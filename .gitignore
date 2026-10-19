@@ -11,3 +11,5 @@ coverage/
 .env.*.local
 .worktree/
 .planning/notes-for-human-used-only/
+
+.taste-skill/inspect/
