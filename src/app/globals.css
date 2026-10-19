@@ -1,0 +1,93 @@
+:root {
+  --bg-wok-iron: #080B10;
+  --bg-smoked-basalt: #111622;
+  --bg-scroll-lacquer: #171F2E;
+  --border-forge-brass: #3A2E1E;
+  --text-parchment: #F4EFE6;
+  --text-ash-slate: #94A3B8;
+  --accent-wok-gold: #F5A623;
+  --accent-jade-wire: #22D3EE;
+  --accent-dragon-ember: #EF4444;
+  --accent-bamboo-green: #10B981;
+  --font-sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Be Vietnam Pro", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-wok-iron);
+  color: var(--text-parchment);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a,
+input,
+select {
+  font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent-jade-wire);
+  outline-offset: 2px;
+}
+
+.cyber-chamfer {
+  background-color: var(--bg-smoked-basalt);
+  border: 1px solid var(--border-forge-brass);
+  border-radius: 2px;
+}
+
+.cyber-shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
