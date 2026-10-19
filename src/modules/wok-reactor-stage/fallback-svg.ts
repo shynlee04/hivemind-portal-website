@@ -10,10 +10,10 @@ interface NodeCoord {
 }
 
 export const NEO_TOKYO_NODE_HEX: Readonly<Record<ReactorNodeId, string>> = {
-  devin: "#00F0FF",
-  antigravity: "#FF2A6D",
-  freebuff: "#FFB800",
-  substrate: "#00E5A3",
+  devin: "#00E5FF",
+  antigravity: "#F2F4F8",
+  freebuff: "#00E5FF",
+  substrate: "#F2F4F8",
 };
 
 const NODE_COORDS: ReadonlyArray<NodeCoord> = [
@@ -72,16 +72,16 @@ export function renderDeterministicFallbackSvg(
     .map(
       (cell, idx) =>
         `<polygon points="${hexPoints(400 + cell.dx, 320 + cell.dy * 0.68, cell.r)}" fill="${
-          activeHarness === "substrate" ? "#092622" : "#0B0E17"
-        }" stroke="#00E5A3" stroke-width="${
-          idx === 0 && activeHarness === "substrate" ? "2.4" : "1.2"
-        }" stroke-opacity="${activeHarness === "substrate" ? "0.95" : "0.52"}" />`
+          activeHarness === "substrate" ? "#161920" : "#0E1015"
+        }" stroke="#00E5FF" stroke-width="${
+          idx === 0 && activeHarness === "substrate" ? "2.2" : "1.1"
+        }" stroke-opacity="${activeHarness === "substrate" ? "0.9" : "0.42"}" />`
     )
     .join("");
 
   const nodeMarkup = NODE_COORDS.map((coord) => {
     const meta = getReactorNodeMetadata(coord.id, locale);
-    const accentHex = NEO_TOKYO_NODE_HEX[coord.id];
+    const accentHex = isActiveColor(coord.id === activeHarness);
     const isActive = coord.id === activeHarness;
     const isDimmed =
       activeHorizon !== "all" && meta.horizon !== activeHorizon && !isActive;
@@ -91,55 +91,59 @@ export function renderDeterministicFallbackSvg(
 
     return `<g data-reactor-node="${coord.id}" opacity="${opacity}">
       <path d="M ${coord.cx} ${coord.cy} Q 400 218 400 262" fill="none" stroke="${accentHex}" stroke-width="${
-        isActive ? "2.8" : "1.4"
+        isActive ? "2.4" : "1.2"
       }" stroke-dasharray="${isActive ? "none" : "6 4"}" opacity="${
-        isActive ? "0.96" : "0.48"
+        isActive ? "0.92" : "0.42"
       }" />
       ${
         isActive
-          ? `<circle data-active-ring="${coord.id}" cx="${coord.cx}" cy="${coord.cy}" r="36" fill="none" stroke="${accentHex}" stroke-width="2.2" stroke-dasharray="8 4" />
-             <circle cx="${coord.cx}" cy="${coord.cy}" r="45" fill="none" stroke="${accentHex}" stroke-width="1.1" opacity="0.45" />`
+          ? `<circle data-active-ring="${coord.id}" cx="${coord.cx}" cy="${coord.cy}" r="36" fill="none" stroke="#00E5FF" stroke-width="2" stroke-dasharray="8 4" />
+             <circle cx="${coord.cx}" cy="${coord.cy}" r="45" fill="none" stroke="#00E5FF" stroke-width="1" opacity="0.4" />`
           : ""
       }
-      <polygon points="${octagonPoints(coord.cx, coord.cy, isActive ? 22 : 17, isActive ? 22 : 17)}" fill="#0B0E17" stroke="${accentHex}" stroke-width="${
-        isActive ? "2.8" : "1.8"
+      <polygon points="${octagonPoints(coord.cx, coord.cy, isActive ? 22 : 17, isActive ? 22 : 17)}" fill="#0E1015" stroke="${accentHex}" stroke-width="${
+        isActive ? "2.4" : "1.4"
       }" />
       <circle cx="${coord.cx}" cy="${coord.cy}" r="${
-        isActive ? "8" : "5"
+        isActive ? "7" : "4"
       }" fill="${accentHex}" />
       <g transform="translate(${coord.labelX}, ${coord.labelY})">
-        <rect x="0" y="0" width="${boxWidth}" height="52" rx="4" fill="#0B0E17" fill-opacity="0.94" stroke="${
-          isActive ? accentHex : "#1E293B"
-        }" stroke-width="${isActive ? "1.8" : "1"}" />
-        <text x="12" y="21" fill="#F8FAFC" font-family="Chakra Petch, sans-serif, monospace" font-size="14" font-weight="700">${meta.label}</text>
-        <text x="12" y="41" fill="${accentHex}" font-family="Chakra Petch, sans-serif, monospace" font-size="14">${modelsText}</text>
+        <rect x="0" y="0" width="${boxWidth}" height="52" rx="4" fill="#0E1015" fill-opacity="0.96" stroke="${
+          isActive ? "#00E5FF" : "#1E222B"
+        }" stroke-width="${isActive ? "1.6" : "1"}" />
+        <text x="12" y="21" fill="#F2F4F8" font-family="Be Vietnam Pro, sans-serif" font-size="14" font-weight="500">${meta.label}</text>
+        <text x="12" y="41" fill="${isActive ? "#00E5FF" : "#A8B3C4"}" font-family="Be Vietnam Pro, sans-serif" font-size="14">${modelsText}</text>
       </g>
     </g>`;
   }).join("");
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%" role="img" aria-label="Neo-Tokyo 3D Orbital Command Core Schematic" data-fallback-adapter="DeterministicCanvasFallbackAdapter" data-active-harness="${activeHarness}" data-active-horizon="${activeHorizon}">
-    <rect width="800" height="500" fill="#05060A" />
-    <g opacity="0.28" stroke="#151C2C" stroke-width="1">
+    <rect width="800" height="500" fill="#07080B" />
+    <g opacity="0.28" stroke="#161920" stroke-width="1">
       <line x1="0" y1="360" x2="800" y2="360" />
       <line x1="0" y1="410" x2="800" y2="410" />
       <line x1="0" y1="460" x2="800" y2="460" />
       <line x1="400" y1="0" x2="400" y2="500" />
       <line x1="400" y1="260" x2="80" y2="500" />
       <line x1="400" y1="260" x2="720" y2="500" />
-      <ellipse cx="400" cy="295" rx="340" ry="126" fill="none" stroke="#00F0FF" stroke-opacity="0.35" stroke-dasharray="4 6" />
+      <ellipse cx="400" cy="295" rx="340" ry="126" fill="none" stroke="#00E5FF" stroke-opacity="0.3" stroke-dasharray="4 6" />
     </g>
     <g data-command-core="neo-tokyo-spire">
-      <ellipse cx="400" cy="262" rx="268" ry="82" fill="#0B0E17" fill-opacity="0.72" stroke="#00F0FF" stroke-width="2.2" stroke-opacity="0.82" />
-      <ellipse cx="400" cy="262" rx="212" ry="62" fill="none" stroke="#FF2A6D" stroke-width="1.5" stroke-dasharray="10 5" stroke-opacity="0.68" />
-      <ellipse cx="400" cy="262" rx="152" ry="44" fill="none" stroke="#FFB800" stroke-width="1.4" stroke-opacity="0.64" />
-      <polygon points="374,176 426,176 442,276 358,276" fill="#0B0E17" stroke="#00F0FF" stroke-width="2" />
-      <polygon points="400,192 418,224 400,256 382,224" fill="#00F0FF" fill-opacity="0.85" />
+      <ellipse cx="400" cy="262" rx="268" ry="82" fill="#0E1015" fill-opacity="0.78" stroke="#00E5FF" stroke-width="1.8" stroke-opacity="0.75" />
+      <ellipse cx="400" cy="262" rx="212" ry="62" fill="none" stroke="#A8B3C4" stroke-width="1.2" stroke-dasharray="10 5" stroke-opacity="0.5" />
+      <ellipse cx="400" cy="262" rx="152" ry="44" fill="none" stroke="#F2F4F8" stroke-width="1.1" stroke-opacity="0.45" />
+      <polygon points="374,176 426,176 442,276 358,276" fill="#0E1015" stroke="#00E5FF" stroke-width="1.6" />
+      <polygon points="400,192 418,224 400,256 382,224" fill="#00E5FF" fill-opacity="0.85" />
     </g>
     <g data-honeycomb-core="substrate-lattice">
       ${honeycombPolygons}
     </g>
     ${nodeMarkup}
   </svg>`;
+}
+
+function isActiveColor(isActive: boolean): string {
+  return isActive ? "#00E5FF" : "#A8B3C4";
 }
 
 export { REACTOR_NODE_IDS };

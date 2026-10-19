@@ -28,54 +28,61 @@ export default async function EpisodesIndexPage({
   const episodes = await listEpisodes(locale);
 
   return (
-    <section className="cyber-shell" style={{ paddingTop: "4.5rem", paddingBottom: "4rem" }}>
-      <div style={{ marginBottom: "3.5rem" }}>
+    <section className="cyber-shell" style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}>
+      <div style={{ marginBottom: "2.5rem" }}>
         <h1
           style={{
-            fontSize: "clamp(2.25rem, 4vw, 3.5rem)",
-            marginBottom: "0.75rem",
+            fontSize: "clamp(32px, 3.8vw, 52px)",
+            fontWeight: 500,
+            marginBottom: "0.6rem",
           }}
         >
           {dict.episodesSection.pageTitle}
         </h1>
-        <p style={{ color: "var(--text-ash-slate)", maxWidth: "62ch", fontSize: "1.1rem" }}>
+        <p style={{ color: "var(--text-titanium)", maxWidth: "54ch", fontSize: "16px", margin: 0 }}>
           {dict.episodesSection.pageSubtitle}
         </p>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
         {episodes.map((ep, idx) => (
           <article
             key={ep.slug}
             className="split-62-38"
             style={{
-              padding: "2rem",
-              backgroundColor: idx % 2 === 0 ? "var(--bg-smoked-basalt)" : "var(--bg-scroll-lacquer)",
+              padding: "1.75rem",
+              backgroundColor: idx % 2 === 0 ? "var(--bg-akihabara-deck)" : "var(--bg-kabuki-panel)",
               borderRadius: "8px",
               alignItems: "center",
             }}
           >
             <div>
-              <h2 style={{ fontSize: "clamp(1.35rem, 2.2vw, 1.85rem)", marginBottom: "0.5rem" }}>
+              <h2
+                style={{
+                  fontSize: "clamp(28px, 2.5vw, 36px)",
+                  fontWeight: 500,
+                  marginBottom: "0.45rem",
+                }}
+              >
                 {ep.title}
               </h2>
               <p
                 style={{
-                  fontSize: "1rem",
-                  color: "var(--text-ash-slate)",
-                  marginBottom: "1.25rem",
-                  maxWidth: "62ch",
+                  fontSize: "16px",
+                  color: "var(--text-titanium)",
+                  marginBottom: "1rem",
+                  maxWidth: "54ch",
                 }}
               >
                 {ep.summary}
               </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.5rem" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginBottom: "1.25rem" }}>
                 <code
                   style={{
-                    fontSize: "0.75rem",
+                    fontSize: "14px",
                     padding: "0.2rem 0.55rem",
-                    backgroundColor: "var(--bg-wok-iron)",
-                    color: "var(--accent-jade-wire)",
+                    backgroundColor: "var(--bg-tokyo-void)",
+                    color: "var(--text-titanium)",
                     borderRadius: "4px",
                   }}
                 >
@@ -85,10 +92,10 @@ export default async function EpisodesIndexPage({
                   <code
                     key={sliceId}
                     style={{
-                      fontSize: "0.75rem",
+                      fontSize: "14px",
                       padding: "0.2rem 0.5rem",
-                      backgroundColor: "var(--bg-wok-iron)",
-                      color: "var(--accent-wok-gold)",
+                      backgroundColor: "var(--bg-tokyo-void)",
+                      color: "var(--text-cyber-slate)",
                       borderRadius: "4px",
                     }}
                   >
@@ -101,19 +108,26 @@ export default async function EpisodesIndexPage({
                 href={`/${locale}/episodes/${ep.slug}`}
                 className="touch-target"
                 style={{
-                  padding: "0 1.25rem",
-                  backgroundColor: "var(--accent-jade-wire)",
-                  color: "var(--bg-wok-iron)",
-                  fontWeight: 700,
-                  fontSize: "0.875rem",
-                  borderRadius: "4px",
+                  padding: "0 1.15rem",
+                  backgroundColor: idx === 0 ? "var(--accent-cyber-cyan)" : "var(--bg-tokyo-void)",
+                  color: idx === 0 ? "var(--bg-tokyo-void)" : "var(--text-titanium)",
+                  fontWeight: 500,
+                  fontSize: "14px",
+                  borderRadius: "6px",
                 }}
               >
                 {dict.episodesSection.watchEpisodeCta}
               </Link>
             </div>
 
-            <div style={{ borderRadius: "6px", overflow: "hidden", aspectRatio: "16 / 10", backgroundColor: "#06090E" }}>
+            <div
+              style={{
+                borderRadius: "6px",
+                overflow: "hidden",
+                aspectRatio: "16 / 10",
+                backgroundColor: "var(--bg-tokyo-void)",
+              }}
+            >
               <img
                 src={EPISODE_PLATES[idx % EPISODE_PLATES.length]}
                 alt={ep.title}

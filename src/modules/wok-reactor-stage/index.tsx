@@ -54,10 +54,8 @@ export function WokReactorStage({
   const shouldUseFallback =
     Boolean(reducedMotion) || osPrefersReducedMotion || !mountedOnClient;
   const activeMeta = getReactorNodeMetadata(activeHarness, locale);
-  const activeAccentHex = NEO_TOKYO_NODE_HEX[activeHarness];
   const allNodes = REACTOR_NODE_IDS.map((id) => ({
     ...getReactorNodeMetadata(id, locale),
-    cyberAccentHex: NEO_TOKYO_NODE_HEX[id],
   }));
 
   const fallbackSvgMarkup = shouldUseFallback
@@ -83,8 +81,8 @@ export function WokReactorStage({
         minHeight: "520px",
         aspectRatio: "16 / 10",
         width: "100%",
-        backgroundColor: "#05060A",
-        border: `1px solid ${activeAccentHex}44`,
+        backgroundColor: "#07080B",
+        border: "1px solid #1E222B",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -99,25 +97,25 @@ export function WokReactorStage({
           alignItems: "center",
           gap: "8px",
           flexWrap: "wrap",
-          padding: "10px 14px",
-          backgroundColor: "#0B0E17",
-          borderBottom: "1px solid #151C2C",
+          padding: "8px 12px",
+          backgroundColor: "#0E1015",
+          borderBottom: "1px solid #161920",
           borderTopLeftRadius: "8px",
           borderTopRightRadius: "8px",
         }}
       >
         <code
           style={{
-            color: activeAccentHex,
+            color: "#00E5FF",
             fontSize: "14px",
-            fontWeight: 700,
+            fontWeight: 500,
           }}
         >
           {stripMiddleDots(activeMeta.horizonBadge)} / {activeMeta.wireProtocol}
         </code>
         <code
           style={{
-            color: "#94A3B8",
+            color: "#A8B3C4",
             fontSize: "14px",
           }}
         >
@@ -133,7 +131,7 @@ export function WokReactorStage({
           width: "100%",
           height: "300px",
           overflow: "hidden",
-          backgroundColor: "#05060A",
+          backgroundColor: "#07080B",
           flexShrink: 0,
         }}
       >
@@ -155,12 +153,12 @@ export function WokReactorStage({
 
       <div
         style={{
-          backgroundColor: "#0B0E17",
-          borderTop: "1px solid #151C2C",
-          padding: "12px 14px",
+          backgroundColor: "#0E1015",
+          borderTop: "1px solid #161920",
+          padding: "10px 12px",
           display: "flex",
           flexDirection: "column",
-          gap: "10px",
+          gap: "8px",
         }}
       >
         <div
@@ -173,10 +171,9 @@ export function WokReactorStage({
           style={{
             display: "flex",
             flexWrap: "wrap",
-            gap: "8px",
-            backgroundColor: "#05060A",
-            border: "1px solid #151C2C",
-            padding: "6px",
+            gap: "6px",
+            backgroundColor: "#07080B",
+            padding: "5px",
             borderRadius: "6px",
           }}
         >
@@ -193,21 +190,17 @@ export function WokReactorStage({
                 style={{
                   minHeight: "44px",
                   minWidth: "44px",
-                  flex: "1 1 130px",
+                  flex: "1 1 120px",
                   padding: "6px 10px",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-start",
                   justifyContent: "flex-start",
-                  gap: "4px",
-                  backgroundColor: isSelected
-                    ? "rgba(11, 14, 23, 0.95)"
-                    : "transparent",
+                  gap: "2px",
+                  backgroundColor: isSelected ? "#F2F4F8" : "#161920",
                   border: "none",
-                  borderBottom: `3px solid ${
-                    isSelected ? node.cyberAccentHex : "transparent"
-                  }`,
-                  color: "#F8FAFC",
+                  borderRadius: "4px",
+                  color: isSelected ? "#07080B" : "#A8B3C4",
                   cursor: "pointer",
                   textAlign: "left",
                 }}
@@ -215,8 +208,8 @@ export function WokReactorStage({
                 <span
                   style={{
                     fontSize: "14px",
-                    fontWeight: 700,
-                    color: isSelected ? node.cyberAccentHex : "#F8FAFC",
+                    fontWeight: isSelected ? 500 : 400,
+                    color: isSelected ? "#07080B" : "#F2F4F8",
                   }}
                 >
                   {node.label}
@@ -224,7 +217,7 @@ export function WokReactorStage({
                 <code
                   style={{
                     fontSize: "14px",
-                    color: isSelected ? "#E2E8F0" : "#94A3B8",
+                    color: isSelected ? "#07080B" : "#A8B3C4",
                   }}
                 >
                   {node.modelIds.join(" / ")}
@@ -241,10 +234,9 @@ export function WokReactorStage({
             flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: "10px",
-            backgroundColor: "#05060A",
-            border: "1px solid #151C2C",
-            padding: "8px 12px",
+            gap: "8px",
+            backgroundColor: "#07080B",
+            padding: "7px 10px",
             borderRadius: "6px",
           }}
         >
@@ -252,26 +244,26 @@ export function WokReactorStage({
             style={{
               margin: 0,
               fontSize: "14px",
-              color: "#00E5A3",
+              color: "#00E5FF",
               whiteSpace: "pre-wrap",
             }}
           >
             <code>$ {stripMiddleDots(activeMeta.sampleCommand, " ")}</code>
           </pre>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "14px" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
             {activeMeta.telemetryMetrics.map((metric) => (
               <div
                 key={metric.label}
-                style={{ display: "flex", alignItems: "baseline", gap: "6px" }}
+                style={{ display: "flex", alignItems: "baseline", gap: "5px" }}
               >
-                <span style={{ fontSize: "14px", color: "#94A3B8" }}>
+                <span style={{ fontSize: "14px", color: "#A8B3C4" }}>
                   {metric.label}
                 </span>
                 <code
                   style={{
                     fontSize: "14px",
-                    fontWeight: 700,
-                    color: activeAccentHex,
+                    fontWeight: 500,
+                    color: "#F2F4F8",
                   }}
                 >
                   {metric.value}

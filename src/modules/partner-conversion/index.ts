@@ -51,30 +51,30 @@ function buildSponsorTiers(locale: Locale): ReadonlyArray<SponsorTierView> {
     return [
       {
         id: "wok-burner",
-        name: "Gói Channel Slot: Đối Tác Coding Pass & CLI",
+        name: "Gói Harness Slot: Đối Tác Coding Pass & CLI",
         priceLabel: "$1,500 / tháng",
         tagline:
-          "Đưa gói cước hoặc CLI của bạn lên danh mục 20 video X-Ray và README GitHub công khai.",
+          "Đưa Harness hoặc gói Coding Pass của bạn lên 20 lát cắt X-Ray và README GitHub công khai của Hivemind.",
         deliverables: [
           "1 video thực chiến song ngữ EN/VI trên kênh YouTube và cổng Hivemind",
           "Đặt liên kết giới thiệu chính thức trên trang chủ và LAUNCH_PACK.md",
-          "Báo cáo lưu lượng chuyển đổi minh bạch cho nhà cung cấp",
+          "Tiếp cận trực tiếp cộng đồng Vibecoder dùng OpenCode V2 mỗi ngày",
         ],
-        ctaLabel: "Đăng Ký Channel Slot",
+        ctaLabel: "Đăng Ký Harness Slot",
         ctaHref: PARTNER_URLS.kofi,
       },
       {
         id: "honeycomb-core",
-        name: "Gói Gateway Core: Nhà Cung Cấp AI API & Subscription Pass",
+        name: "Gói Bridge Core: Nhà Cung Cấp AI Pass & Model",
         priceLabel: "$3,500 / tháng",
         tagline:
-          "Tích hợp trực tiếp vào chuỗi ModelSlotChain mặc định của Hivemind-Steward.",
+          "Tích hợp trực tiếp vào chuỗi 3-Slot ModelSlotChain và bảng tính vắt token khuyến mãi của Hivemind-Steward.",
         deliverables: [
-          "Hiển thị trực tiếp trong bảng tính tiết kiệm chi phí của Vibecoder",
+          "Hiển thị nổi bật trong bảng tính hiệu suất vắt token của Vibecoder",
           "Video hướng dẫn dưới 2 phút phát tán trên YouTube, Reddit và Discord",
-          "Bài viết phân tích chuyên sâu trên Blog kỹ thuật Payload CMS 3.0",
+          "Bài viết phân tích kiến trúc đường truyền trên Blog kỹ thuật Payload CMS 3.0",
         ],
-        ctaLabel: "Đặt Chỗ Gateway Core",
+        ctaLabel: "Đặt Chỗ Bridge Core",
         ctaHref: PARTNER_URLS.kofi,
       },
       {
@@ -82,11 +82,11 @@ function buildSponsorTiers(locale: Locale): ReadonlyArray<SponsorTierView> {
         name: "Gói Ecosystem Title: Đối Tác Chiến Lược Toàn Hệ Sinh Thái",
         priceLabel: "$7,500 / tháng",
         tagline:
-          "Đồng hành cùng buồng lái 3D Neo-Tokyo và chuỗi video dựng dự án thực tế.",
+          "Đồng hành cùng buồng lái 3D Neo-Tokyo và chuỗi video dựng dự án Greenfield 3-Harness trong 5 phút.",
         deliverables: [
           "Vị trí nổi bật trên mô hình 3D trung tâm và toàn bộ kho mã nguồn GitHub",
           "Xuất hiện xuyên suốt trong chuỗi video Greenfield 5 phút (V1-V5)",
-          "Hỗ trợ kỹ thuật trực tiếp để kết nối chuẩn giao thức ACP stdio",
+          "Hỗ trợ kỹ thuật trực tiếp kết nối chuẩn giao thức ACP stdio hai chiều",
         ],
         ctaLabel: "Liên Hệ Đối Tác Chiến Lược",
         ctaHref: PARTNER_URLS.kofi,
@@ -97,30 +97,30 @@ function buildSponsorTiers(locale: Locale): ReadonlyArray<SponsorTierView> {
   return [
     {
       id: "wok-burner",
-      name: "Channel Slot Tier: Coding-Pass & CLI Partner",
+      name: "Harness Slot Tier: Coding-Pass & CLI Partner",
       priceLabel: "$1,500 / mo",
       tagline:
-        "Feature your coding subscription pass or CLI in our 20-clip video showcase and public GitHub READMEs.",
+        "Feature your coding pass or harness CLI in our 20-clip X-Ray showcase and public GitHub READMEs.",
       deliverables: [
         "1 dedicated bilingual (EN/VI) video & 3-Layer X-Ray showcase slice",
         "Verified referral placement in the Portal & docs/LAUNCH_PACK.md",
         "Direct exposure to active OpenCode vibecoders across GitHub & Discord",
       ],
-      ctaLabel: "Claim Channel Slot",
+      ctaLabel: "Claim Harness Slot",
       ctaHref: PARTNER_URLS.kofi,
     },
     {
       id: "honeycomb-core",
-      name: "Gateway Core Tier: AI API & Subscription Provider",
+      name: "Bridge Core Tier: AI Pass & Model Provider",
       priceLabel: "$3,500 / mo",
       tagline:
-        "Integrate your coding pass into Hivemind-Steward default ModelSlotChain routing and pocket calculator.",
+        "Integrate your coding pass into Hivemind-Steward ModelSlotChain routing and promo-squeezing estimator.",
       deliverables: [
-        "Featured slot in the interactive Vibecoder Pocket-Savings Calculator",
+        "Featured slot in the interactive Vibecoder Promo-Squeezing Estimator",
         "Dedicated YouTube tutorial + Reddit & Discord launch breakdown",
         "Technical integration guide published in the Payload 3.0 Blog",
       ],
-      ctaLabel: "Reserve Gateway Core",
+      ctaLabel: "Reserve Bridge Core",
       ctaHref: PARTNER_URLS.kofi,
     },
     {
@@ -128,11 +128,11 @@ function buildSponsorTiers(locale: Locale): ReadonlyArray<SponsorTierView> {
       name: "Ecosystem Title Tier: Flagship Hivemind Partner",
       priceLabel: "$7,500 / mo",
       tagline:
-        "Co-headline the 3D Neo-Tokyo Orbital Command Stage and the 5-Minute Greenfield Video Series.",
+        "Co-headline the 3D Neo-Tokyo Orbital Command Stage and the 5-Minute 3-Harness Greenfield Video Series.",
       deliverables: [
         "Primary 3D telemetry node placement on the Neo-Tokyo Hero Stage",
         "Featured harness slot across the 5-Minute Greenfield Build series",
-        "Priority ACP stdio adapter engineering & public repo placement",
+        "Priority bi-directional ACP stdio adapter & public repo placement",
       ],
       ctaLabel: "Inquire Flagship Sponsorship",
       ctaHref: PARTNER_URLS.kofi,
@@ -163,17 +163,17 @@ export function resolveConversionCtas(input: {
           {
             id: "freebuff-referral",
             audience: "builders",
-            label: "Mở Freebuff Pass",
+            label: "Nhận Freebuff Miễn Phí",
             badge: isFreebuffSlice
               ? "Đề xuất cho lát cắt Freebuff (S8-S10)"
-              : "Gói trinh sát tốc độ cao cho Vibecoder",
+              : "100% Free Coding Agent + Credit mỗi ngày",
             headline:
-              "Freebuff Coding Pass (deepseek-4.1-flash & glm-5.3-flash)",
+              "Freebuff Daily Free AI (deepseek-4.1-flash & glm-5.3-flash)",
             description:
-              "Chuyển 62% tác vụ quét kho code và dựng khung sang Freebuff để giữ nguyên hạn ngạch Devin và Antigravity cho việc khó.",
+              "Dùng AI miễn phí mỗi ngày ngay trong OpenCode V2 để càn quét tài liệu và nghiên cứu repo với chi phí 0 đồng, giữ nguyên gói promo $20 Devin cho việc khó.",
             href: PARTNER_URLS.freebuffReferral,
             disclosure:
-              "Liên kết giới thiệu chính thức giúp bạn tiết kiệm chi phí và ủng hộ dự án mã nguồn mở.",
+              "Liên kết giới thiệu chính thức mở hạn mức miễn phí mỗi ngày và ủng hộ Hivemind-Steward.",
             isHighlighted: highlightBuilders,
             accentToken: "wok-gold",
           },
@@ -182,12 +182,12 @@ export function resolveConversionCtas(input: {
             audience: "builders",
             label: "Đăng Ký Zap GLM Plan",
             badge: isFreebuffSlice
-              ? "Cặp đôi tối ưu hạn ngạch (S8-S10)"
-              : "Gói cước GLM dành cho Vibecoder",
+              ? "Đổi não giữa phiên không mất lease (S8-S10)"
+              : "Gói GLM tốc độ ánh sáng cho Vibecoder",
             headline:
-              "Z.ai GLM Coding Plan: Hạn Ngạch Dồi Dào Giá Mềm",
+              "Z.ai Zap GLM Coding Plan: Đổi Não Giữa Phiên Tốc Độ Cao",
             description:
-              "Chạy các vòng lặp TDD và dịch thuật song ngữ liên tục với mức phí cố định cực nhẹ túi tiền.",
+              "Chuyển mượt từ deepseek-4.1-flash sang glm-5.3-flash ngay giữa phiên (keepSlotForResume) để viết API docs và bảng cấu trúc component với tốc độ bàn thờ.",
             href: PARTNER_URLS.zapGlm,
             disclosure:
               "Mã giới thiệu chính thức (ic=LTWUT4H2RS) mở quyền lợi ưu đãi và tài trợ trực tiếp cho Hivemind-Steward.",
@@ -199,9 +199,9 @@ export function resolveConversionCtas(input: {
             audience: "supporters",
             label: "Ủng Hộ Qua Ko-fi",
             badge: "Quỹ cộng đồng Ko-fi (shynlee04)",
-            headline: "Tài Trợ Phát Triển Cổng Mở Hivemind-Steward",
+            headline: "Tài Trợ Phát Triển Hivemind-Steward & Hivemind-Substrate",
             description:
-              "Giúp duy trì bản phát hành miễn phí, chuỗi video hướng dẫn thực chiến và phát triển lộ trình Hivemind-Substrate.",
+              "Giúp duy trì cầu nối đa Harness miễn phí, chuỗi video thực chiến Pro Not Bro và lộ trình động cơ bộ nhớ Hivemind-Substrate.",
             href: PARTNER_URLS.kofi,
             disclosure:
               "Đóng góp trực tiếp 100% cho tác giả dự án mã nguồn mở (shynlee04).",
@@ -213,9 +213,9 @@ export function resolveConversionCtas(input: {
             audience: "supporters",
             label: "Mời Cà Phê Qua BMC",
             badge: "Quỹ ủng hộ Buy Me a Coffee (shynlee04l)",
-            headline: "Tiếp Sức Cho Các Bản Cập Nhật OpenCode V2",
+            headline: "Tiếp Lửa Cho Hệ Sinh Thái Mã Nguồn Mở Hivemind",
             description:
-              "Đóng góp nhanh gọn cho đội ngũ phát triển Hivemind-Steward giữ toàn bộ công cụ miễn phí cho cộng đồng.",
+              "Đóng góp nhanh gọn từ các Vibecoder dùng Hivemind-Steward mỗi ngày để vắt kiệt gói promo và đồng bộ phiên hai chiều.",
             href: PARTNER_URLS.buyMeACoffee,
             disclosure:
               "Ủng hộ trực tiếp qua trang Buy Me a Coffee chính thức (shynlee04l).",
@@ -226,10 +226,10 @@ export function resolveConversionCtas(input: {
             id: "b2b-sponsor-inquiry",
             audience: "sponsors",
             label: "Đặt Chỗ Nhà Cung Cấp",
-            badge: "Kênh đối tác Coding Pass & AI API",
-            headline: "Đưa Gói Cước & Model Của Bạn Đến Hàng Ngàn Vibecoder",
+            badge: "Kênh đối tác Harness, Coding Pass & AI API",
+            headline: "Đưa Harness & Gói Cước Của Bạn Đến Cộng Đồng OpenCode",
             description:
-              "Quảng bá trực tiếp trên kho GitHub công khai, chuỗi video YouTube, thảo luận Reddit/Discord và buồng lái Hivemind-Steward.",
+              "Quảng bá trực tiếp trên kho GitHub công khai, chuỗi video YouTube 3-Harness, thảo luận Reddit/Discord và buồng lái Hivemind-Steward.",
             href: PARTNER_URLS.kofi,
             disclosure:
               "Kênh hợp tác nhà cung cấp với số liệu kiểm chứng thực tế trên OpenCode V2.",
@@ -241,17 +241,17 @@ export function resolveConversionCtas(input: {
           {
             id: "freebuff-referral",
             audience: "builders",
-            label: "Activate Freebuff Pass",
+            label: "Get Freebuff Daily AI",
             badge: isFreebuffSlice
               ? "Recommended for Freebuff slices (S8-S10)"
-              : "Vibecoder pick: High-speed recon pass",
+              : "100% Free Coding Agent + Daily Credits",
             headline:
-              "Freebuff Coding Pass (deepseek-4.1-flash & glm-5.3-flash)",
+              "Freebuff Daily Free AI (deepseek-4.1-flash & glm-5.3-flash)",
             description:
-              "Route 62% of daily repo recon and fast edits through Freebuff inside OpenCode so your flagship quotas last all month.",
+              "Use free AI every day inside OpenCode V2 for $0 repo recon and spec drafting so you can save your $20 Devin swe-2 promo and Antigravity quota for heavy lifting.",
             href: PARTNER_URLS.freebuffReferral,
             disclosure:
-              "Verified partner referral link that saves your pocket and backs open-source Hivemind-Steward development.",
+              "Verified partner referral link bridging daily free credits while backing open-source Hivemind-Steward.",
             isHighlighted: highlightBuilders,
             accentToken: "wok-gold",
           },
@@ -260,12 +260,12 @@ export function resolveConversionCtas(input: {
             audience: "builders",
             label: "Get Zap GLM Plan",
             badge: isFreebuffSlice
-              ? "Recommended slot-chain pairing (S8-S10)"
-              : "Pocket-friendly GLM coding pass",
+              ? "Mid-session model swap partner (S8-S10)"
+              : "High-speed GLM coding subscription",
             headline:
-              "Z.ai GLM Coding Plan: High-Volume Builder Subscription",
+              "Z.ai Zap GLM Coding Plan: High-Speed Mid-Session Model Swaps",
             description:
-              "Run parallel worktree loops, schema generation, and bilingual docs on predictable, wallet-friendly GLM coding quota.",
+              "Switch live mid-session from deepseek-4.1-flash to glm-5.3-flash without losing your session lease (keepSlotForResume) for ultra-fast API docs and component tables.",
             href: PARTNER_URLS.zapGlm,
             disclosure:
               "Verified referral invite (ic=LTWUT4H2RS) activating subscriber perks while funding Hivemind-Steward.",
@@ -277,9 +277,9 @@ export function resolveConversionCtas(input: {
             audience: "supporters",
             label: "Back on Ko-fi",
             badge: "Community supporter vault (shynlee04)",
-            headline: "Fund Open-Source Hivemind-Steward Engineering",
+            headline: "Fund Open-Source Hivemind-Steward & Substrate Engineering",
             description:
-              "Directly support cross-OS OpenCode V2 plugin releases, YouTube video breakdowns, and the Hivemind-Substrate roadmap.",
+              "Directly support cross-OS OpenCode V2 harness bridges, Pro Not Bro YouTube builds, and the Stage 3 Hivemind-Substrate memory engine.",
             href: PARTNER_URLS.kofi,
             disclosure:
               "100% direct creator support via verified Ko-fi vault (shynlee04).",
@@ -291,9 +291,9 @@ export function resolveConversionCtas(input: {
             audience: "supporters",
             label: "Buy Me a Coffee",
             badge: "Creator tip jar (shynlee04l)",
-            headline: "Fuel Late-Night Tokyo Cyberpunk Builds",
+            headline: "Fuel Late-Night Multi-Harness Engineering",
             description:
-              "One-click backing from vibecoders who use Hivemind-Steward every day to centralize their AI coding subscriptions.",
+              "One-click backing from vibecoders who use Hivemind-Steward to reuse warm ses_* sessions and squeeze every promo token.",
             href: PARTNER_URLS.buyMeACoffee,
             disclosure:
               "Direct creator support via verified Buy Me a Coffee page (shynlee04l).",
@@ -304,10 +304,10 @@ export function resolveConversionCtas(input: {
             id: "b2b-sponsor-inquiry",
             audience: "sponsors",
             label: "Partner & Sponsor",
-            badge: "For coding-pass & AI API providers",
-            headline: "Put Your Coding Pass & Models in Front of Active Builders",
+            badge: "For coding-pass, harness & AI providers",
+            headline: "Put Your Harness & Coding Pass in Front of Active Builders",
             description:
-              "Get featured inside Hivemind-Steward, public GitHub READMEs, YouTube tutorials, and Reddit/Discord community benchmarks.",
+              "Get featured inside Hivemind-Steward, public GitHub READMEs, 5-minute YouTube builds, and Reddit/Discord community benchmarks.",
             href: PARTNER_URLS.kofi,
             disclosure:
               "Provider & sponsor channel with reproducible OpenCode V2 benchmarks.",

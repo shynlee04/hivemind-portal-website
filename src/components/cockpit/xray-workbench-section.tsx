@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Link from "next/link";
 import type {
   HorizonTier,
@@ -10,7 +10,6 @@ import type {
   ShowcaseId,
 } from "@/types/portal";
 import { PARTNER_URLS } from "@/modules/partner-conversion";
-import { HARNESS_META } from "./cockpit-shared";
 
 export interface XrayWorkbenchSectionProps {
   readonly locale: Locale;
@@ -25,6 +24,21 @@ export interface XrayWorkbenchSectionProps {
   readonly setActiveHarness: (id: ReactorNodeId) => void;
 }
 
+const PRIORITY_SLICE_ORDER: ReadonlyArray<ShowcaseId> = [
+  "S8",
+  "S9",
+  "S10",
+  "S1",
+  "S2",
+  "S3",
+  "S6",
+  "S7",
+  "M1",
+  "M3",
+  "M5",
+  "C1",
+];
+
 export function XrayWorkbenchSection({
   locale,
   dictionary,
@@ -37,373 +51,415 @@ export function XrayWorkbenchSection({
   setSelectedSliceId,
   setActiveHarness,
 }: XrayWorkbenchSectionProps) {
-  return (
-      <section
-        id="xray"
-        data-reveal=""
-        style={{
-          scrollMarginTop: "5rem",
-          paddingTop: "clamp(4.5rem, 8vw, 7.5rem)",
-          paddingBottom: "clamp(4.5rem, 8vw, 7.5rem)",
-          backgroundColor: "var(--bg-tokyo-void)",
-        }}
-      >
-        <div className="cyber-shell">
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              gap: "1.5rem",
-              marginBottom: "2.25rem",
-            }}
-          >
-            <div>
-              <h2
-                style={{
-                  fontSize: "clamp(32px, 3.1vw, 44px)",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                {dictionary.xrayExplorer.sectionTitle}
-              </h2>
-              <p
-                style={{
-                  color: "var(--text-titanium)",
-                  maxWidth: "60ch",
-                  margin: 0,
-                  fontSize: "17px",
-                }}
-              >
-                {dictionary.xrayExplorer.sectionSubtitle}
-              </p>
-            </div>
+  const visibleShowcases = useMemo(() => {
+    const rank = (id: ShowcaseId): number => {
+      const idx = PRIORITY_SLICE_ORDER.indexOf(id);
+      return idx === -1 ? 999 : idx;
+    };
+    return [...filteredShowcases]
+      .sort((a, b) => rank(a.id) - rank(b.id))
+      .slice(0, 12);
+  }, [filteredShowcases]);
 
-            {/* Filter by Horizon & Plugin */}
-            <div style={{ display: "flex", gap: "0.45rem", flexWrap: "wrap" }}>
-              {(
-                [
-                  ["all", dictionary.horizons.filterAll],
-                  ["shipped", "v0.1 Shipped (Devin)"],
-                  ["next-release", "v0.2 Next (Tri-Harness)"],
-                  ["roadmap", "Stage 3 (Substrate)"],
-                ] as const
-              ).map(([tierKey, label]) => {
-                const isSelected = activeHorizon === tierKey;
-                return (
-                  <button
-                    key={tierKey}
-                    type="button"
-                    onClick={() => setActiveHorizon(tierKey)}
-                    aria-pressed={isSelected}
-                    className="touch-target"
-                    style={{
-                      padding: "0 0.85rem",
-                      borderRadius: "6px",
-                      border: "none",
-                      backgroundColor: isSelected
-                        ? "var(--accent-cyber-cyan)"
-                        : "var(--bg-akihabara-deck)",
-                      color: isSelected
-                        ? "var(--bg-tokyo-void)"
-                        : "var(--text-titanium)",
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
+  return (
+    <section
+      id="xray"
+      className="stage-screen"
+      data-reveal=""
+      style={{
+        scrollMarginTop: "3.5rem",
+        backgroundColor: "var(--bg-tokyo-void)",
+      }}
+    >
+      <div className="cyber-shell">
+        <div
+          data-reveal=""
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            gap: "1rem",
+            marginBottom: "0.65rem",
+          }}
+        >
+          <div>
+            <h2
+              style={{
+                fontSize: "clamp(28px, 2.5vw, 36px)",
+                fontWeight: 500,
+                marginBottom: "0.3rem",
+              }}
+            >
+              {dictionary.xrayExplorer.sectionTitle}
+            </h2>
+            <p
+              style={{
+                color: "var(--text-titanium)",
+                maxWidth: "54ch",
+                margin: 0,
+                fontSize: "16px",
+              }}
+            >
+              {dictionary.xrayExplorer.sectionSubtitle}
+            </p>
           </div>
 
-          <div className="split-62-38">
-            {/* Left 62%: Live 3-Layer Terminal X-Ray & Video Showcase Stage */}
-            <div
-              data-testid="xray-inspector-drawer"
-              data-ui="true"
-              style={{
-                backgroundColor: "var(--bg-akihabara-deck)",
-                borderRadius: "8px",
-                padding: "clamp(1.25rem, 2.5vw, 2rem)",
-              }}
-            >
-              {activeShowcase ? (
-                <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      gap: "0.75rem",
-                    }}
-                  >
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-                      <code
-                        style={{
-                          padding: "0.25rem 0.65rem",
-                          backgroundColor: "var(--bg-tokyo-void)",
-                          color: HARNESS_META[activeShowcase.harnessNode].color,
-                          borderRadius: "4px",
-                          fontWeight: 700,
-                          fontSize: "14px",
-                        }}
-                      >
-                        {activeShowcase.id} ({activeShowcase.durationLabel})
-                      </code>
-                      <code style={{ fontSize: "14px", color: "var(--text-cyber-slate)" }}>
-                        {activeShowcase.sourceGrounding}
-                      </code>
-                    </div>
-                    <Link
-                      href={`/${locale}/episodes`}
-                      className="touch-target"
+          {/* Filter by Horizon */}
+          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
+            {(
+              [
+                ["all", dictionary.horizons.filterAll],
+                ["shipped", "v0.1 Shipped (Devin)"],
+                ["next-release", "v0.2 Next (Multi-Pass)"],
+                ["roadmap", "Stage 3 (Substrate)"],
+              ] as const
+            ).map(([tierKey, label]) => {
+              const isSelected = activeHorizon === tierKey;
+              return (
+                <button
+                  key={tierKey}
+                  type="button"
+                  onClick={() => setActiveHorizon(tierKey)}
+                  aria-pressed={isSelected}
+                  className="touch-target"
+                  style={{
+                    padding: "0 0.85rem",
+                    borderRadius: "6px",
+                    border: "none",
+                    backgroundColor: isSelected
+                      ? "var(--text-titanium)"
+                      : "var(--bg-kabuki-panel)",
+                    color: isSelected
+                      ? "var(--bg-tokyo-void)"
+                      : "var(--text-cyber-slate)",
+                    fontWeight: isSelected ? 500 : 400,
+                    fontSize: "14px",
+                    cursor: "pointer",
+                  }}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="split-60-40">
+          {/* Left 60%: Live 3-Layer Terminal X-Ray Drawer */}
+          <div
+            data-testid="xray-inspector-drawer"
+            data-ui="true"
+            data-reveal=""
+            style={{
+              backgroundColor: "var(--bg-akihabara-deck)",
+              borderRadius: "8px",
+              padding: "0.85rem 1.05rem",
+            }}
+          >
+            {activeShowcase ? (
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "0.65rem",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
+                    <code
                       style={{
-                        padding: "0 0.85rem",
+                        padding: "0.2rem 0.55rem",
                         backgroundColor: "var(--bg-tokyo-void)",
-                        color: "var(--accent-neon-crimson)",
+                        color: "var(--accent-cyber-cyan)",
                         borderRadius: "4px",
+                        fontWeight: 500,
                         fontSize: "14px",
-                        fontWeight: 700,
                       }}
                     >
-                      {locale === "vi" ? "Xem Video & Bản Ghi" : "Watch Video & Replay"}
-                    </Link>
+                      {activeShowcase.id} ({activeShowcase.durationLabel})
+                    </code>
+                    <code style={{ fontSize: "14px", color: "var(--text-cyber-slate)" }}>
+                      {activeShowcase.sourceGrounding}
+                    </code>
                   </div>
-
-                  <div>
-                    <h3 style={{ fontSize: "22px", marginBottom: "0.35rem" }}>
-                      {activeShowcase.title}
-                    </h3>
-                    <p style={{ color: "var(--text-titanium)", margin: 0, fontSize: "17px" }}>
-                      {activeShowcase.summary}
-                    </p>
-                  </div>
-
-                  {/* 3-Layer X-Ray Pipeline */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                    <div
-                      style={{
-                        backgroundColor: "var(--bg-tokyo-void)",
-                        padding: "0.95rem 1.15rem",
-                        borderRadius: "6px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: "var(--accent-voltage-gold)",
-                          marginBottom: "0.3rem",
-                        }}
-                      >
-                        1. {dictionary.xrayExplorer.layer1Label}
-                      </div>
-                      <pre
-                        style={{
-                          margin: 0,
-                          whiteSpace: "pre-wrap",
-                          wordBreak: "break-word",
-                          color: "var(--text-titanium)",
-                        }}
-                      >
-                        <code>{activeShowcase.xray.humanPrompt}</code>
-                      </pre>
-                    </div>
-
-                    <div
-                      style={{
-                        backgroundColor: "var(--bg-tokyo-void)",
-                        padding: "0.95rem 1.15rem",
-                        borderRadius: "6px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: "var(--accent-cyber-cyan)",
-                          marginBottom: "0.3rem",
-                        }}
-                      >
-                        2. {dictionary.xrayExplorer.layer2Label}
-                      </div>
-                      <pre
-                        style={{
-                          margin: 0,
-                          whiteSpace: "pre-wrap",
-                          wordBreak: "break-word",
-                          color: "var(--accent-cyber-cyan)",
-                        }}
-                      >
-                        <code>{activeShowcase.xray.orchestratorTool}</code>
-                      </pre>
-                    </div>
-
-                    <div
-                      style={{
-                        backgroundColor: "var(--bg-tokyo-void)",
-                        padding: "0.95rem 1.15rem",
-                        borderRadius: "6px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: "var(--accent-matrix-mint)",
-                          marginBottom: "0.3rem",
-                        }}
-                      >
-                        3. {dictionary.xrayExplorer.layer3Label}
-                      </div>
-                      <pre
-                        style={{
-                          margin: 0,
-                          whiteSpace: "pre-wrap",
-                          wordBreak: "break-word",
-                          color: "var(--text-titanium)",
-                        }}
-                      >
-                        <code>{activeShowcase.xray.engineExecution}</code>
-                      </pre>
-                    </div>
-                  </div>
-
-                  {/* Takeaway + Contextual Referral CTA */}
-                  <div
+                  <Link
+                    href={`/${locale}/episodes`}
+                    className="touch-target"
                     style={{
+                      padding: "0 0.8rem",
                       backgroundColor: "var(--bg-kabuki-panel)",
-                      padding: "1rem 1.15rem",
-                      borderRadius: "6px",
-                      display: "flex",
-                      flexWrap: "wrap",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      gap: "1rem",
+                      color: "var(--text-titanium)",
+                      borderRadius: "4px",
+                      fontSize: "14px",
+                      fontWeight: 400,
                     }}
                   >
-                    <div style={{ maxWidth: "54ch" }}>
-                      <strong
-                        style={{
-                          display: "block",
-                          fontSize: "14px",
-                          color: "var(--accent-voltage-gold)",
-                          marginBottom: "0.2rem",
-                        }}
-                      >
-                        {dictionary.xrayExplorer.proNotBroHeader}
-                      </strong>
-                      <span style={{ fontSize: "17px", color: "var(--text-titanium)" }}>
-                        {activeShowcase.proNotBroLesson}
-                      </span>
-                    </div>
+                    {locale === "vi" ? "Xem Video & Bản Ghi" : "Watch Video & Replay"}
+                  </Link>
+                </div>
 
-                    {activeShowcase.highlightsFreebuffReferral ? (
-                      <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-                        <a
-                          href={PARTNER_URLS.freebuffReferral}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="touch-target"
-                          style={{
-                            padding: "0 0.9rem",
-                            backgroundColor: "var(--accent-voltage-gold)",
-                            color: "var(--bg-tokyo-void)",
-                            borderRadius: "6px",
-                            fontWeight: 700,
-                            fontSize: "14px",
-                          }}
-                        >
-                          Freebuff Pass
-                        </a>
-                        <a
-                          href={PARTNER_URLS.zapGlm}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="touch-target"
-                          style={{
-                            padding: "0 0.9rem",
-                            backgroundColor: "var(--bg-tokyo-void)",
-                            color: "var(--accent-cyber-cyan)",
-                            borderRadius: "6px",
-                            fontWeight: 700,
-                            fontSize: "14px",
-                          }}
-                        >
-                          Zap GLM Pass
-                        </a>
-                      </div>
-                    ) : null}
+                <div>
+                  <h3 style={{ fontSize: "20px", fontWeight: 500, marginBottom: "0.25rem" }}>
+                    {activeShowcase.title}
+                  </h3>
+                  <p
+                    style={{
+                      color: "var(--text-titanium)",
+                      margin: 0,
+                      fontSize: "16px",
+                      maxWidth: "54ch",
+                    }}
+                  >
+                    {activeShowcase.summary}
+                  </p>
+                </div>
+
+                {/* 3-Layer X-Ray Pipeline */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                  <div
+                    data-reveal=""
+                    style={{
+                      backgroundColor: "transparent",
+                      borderLeft: "2px solid var(--bg-elevated-slate)",
+                      padding: "0.35rem 0.75rem",
+                      borderRadius: "0px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        color: "var(--text-cyber-slate)",
+                        marginBottom: "0.2rem",
+                      }}
+                    >
+                      {dictionary.xrayExplorer.layer1Label}
+                    </div>
+                    <pre
+                      style={{
+                        margin: 0,
+                        whiteSpace: "pre-wrap",
+                        wordBreak: "break-word",
+                        color: "var(--text-titanium)",
+                        fontSize: "14px",
+                      }}
+                    >
+                      <code>{activeShowcase.xray.humanPrompt}</code>
+                    </pre>
+                  </div>
+
+                  <div
+                    data-reveal=""
+                    style={{
+                      backgroundColor: "transparent",
+                      borderLeft: "2px solid var(--bg-elevated-slate)",
+                      padding: "0.35rem 0.75rem",
+                      borderRadius: "0px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        color: "var(--accent-cyber-cyan)",
+                        marginBottom: "0.2rem",
+                      }}
+                    >
+                      {dictionary.xrayExplorer.layer2Label}
+                    </div>
+                    <pre
+                      style={{
+                        margin: 0,
+                        whiteSpace: "pre-wrap",
+                        wordBreak: "break-word",
+                        color: "var(--accent-cyber-cyan)",
+                        fontSize: "14px",
+                      }}
+                    >
+                      <code>{activeShowcase.xray.orchestratorTool}</code>
+                    </pre>
+                  </div>
+
+                  <div
+                    data-reveal=""
+                    style={{
+                      backgroundColor: "transparent",
+                      borderLeft: "2px solid var(--bg-elevated-slate)",
+                      padding: "0.35rem 0.75rem",
+                      borderRadius: "0px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        color: "var(--text-cyber-slate)",
+                        marginBottom: "0.2rem",
+                      }}
+                    >
+                      {dictionary.xrayExplorer.layer3Label}
+                    </div>
+                    <pre
+                      style={{
+                        margin: 0,
+                        whiteSpace: "pre-wrap",
+                        wordBreak: "break-word",
+                        color: "var(--text-titanium)",
+                        fontSize: "14px",
+                      }}
+                    >
+                      <code>{activeShowcase.xray.engineExecution}</code>
+                    </pre>
                   </div>
                 </div>
-              ) : null}
-            </div>
 
-            {/* Right 38%: Compact 20-Clip Video Selector List */}
+                {/* Takeaway + Contextual Referral CTA */}
+                <div
+                  style={{
+                    backgroundColor: "var(--bg-kabuki-panel)",
+                    padding: "0.7rem 0.9rem",
+                    borderRadius: "6px",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <div style={{ maxWidth: "54ch" }}>
+                    <strong
+                      style={{
+                        display: "block",
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        color: "var(--text-cyber-slate)",
+                        marginBottom: "0.15rem",
+                      }}
+                    >
+                      {dictionary.xrayExplorer.proNotBroHeader}
+                    </strong>
+                    <span style={{ fontSize: "14px", color: "var(--text-titanium)" }}>
+                      {activeShowcase.proNotBroLesson}
+                    </span>
+                  </div>
+
+                  {activeShowcase.highlightsFreebuffReferral ? (
+                    <div style={{ display: "flex", gap: "0.45rem", flexWrap: "wrap" }}>
+                      <a
+                        href={PARTNER_URLS.freebuffReferral}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="touch-target"
+                        style={{
+                          padding: "0 0.85rem",
+                          backgroundColor: "var(--accent-cyber-cyan)",
+                          color: "var(--bg-tokyo-void)",
+                          borderRadius: "6px",
+                          fontWeight: 500,
+                          fontSize: "14px",
+                        }}
+                      >
+                        Freebuff Pass
+                      </a>
+                      <a
+                        href={PARTNER_URLS.zapGlm}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="touch-target"
+                        style={{
+                          padding: "0 0.85rem",
+                          backgroundColor: "var(--bg-tokyo-void)",
+                          color: "var(--text-titanium)",
+                          borderRadius: "6px",
+                          fontWeight: 400,
+                          fontSize: "14px",
+                        }}
+                      >
+                        Zap GLM Pass
+                      </a>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+          </div>
+
+          {/* Right 40%: Non-Clipping Patch-Bay Selector Grid (S8 First, Zero Clipped Rows) */}
+          <div
+            data-ui="true"
+            data-reveal=""
+            style={{
+              backgroundColor: "var(--bg-akihabara-deck)",
+              borderRadius: "8px",
+              padding: "1.1rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              gap: "0.65rem",
+            }}
+          >
             <div
-              data-ui="true"
               style={{
-                backgroundColor: "var(--bg-akihabara-deck)",
-                borderRadius: "8px",
-                padding: "1.1rem",
-                maxHeight: "650px",
-                overflowY: "auto",
                 display: "flex",
-                flexDirection: "column",
-                gap: "0.35rem",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "0.4rem",
+                flexWrap: "wrap",
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  gap: "0.35rem",
-                  flexWrap: "wrap",
-                  paddingBottom: "0.6rem",
-                }}
-              >
+              <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap" }}>
                 {(
                   [
                     ["all", dictionary.xrayExplorer.pluginAll],
                     ["steward", dictionary.xrayExplorer.pluginSteward],
                     ["substrate", dictionary.xrayExplorer.pluginSubstrate],
                   ] as const
-                ).map(([plugKey, label]) => (
-                  <button
-                    key={plugKey}
-                    type="button"
-                    onClick={() => setActivePluginFilter(plugKey)}
-                    aria-pressed={activePluginFilter === plugKey}
-                    className="touch-target"
-                    style={{
-                      padding: "0 0.7rem",
-                      borderRadius: "4px",
-                      border: "none",
-                      backgroundColor:
-                        activePluginFilter === plugKey
-                          ? "var(--bg-kabuki-panel)"
-                          : "var(--bg-tokyo-void)",
-                      color:
-                        activePluginFilter === plugKey
-                          ? "var(--accent-cyber-cyan)"
+                ).map(([plugKey, label]) => {
+                  const isSelected = activePluginFilter === plugKey;
+                  return (
+                    <button
+                      key={plugKey}
+                      type="button"
+                      onClick={() => setActivePluginFilter(plugKey)}
+                      aria-pressed={isSelected}
+                      className="touch-target"
+                      style={{
+                        padding: "0 0.7rem",
+                        borderRadius: "4px",
+                        border: "none",
+                        backgroundColor: isSelected
+                          ? "var(--text-titanium)"
+                          : "var(--bg-kabuki-panel)",
+                        color: isSelected
+                          ? "var(--bg-tokyo-void)"
                           : "var(--text-cyber-slate)",
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      cursor: "pointer",
-                    }}
-                  >
-                    {label}
-                  </button>
-                ))}
+                        fontSize: "14px",
+                        fontWeight: isSelected ? 500 : 400,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
               </div>
+              <code style={{ fontSize: "14px", color: "var(--text-cyber-slate)" }}>
+                {filteredShowcases.length} {locale === "vi" ? "lát cắt" : "slices"}
+              </code>
+            </div>
 
-              {filteredShowcases.map((clip) => {
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                gap: "0.45rem",
+              }}
+            >
+              {visibleShowcases.map((clip) => {
                 const isSelected = activeShowcase?.id === clip.id;
-                const nodeMeta = HARNESS_META[clip.harnessNode];
                 return (
                   <button
                     key={clip.id}
@@ -416,67 +472,86 @@ export function XrayWorkbenchSection({
                     className="touch-target"
                     style={{
                       width: "100%",
-                      justifyContent: "space-between",
-                      padding: "0.6rem 0.85rem",
+                      justifyContent: "flex-start",
+                      padding: "0.45rem 0.65rem",
                       borderRadius: "6px",
                       border: "none",
                       backgroundColor: isSelected
-                        ? "var(--bg-kabuki-panel)"
-                        : "transparent",
-                      color: "var(--text-titanium)",
+                        ? "var(--text-titanium)"
+                        : "var(--bg-kabuki-panel)",
+                      color: isSelected
+                        ? "var(--bg-tokyo-void)"
+                        : "var(--text-titanium)",
                       cursor: "pointer",
                       textAlign: "left",
-                      gap: "0.75rem",
+                      gap: "0.5rem",
+                      minWidth: 0,
                     }}
                   >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.65rem",
-                        minWidth: 0,
-                      }}
-                    >
-                      <code
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 700,
-                          color: isSelected
-                            ? "var(--accent-voltage-gold)"
-                            : nodeMeta.color,
-                          flexShrink: 0,
-                        }}
-                      >
-                        {clip.id}
-                      </code>
-                      <span
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: isSelected ? 700 : 500,
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
-                      >
-                        {clip.title}
-                      </span>
-                    </div>
-
                     <code
                       style={{
                         fontSize: "14px",
-                        color: "var(--text-cyber-slate)",
+                        fontWeight: 500,
+                        color: isSelected
+                          ? "var(--bg-tokyo-void)"
+                          : "var(--accent-cyber-cyan)",
                         flexShrink: 0,
                       }}
                     >
-                      {clip.durationLabel}
+                      {clip.id}
                     </code>
+                    <span
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: isSelected ? 500 : 400,
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        minWidth: 0,
+                      }}
+                    >
+                      {clip.title}
+                    </span>
                   </button>
                 );
               })}
             </div>
+
+            <div
+              style={{
+                backgroundColor: "var(--bg-tokyo-void)",
+                borderRadius: "6px",
+                padding: "0.65rem 0.8rem",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "0.5rem",
+                flexWrap: "wrap",
+              }}
+            >
+              <span style={{ fontSize: "14px", color: "var(--text-cyber-slate)" }}>
+                {locale === "vi"
+                  ? "Mở trọn bộ 20 lát cắt trong Showroom:"
+                  : "Inspect all 20 slices in Showroom:"}
+              </span>
+              <Link
+                href={`/${locale}/showroom`}
+                className="touch-target"
+                style={{
+                  minHeight: "38px",
+                  padding: "0 0.75rem",
+                  backgroundColor: "var(--bg-kabuki-panel)",
+                  color: "var(--text-titanium)",
+                  borderRadius: "4px",
+                  fontSize: "14px",
+                }}
+              >
+                {dictionary.nav.showroomLink}
+              </Link>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 }

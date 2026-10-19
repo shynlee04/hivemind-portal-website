@@ -44,9 +44,9 @@ export default async function EpisodeDetailPage({
         href={`/${locale}/episodes`}
         className="touch-target"
         style={{
-          fontSize: "0.875rem",
-          fontWeight: 600,
-          color: "var(--accent-jade-wire)",
+          fontSize: "14px",
+          fontWeight: 500,
+          color: "var(--accent-cyber-cyan)",
           marginBottom: "1.5rem",
         }}
       >
@@ -55,21 +55,22 @@ export default async function EpisodeDetailPage({
 
       <header
         style={{
-          padding: "2.25rem",
-          marginBottom: "2.25rem",
-          backgroundColor: "var(--bg-smoked-basalt)",
+          padding: "2rem",
+          marginBottom: "2rem",
+          backgroundColor: "var(--bg-akihabara-deck)",
           borderRadius: "8px",
         }}
       >
         <h1
           style={{
-            fontSize: "clamp(1.85rem, 3vw, 2.65rem)",
+            fontSize: "clamp(42px, 4.2vw, 60px)",
+            fontWeight: 500,
             marginBottom: "0.5rem",
           }}
         >
           {episode.title}
         </h1>
-        <p style={{ fontSize: "1.05rem", color: "var(--text-ash-slate)", marginBottom: "1rem" }}>
+        <p style={{ fontSize: "16px", color: "var(--text-cyber-slate)", marginBottom: "1rem" }}>
           {episode.subtitle}
         </p>
         <div
@@ -80,29 +81,30 @@ export default async function EpisodeDetailPage({
             marginBottom: "1.25rem",
           }}
         >
-          <code style={{ fontSize: "0.78rem", color: "var(--accent-wok-gold)" }}>
+          <code style={{ fontSize: "14px", color: "var(--text-cyber-slate)" }}>
             [EP-{episode.episodeNumber}] / [{episode.horizon.toUpperCase()}] / {episode.duration}
           </code>
         </div>
 
         <div
           style={{
-            padding: "1.15rem 1.35rem",
-            backgroundColor: "var(--bg-scroll-lacquer)",
+            padding: "1rem 1.25rem",
+            backgroundColor: "var(--bg-kabuki-panel)",
             borderRadius: "6px",
           }}
         >
           <strong
             style={{
               display: "block",
-              fontSize: "0.8rem",
-              color: "var(--accent-jade-wire)",
-              marginBottom: "0.35rem",
+              fontSize: "14px",
+              fontWeight: 500,
+              color: "var(--text-cyber-slate)",
+              marginBottom: "0.25rem",
             }}
           >
             {episode.youtubeTeaserTitle}
           </strong>
-          <div style={{ fontSize: "0.95rem" }}>
+          <div style={{ fontSize: "16px", color: "var(--text-titanium)" }}>
             {episode.architectureTakeaway}
           </div>
         </div>
@@ -111,27 +113,28 @@ export default async function EpisodeDetailPage({
       <div className="split-50-50">
         <section
           style={{
-            padding: "1.75rem",
-            backgroundColor: "var(--bg-smoked-basalt)",
+            padding: "1.5rem",
+            backgroundColor: "var(--bg-akihabara-deck)",
             borderRadius: "8px",
           }}
         >
           <h2
             style={{
-              fontSize: "1.25rem",
-              color: "var(--accent-wok-gold)",
-              marginBottom: "1.25rem",
+              fontSize: "clamp(28px, 2.5vw, 36px)",
+              fontWeight: 500,
+              color: "var(--text-titanium)",
+              marginBottom: "1rem",
             }}
           >
             {dict.episodesSection.transcriptHeading}
           </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
             {episode.transcriptTurns.map((turn) => (
               <div
                 key={turn.timestamp}
                 style={{
-                  padding: "1.1rem",
-                  backgroundColor: "var(--bg-wok-iron)",
+                  padding: "1rem",
+                  backgroundColor: "var(--bg-tokyo-void)",
                   borderRadius: "6px",
                 }}
               >
@@ -139,9 +142,9 @@ export default async function EpisodeDetailPage({
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    fontSize: "0.78rem",
-                    color: "var(--accent-jade-wire)",
-                    marginBottom: "0.45rem",
+                    fontSize: "14px",
+                    color: "var(--text-cyber-slate)",
+                    marginBottom: "0.35rem",
                   }}
                 >
                   <code>
@@ -149,7 +152,9 @@ export default async function EpisodeDetailPage({
                   </code>
                   <code>[{turn.harness.toUpperCase()}]</code>
                 </div>
-                <p style={{ margin: 0, fontSize: "0.95rem" }}>{turn.text}</p>
+                <p style={{ margin: 0, fontSize: "16px", color: "var(--text-titanium)" }}>
+                  {turn.text}
+                </p>
               </div>
             ))}
           </div>
@@ -158,39 +163,40 @@ export default async function EpisodeDetailPage({
         <section
           data-ui="episode-tui-replay"
           style={{
-            padding: "1.75rem",
-            backgroundColor: "var(--bg-smoked-basalt)",
+            padding: "1.5rem",
+            backgroundColor: "var(--bg-akihabara-deck)",
             borderRadius: "8px",
           }}
         >
           <h2
             style={{
-              fontSize: "1.25rem",
-              color: "var(--accent-jade-wire)",
-              marginBottom: "1.25rem",
+              fontSize: "clamp(28px, 2.5vw, 36px)",
+              fontWeight: 500,
+              color: "var(--text-titanium)",
+              marginBottom: "1rem",
             }}
           >
             {dict.episodesSection.tuiReplayHeading}
           </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
             {episode.transcriptTurns.map((turn) => (
               <div
                 key={turn.timestamp}
                 style={{
-                  padding: "1.1rem",
-                  backgroundColor: "#05070B",
+                  padding: "1rem",
+                  backgroundColor: "var(--bg-tokyo-void)",
                   borderRadius: "6px",
-                  fontSize: "0.82rem",
+                  fontSize: "14px",
                 }}
               >
-                <div style={{ color: "var(--accent-wok-gold)", marginBottom: "0.4rem" }}>
+                <div style={{ color: "var(--accent-cyber-cyan)", marginBottom: "0.35rem" }}>
                   <code>$ {turn.tuiCommand}</code>
                 </div>
                 <pre
                   style={{
                     margin: 0,
                     whiteSpace: "pre-wrap",
-                    color: "var(--accent-bamboo-green)",
+                    color: "var(--text-titanium)",
                   }}
                 >
                   <code>{turn.tuiOutput}</code>

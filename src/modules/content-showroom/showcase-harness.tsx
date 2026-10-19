@@ -64,7 +64,7 @@ const HARNESS_CHROME_COPY: Readonly<
   >
 > = {
   en: {
-    badge: "[SHOWCASE HARNESS · STORYBOOK 8 & ISOLATED STAGE]",
+    badge: "Storybook 8 & Isolated UI Stage",
     defaultTitle: "Neo-Tokyo Component Showroom Harness",
     defaultDescription:
       "Inspect isolated portal modules with live EN/VI dictionary switching, 3-Horizon maturity filtering, and deterministic reduced-motion SVG fallbacks.",
@@ -77,7 +77,7 @@ const HARNESS_CHROME_COPY: Readonly<
       "Active isolated showroom stage ready. Toggle EN/VI, HorizonTier, or Reduced Motion above to verify deterministic rendering.",
   },
   vi: {
-    badge: "[KHUNG TRÌNH DIỄN · STORYBOOK 8 & SÂN KHẤU ĐỘC LẬP]",
+    badge: "Storybook 8 & Sân Khấu UI Độc Lập",
     defaultTitle: "Khung Thử Nghiệm Thành Phần Neo-Tokyo",
     defaultDescription:
       "Kiểm tra độc lập từng mô-đun cổng thông tin với chuyển đổi song ngữ EN/VI tức thời, bộ lọc 3 Chân Trời và chế độ SVG dự phòng tất định.",
@@ -153,21 +153,20 @@ export function ShowcaseHarness({
   return (
     <section
       data-testid="showcase-harness"
+      data-ui="showcase-harness"
       data-locale={activeLocale}
       data-reduced-motion={String(activeReducedMotion)}
       data-horizon={activeHorizon}
       data-component={componentName}
       style={{
-        backgroundColor: "var(--bg-smoked-basalt, #111622)",
-        border: "1px solid var(--border-forge-brass, #3A2E1E)",
-        borderRadius: "2px",
-        color: "var(--text-parchment, #F4EFE6)",
+        backgroundColor: "var(--bg-akihabara-deck, #0E1015)",
+        borderRadius: "6px",
+        color: "var(--text-titanium, #F2F4F8)",
         padding: "1.5rem",
       }}
     >
       <header
         style={{
-          borderBottom: "1px solid var(--border-forge-brass, #3A2E1E)",
           paddingBottom: "1rem",
           marginBottom: "1.25rem",
         }}
@@ -179,54 +178,49 @@ export function ShowcaseHarness({
             alignItems: "center",
             justifyContent: "space-between",
             gap: "0.75rem",
-            marginBottom: "0.75rem",
+            marginBottom: "0.45rem",
           }}
         >
-          <span
+          <h2
             style={{
-              
-              fontSize: "0.8125rem",
-              color: "var(--accent-wok-gold, #F5A623)",
+              fontFamily: "var(--font-sans, 'Be Vietnam Pro', system-ui, sans-serif)",
+              fontSize: "clamp(28px, 2.5vw, 36px)",
+              fontWeight: 500,
+              lineHeight: 1.15,
+              margin: 0,
             }}
           >
-            {copy.badge} · {componentName}
-          </span>
-          <span
-            data-testid="showcase-harness-horizon-badge"
-            style={{
-              
-              fontSize: "0.8125rem",
-              color:
-                activeHorizon === "shipped"
-                  ? "var(--accent-wok-gold, #F5A623)"
-                  : activeHorizon === "next-release"
-                    ? "var(--accent-jade-wire, #22D3EE)"
-                    : "var(--accent-dragon-ember, #EF4444)",
-            }}
-          >
-            {activeHorizonBadge}
-          </span>
+            {resolvedTitle}
+          </h2>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.65rem", flexWrap: "wrap" }}>
+            <span
+              style={{
+                fontSize: "14px",
+                color: "var(--text-cyber-slate, #A8B3C4)",
+              }}
+            >
+              {copy.badge} / {componentName}
+            </span>
+            <span
+              data-testid="showcase-harness-horizon-badge"
+              style={{
+                fontSize: "14px",
+                color: "var(--accent-cyber-cyan, #00E5FF)",
+              }}
+            >
+              {activeHorizonBadge}
+            </span>
+          </div>
         </div>
 
-        <h2
-          style={{
-            fontFamily: "var(--font-sans, 'Be Vietnam Pro', system-ui, sans-serif)",
-            fontSize: "clamp(1.35rem, 2vw + 0.5rem, 1.85rem)",
-            fontWeight: 700,
-            lineHeight: 1.24,
-            margin: "0 0 0.5rem 0",
-          }}
-        >
-          {resolvedTitle}
-        </h2>
         <p
           style={{
             fontFamily: "var(--font-sans, 'Be Vietnam Pro', system-ui, sans-serif)",
-            fontSize: "1rem",
-            lineHeight: 1.65,
-            color: "var(--text-ash-slate, #94A3B8)",
+            fontSize: "16px",
+            lineHeight: 1.55,
+            color: "var(--text-titanium, #F2F4F8)",
             margin: 0,
-            maxWidth: "66ch",
+            maxWidth: "54ch",
           }}
         >
           {resolvedDescription}
@@ -239,7 +233,7 @@ export function ShowcaseHarness({
             display: "flex",
             flexWrap: "wrap",
             alignItems: "center",
-            gap: "0.75rem",
+            gap: "0.65rem",
             marginTop: "1rem",
           }}
         >
@@ -261,17 +255,17 @@ export function ShowcaseHarness({
                   style={{
                     minHeight: "44px",
                     minWidth: "44px",
-                    padding: "0.5rem 0.875rem",
-                    borderRadius: "2px",
-                    border: "1px solid var(--border-forge-brass, #3A2E1E)",
+                    padding: "0.45rem 0.85rem",
+                    borderRadius: "4px",
+                    border: "none",
                     backgroundColor: isSelected
-                      ? "var(--accent-wok-gold, #F5A623)"
-                      : "var(--bg-scroll-lacquer, #171F2E)",
+                      ? "var(--text-titanium, #F2F4F8)"
+                      : "var(--bg-kabuki-panel, #161920)",
                     color: isSelected
-                      ? "var(--bg-wok-iron, #080B10)"
-                      : "var(--text-parchment, #F4EFE6)",
-                    
-                    fontWeight: 700,
+                      ? "var(--bg-tokyo-void, #07080B)"
+                      : "var(--text-cyber-slate, #A8B3C4)",
+                    fontSize: "14px",
+                    fontWeight: isSelected ? 500 : 400,
                     cursor: "pointer",
                   }}
                 >
@@ -299,18 +293,17 @@ export function ShowcaseHarness({
                   style={{
                     minHeight: "44px",
                     minWidth: "44px",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "2px",
-                    border: "1px solid var(--border-forge-brass, #3A2E1E)",
+                    padding: "0.45rem 0.75rem",
+                    borderRadius: "4px",
+                    border: "none",
                     backgroundColor: isSelected
-                      ? "var(--accent-jade-wire, #22D3EE)"
-                      : "var(--bg-scroll-lacquer, #171F2E)",
+                      ? "var(--text-titanium, #F2F4F8)"
+                      : "var(--bg-kabuki-panel, #161920)",
                     color: isSelected
-                      ? "var(--bg-wok-iron, #080B10)"
-                      : "var(--text-parchment, #F4EFE6)",
-                    
-                    fontSize: "0.8125rem",
-                    fontWeight: 600,
+                      ? "var(--bg-tokyo-void, #07080B)"
+                      : "var(--text-cyber-slate, #A8B3C4)",
+                    fontSize: "14px",
+                    fontWeight: isSelected ? 500 : 400,
                     cursor: "pointer",
                   }}
                 >
@@ -329,18 +322,17 @@ export function ShowcaseHarness({
             style={{
               minHeight: "44px",
               minWidth: "44px",
-              padding: "0.5rem 0.875rem",
-              borderRadius: "2px",
-              border: "1px solid var(--border-forge-brass, #3A2E1E)",
+              padding: "0.45rem 0.85rem",
+              borderRadius: "4px",
+              border: "none",
               backgroundColor: activeReducedMotion
-                ? "var(--accent-bamboo-green, #10B981)"
-                : "var(--bg-scroll-lacquer, #171F2E)",
+                ? "var(--text-titanium, #F2F4F8)"
+                : "var(--bg-kabuki-panel, #161920)",
               color: activeReducedMotion
-                ? "var(--bg-wok-iron, #080B10)"
-                : "var(--text-parchment, #F4EFE6)",
-              
-              fontSize: "0.8125rem",
-              fontWeight: 600,
+                ? "var(--bg-tokyo-void, #07080B)"
+                : "var(--text-cyber-slate, #A8B3C4)",
+              fontSize: "14px",
+              fontWeight: activeReducedMotion ? 500 : 400,
               cursor: "pointer",
             }}
           >
@@ -349,9 +341,8 @@ export function ShowcaseHarness({
 
           <span
             style={{
-              
-              fontSize: "0.75rem",
-              color: "var(--accent-bamboo-green, #10B981)",
+              fontSize: "14px",
+              color: "var(--text-cyber-slate, #A8B3C4)",
               marginLeft: "auto",
             }}
           >
@@ -363,9 +354,8 @@ export function ShowcaseHarness({
       <div
         data-testid="showcase-harness-canvas"
         style={{
-          backgroundColor: "var(--bg-wok-iron, #080B10)",
-          border: "1px solid var(--border-forge-brass, #3A2E1E)",
-          borderRadius: "2px",
+          backgroundColor: "var(--bg-tokyo-void, #07080B)",
+          borderRadius: "6px",
           padding: "1.25rem",
         }}
       >
@@ -373,17 +363,17 @@ export function ShowcaseHarness({
           <div
             data-testid="showcase-harness-default-stage"
             style={{
-              
-              fontSize: "0.875rem",
-              lineHeight: 1.6,
-              color: "var(--text-parchment, #F4EFE6)",
+              fontSize: "16px",
+              lineHeight: 1.55,
+              color: "var(--text-titanium, #F2F4F8)",
             }}
           >
-            <p style={{ margin: "0 0 0.5rem 0" }}>{copy.defaultStageNote}</p>
+            <p style={{ margin: "0 0 0.5rem 0", maxWidth: "54ch" }}>{copy.defaultStageNote}</p>
             <code
               style={{
                 display: "block",
-                color: "var(--accent-jade-wire, #22D3EE)",
+                fontSize: "14px",
+                color: "var(--accent-cyber-cyan, #00E5FF)",
               }}
             >
               {`{ locale: "${activeLocale}", horizon: "${activeHorizon}", reducedMotion: ${String(activeReducedMotion)} }`}

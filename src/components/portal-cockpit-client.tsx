@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import type {
   ConversionAudience,
   ConversionBundle,
@@ -17,10 +16,13 @@ import type {
 } from "@/types/portal";
 import { WokReactorStage } from "@/modules/wok-reactor-stage";
 import {
-  PARTNER_URLS,
   calculateQuotaSavings,
   resolveConversionCtas,
 } from "@/modules/partner-conversion";
+import { SignalFlowSection } from "./cockpit/signal-flow-section";
+import { XrayWorkbenchSection } from "./cockpit/xray-workbench-section";
+import { QuotaPartnerSection } from "./cockpit/quota-partner-section";
+import { GreenfieldSubstrateSection } from "./cockpit/greenfield-substrate-section";
 
 export interface PortalCockpitClientProps {
   readonly locale: Locale;
@@ -31,15 +33,9 @@ export interface PortalCockpitClientProps {
   readonly initialConversion: ConversionBundle;
 }
 
-import { SignalFlowSection } from "./cockpit/signal-flow-section";
-import { XrayWorkbenchSection } from "./cockpit/xray-workbench-section";
-import { QuotaPartnerSection } from "./cockpit/quota-partner-section";
-import { GreenfieldSubstrateSection } from "./cockpit/greenfield-substrate-section";
-
 export function PortalCockpitClient({
   locale,
   dictionary,
-  horizons,
   showcases,
   greenfield,
   initialConversion,
@@ -68,6 +64,44 @@ export function PortalCockpitClient({
     setReducedMotion(mq.matches);
     const listener = (event: MediaQueryListEvent) => setReducedMotion(event.matches);
     mq.addEventListener("change", listener);
+
+    if (!mq.matches) {
+      const nodes = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-line], [data-rise], [data-reveal]")
+      );
+      const timers: number[] = [];
+      nodes.forEach((el, idx) => {
+        const t = window.setTimeout(() => {
+          el.style.opacity = "1";
+          el.style.transform = "translate3d(0px, 0px, 0px)";
+        }, 120 + (idx % 12) * 45);
+        timers.push(t);
+      });
+
+      let io: IntersectionObserver | null = null;
+      if (typeof IntersectionObserver !== "undefined") {
+        io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry, idx) => {
+              if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+                const target = entry.target;
+                target.style.opacity = "1";
+                target.style.transform = `translateY(${idx % 2 === 0 ? "0px" : "0.01px"})`;
+              }
+            });
+          },
+          { threshold: 0.08 }
+        );
+        nodes.forEach((el) => io?.observe(el));
+      }
+
+      return () => {
+        mq.removeEventListener("change", listener);
+        timers.forEach((id) => window.clearTimeout(id));
+        io?.disconnect();
+      };
+    }
+
     return () => mq.removeEventListener("change", listener);
   }, []);
 
@@ -110,8 +144,12 @@ export function PortalCockpitClient({
       locale,
       sliceId: activeShowcase?.id,
     });
-    const matched = bundle.items.filter((item) => item.audience === activeAudience);
-    return matched.length > 0 ? matched : bundle.items;
+    if (activeAudience === "sponsors") {
+      return bundle.items.filter((item) => item.audience === "sponsors");
+    }
+    return bundle.items.filter(
+      (item) => item.audience === "builders" || item.audience === "supporters"
+    );
   }, [activeAudience, locale, activeShowcase?.id]);
 
   const savings = useMemo(() => calculateQuotaSavings(hoursPerWeek), [hoursPerWeek]);
@@ -138,36 +176,36 @@ export function PortalCockpitClient({
 
   const heroLines =
     locale === "vi"
-      ? ["Mọi Đặc Vụ.", "Một Buồng Lái."]
-      : ["All Agents.", "One Cockpit."];
+      ? ["Mọi Harness.", "Một Buồng Lái."]
+      : ["All Harnesses.", "One Cockpit."];
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      {/* ACT 1: NEO-TOKYO SPLIT HERO COCKPIT FRONTING HIVEMIND-STEWARD */}
+      {/* SCREEN 1 (0..900px): .site-header (56px) + #cockpit.stage-hero (844px) */}
       <section
         id="cockpit"
+        className="stage-hero"
         style={{
-          scrollMarginTop: "5rem",
-          paddingTop: "clamp(2.25rem, 4.5vw, 4.25rem)",
-          paddingBottom: "clamp(3.5rem, 6.5vw, 5.5rem)",
+          scrollMarginTop: "3.5rem",
+          backgroundColor: "var(--bg-tokyo-void)",
         }}
       >
         <div className="cyber-shell">
           <div className="hero-cockpit-grid">
             {/* Left 42%: Vibecoder Value Proposition, Install CLI & Stage 1 Social Channels */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.35rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               <h1
                 style={{
-                  fontSize: "clamp(44px, 5vw, 72px)",
-                  fontWeight: 700,
-                  lineHeight: 1.02,
-                  letterSpacing: "-0.038em",
+                  fontSize: "clamp(32px, 3.8vw, 52px)",
+                  fontWeight: 500,
+                  lineHeight: 1.06,
+                  letterSpacing: "-0.03em",
                   margin: 0,
                   color: "var(--text-titanium)",
                 }}
               >
                 <span className="line-mask">
-                  <span data-line="" style={{ "--i": 0 } as React.CSSProperties}>
+                  <span data-line="" style={{ "--i": 0, whiteSpace: "nowrap" } as React.CSSProperties}>
                     {heroLines[0]}
                   </span>
                 </span>
@@ -177,7 +215,8 @@ export function PortalCockpitClient({
                     style={
                       {
                         "--i": 1,
-                        color: "var(--accent-cyber-cyan)",
+                        whiteSpace: "nowrap",
+                        color: "var(--text-titanium)",
                       } as React.CSSProperties
                     }
                   >
@@ -191,15 +230,15 @@ export function PortalCockpitClient({
                 style={
                   {
                     "--d": 1,
-                    fontSize: "17px",
-                    lineHeight: 1.6,
+                    fontSize: "16px",
+                    lineHeight: 1.55,
                     color: "var(--text-titanium)",
                     margin: 0,
                     maxWidth: "54ch",
                   } as React.CSSProperties
                 }
               >
-                {dictionary.hero.philosophySummary}
+                {dictionary.hero.subheadline}
               </p>
 
               {/* TUI Command Install Bar */}
@@ -209,11 +248,11 @@ export function PortalCockpitClient({
                   {
                     "--d": 2,
                     backgroundColor: "var(--bg-akihabara-deck)",
-                    padding: "0.9rem 1.1rem",
+                    padding: "0.85rem 1rem",
                     borderRadius: "6px",
                     display: "flex",
                     flexDirection: "column",
-                    gap: "0.55rem",
+                    gap: "0.45rem",
                   } as React.CSSProperties
                 }
               >
@@ -229,7 +268,7 @@ export function PortalCockpitClient({
                   <code
                     style={{
                       fontSize: "14px",
-                      fontWeight: 700,
+                      fontWeight: 500,
                       color: "var(--accent-cyber-cyan)",
                     }}
                   >
@@ -240,14 +279,16 @@ export function PortalCockpitClient({
                     onClick={handleCopyInstall}
                     className="touch-target"
                     style={{
-                      padding: "0 1rem",
+                      padding: "0 0.9rem",
                       backgroundColor: copiedCommand
-                        ? "var(--accent-matrix-mint)"
-                        : "var(--accent-cyber-cyan)",
-                      color: "var(--bg-tokyo-void)",
+                        ? "var(--text-titanium)"
+                        : "var(--bg-kabuki-panel)",
+                      color: copiedCommand
+                        ? "var(--bg-tokyo-void)"
+                        : "var(--text-titanium)",
                       border: "none",
                       borderRadius: "4px",
-                      fontWeight: 700,
+                      fontWeight: 500,
                       fontSize: "14px",
                       cursor: "pointer",
                     }}
@@ -257,12 +298,19 @@ export function PortalCockpitClient({
                       : dictionary.hero.copyCommandLabel}
                   </button>
                 </div>
-                <div style={{ fontSize: "14px", color: "var(--text-cyber-slate)", maxWidth: "58ch" }}>
-                  {dictionary.hero.subheadline} 
-                </div>
+                <p
+                  style={{
+                    fontSize: "16px",
+                    color: "var(--text-titanium)",
+                    margin: 0,
+                    maxWidth: "54ch",
+                  }}
+                >
+                  {dictionary.hero.philosophySummary}
+                </p>
               </div>
 
-              {/* Primary CTAs */}
+              {/* Single Primary CTA + Monochrome Secondary CTA */}
               <div
                 data-rise=""
                 style={
@@ -270,7 +318,7 @@ export function PortalCockpitClient({
                     "--d": 3,
                     display: "flex",
                     flexWrap: "wrap",
-                    gap: "0.75rem",
+                    gap: "0.65rem",
                   } as React.CSSProperties
                 }
               >
@@ -278,25 +326,25 @@ export function PortalCockpitClient({
                   href="#xray"
                   className="touch-target"
                   style={{
-                    padding: "0 1.35rem",
-                    backgroundColor: "var(--accent-voltage-gold)",
+                    padding: "0 1.25rem",
+                    backgroundColor: "var(--accent-cyber-cyan)",
                     color: "var(--bg-tokyo-void)",
                     borderRadius: "6px",
-                    fontWeight: 700,
+                    fontWeight: 500,
                     fontSize: "14px",
                   }}
                 >
                   {dictionary.hero.primaryCtaLabel}
                 </a>
                 <a
-                  href="#conversion"
+                  href="#gateway"
                   className="touch-target"
                   style={{
-                    padding: "0 1.25rem",
+                    padding: "0 1.15rem",
                     backgroundColor: "var(--bg-kabuki-panel)",
                     color: "var(--text-titanium)",
                     borderRadius: "6px",
-                    fontWeight: 600,
+                    fontWeight: 400,
                     fontSize: "14px",
                   }}
                 >
@@ -304,7 +352,7 @@ export function PortalCockpitClient({
                 </a>
               </div>
 
-              {/* Stage 1 Social Launch & Community Channels (GitHub, YouTube, Reddit, Discord) */}
+              {/* Stage 1 Social Launch & Community Channels */}
               <div
                 data-rise=""
                 style={
@@ -313,27 +361,25 @@ export function PortalCockpitClient({
                     display: "flex",
                     flexWrap: "wrap",
                     alignItems: "center",
-                    gap: "0.5rem",
-                    paddingTop: "0.25rem",
+                    gap: "0.45rem",
                   } as React.CSSProperties
                 }
               >
                 <span style={{ fontSize: "14px", color: "var(--text-cyber-slate)" }}>
-                  {locale === "vi" ? "Kênh Cộng Đồng Stage 1:" : "Stage 1 Launch Channels:"}
+                  {locale === "vi" ? "Kênh Cộng Đồng:" : "Community Channels:"}
                 </span>
                 <a
                   href="https://youtube.com/@chingchongchingvibecoding"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-rise=""
                   className="touch-target"
                   style={{
-                    padding: "0 0.75rem",
-                    backgroundColor: "var(--bg-akihabara-deck)",
-                    color: "var(--accent-neon-crimson)",
+                    padding: "0 0.7rem",
+                    backgroundColor: "var(--bg-kabuki-panel)",
+                    color: "var(--text-cyber-slate)",
                     borderRadius: "4px",
                     fontSize: "14px",
-                    fontWeight: 600,
+                    fontWeight: 400,
                   }}
                 >
                   YouTube
@@ -342,15 +388,14 @@ export function PortalCockpitClient({
                   href="https://github.com/shynlee04/hivemind-steward-oc-devin-dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-rise=""
                   className="touch-target"
                   style={{
-                    padding: "0 0.75rem",
-                    backgroundColor: "var(--bg-akihabara-deck)",
-                    color: "var(--text-titanium)",
+                    padding: "0 0.7rem",
+                    backgroundColor: "var(--bg-kabuki-panel)",
+                    color: "var(--text-cyber-slate)",
                     borderRadius: "4px",
                     fontSize: "14px",
-                    fontWeight: 600,
+                    fontWeight: 400,
                   }}
                 >
                   GitHub
@@ -359,15 +404,14 @@ export function PortalCockpitClient({
                   href="https://reddit.com/r/opencode"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-rise=""
                   className="touch-target"
                   style={{
-                    padding: "0 0.75rem",
-                    backgroundColor: "var(--bg-akihabara-deck)",
-                    color: "var(--accent-voltage-gold)",
+                    padding: "0 0.7rem",
+                    backgroundColor: "var(--bg-kabuki-panel)",
+                    color: "var(--text-cyber-slate)",
                     borderRadius: "4px",
                     fontSize: "14px",
-                    fontWeight: 600,
+                    fontWeight: 400,
                   }}
                 >
                   Reddit
@@ -376,15 +420,14 @@ export function PortalCockpitClient({
                   href="https://discord.com/invite/opencode"
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-rise=""
                   className="touch-target"
                   style={{
-                    padding: "0 0.75rem",
-                    backgroundColor: "var(--bg-akihabara-deck)",
-                    color: "var(--accent-cyber-cyan)",
+                    padding: "0 0.7rem",
+                    backgroundColor: "var(--bg-kabuki-panel)",
+                    color: "var(--text-cyber-slate)",
                     borderRadius: "4px",
                     fontSize: "14px",
-                    fontWeight: 600,
+                    fontWeight: 400,
                   }}
                 >
                   Discord
@@ -406,14 +449,20 @@ export function PortalCockpitClient({
         </div>
       </section>
 
+      {/* SCREEN 2 (900..1800px): #gateway.stage-screen */}
       <SignalFlowSection
         locale={locale}
+        dictionary={dictionary}
         activeHarness={activeHarness}
         gatewayMode={gatewayMode}
         setGatewayMode={setGatewayMode}
         onSelectReactorNode={handleSelectReactorNode}
+        hoursPerWeek={hoursPerWeek}
+        setHoursPerWeek={setHoursPerWeek}
+        savings={savings}
       />
 
+      {/* SCREEN 3 (1800..2700px): #xray.stage-screen */}
       <XrayWorkbenchSection
         locale={locale}
         dictionary={dictionary}
@@ -427,18 +476,17 @@ export function PortalCockpitClient({
         setActiveHarness={setActiveHarness}
       />
 
+      {/* SCREEN 4 (2700..3600px): #conversion.stage-screen */}
       <QuotaPartnerSection
         locale={locale}
         dictionary={dictionary}
-        hoursPerWeek={hoursPerWeek}
-        setHoursPerWeek={setHoursPerWeek}
-        savings={savings}
         activeAudience={activeAudience}
         setActiveAudience={setActiveAudience}
         allConversionItems={allConversionItems}
         conversionBundle={conversionBundle}
       />
 
+      {/* SCREEN 5 (3600..4500px): #greenfield.stage-final + .site-footer */}
       <GreenfieldSubstrateSection
         locale={locale}
         dictionary={dictionary}

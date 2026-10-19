@@ -73,9 +73,9 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
     xray: {
       humanPrompt: "$ npx hmoc-steward-acp --scope project",
       orchestratorTool:
-        "cross-os-platform.mjs to probeExecutable('devin') + patchJsoncPreservingComments('opencode.json')",
+        "cross-os-platform.mjs: probeExecutable('devin') + patchJsoncPreservingComments('opencode.json')",
       engineExecution:
-        "Verified devin acp binary (darwin-arm64, sha256:8f2e...91a4) to appended plugin entry & sentinel provider devin-native without mutating existing JSONC comments.",
+        "Verified devin acp binary (darwin-arm64, sha256:8f2e...91a4) and appended plugin entry & sentinel provider devin-native without mutating existing JSONC comments.",
     },
     proNotBroLesson: {
       en: "Never nuke a developer's hand-commented opencode.json with JSON.stringify. Parse and patch AST spans at the boundary and fail closed on unknown OS tuples.",
@@ -107,7 +107,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       orchestratorTool:
         'jsonrpc: "2.0", method: "session/prompt", params: { sessionId: "devin_7a91c", prompt: [{ type: "text", text: "Audit src/acp.ts..." }] }',
       engineExecution:
-        "subprocess(devin acp) to AcpClient ndjson stream to hostedLaneFor('devin', cwd) to remount-safe sink to Solid TUI frame render.",
+        "subprocess(devin acp) | AcpClient ndjson stream | hostedLaneFor('devin', cwd) | remount-safe sink | Solid TUI frame render.",
     },
     proNotBroLesson: {
       en: "Never bind a subprocess stdio callback directly to a UI component signal. Route events through a headless Lane state machine so TUI tab remounts never drop a frame.",
@@ -139,7 +139,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       orchestratorTool:
         'tool: "delegate-devin", args: { prompt: "Implement deterministic Zod boundary parser...", mode: "coding", effort: "high" }',
       engineExecution:
-        "host.session.create() to ses_01J9X8A2 to AcpClient.sessionNew(cwd) to foreignSessionId: dev_9921 to native-checkpoint binding persisted.",
+        "host.session.create() | ses_01J9X8A2 | AcpClient.sessionNew(cwd) | foreignSessionId: dev_9921 | native-checkpoint binding persisted.",
     },
     proNotBroLesson: {
       en: "Subagents should not be opaque black-box promises. Bind every foreign ACP session to a native OpenCode ses_* child so the operator can inspect every step in the session tree.",
@@ -169,9 +169,9 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
     xray: {
       humanPrompt: "/devin:resume ses_01J9X8A2 --reconcile",
       orchestratorTool:
-        'reconcileNativeCheckpoint({ childSessionId: "ses_01J9X8A2", foreignSessionId: "dev_9921" }) to jsonrpc: "session/load"',
+        'reconcileNativeCheckpoint({ childSessionId: "ses_01J9X8A2", foreignSessionId: "dev_9921" }) | jsonrpc: "session/load"',
       engineExecution:
-        "Verified ownership stamp to replayed missed ACP notifications from offset #42 to restored child status to READY without re-running completed tool calls.",
+        "Verified ownership stamp, replayed missed ACP notifications from offset #42, and restored child status to READY without re-running completed tool calls.",
     },
     proNotBroLesson: {
       en: "Lifecycle loops must be idempotent. Stamp ownership at creation time and reconcile partial state on recovery instead of spawning duplicate blind retries.",
@@ -199,11 +199,11 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       vi: "Chặn bắt các khung yêu cầu quyền session/request_permission từ Devin ACP và hiển thị bảng duyệt Cho Phép 1 Lần, Cho Phép Cả Phiên hoặc Từ Chối ngay trong TUI.",
     },
     xray: {
-      humanPrompt: "[Permission Prompt] devin wants to run: bun test test/phase-v1-seams.test.ts to [Allow Once]",
+      humanPrompt: "[Permission Prompt] devin wants to run: bun test test/phase-v1-seams.test.ts [Allow Once]",
       orchestratorTool:
         'jsonrpc: "2.0", id: 19, result: { outcome: { outcome: "selected", optionId: "allow_once" } }',
       engineExecution:
-        "Pending permission promise resolved in Lane to ACP response frame flushed over stdio to foreign tool execution unlocked.",
+        "Pending permission promise resolved in Lane, ACP response frame flushed over stdio, and foreign tool execution unlocked.",
     },
     proNotBroLesson: {
       en: "Autonomy without explicit permission boundaries is a liability. Mediate every foreign tool capability request through a typed RPC gate before touching the host filesystem.",
@@ -233,9 +233,9 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
     xray: {
       humanPrompt: "/antigravity /plan @src/modules/wok-reactor-stage/index.tsx",
       orchestratorTool:
-        'resolveMentions({ query: "plan", harness: "antigravity" }) to [{ trigger: "/plan", origin: "antigravity:acp-catalog", resource: "file:///.../index.tsx" }]',
+        'resolveMentions({ query: "plan", harness: "antigravity" }) | [{ trigger: "/plan", origin: "antigravity:acp-catalog", resource: "file:///.../index.tsx" }]',
       engineExecution:
-        "acp-session-core catalog lookup to attached structured resource_link content block to session/prompt payload.",
+        "acp-session-core catalog lookup attached structured resource_link content block to session/prompt payload.",
     },
     proNotBroLesson: {
       en: "When multiple harnesses advertise slash commands, unlabelled autocomplete causes operator misfires. Stamp every suggestion with its canonical origin seam.",
@@ -263,11 +263,11 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       vi: "Chuyển đổi model, mức độ suy luận hoặc chế độ chạy ngay giữa phiên bằng phím tắt ctrl+m, ctrl+e, ctrl+t. Mọi thay đổi đều đi qua hàng rào xác nhận từ engine trước khi cập nhật nhãn giao diện.",
     },
     xray: {
-      humanPrompt: "[Keypress: ctrl+e] Switch Antigravity effort: medium to max",
+      humanPrompt: "[Keypress: ctrl+e] Switch Antigravity effort from medium to max",
       orchestratorTool:
         'targetedRequestBroker.enqueue({ method: "session/set_config_option", params: { sessionId: "agy_402", configId: "reasoning_effort", value: "max" } })',
       engineExecution:
-        "Serialized in-flight config mutation to awaited ACP configOptions echo to acp-session-core confirmed 'max' to updated Dragon Ember UI badge.",
+        "Serialized in-flight config mutation, awaited ACP configOptions echo, confirmed 'max' in acp-session-core, and updated UI badge.",
     },
     proNotBroLesson: {
       en: "Optimistic UI lies when an engine rejects a model or effort transition. Fence concurrent config writes and render only engine-confirmed catalog values.",
@@ -291,7 +291,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       vi: "Trinh Sát Freebuff + Thực Thi TDD Devin + Phản Biện Kiến Trúc Antigravity",
     },
     summary: {
-      en: "Fan out work across a 3-slot ModelSlotChain via hivemind-delegate: Slot 1 routes fast repo recon to Freebuff (deepseek-4.1-flash to glm-5.3-flash), Slot 2 assigns deep TDD slices to Devin (swe-2-max), and Slot 3 runs visual/spec verification on Antigravity (argon-4-high).",
+      en: "Fan out work across a 3-slot ModelSlotChain via hivemind-delegate: Slot 1 routes fast repo recon to Freebuff (deepseek-4.1-flash / glm-5.3-flash), Slot 2 assigns deep TDD slices to Devin (swe-2-max), and Slot 3 runs visual/spec verification on Antigravity (argon-4-high).",
       vi: "Phân bổ tác vụ song song qua chuỗi 3-slot ModelSlotChain: Slot 1 giao việc dò tìm tốc độ cao cho Freebuff, Slot 2 giao viết code TDD cho Devin, và Slot 3 chạy kiểm định chéo trên Antigravity.",
     },
     xray: {
@@ -300,7 +300,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       orchestratorTool:
         'resolveModelSlotChain({ slot1: "freebuff/deepseek-4.1-flash", slot2: "devin/swe-2-max", slot3: "antigravity/argon-4-high" })',
       engineExecution:
-        "Spawned 3 isolated worktree lanes (.worktree/recon, .worktree/impl, .worktree/review) to merged verified green diff with 68% lower frontier token burn.",
+        "Spawned 3 isolated worktree lanes (.worktree/recon, .worktree/impl, .worktree/review) and merged a verified green diff with 68% lower frontier token burn.",
     },
     proNotBroLesson: {
       en: "Burning frontier reasoning quota on file-tree recon is amateur hour. Route by cognitive rank across specialized harnesses and isolate writers in linked git worktrees.",
@@ -330,9 +330,9 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
     xray: {
       humanPrompt: "@delegate-freebuff Generate bilingual JSON fixtures for 20 showcase slices",
       orchestratorTool:
-        'POST /api/v1/freebuff/session (Ed25519-Signature: 0x94b1...) to HTTP 409 StaleHandle(fbm1_old88a) to refreshFreebuffCatalog()',
+        'POST /api/v1/freebuff/session (Ed25519-Signature: 0x94b1...) | HTTP 409 StaleHandle(fbm1_old88a) | refreshFreebuffCatalog()',
       engineExecution:
-        "GET /api/v1/freebuff/models to mapped 'glm-5.3-flash' to fbm1_7c39d2e1 to re-dispatched turn with zero prompt loss.",
+        "GET /api/v1/freebuff/models mapped 'glm-5.3-flash' to fbm1_7c39d2e1 and re-dispatched turn with zero prompt loss.",
     },
     proNotBroLesson: {
       en: "Never hardcode ephemeral vendor wire handles into domain config. Bind configuration to semantic model slugs and let the transport adapter resolve rotated handles on 409.",
@@ -364,7 +364,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       orchestratorTool:
         'transitionFreebuffLease({ leaseId: "fbl_092a", keepSlotForResume: true, ttlSeconds: 300 })',
       engineExecution:
-        "Admission ledger locked slot state = PAUSED_RETAINED to heartbeat keepalive acked to instant 0ms resume on follow-up prompt.",
+        "Admission ledger locked slot state = PAUSED_RETAINED, heartbeat keepalive acked, and resumed in 0ms on follow-up prompt.",
     },
     proNotBroLesson: {
       en: "Dropping an admission lease on every pause destroys interactive TDD cadence. Model lease states explicitly so pause-and-resume is a first-class transition.",
@@ -394,9 +394,9 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
     xray: {
       humanPrompt: "/substrate:spine inspect sha256:4b825dc642cb6eb9a060e54bf8d69288fbee4904",
       orchestratorTool:
-        'spineBlobStore.writeBlob(rawToolOutput) to ".session-archive/blobs/4b825dc6...4904.txt" (38,412 bytes)',
+        'spineBlobStore.writeBlob(rawToolOutput) | ".session-archive/blobs/4b825dc6...4904.txt" (38,412 bytes)',
       engineExecution:
-        "Atomic write-then-rename completed in 0.42ms to deduplicated identical tool output across 3 subagent turns.",
+        "Atomic write-then-rename completed in 0.42ms and deduplicated identical tool output across 3 subagent turns.",
     },
     proNotBroLesson: {
       en: "Context pruning is only safe when backed by a lossless archive. Content-address every raw artifact into The Spine first so pruned turns remain 100% recoverable.",
@@ -426,9 +426,9 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
     xray: {
       humanPrompt: "/substrate:checkpoint diff turn_14..turn_18",
       orchestratorTool:
-        'shadowGit.captureWorkingTree({ sessionId: "ses_01J9X8A2", turnIndex: 18 }) to refs/hivemind/shadow/ses_01J9X8A2/18', // taste-skill-ignore
+        'shadowGit.captureWorkingTree({ sessionId: "ses_01J9X8A2", turnIndex: 18 }) | refs/hivemind/shadow/ses_01J9X8A2/18', // taste-skill-ignore
       engineExecution:
-        "GIT_INDEX_FILE=.session-archive/shadow.index git write-tree to tree 9c11f0... recorded in 1.1ms without touching .git/index.", // taste-skill-ignore
+        "GIT_INDEX_FILE=.session-archive/shadow.index git write-tree recorded tree 9c11f0... in 1.1ms without touching .git/index.", // taste-skill-ignore
     },
     proNotBroLesson: {
       en: "Never run git stash or dirty commits on the user's active index to save agent checkpoints. Use a dedicated GIT_INDEX_FILE and custom ref namespace.",
@@ -460,7 +460,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       orchestratorTool:
         'honeycomb.queryHybrid({ text: "set_config_option targeted-request-broker", k: 5, weights: { bm25: 0.45, vector: 0.35, graph: 0.20 } })',
       engineExecution:
-        "SQLite FTS5 + cosine vector join + 1-hop IntentPivot edge scan to returned ADR-006 & turn_31 digest in 4.8ms.",
+        "SQLite FTS5 + cosine vector join + 1-hop IntentPivot edge scan returned ADR-006 & turn_31 digest in 4.8ms.",
     },
     proNotBroLesson: {
       en: "Vector search alone hallucinates on exact identifier names, and grep alone misses conceptual pivots. Fuse BM25, vectors, and relational edges inside one local SQLite file.",
@@ -492,7 +492,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       orchestratorTool:
         'buildPageRankRepoMap({ seedFiles: ["src/modules/ecosystem-catalog/index.ts"], maxTokens: 900 })',
       engineExecution:
-        "Traversed 142 symbol nodes & 318 import edges to emitted 812-token ranked skeleton covering all 5 module seams.",
+        "Traversed 142 symbol nodes & 318 import edges and emitted an 812-token ranked skeleton covering all 5 module seams.",
     },
     proNotBroLesson: {
       en: "Dumping full 800-line files into a subagent prompt drowns the model in implementation noise. Feed it PageRank-ordered public seam skeletons first.",
@@ -524,7 +524,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       orchestratorTool:
         'workingSetValve.pruneTurnWindow({ sessionId: "ses_01J9X8A2", maxWorkingTokens: 28000 })',
       engineExecution:
-        "Replaced 11 stale tool outputs with [spine://sha256:...] pointers in 1.34ms to active prompt reduced from 94,200 to 21,840 tokens.",
+        "Replaced 11 stale tool outputs with [spine://sha256:...] pointers in 1.34ms, reducing active prompt from 94,200 to 21,840 tokens.",
     },
     proNotBroLesson: {
       en: "Waiting until the context window hits 95% to run a slow LLM summarization pass is too late. Prune superseded tool bloat deterministically in under 2 milliseconds on every turn.",
@@ -588,7 +588,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       orchestratorTool:
         'provenanceChain.traceSymbol({ file: "src/modules/partner-conversion/index.ts", line: 42 })',
       engineExecution:
-        "Resolved commit 7d91e2a to session ses_01J9X8A2 to delegate-devin turn #9 to Spine blob sha256:9f01a... (US-11 Referral Vault spec).",
+        "Resolved commit 7d91e2a | session ses_01J9X8A2 | delegate-devin turn #9 | Spine blob sha256:9f01a... (US-11 Referral Vault spec).",
     },
     proNotBroLesson: {
       en: "Git blame shows who touched a line, not the failed hypotheses or spec constraints behind it. Bind commits to their ProvenanceChain so architectural intent never evaporates.",
@@ -620,7 +620,7 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
       orchestratorTool:
         'honeycomb.queryCochange({ file: "src/types/portal.ts", minConfidence: 0.75 })',
       engineExecution:
-        "Detected high temporal coupling: src/modules/locale-dictionary/en.json (0.94) & vi.json (0.94) to added both to delegate write-lease checklist.",
+        "Detected high temporal coupling: src/modules/locale-dictionary/en.json (0.94) & vi.json (0.94), adding both to the delegate write-lease checklist.",
     },
     proNotBroLesson: {
       en: "Static import graphs miss implicit schema coupling across JSON dictionaries and fixtures. Combine AST edges with git_cochange history when sizing subagent write scopes.",
@@ -681,11 +681,11 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
     },
     xray: {
       humanPrompt:
-        "@hivemind-delegate --with-substrate Ship & verify bilingual 20-clip X-Ray catalog across Freebuff to Devin to Antigravity",
+        "@hivemind-delegate --with-substrate Ship & verify bilingual 20-clip X-Ray catalog across Freebuff, Devin, and Antigravity",
       orchestratorTool:
         'steward.dispatchChain() |> substrate.recordDelegationTurn() |> workingSetValve.emitContinuationPacket({ maxTokens: 1200 })',
       engineExecution:
-        "Freebuff recon blob archived (sha256:3a19...) to Honeycomb indexed 20 ShowcaseId nodes to Devin received 980-token packet to Antigravity verified zero drift.",
+        "Freebuff recon blob archived (sha256:3a19...), Honeycomb indexed 20 ShowcaseId nodes, Devin received 980-token packet, and Antigravity verified zero drift.",
     },
     proNotBroLesson: {
       en: "Multi-agent swarms collapse under their own transcript weight unless paired with a surgical memory engine. Orchestration (Steward) and memory (Substrate) are two halves of one architecture.",
@@ -710,114 +710,114 @@ const RAW_GREENFIELD_STEPS: ReadonlyArray<RawGreenfieldStep> = [
     stepNumber: 1,
     phaseCode: "V1",
     harnessId: "freebuff",
-    modelSlot: "Slot 1 / Recon & Schema Scaffold (deepseek-4.1-flash to glm-5.3-flash)",
+    modelSlot: "Slot 1 / $0 Daily-Credit Recon & Mid-Session Swap (deepseek-4.1-flash / glm-5.3-flash)",
     title: {
-      en: "Fast Recon, Zod Domain Contracts & EN/VI Parity Seams",
-      vi: "Trinh Sát Nhanh, Hợp Đồng Miền Zod & Ranh Giới Song Ngữ EN/VI",
+      en: "$0 Daily-Credit R3F Recon & Live Swap to glm-5.3-flash",
+      vi: "Trinh Sát 0 Đồng Với Freebuff & Đổi Não Giữa Phiên Sang glm-5.3-flash",
     },
     actionSummary: {
-      en: "Freebuff scans the repo skeleton, drafts PortalDictionarySchema and the 20-clip catalog fixtures in en.json / vi.json, and recovers deterministically from a rotated fbm1.... handle mid-turn.",
-      vi: "Freebuff quét nhanh cấu trúc kho code, khởi tạo PortalDictionarySchema cùng dữ liệu 20 clip song ngữ EN/VI, đồng thời tự vượt qua nhịp xoay vòng mã fbm1.... ngay giữa lượt.",
+      en: "From an empty folder, Freebuff (deepseek-4.1-flash) scans React Three Fiber docs and drafts the spec for $0 using daily free credits, then switches live mid-session to glm-5.3-flash for high-speed API docs without starting a new session.",
+      vi: "Khởi đầu từ thư mục trống, Freebuff (deepseek-4.1-flash) càn quét tài liệu React Three Fiber và dựng khung đặc tả với chi phí 0 đồng nhờ gói credit miễn phí mỗi ngày, rồi đổi não trực tiếp ngay giữa phiên sang glm-5.3-flash mà không mất phiên.",
     },
     xray: {
       humanPrompt:
-        "@delegate-freebuff Scaffold src/types/portal.ts and verify 100% EN/VI dictionary parity",
+        "@hivemind-delegate --parallel 2 freebuff:deepseek-4.1-flash,antigravity:argon-4-high",
       orchestratorTool:
-        'tool: "delegate-freebuff", modelSlot: "deepseek-4.1-flash to glm-5.3-flash", lease: "keepSlotForResume"',
+        'tool: "hivemind-delegate", modelSlot: "deepseek-4.1-flash -> glm-5.3-flash", lease: "keepSlotForResume"',
       engineExecution:
-        "Resolved rotated handle fbm1_7c39d2e1 to wrote 103 parity-checked dictionary leaf keys to bun test test/phase-v1-seams.test.ts PASS.",
+        "Spawned background ses_* child on $0 daily Freebuff credits, swapped live to glm-5.3-flash mid-session without dropping instanceId.",
     },
-    verificationGate: "bun test test/phase-v1-seams.test.ts (103/103 leaf keys matched)",
+    verificationGate: "bun test test/phase-v1-seams.test.ts (103/103 EN/VI leaf keys matched)",
   },
   {
     stepNumber: 2,
     phaseCode: "V2",
     harnessId: "antigravity",
-    modelSlot: "Slot 3 / 3D WebGL & Deterministic SVG Stage (argon-4-high)",
+    modelSlot: "Slot 3 / Parallel 3D Three.js Spatial Design & Shaders (argon-4-high)",
     title: {
-      en: "Neo-Tokyo 3D Orbital Command Stage & Deterministic SVG Schematic",
-      vi: "Sân Khấu 3D Neo-Tokyo & Sơ Đồ SVG Tất Định Khi Giảm Chuyển Động",
+      en: "Parallel 3D Three.js Spatial Design & Bi-Directional Sync",
+      vi: "Thiết Kế Không Gian 3D Three.js Song Song Trên Antigravity (argon-4-high)",
     },
     actionSummary: {
-      en: "Antigravity builds WokReactorStageModule with a Three.js Neo-Tokyo orbital command spire, 4 interactive telemetry nodes (devin, antigravity, freebuff, substrate), and DeterministicCanvasFallbackAdapter.",
-      vi: "Antigravity dựng WokReactorStageModule với tháp chỉ huy quỹ đạo 3D Neo-Tokyo, 4 nút telemetry tương tác (devin, antigravity, freebuff, substrate) cùng sơ đồ SVG tĩnh tất định.",
+      en: "Running in parallel as a shared ses_* background child, Antigravity (argon-4-high) architects the 3D Three.js orbital command stage, studio lighting, and deterministic SVG schematic while synced bi-directionally with the host harness.",
+      vi: "Chạy song song dưới dạng phiên con ses_* dùng chung, Antigravity (argon-4-high) thiết kế không gian 3D Three.js, hiệu ứng ánh sáng và sơ đồ SVG tất định, đồng bộ hai chiều với cả nền tảng gốc.",
     },
     xray: {
       humanPrompt:
-        "/antigravity Implement src/modules/wok-reactor-stage/index.tsx with CLS < 0.1 and SVG fallback",
+        "/antigravity Architect 3D Three.js orbital command core and deterministic SVG fallback",
       orchestratorTool:
-        'jsonrpc: "session/prompt", harness: "antigravity", model: "argon-4-high", effort: "max"',
+        'jsonrpc: "session/prompt", harness: "antigravity", model: "argon-4-high", sync: "bi-directional"',
       engineExecution:
-        "Rendered 4 ReactorNodeDescriptor rings + renderDeterministicFallbackSvg() to verified identical node telemetry in SSR and WebGL modes.",
+        "Rendered 4 ReactorNodeDescriptor rings + renderDeterministicFallbackSvg() synced across OpenCode TUI and Antigravity host.",
     },
-    verificationGate: "bun test test/phase-v2-wok-stage.test.ts (4 nodes + SVG fallback verified)",
+    verificationGate: "bun test test/phase-v2-wok-reactor.test.ts (4 nodes + SVG fallback verified)",
   },
   {
     stepNumber: 3,
     phaseCode: "V3",
     harnessId: "devin",
-    modelSlot: "Slot 2 / Deep Module Seams & Conversion Funnel (swe-2-max)",
+    modelSlot: "Slot 2 / Heavy-Lifter Multi-Page Next.js & Backend (swe-2-max)",
     title: {
-      en: "Partner Conversion Hub, Referral Vault & Quota Estimator",
-      vi: "Trung Tâm Chuyển Đổi Đối Tác, Kho Referral & Máy Tính Quota",
+      en: "Devin (swe-2-max) Multi-Page Next.js App Router & Backend Tickets",
+      vi: "Tung Chủ Lực Devin (swe-2-max) Dựng Khung Đa Trang Next.js & API Backend",
     },
     actionSummary: {
-      en: "Devin implements PartnerConversionModule with verified Freebuff + Zap GLM referral links, Ko-fi + Buy Me a Coffee supporter vaults, B2B sponsor tiers, and deterministic quota savings math.",
-      vi: "Devin lập trình PartnerConversionModule với các liên kết giới thiệu Freebuff + Zap GLM đã xác thực, cổng ủng hộ Ko-fi + Buy Me a Coffee, bảng gói tài trợ B2B và hàm tính tiết kiệm quota.",
+      en: "Once the 3D blueprint and spec lock, Orchestrator dispatches all multi-page Next.js App Router and backend API tickets to Devin (swe-2-max) via shared ses_* child sessions that you can inspect and reuse in Devin's UI to squeeze $20 promos.",
+      vi: "Khi bản vẽ 3D và đặc tả đã chốt, Orchestrator giao toàn bộ ticket dựng khung đa trang Next.js và API backend cho siêu não Devin (swe-2-max) qua phiên con ses_* dùng chung, giúp tái sử dụng ngữ cảnh và vắt kiệt gói promo $20.",
     },
     xray: {
       humanPrompt:
-        "@delegate-devin Implement src/modules/partner-conversion/index.ts with contextual S8/S9/S10 referral highlighting",
+        "@delegate-devin Implement multi-page Next.js App Router and PartnerConversionModule seams",
       orchestratorTool:
-        'tool: "delegate-devin", sessionId: "ses_01J9X9B4", model: "swe-2-max"',
+        'tool: "delegate-devin", sessionId: "ses_01J9X9B4", model: "swe-2-max", sharedHostSession: true',
       engineExecution:
-        "Wired PARTNER_URLS constants + resolveConversionCtas() + calculateQuotaSavings() to verified exact href parity and monotonic savings curve.",
+        "Bound shared ses_01J9X9B4 child session surfaced in both OpenCode and Devin host UI, passing all seam and conversion checks.",
     },
-    verificationGate: "bun test test/phase-v1-seams.test.ts (PARTNER_URLS & savings curve verified)",
+    verificationGate: "bun test test/phase-v1-seams.test.ts (PARTNER_URLS & conversion verified)",
   },
   {
     stepNumber: 4,
     phaseCode: "V4",
     harnessId: "devin",
-    modelSlot: "Slot 2 / Payload CMS 3.0 & Component Showroom (swe-2-max)",
+    modelSlot: "Slot 1+2 / Pause, Ed25519 Signing & fbm1.... / keepSlotForResume (swe-2-max)",
     title: {
-      en: "Payload CMS 3.0 Localized Collections & Interactive Showroom",
-      vi: "Bộ Sưu Tập Đa Ngôn Ngữ Payload CMS 3.0 & Showroom Linh Kiện",
+      en: "Mid-Run Pause, Rotated fbm1.... Recovery & keepSlotForResume Lease",
+      vi: "Tạm Dừng Giữa Chừng (Pause), Bắt Sóng Mã fbm1.... & Giữ Quyền Thuê keepSlotForResume",
     },
     actionSummary: {
-      en: "Devin authors ContentShowroomModule with Payload 3.0 collection schemas (episodes, articles, showcase-slices, sponsors), bilingual articles/episodes, and the interactive <ShowcaseHarness />.",
-      vi: "Devin hoàn thiện ContentShowroomModule gồm lược đồ bộ sưu tập Payload 3.0, loạt bài viết và tập phim song ngữ cùng bộ khung thử nghiệm linh kiện <ShowcaseHarness />.",
+      en: "Hit Pause mid-run to inspect child sessions and swap models: Freebuff signs packets with hardware Ed25519 keys, auto-recovers from HTTP 409 rotated fbm1.... anti-spam handles, and holds instanceId + RunState via keepSlotForResume without calling DELETE.",
+      vi: "Bấm Pause giữa chừng để kiểm tra phiên con và đổi model: Freebuff ký gói tin bằng khóa Ed25519, tự động bắt sóng khi server xoay vòng mã fbm1.... (HTTP 409) và giữ chặt phiên thuê qua keepSlotForResume mà không xóa phiên.",
     },
     xray: {
       humanPrompt:
-        "@delegate-devin Build src/modules/content-showroom/index.ts and Next.js App Router pages under src/app/[locale]/",
+        "Pause active run -> inspect harness-freebuff.ts, freebuff-acp-bridge.ts & freebuff-session-lease.ts",
       orchestratorTool:
-        'tool: "delegate-devin", sessionId: "ses_01J9X9C8", model: "swe-2-max"',
+        'freebuffSessionLease.pause({ keepSlotForResume: true, onHttp409: "refreshCatalogFbm1" })',
       engineExecution:
-        "Compiled 4 Payload 3.0 collection configs + bilingual blog/episode/showroom routes to zero unchecked index accesses.",
+        "Preserved instanceId + remainingMs + RunState across Pause and remapped rotated fbm1.... handle automatically without session loss.",
     },
-    verificationGate: "bun test test/phase-v4-content-showroom.test.ts + bun run typecheck",
+    verificationGate: "bun test test/phase-v4-v5-showroom.test.ts + bun run typecheck",
   },
   {
     stepNumber: 5,
     phaseCode: "V5",
     harnessId: "substrate",
-    modelSlot: "Substrate + Antigravity / Closed-Loop Audit & Production Build",
+    modelSlot: "Substrate + 3-Harness Resume / 60fps 3D Production & < 2ms Valve",
     title: {
-      en: "Substrate Memory Compaction & Cross-Harness Verification Gate",
-      vi: "Nén Bộ Nhớ Substrate & Cổng Kiểm Chứng Liên Harness",
+      en: "Resume to 60fps localhost:3000 & Stage 3 Substrate Compaction",
+      vi: "Chạy Tiếp Tới Web 3D 60fps & Nén Bộ Nhớ Hivemind-Substrate Dưới 2ms",
     },
     actionSummary: {
-      en: "Substrate indexes all 4 preceding build turns into The Honeycomb, prunes raw build logs via Working-Set Valve, and Antigravity runs the final Spec + Standards audit across bun test, typecheck, and next build.",
-      vi: "Substrate đánh chỉ mục cả 4 bước dựng trước đó vào The Honeycomb, tỉa gọn log qua Working-Set Valve, và Antigravity chạy vòng kiểm toán cuối cùng qua bun test, typecheck và next build.",
+      en: "Hit Resume: Devin (swe-2-max), Antigravity (argon-4-high), and Freebuff (glm-5.3-flash) finish the 60fps 3D app on localhost:3000 while Hivemind-Substrate verifies child outcomes in The Honeycomb and prunes raw logs to 1,140 tokens in under 2ms.",
+      vi: "Bấm Resume: Devin (swe-2-max), Antigravity (argon-4-high) và Freebuff (glm-5.3-flash) hoàn thiện web 3D 60fps trên localhost:3000 trong khi Hivemind-Substrate xác thực kết quả Verified vào The Honeycomb và tỉa gọn ngữ cảnh còn 1.140 token dưới 2ms.",
     },
     xray: {
       humanPrompt:
-        "bun test && bun run typecheck && bun run build",
+        "Resume 3-Harness run && bun test && bun run typecheck && bun run build",
       orchestratorTool:
-        'substrate.emitContinuationPacket() to antigravity.verifyGate(["bun test", "bun run typecheck", "bun run build"])',
+        'substrate.emitContinuationPacket({ maxTokens: 1200, freshnessManifest: "FRESH_DO_NOT_REREAD" })',
       engineExecution:
-        "All seam tests green to tsc --noEmit 0 errors to Next.js 15 production build succeeded across /en and /vi routes.",
+        "60fps 3D web app live on localhost:3000, 24/24 tests green, and working-set pruned from 48,000 to 1,140 tokens in 1.4ms.",
     },
     verificationGate: "bun test && bun run typecheck && bun run build (ALL GREEN)",
   },
@@ -839,8 +839,8 @@ const RAW_HORIZON_SUMMARIES: ReadonlyArray<{
       vi: "Devin ACP Steward MVP (hivemind-steward-acp v0.1)",
     },
     description: {
-      en: "Live /devin Hosted View inside the OpenCode TUI, delegate-devin Native child sessions (ses_*), crash-safe checkpoint reconcile, interactive ACP permission mediation, and the comment-preserving npx hmoc-steward-acp installer.",
-      vi: "Buồng lái /devin Hosted View trực tiếp trong OpenCode TUI, phiên con Native Delegation delegate-devin (ses_*), đối soát điểm chốt sau sự cố, duyệt quyền ACP tương tác và trình cài npx hmoc-steward-acp giữ nguyên chú thích.",
+      en: "Native /devin Hosted View on OpenCode's main menu, shared delegate-devin child sessions (ses_*) surfaced in Devin's host UI, crash-safe checkpoint reconcile, interactive ACP permission mediation, and npx hmoc-steward-acp.",
+      vi: "Giao diện /devin nguyên bản ngay trên menu chính OpenCode, phiên con dùng chung delegate-devin (ses_*) hiển thị cả trên Devin gốc, đối soát điểm chốt sau sự cố, duyệt quyền ACP và bộ cài npx hmoc-steward-acp.",
     },
     sourceGrounding: "hivemind-steward-oc-devin-dev/README.md / src/hosted/lane.ts",
     primaryNode: "devin",
@@ -849,12 +849,12 @@ const RAW_HORIZON_SUMMARIES: ReadonlyArray<{
     horizon: "next-release",
     badge: HORIZON_BADGES["next-release"],
     canonicalScope: {
-      en: "Tri-Harness Steward & Freebuff Candidate (v0.2)",
-      vi: "Steward Tam-Harness & Ứng Viên Freebuff (v0.2)",
+      en: "Tri-Harness Bridge & Freebuff Daily Free AI (v0.2)",
+      vi: "Cầu Nối 3 Harness & AI Miễn Phí Mỗi Ngày Freebuff (v0.2)",
     },
     description: {
-      en: "Shared acp-session-core.ts foundation, /devin & /antigravity Hosted Views, S6 origin-labelled / & @ autocomplete, S7 fenced ctrl+m/ctrl+e/ctrl+t live option switching, S8 rank-routed 3-slot ModelSlotChain, and freebuff-native (deepseek-4.1-flash & glm-5.3-flash with rotated fbm1.... recovery and keepSlotForResume).",
-      vi: "Nền tảng dùng chung acp-session-core.ts, Hosted View cho /devin & /antigravity, gợi ý lệnh / & @ gắn nhãn nguồn gốc (S6), đổi cấu hình sống có rào chắn ctrl+m/ctrl+e/ctrl+t (S7), chuỗi 3-slot ModelSlotChain (S8) và freebuff-native (khôi phục mã xoay vòng fbm1.... & giữ slot keepSlotForResume).",
+      en: "Break harness lock-in across Devin, Antigravity, and Freebuff: run foreign models as native OpenCode main agents delegating across 127+ providers, switch models live mid-session (ctrl+m/ctrl+e/ctrl+t), and squeeze $0 daily Freebuff credits with fbm1.... recovery and keepSlotForResume.",
+      vi: "Phá khóa độc quyền Harness giữa Devin, Antigravity và Freebuff: dùng model ngoại làm agent chính điều phối cả 127+ provider OpenCode, đổi model ngay giữa phiên (ctrl+m/ctrl+e/ctrl+t) và tận dụng credit miễn phí mỗi ngày từ Freebuff với khôi phục mã fbm1.... cùng keepSlotForResume.",
     },
     sourceGrounding: "src/acp-session-core.ts / src/hosted/mentions.ts / src/targeted-request-broker.ts",
     primaryNode: "antigravity",
@@ -867,8 +867,8 @@ const RAW_HORIZON_SUMMARIES: ReadonlyArray<{
       vi: "Động Cơ Bộ Nhớ 3 Tầng Hivemind Substrate (hivemind-substrate)",
     },
     description: {
-      en: "Layer 1 The Spine (.session-archive/blobs/<sha256>.txt & shadow Git drafts), Layer 2 The Honeycomb (index.sqlite hybrid BM25 + vector + graph index, AST skeletons, PageRank RepoMap, git_cochange), and Layer 3 Viewports & Working-Set Valve (< 2 ms pruning, < 1,200-token CompactionContinuationPacket, /substrate Mudball Advisor).", // taste-skill-ignore
-      vi: "Tầng 1 The Spine (.session-archive/blobs/<sha256>.txt & nhánh nháp shadow Git), Tầng 2 The Honeycomb (index.sqlite lai BM25 + vector + đồ thị, khung xương AST, PageRank RepoMap, git_cochange) và Tầng 3 Viewports & Working-Set Valve (tỉa ngữ cảnh < 2 ms, gói bàn giao < 1.200 token, cố vấn /substrate Mudball Advisor).", // taste-skill-ignore
+      en: "Layer 1 The Spine (.session-archive/blobs/<sha256>.txt & shadow Git drafts), Layer 2 The Honeycomb (Reported vs Verified outcome classifier & 0.21ms 4-tier AST graph in index.sqlite), and Layer 3 Working-Set Valve (< 2ms FRESH — DO NOT REREAD breadcrumbs & < 1,200-token compaction packet).", // taste-skill-ignore
+      vi: "Tầng 1 The Spine (.session-archive/blobs/<sha256>.txt & nhánh nháp shadow Git), Tầng 2 The Honeycomb (phân loại Reported vs Verified & bản đồ AST 4 tầng 0.21ms trong index.sqlite) và Tầng 3 Working-Set Valve (nhãn FRESH — DO NOT REREAD dưới 2ms & gói bàn giao nén < 1.200 token).", // taste-skill-ignore
     },
     sourceGrounding: "hivemind-substrate/AGENTS.md / GLOSSARY.md",
     primaryNode: "substrate",
@@ -907,8 +907,8 @@ export function buildGreenfieldWalkthrough(
         : "Màn Dựng Greenfield 5 Phút Với 3 Harness: Rèn Giũa hivemind-portal",
     subtitle:
       locale === "en"
-        ? "Freebuff (deepseek-4.1-flash to glm-5.3-flash) + Devin (swe-2-max) + Antigravity (argon-4-high) under OpenCode V2 & Substrate Memory"
-        : "Freebuff (deepseek-4.1-flash to glm-5.3-flash) + Devin (swe-2-max) + Antigravity (argon-4-high) dưới sự điều phối của OpenCode V2 & Bộ nhớ Substrate",
+        ? "Freebuff (deepseek-4.1-flash / glm-5.3-flash) + Devin (swe-2-max) + Antigravity (argon-4-high) under OpenCode V2 & Substrate Memory"
+        : "Freebuff (deepseek-4.1-flash / glm-5.3-flash) + Devin (swe-2-max) + Antigravity (argon-4-high) dưới sự điều phối của OpenCode V2 & Bộ nhớ Substrate",
     durationLabel: "05:00",
     overview:
       locale === "en"

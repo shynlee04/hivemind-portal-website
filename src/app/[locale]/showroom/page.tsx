@@ -36,22 +36,23 @@ export default async function ShowroomPage({
   const sampleSavings = calculateQuotaSavings(35);
 
   return (
-    <div className="cyber-shell" style={{ paddingTop: "4.5rem", paddingBottom: "4rem" }}>
-      <div style={{ marginBottom: "3.5rem" }}>
+    <div className="cyber-shell" style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}>
+      <div style={{ marginBottom: "2.5rem" }}>
         <h1
           style={{
-            fontSize: "clamp(2.25rem, 4vw, 3.5rem)",
-            marginBottom: "0.75rem",
+            fontSize: "clamp(42px, 4.2vw, 60px)",
+            fontWeight: 500,
+            marginBottom: "0.6rem",
           }}
         >
           {dict.showroomSection.pageTitle}
         </h1>
-        <p style={{ color: "var(--text-ash-slate)", maxWidth: "62ch", fontSize: "1.1rem" }}>
+        <p style={{ color: "var(--text-cyber-slate)", maxWidth: "62ch", fontSize: "16px", margin: 0 }}>
           {dict.showroomSection.pageSubtitle}
         </p>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         <ShowcaseHarness
           locale={locale}
           reducedMotion={true}
@@ -76,24 +77,24 @@ export default async function ShowroomPage({
             <div
               data-ui="showroom-xray-sample"
               style={{
-                padding: "1.5rem",
-                backgroundColor: "var(--bg-smoked-basalt)",
+                padding: "1.25rem",
+                backgroundColor: "var(--bg-akihabara-deck)",
                 borderRadius: "6px",
               }}
             >
-              <h3 style={{ fontSize: "1.3rem", marginBottom: "0.5rem" }}>
+              <h3 style={{ fontSize: "20px", fontWeight: 500, marginBottom: "0.4rem" }}>
                 {sampleSlice.title}
               </h3>
-              <p style={{ color: "var(--text-ash-slate)", marginBottom: "1rem" }}>
+              <p style={{ color: "var(--text-titanium)", marginBottom: "0.85rem", fontSize: "16px" }}>
                 {sampleSlice.summary}
               </p>
               <pre
                 style={{
-                  backgroundColor: "var(--bg-wok-iron)",
-                  padding: "1rem",
+                  backgroundColor: "var(--bg-tokyo-void)",
+                  padding: "0.85rem 1rem",
                   borderRadius: "6px",
-                  fontSize: "0.82rem",
-                  color: "var(--accent-jade-wire)",
+                  fontSize: "14px",
+                  color: "var(--accent-cyber-cyan)",
                   overflowX: "auto",
                   margin: 0,
                 }}
@@ -115,21 +116,23 @@ export default async function ShowroomPage({
               <div
                 key={item.id}
                 style={{
-                  padding: "1.35rem",
-                  backgroundColor: "var(--bg-smoked-basalt)",
+                  padding: "1.2rem",
+                  backgroundColor: "var(--bg-akihabara-deck)",
                   borderRadius: "6px",
                 }}
               >
-                <h4 style={{ margin: "0 0 0.5rem 0", fontSize: "1.1rem" }}>{item.headline}</h4>
+                <h3 style={{ margin: "0 0 0.45rem 0", fontSize: "20px", fontWeight: 500 }}>
+                  {item.headline}
+                </h3>
                 <a
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="touch-target"
                   style={{
-                    fontSize: "0.85rem",
-                    fontWeight: 700,
-                    color: "var(--accent-jade-wire)",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                    color: "var(--accent-cyber-cyan)",
                   }}
                 >
                   {item.label}
@@ -138,15 +141,15 @@ export default async function ShowroomPage({
             ))}
             <div
               style={{
-                padding: "1.35rem",
-                backgroundColor: "var(--bg-scroll-lacquer)",
+                padding: "1.2rem",
+                backgroundColor: "var(--bg-kabuki-panel)",
                 borderRadius: "6px",
               }}
             >
-              <strong style={{ color: "var(--accent-bamboo-green)", fontSize: "0.85rem" }}>
+              <strong style={{ color: "var(--text-cyber-slate)", fontSize: "14px", fontWeight: 500 }}>
                 {sampleSavings.hoursPerWeek}h/wk Quota Snapshot
               </strong>
-              <div style={{ fontSize: "1.6rem", fontWeight: 800, marginTop: "0.4rem" }}>
+              <div style={{ fontSize: "20px", fontWeight: 500, marginTop: "0.35rem", color: "var(--accent-cyber-cyan)" }}>
                 ${sampleSavings.monthlySavingsUsd}/mo ({sampleSavings.savingsPercentage}%)
               </div>
             </div>
@@ -155,16 +158,17 @@ export default async function ShowroomPage({
 
         <section
           style={{
-            padding: "2rem",
-            backgroundColor: "var(--bg-smoked-basalt)",
+            padding: "1.75rem",
+            backgroundColor: "var(--bg-akihabara-deck)",
             borderRadius: "8px",
           }}
         >
           <h2
             style={{
-              fontSize: "1.45rem",
-              color: "var(--accent-jade-wire)",
-              marginBottom: "1.25rem",
+              fontSize: "clamp(28px, 2.5vw, 36px)",
+              fontWeight: 500,
+              color: "var(--text-titanium)",
+              marginBottom: "1rem",
             }}
           >
             {dict.showroomSection.payloadCollectionsTitle}
@@ -181,7 +185,7 @@ export default async function ShowroomPage({
               {payloadCollections.map((col) => (
                 <tr key={col.slug}>
                   <td>
-                    <code style={{ color: "var(--accent-wok-gold)", fontWeight: 700 }}>
+                    <code style={{ color: "var(--accent-cyber-cyan)", fontWeight: 500 }}>
                       {col.slug}
                     </code>
                   </td>
@@ -189,7 +193,7 @@ export default async function ShowroomPage({
                     <code>{col.admin.useAsTitle}</code>
                   </td>
                   <td>
-                    <code style={{ fontSize: "0.8rem", color: "var(--text-ash-slate)" }}>
+                    <code style={{ fontSize: "14px", color: "var(--text-cyber-slate)" }}>
                       {col.fields.map((f) => f.name).join(", ")}
                     </code>
                   </td>
