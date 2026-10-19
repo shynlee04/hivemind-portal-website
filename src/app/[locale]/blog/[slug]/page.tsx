@@ -41,14 +41,14 @@ export default async function BlogDetailPage({
   return (
     <article
       className="cyber-shell"
-      style={{ paddingTop: "2.5rem", maxWidth: "920px" }}
+      style={{ paddingTop: "3rem", paddingBottom: "4rem", maxWidth: "920px" }}
     >
       <Link
         href={`/${locale}/blog`}
         className="touch-target"
         style={{
-          fontFamily: "var(--font-mono)",
-          fontSize: "0.85rem",
+          fontSize: "0.875rem",
+          fontWeight: 600,
           color: "var(--accent-jade-wire)",
           marginBottom: "1.5rem",
         }}
@@ -57,56 +57,54 @@ export default async function BlogDetailPage({
       </Link>
 
       <header
-        className="cyber-chamfer"
-        style={{ padding: "2rem", marginBottom: "2rem" }}
+        style={{
+          padding: "2.25rem",
+          marginBottom: "2.25rem",
+          backgroundColor: "var(--bg-smoked-basalt)",
+          borderRadius: "8px",
+        }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.75rem",
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.78rem",
-            color: "var(--accent-wok-gold)",
-            marginBottom: "0.75rem",
-          }}
-        >
-          <span>[{article.horizon.toUpperCase()}]</span>
-          <span>{article.publishedAt}</span>
-          <span>{article.readingTime}</span>
-          <span>{article.authorRole}</span>
-        </div>
         <h1
           style={{
-            fontSize: "clamp(1.85rem, 3vw, 2.75rem)",
+            fontSize: "clamp(1.85rem, 3vw, 2.65rem)",
             marginBottom: "0.75rem",
           }}
         >
           {article.title}
         </h1>
-        <p style={{ fontSize: "1.1rem", color: "var(--text-ash-slate)" }}>
+        <p style={{ fontSize: "1.1rem", color: "var(--text-ash-slate)", marginBottom: "1rem" }}>
           {article.subtitle}
         </p>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.75rem",
+            marginBottom: "1.25rem",
+          }}
+        >
+          <code style={{ fontSize: "0.78rem", color: "var(--accent-wok-gold)" }}>
+            [{article.horizon.toUpperCase()}] · {article.publishedAt} · {article.readingTime}
+          </code>
+        </div>
 
         <div
           style={{
-            marginTop: "1.5rem",
-            padding: "1rem 1.25rem",
+            padding: "1.15rem 1.35rem",
             backgroundColor: "var(--bg-scroll-lacquer)",
-            borderLeft: "3px solid var(--accent-wok-gold)",
+            borderRadius: "6px",
           }}
         >
-          <div
+          <strong
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.75rem",
-              fontWeight: 700,
+              display: "block",
+              fontSize: "0.8rem",
               color: "var(--accent-wok-gold)",
               marginBottom: "0.35rem",
             }}
           >
             {dict.blogSection.proNotBroTakeawayLabel}
-          </div>
+          </strong>
           <div style={{ fontSize: "0.95rem" }}>{article.proNotBroTakeaway}</div>
         </div>
       </header>
@@ -115,8 +113,11 @@ export default async function BlogDetailPage({
         {article.sections.map((section) => (
           <section
             key={section.heading}
-            className="cyber-chamfer"
-            style={{ padding: "1.75rem" }}
+            style={{
+              padding: "2rem",
+              backgroundColor: "var(--bg-smoked-basalt)",
+              borderRadius: "8px",
+            }}
           >
             <h2
               style={{
@@ -142,17 +143,18 @@ export default async function BlogDetailPage({
             ))}
             {section.codeSnippet ? (
               <div
+                data-ui="article-code-terminal"
                 style={{
                   marginTop: "1.25rem",
                   backgroundColor: "var(--bg-wok-iron)",
-                  border: "1px solid var(--border-forge-brass)",
-                  padding: "1rem",
+                  padding: "1.25rem",
+                  borderRadius: "6px",
                 }}
               >
                 <div
                   style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
                     color: "var(--accent-wok-gold)",
                     marginBottom: "0.5rem",
                   }}
@@ -163,7 +165,6 @@ export default async function BlogDetailPage({
                   style={{
                     margin: 0,
                     overflowX: "auto",
-                    fontFamily: "var(--font-mono)",
                     fontSize: "0.85rem",
                     color: "var(--accent-jade-wire)",
                   }}

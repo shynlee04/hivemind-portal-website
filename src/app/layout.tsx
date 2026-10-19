@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hivemind-* Ecosystem Portal | Cyber-Wok Multi-Harness Cockpit",
+  title: "Hivemind-Steward | Neo-Tokyo OpenCode Multi-Agent Gateway",
   description:
-    "Bilingual (EN/VI) Interactive Showroom for Hivemind Steward ACP (Devin, Antigravity, Freebuff) & Hivemind Substrate 3-Layer Memory Engine.",
+    "Run Devin, Antigravity, Freebuff, and GLM coding passes inside one OpenCode V2 terminal cockpit. Stop paying $200/mo across fragmented AI coding tools.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>

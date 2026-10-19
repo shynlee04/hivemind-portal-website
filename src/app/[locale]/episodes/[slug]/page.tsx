@@ -39,13 +39,13 @@ export default async function EpisodeDetailPage({
   }
 
   return (
-    <div className="cyber-shell" style={{ paddingTop: "2.5rem" }}>
+    <div className="cyber-shell" style={{ paddingTop: "3rem", paddingBottom: "4rem" }}>
       <Link
         href={`/${locale}/episodes`}
         className="touch-target"
         style={{
-          fontFamily: "var(--font-mono)",
-          fontSize: "0.85rem",
+          fontSize: "0.875rem",
+          fontWeight: 600,
           color: "var(--accent-jade-wire)",
           marginBottom: "1.5rem",
         }}
@@ -54,105 +54,100 @@ export default async function EpisodeDetailPage({
       </Link>
 
       <header
-        className="cyber-chamfer"
-        style={{ padding: "2rem", marginBottom: "2rem" }}
+        style={{
+          padding: "2.25rem",
+          marginBottom: "2.25rem",
+          backgroundColor: "var(--bg-smoked-basalt)",
+          borderRadius: "8px",
+        }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.75rem",
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.78rem",
-            color: "var(--accent-wok-gold)",
-            marginBottom: "0.75rem",
-          }}
-        >
-          <span>[EP-0{episode.episodeNumber}]</span>
-          <span>[{episode.horizon.toUpperCase()}]</span>
-          <span>{episode.duration}</span>
-          <span>{episode.publishedAt}</span>
-        </div>
         <h1
           style={{
-            fontSize: "clamp(1.85rem, 3vw, 2.75rem)",
+            fontSize: "clamp(1.85rem, 3vw, 2.65rem)",
             marginBottom: "0.5rem",
           }}
         >
           {episode.title}
         </h1>
-        <p style={{ fontSize: "1.05rem", color: "var(--text-ash-slate)" }}>
+        <p style={{ fontSize: "1.05rem", color: "var(--text-ash-slate)", marginBottom: "1rem" }}>
           {episode.subtitle}
         </p>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.75rem",
+            marginBottom: "1.25rem",
+          }}
+        >
+          <code style={{ fontSize: "0.78rem", color: "var(--accent-wok-gold)" }}>
+            [EP-{episode.episodeNumber}] · [{episode.horizon.toUpperCase()}] · {episode.duration}
+          </code>
+        </div>
 
         <div
           style={{
-            marginTop: "1.25rem",
-            padding: "1rem 1.25rem",
+            padding: "1.15rem 1.35rem",
             backgroundColor: "var(--bg-scroll-lacquer)",
-            borderLeft: "3px solid var(--accent-jade-wire)",
+            borderRadius: "6px",
           }}
         >
-          <div
+          <strong
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.75rem",
+              display: "block",
+              fontSize: "0.8rem",
               color: "var(--accent-jade-wire)",
-              marginBottom: "0.25rem",
+              marginBottom: "0.35rem",
             }}
           >
-            [YOUTUBE TEASER · {episode.youtubeTeaserTitle}]
-          </div>
+            {episode.youtubeTeaserTitle}
+          </strong>
           <div style={{ fontSize: "0.95rem" }}>
             {episode.architectureTakeaway}
           </div>
         </div>
       </header>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))",
-          gap: "1.5rem",
-        }}
-      >
-        <section className="cyber-chamfer" style={{ padding: "1.5rem" }}>
+      <div className="split-50-50">
+        <section
+          style={{
+            padding: "1.75rem",
+            backgroundColor: "var(--bg-smoked-basalt)",
+            borderRadius: "8px",
+          }}
+        >
           <h2
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "1rem",
+              fontSize: "1.25rem",
               color: "var(--accent-wok-gold)",
               marginBottom: "1.25rem",
             }}
           >
             {dict.episodesSection.transcriptHeading}
           </h2>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-          >
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {episode.transcriptTurns.map((turn) => (
               <div
                 key={turn.timestamp}
                 style={{
-                  padding: "1rem",
+                  padding: "1.1rem",
                   backgroundColor: "var(--bg-wok-iron)",
-                  border: "1px solid var(--border-forge-brass)",
+                  borderRadius: "6px",
                 }}
               >
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
+                    fontSize: "0.78rem",
                     color: "var(--accent-jade-wire)",
-                    marginBottom: "0.4rem",
+                    marginBottom: "0.45rem",
                   }}
                 >
-                  <span>
+                  <code>
                     [{turn.timestamp}] {turn.speaker}
-                  </span>
-                  <span>[{turn.harness.toUpperCase()}]</span>
+                  </code>
+                  <code>[{turn.harness.toUpperCase()}]</code>
                 </div>
                 <p style={{ margin: 0, fontSize: "0.95rem" }}>{turn.text}</p>
               </div>
@@ -160,38 +155,36 @@ export default async function EpisodeDetailPage({
           </div>
         </section>
 
-        <section className="cyber-chamfer" style={{ padding: "1.5rem" }}>
+        <section
+          data-ui="episode-tui-replay"
+          style={{
+            padding: "1.75rem",
+            backgroundColor: "var(--bg-smoked-basalt)",
+            borderRadius: "8px",
+          }}
+        >
           <h2
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "1rem",
+              fontSize: "1.25rem",
               color: "var(--accent-jade-wire)",
               marginBottom: "1.25rem",
             }}
           >
             {dict.episodesSection.tuiReplayHeading}
           </h2>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-          >
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {episode.transcriptTurns.map((turn) => (
               <div
                 key={turn.timestamp}
                 style={{
-                  padding: "1rem",
+                  padding: "1.1rem",
                   backgroundColor: "#05070B",
-                  border: "1px solid var(--border-forge-brass)",
-                  fontFamily: "var(--font-mono)",
+                  borderRadius: "6px",
                   fontSize: "0.82rem",
                 }}
               >
-                <div
-                  style={{
-                    color: "var(--accent-wok-gold)",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  $ {turn.tuiCommand}
+                <div style={{ color: "var(--accent-wok-gold)", marginBottom: "0.4rem" }}>
+                  <code>$ {turn.tuiCommand}</code>
                 </div>
                 <pre
                   style={{
@@ -200,7 +193,7 @@ export default async function EpisodeDetailPage({
                     color: "var(--accent-bamboo-green)",
                   }}
                 >
-                  {turn.tuiOutput}
+                  <code>{turn.tuiOutput}</code>
                 </pre>
               </div>
             ))}

@@ -1,25 +1,29 @@
 "use client";
 
-import type { CSSProperties } from "react";
-import { useEffect, useMemo, useState } from "react";
-import { WokReactorStage } from "../modules/wok-reactor-stage";
+import React, { useEffect, useMemo, useState } from "react";
 import type {
   ConversionAudience,
   ConversionBundle,
-  ConversionCtaItem,
   GreenfieldWalkthroughView,
   HorizonSummaryView,
   HorizonTier,
   Locale,
   PluginGroup,
   PortalDictionary,
-  QuotaSavingsEstimate,
   ReactorNodeId,
   ShowcaseCardView,
-} from "../types/portal";
-
-const BAMBOO_ACCENT = "bamboo-green" as const;
-const EMBER_ACCENT = "dragon-ember" as const;
+  ShowcaseId,
+} from "@/types/portal";
+import { WokReactorStage } from "@/modules/wok-reactor-stage";
+import {
+  calculateQuotaSavings,
+  resolveConversionCtas,
+} from "@/modules/partner-conversion";
+import { HARNESS_META } from "./cockpit/cockpit-shared";
+import { SignalFlowSection } from "./cockpit/signal-flow-section";
+import { XrayWorkbenchSection } from "./cockpit/xray-workbench-section";
+import { GreenfieldSubstrateSection } from "./cockpit/greenfield-substrate-section";
+import { QuotaPartnerSection } from "./cockpit/quota-partner-section";
 
 export interface PortalCockpitClientProps {
   readonly locale: Locale;
@@ -30,110 +34,6 @@ export interface PortalCockpitClientProps {
   readonly initialConversion: ConversionBundle;
 }
 
-const ACCENT_HEX_BY_TOKEN: Readonly<Record<ConversionCtaItem["accentToken"], string>> = {
-  "wok-gold": "#F5A623",
-  "jade-wire": "#22D3EE",
-  "dragon-ember": "#EF4444",
-  "bamboo-green": "#10B981",
-};
-
-const S = {
-  shell: { display: "flex", flexDirection: "column", gap: "4rem", paddingTop: "2rem", paddingBottom: "3rem" } satisfies CSSProperties,
-  heroGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))", gap: "2.5rem", alignItems: "start" } satisfies CSSProperties,
-  col: { display: "flex", flexDirection: "column", gap: "1.15rem" } satisfies CSSProperties,
-  rowWrap: { display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.5rem" } satisfies CSSProperties,
-  betweenWrap: { display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "0.75rem" } satisfies CSSProperties,
-  grid3: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))", gap: "1rem" } satisfies CSSProperties,
-  monoTag: { fontFamily: "var(--font-mono)", fontSize: "0.75rem", fontWeight: 700 } satisfies CSSProperties,
-  preBox: { margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word", fontFamily: "var(--font-mono)", fontSize: "0.8125rem", color: "var(--text-parchment)" } satisfies CSSProperties,
-  xrayBox: { backgroundColor: "var(--bg-wok-iron)", border: "1px solid var(--border-forge-brass)", padding: "0.85rem", borderRadius: "2px" } satisfies CSSProperties,
-};
-
-function computeClientQuotaSavings(hoursPerWeek: number): QuotaSavingsEstimate {
-  const clampedHours = Math.min(80, Math.max(5, Math.round(hoursPerWeek)));
-  const baselineMonthlyUsd = Math.round(clampedHours * 9.5);
-  const optimizedMonthlyUsd = Math.round(clampedHours * 3.15);
-  const monthlySavingsUsd = Math.max(0, baselineMonthlyUsd - optimizedMonthlyUsd);
-  const savingsPercentage = baselineMonthlyUsd > 0 ? Math.round((monthlySavingsUsd / baselineMonthlyUsd) * 100) : 0;
-  return {
-    hoursPerWeek: clampedHours,
-    baselineMonthlyUsd,
-    optimizedMonthlyUsd,
-    monthlySavingsUsd,
-    savingsPercentage,
-    prunedTokensPerMonth: clampedHours * 420_000,
-    freebuffOffloadSharePercent: 68,
-  };
-}
-
-function getFallbackAudienceItems(locale: Locale, highlightFreebuff: boolean): ReadonlyArray<ConversionCtaItem> {
-  const isVi = locale === "vi";
-  return [
-    {
-      id: "cta-freebuff-referral",
-      audience: "builders",
-      label: isVi ? "Đăng ký Freebuff (Nhận tín dụng thưởng)" : "Claim Freebuff Referral Slot",
-      badge: isVi ? "[HARNESS THỨ 3 · FREEBUFF]" : "[3RD HARNESS · FREEBUFF]",
-      headline: "Freebuff · glm-5.3-flash & deepseek-4.1-flash",
-      description: isVi
-        ? "Giảm tải trinh sát mã nguồn và vòng lặp TDD sang Freebuff với khôi phục thẻ xoay vòng fbm1.... và keepSlotForResume."
-        : "Offload codebase recon and rapid TDD loops to Freebuff with rotated fbm1.... handle recovery and keepSlotForResume continuity.",
-      href: "https://freebuff.com/?ref=ref-6c980d54-a29a-4270-a160-35f13e62a2ff",
-      disclosure: isVi
-        ? "Liên kết giới thiệu minh bạch: hỗ trợ phát triển hệ sinh thái Hivemind-* mà không tăng chi phí của bạn."
-        : "Transparent referral link: supports Hivemind-* open-source maintenance at zero extra cost to you.",
-      isHighlighted: highlightFreebuff,
-      accentToken: BAMBOO_ACCENT,
-    },
-    {
-      id: "cta-zap-glm-plan",
-      audience: "builders",
-      label: isVi ? "Kích hoạt gói Zap GLM Coding Plan" : "Activate Zap GLM Coding Plan",
-      badge: isVi ? "[ĐỐI TÁC SUY LUẬN · Z.AI]" : "[INFERENCE PARTNER · Z.AI]",
-      headline: isVi ? "Z.AI GLM Coding Plan · Thông lượng cao cho OpenCode" : "Z.AI GLM Coding Plan · High-Throughput Swarm Tier",
-      description: isVi
-        ? "Tối ưu chi phí token hàng tháng khi chạy song song nhiều subagent với mô hình họ GLM tốc độ cao."
-        : "Slash monthly token burn when fanning out parallel multi-harness delegations across OpenCode V2 worktrees.",
-      href: "https://z.ai/subscribe?ic=LTWUT4H2RS",
-      disclosure: isVi
-        ? "Mã giới thiệu đối tác chính thức (ic=LTWUT4H2RS) dành cho cộng đồng Hivemind."
-        : "Official partner invite code (ic=LTWUT4H2RS) supporting Hivemind ecosystem benchmarks.",
-      isHighlighted: highlightFreebuff,
-      accentToken: "wok-gold",
-    },
-    {
-      id: "cta-kofi-support",
-      audience: "supporters",
-      label: isVi ? "Ủng hộ qua Ko-fi (@shynlee04)" : "Support on Ko-fi (@shynlee04)",
-      badge: isVi ? "[CỘNG ĐỒNG BẢO TRỢ · KO-FI]" : "[COMMUNITY BACKER · KO-FI]",
-      headline: isVi ? "Tiếp lửa cho phòng lab mã nguồn mở Hivemind-*" : "Fuel the Hivemind-* Open-Source Forge",
-      description: isVi
-        ? "Đóng góp trực tiếp giúp duy trì kiểm thử giao thức ACP thực tế và phát triển Hivemind Substrate."
-        : "Directly fund live ACP binary regression gates, multi-OS packaging, and bilingual architecture documentation.",
-      href: "https://ko-fi.com/shynlee04",
-      disclosure: isVi
-        ? "100% đóng góp dành cho chi phí hạ tầng kiểm thử và tài liệu song ngữ."
-        : "100% of community backing funds test-runner infrastructure and open specs.",
-      isHighlighted: false,
-      accentToken: "jade-wire",
-    },
-    {
-      id: "cta-bmac-support",
-      audience: "supporters",
-      label: isVi ? "Mua cà phê cho tác giả (Buy Me a Coffee)" : "Buy Me a Coffee (@shynlee04l)",
-      badge: isVi ? "[TIẾP SỨC · BMAC]" : "[CREATOR FUEL · BMAC]",
-      headline: "Buy Me a Coffee · shynlee04l",
-      description: isVi
-        ? "Ủng hộ nhanh một ly cà phê để duy trì chuỗi bài viết kỹ thuật sâu và tập phim X-Ray mới."
-        : "Back the maintainer directly to keep shipping 3-Layer X-Ray deep-dives and new multi-harness episodes.",
-      href: "https://buymeacoffee.com/shynlee04l",
-      disclosure: isVi ? "Kênh ủng hộ trực tiếp của tác giả dự án." : "Direct maintainer support channel.",
-      isHighlighted: false,
-      accentToken: EMBER_ACCENT,
-    },
-  ];
-}
-
 export function PortalCockpitClient({
   locale,
   dictionary,
@@ -141,775 +41,517 @@ export function PortalCockpitClient({
   showcases,
   greenfield,
   initialConversion,
-}: PortalCockpitClientProps) {
-  const [activeHarness, setActiveHarness] = useState<ReactorNodeId>("devin");
+}: PortalCockpitClientProps): React.JSX.Element {
+  const [activeHarness, setActiveHarness] = useState<ReactorNodeId>("freebuff");
   const [activeHorizon, setActiveHorizon] = useState<HorizonTier | "all">("all");
   const [activePlugin, setActivePlugin] = useState<PluginGroup | "all">("all");
-  const [reducedMotion, setReducedMotion] = useState<boolean>(false);
-  const [copiedInstall, setCopiedInstall] = useState<boolean>(false);
-  const [selectedShowcaseId, setSelectedShowcaseId] = useState<string>(showcases[0]?.id ?? "S1");
+  const [selectedShowcaseId, setSelectedShowcaseId] = useState<ShowcaseId>("S8");
+  const [activeXrayLayer, setActiveXrayLayer] = useState<
+    "all" | 1 | 2 | 3
+  >("all");
   const [activeGreenfieldStep, setActiveGreenfieldStep] = useState<number>(1);
-  const [activeAudience, setActiveAudience] = useState<ConversionAudience>(initialConversion.activeAudience);
+  const [activeAudience, setActiveAudience] =
+    useState<ConversionAudience>("builders");
   const [hoursPerWeek, setHoursPerWeek] = useState<number>(35);
+  const [reducedMotion, setReducedMotion] = useState<boolean>(false);
+  const [heroVisualMode, setHeroVisualMode] = useState<"webgl" | "plate">("webgl");
+  const [copiedInstall, setCopiedInstall] = useState<boolean>(false);
+  const [valvePrunedMode, setValvePrunedMode] = useState<boolean>(true);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-      setReducedMotion(true);
-    }
+    const cycle: ReadonlyArray<ReactorNodeId> = [
+      "freebuff",
+      "devin",
+      "antigravity",
+      "substrate",
+    ];
+    let idx = 0;
+    const timer = window.setInterval(() => {
+      idx = (idx + 1) % cycle.length;
+      const next = cycle[idx];
+      if (next) setActiveHarness(next);
+    }, 6400);
+    return () => window.clearInterval(timer);
   }, []);
 
-  const filteredShowcases = useMemo(
-    () =>
-      showcases.filter(
-        (item) =>
-          (activeHorizon === "all" || item.horizon === activeHorizon) &&
-          (activePlugin === "all" || item.plugin === activePlugin)
-      ),
-    [showcases, activeHorizon, activePlugin]
-  );
+  const filteredShowcases = useMemo(() => {
+    return showcases.filter((item) => {
+      if (activeHorizon !== "all" && item.horizon !== activeHorizon) {
+        return false;
+      }
+      if (activePlugin !== "all" && item.plugin !== activePlugin) {
+        return false;
+      }
+      return true;
+    });
+  }, [showcases, activeHorizon, activePlugin]);
 
-  const selectedShowcase: ShowcaseCardView | undefined = useMemo(
-    () =>
-      filteredShowcases.find((item) => item.id === selectedShowcaseId) ??
-      filteredShowcases[0] ??
-      showcases[0],
-    [filteredShowcases, selectedShowcaseId, showcases]
-  );
+  const selectedShowcase = useMemo(() => {
+    const inFiltered = filteredShowcases.find(
+      (s) => s.id === selectedShowcaseId
+    );
+    if (inFiltered) return inFiltered;
+    return filteredShowcases[0] ?? showcases[0];
+  }, [filteredShowcases, selectedShowcaseId, showcases]);
 
-  const isFreebuffSliceActive = Boolean(
-    selectedShowcase &&
-      (selectedShowcase.highlightsFreebuffReferral ||
-        selectedShowcase.id === "S8" ||
-        selectedShowcase.id === "S9" ||
-        selectedShowcase.id === "S10")
-  );
+  const activeGreenfieldItem = useMemo(() => {
+    return (
+      greenfield.steps.find((s) => s.stepNumber === activeGreenfieldStep) ??
+      greenfield.steps[0]
+    );
+  }, [greenfield.steps, activeGreenfieldStep]);
 
-  const activeGreenfieldStage = useMemo(
-    () => greenfield.steps.find((s) => s.stepNumber === activeGreenfieldStep) ?? greenfield.steps[0],
-    [greenfield.steps, activeGreenfieldStep]
-  );
-
-  const visibleConversionItems = useMemo(() => {
-    const fallback = getFallbackAudienceItems(locale, isFreebuffSliceActive);
-    const mergedMap = new Map<string, ConversionCtaItem>();
-    for (const item of fallback) {
-      mergedMap.set(item.id, item);
-    }
-    for (const item of initialConversion.items) {
-      mergedMap.set(item.id, {
-        ...item,
-        isHighlighted: item.isHighlighted || (item.audience === "builders" && isFreebuffSliceActive),
+  const liveConversion = useMemo(() => {
+    try {
+      return resolveConversionCtas({
+        locale,
+        audience: activeAudience,
+        sliceId: selectedShowcase?.id,
       });
+    } catch {
+      return initialConversion;
     }
-    return Array.from(mergedMap.values()).filter((item) => item.audience === activeAudience);
-  }, [initialConversion.items, locale, isFreebuffSliceActive, activeAudience]);
+  }, [locale, activeAudience, selectedShowcase?.id, initialConversion]);
 
-  const quotaEstimate = useMemo(() => computeClientQuotaSavings(hoursPerWeek), [hoursPerWeek]);
+  const allConversionItems = useMemo(() => {
+    try {
+      const builders = resolveConversionCtas({
+        locale,
+        audience: "builders",
+        sliceId: selectedShowcase?.id,
+      }).items;
+      const supporters = resolveConversionCtas({
+        locale,
+        audience: "supporters",
+        sliceId: selectedShowcase?.id,
+      }).items;
+      const sponsors = resolveConversionCtas({
+        locale,
+        audience: "sponsors",
+        sliceId: selectedShowcase?.id,
+      }).items;
+      const seen = new Set<string>();
+      return [...builders, ...supporters, ...sponsors].filter((item) => {
+        if (seen.has(item.id)) return false;
+        seen.add(item.id);
+        return true;
+      });
+    } catch {
+      return liveConversion.items;
+    }
+  }, [locale, selectedShowcase?.id, liveConversion.items]);
 
-  const handleCopyInstallCommand = async () => {
+  const savings = useMemo(
+    () => calculateQuotaSavings(hoursPerWeek),
+    [hoursPerWeek]
+  );
+
+  const handleCopyInstall = async () => {
     try {
       if (typeof navigator !== "undefined" && navigator.clipboard) {
         await navigator.clipboard.writeText(dictionary.hero.installCommand);
       }
       setCopiedInstall(true);
-      window.setTimeout(() => setCopiedInstall(false), 2200);
+      setTimeout(() => setCopiedInstall(false), 1800);
     } catch {
       setCopiedInstall(true);
     }
   };
 
+  const heroLines =
+    locale === "vi"
+      ? ["Ba Đặc Vụ.", "Một Chảo Lửa."]
+      : ["Three Agents.", "One Wok."];
+
+  const activeHarnessInfo = HARNESS_META[activeHarness];
+
   return (
-    <div className="cyber-shell" style={S.shell}>
-      <section id="cockpit" aria-label="Cockpit Hero" style={S.heroGrid}>
-        <div style={S.col}>
-          <div style={S.rowWrap}>
-            <span
-              style={{
-                ...S.monoTag,
-                padding: "0.25rem 0.6rem",
-                backgroundColor: "var(--bg-smoked-basalt)",
-                border: "1px solid var(--accent-wok-gold)",
-                color: "var(--accent-wok-gold)",
-              }}
-            >
-              {dictionary.hero.eyebrowTag}
-            </span>
-            <span
-              style={{
-                ...S.monoTag,
-                padding: "0.25rem 0.6rem",
-                backgroundColor: "var(--bg-scroll-lacquer)",
-                border: "1px solid var(--accent-jade-wire)",
-                color: "var(--accent-jade-wire)",
-              }}
-            >
-              {dictionary.hero.philosophyBadge}
-            </span>
-          </div>
-
-          <h1
-            style={{
-              fontSize: "clamp(2.25rem, 4vw + 1rem, 3.5rem)",
-              fontWeight: 700,
-              lineHeight: 1.18,
-              color: "var(--text-parchment)",
-              margin: 0,
-            }}
-          >
-            {dictionary.hero.headline}
-          </h1>
-
-          <p style={{ fontSize: "1.0625rem", lineHeight: 1.65, color: "var(--text-ash-slate)", margin: 0, maxWidth: "64ch" }}>
-            {dictionary.hero.subheadline}
-          </p>
-
-          <div
-            className="cyber-chamfer"
-            style={{ padding: "0.85rem 1rem", borderLeft: "3px solid var(--accent-wok-gold)", fontSize: "0.9375rem" }}
-          >
-            {dictionary.hero.philosophySummary}
-          </div>
-
-          <div className="cyber-chamfer" style={{ padding: "1rem", backgroundColor: "var(--bg-scroll-lacquer)", ...S.col, gap: "0.6rem" }}>
-            <div style={{ ...S.monoTag, color: "var(--accent-wok-gold)" }}>{dictionary.hero.installLabel}</div>
-            <div
-              style={{
-                ...S.betweenWrap,
-                backgroundColor: "var(--bg-wok-iron)",
-                border: "1px solid var(--border-forge-brass)",
-                padding: "0.6rem 0.85rem",
-                borderRadius: "2px",
-              }}
-            >
-              <code style={{ fontFamily: "var(--font-mono)", fontSize: "0.9375rem", color: "var(--accent-jade-wire)", fontWeight: 600 }}>
-                $ {dictionary.hero.installCommand}
-              </code>
-              <button
-                type="button"
-                onClick={handleCopyInstallCommand}
-                className="touch-target"
+    <div>
+      {/* SECTION 0: FULL-VIEWPORT ASYMMETRIC SPLIT COCKPIT HERO */}
+      <section
+        id="cockpit"
+        style={{
+          minHeight: "calc(100dvh - 64px)",
+          display: "flex",
+          alignItems: "center",
+          paddingTop: "clamp(1.75rem, 3.5vw, 3rem)",
+          paddingBottom: "clamp(2.5rem, 4.5vw, 4rem)",
+          backgroundColor: "var(--bg-wok-iron)",
+        }}
+      >
+        <div className="cyber-shell" style={{ width: "100%" }}>
+          <div className="hero-cockpit-grid">
+            {/* Left 42%: Focal Point Copy, Command Bar & Node Telemetry Triggers */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.4rem" }}>
+              <h1
                 style={{
-                  ...S.monoTag,
-                  padding: "0 0.85rem",
-                  backgroundColor: copiedInstall ? "var(--accent-bamboo-green)" : "var(--accent-wok-gold)",
-                  color: "#080B10",
-                  border: "none",
-                  borderRadius: "2px",
-                  cursor: "pointer",
+                  fontSize: "clamp(44px, 5vw, 72px)",
+                  fontWeight: 800,
+                  lineHeight: 1.02,
+                  letterSpacing: "-0.035em",
+                  margin: 0,
+                  color: "var(--text-parchment)",
                 }}
               >
-                {copiedInstall ? dictionary.hero.copiedCommandLabel : dictionary.hero.copyCommandLabel}
-              </button>
-            </div>
-          </div>
+                <span className="line-mask">
+                  <span data-line="" style={{ ["--i" as string]: 0 }}>
+                    {heroLines[0]}
+                  </span>
+                </span>
+                <span className="line-mask">
+                  <span
+                    data-line=""
+                    style={{
+                      ["--i" as string]: 1,
+                      color: "var(--accent-wok-gold)",
+                    }}
+                  >
+                    {heroLines[1]}
+                  </span>
+                </span>
+              </h1>
 
-          <div style={S.rowWrap}>
-            <a
-              href="#xray"
-              className="touch-target"
-              style={{
-                ...S.monoTag,
-                padding: "0 1.25rem",
-                backgroundColor: "var(--accent-wok-gold)",
-                color: "#080B10",
-                fontSize: "0.875rem",
-                borderRadius: "2px",
-              }}
-            >
-              {dictionary.hero.primaryCtaLabel}
-            </a>
-            <a
-              href="#greenfield"
-              className="touch-target cyber-chamfer"
-              style={{ ...S.monoTag, padding: "0 1.15rem", color: "var(--accent-jade-wire)", fontSize: "0.875rem" }}
-            >
-              {dictionary.hero.secondaryCtaLabel}
-            </a>
-            <button
-              type="button"
-              aria-pressed={reducedMotion}
-              onClick={() => setReducedMotion((prev) => !prev)}
-              className="touch-target cyber-chamfer"
-              style={{ ...S.monoTag, padding: "0 0.9rem", color: "var(--text-parchment)", cursor: "pointer" }}
-            >
-              {reducedMotion ? dictionary.hero.reducedMotionToggleOn : dictionary.hero.reducedMotionToggleOff}
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <WokReactorStage
-            activeHarness={activeHarness}
-            activeHorizon={activeHorizon}
-            reducedMotion={reducedMotion}
-            locale={locale}
-            onSelectNode={(nodeId) => setActiveHarness(nodeId)}
-          />
-        </div>
-      </section>
-
-      <section aria-label={dictionary.horizons.sectionTitle} style={S.col}>
-        <div>
-          <h2 style={{ fontSize: "clamp(1.5rem, 2.2vw + 0.5rem, 2.25rem)", marginBottom: "0.35rem" }}>
-            {dictionary.horizons.sectionTitle}
-          </h2>
-          <p style={{ margin: 0, color: "var(--text-ash-slate)" }}>{dictionary.horizons.sectionSubtitle}</p>
-        </div>
-
-        <div style={S.grid3}>
-          {horizons.map((h) => {
-            const borderColor =
-              h.horizon === "shipped"
-                ? "var(--accent-wok-gold)"
-                : h.horizon === "next-release"
-                  ? "var(--accent-jade-wire)"
-                  : "var(--accent-dragon-ember)";
-            return (
-              <div
-                key={h.horizon}
-                className="cyber-chamfer"
+              <p
+                data-rise=""
                 style={{
-                  padding: "1.15rem",
-                  borderColor: activeHorizon === h.horizon ? borderColor : "var(--border-forge-brass)",
+                  ["--d" as string]: 1,
+                  fontSize: "17px",
+                  lineHeight: 1.6,
+                  color: "var(--text-parchment)",
+                  maxWidth: "54ch",
+                  margin: 0,
+                }}
+              >
+                {dictionary.hero.subheadline}
+              </p>
+
+              {/* Command Bar & Primary Action */}
+              <div
+                data-rise=""
+                data-ui="hero-command-ledger"
+                style={{
+                  ["--d" as string]: 2,
+                  backgroundColor: "var(--bg-smoked-basalt)",
+                  padding: "1rem 1.15rem",
+                  borderRadius: "8px",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "space-between",
                   gap: "0.75rem",
                 }}
               >
-                <div style={{ ...S.col, gap: "0.45rem" }}>
-                  <span style={{ ...S.monoTag, color: borderColor }}>{h.badge}</span>
-                  <h3 style={{ margin: 0, fontSize: "1.125rem" }}>{h.canonicalScope}</h3>
-                  <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--text-ash-slate)" }}>{h.description}</p>
-                </div>
                 <div
                   style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
-                    color: "var(--text-ash-slate)",
-                    borderTop: "1px solid var(--border-forge-brass)",
-                    paddingTop: "0.5rem",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "0.65rem",
                   }}
                 >
-                  {dictionary.xrayExplorer.sourceGroundingLabel}: {h.sourceGrounding}
+                  <code
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      color: "var(--accent-jade-wire)",
+                      backgroundColor: "var(--bg-wok-iron)",
+                      padding: "0.55rem 0.9rem",
+                      borderRadius: "6px",
+                      flex: "1 1 auto",
+                    }}
+                  >
+                    $ {dictionary.hero.installCommand}
+                  </code>
+                  <button
+                    type="button"
+                    onClick={handleCopyInstall}
+                    className="touch-target"
+                    style={{
+                      padding: "0 1.1rem",
+                      backgroundColor: copiedInstall
+                        ? "var(--accent-bamboo-green)"
+                        : "var(--accent-wok-gold)",
+                      color: "var(--bg-wok-iron)",
+                      border: "none",
+                      borderRadius: "6px",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {copiedInstall
+                      ? dictionary.hero.copiedCommandLabel
+                      : dictionary.hero.copyCommandLabel}
+                  </button>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "0.5rem",
+                    fontSize: "14px",
+                    color: "var(--text-ash-slate)",
+                  }}
+                >
+                  <span>{dictionary.hero.philosophyBadge}</span>
+                  <code>v0.1 Shipped · v0.2 Tri-Harness · Substrate Lab</code>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </section>
 
-      <section id="xray" aria-label={dictionary.xrayExplorer.sectionTitle} style={S.col}>
-        <div style={S.betweenWrap}>
-          <div>
-            <h2 style={{ fontSize: "clamp(1.65rem, 2.5vw + 0.5rem, 2.5rem)", marginBottom: "0.35rem" }}>
-              {dictionary.xrayExplorer.sectionTitle}
-            </h2>
-            <p style={{ margin: 0, color: "var(--text-ash-slate)" }}>{dictionary.xrayExplorer.sectionSubtitle}</p>
-          </div>
-
-          <div style={S.rowWrap}>
-            {(
-              [
-                { id: "all", label: dictionary.horizons.filterAll },
-                { id: "shipped", label: dictionary.horizons.shippedBadge },
-                { id: "next-release", label: dictionary.horizons.nextReleaseBadge },
-                { id: "roadmap", label: dictionary.horizons.roadmapBadge },
-              ] as const
-            ).map((tab) => {
-              const active = activeHorizon === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => setActiveHorizon(tab.id)}
-                  className="touch-target cyber-chamfer"
-                  style={{
-                    ...S.monoTag,
-                    padding: "0 0.75rem",
-                    backgroundColor: active ? "var(--bg-scroll-lacquer)" : "var(--bg-smoked-basalt)",
-                    color: active ? "var(--accent-wok-gold)" : "var(--text-parchment)",
-                    borderColor: active ? "var(--accent-wok-gold)" : "var(--border-forge-brass)",
-                    cursor: "pointer",
-                  }}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        <div style={S.rowWrap}>
-          <span style={{ ...S.monoTag, color: "var(--text-ash-slate)" }}>{dictionary.xrayExplorer.pluginFilterLabel}:</span>
-          {(
-            [
-              { id: "all", label: dictionary.xrayExplorer.pluginAll },
-              { id: "steward", label: dictionary.xrayExplorer.pluginSteward },
-              { id: "substrate", label: dictionary.xrayExplorer.pluginSubstrate },
-              { id: "cross-plugin", label: dictionary.xrayExplorer.pluginCross },
-            ] as const
-          ).map((pluginTab) => {
-            const active = activePlugin === pluginTab.id;
-            return (
-              <button
-                key={pluginTab.id}
-                type="button"
-                aria-pressed={active}
-                onClick={() => setActivePlugin(pluginTab.id)}
-                className="touch-target cyber-chamfer"
+              {/* Action CTA Row */}
+              <div
+                data-rise=""
                 style={{
-                  ...S.monoTag,
-                  padding: "0 0.75rem",
-                  backgroundColor: active ? "var(--bg-scroll-lacquer)" : "var(--bg-smoked-basalt)",
-                  color: active ? "var(--accent-jade-wire)" : "var(--text-parchment)",
-                  borderColor: active ? "var(--accent-jade-wire)" : "var(--border-forge-brass)",
-                  cursor: "pointer",
+                  ["--d" as string]: 3,
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "0.75rem",
+                  alignItems: "center",
                 }}
               >
-                {pluginTab.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {selectedShowcase && (
-          <div
-            data-testid="xray-inspector-drawer"
-            data-selected-slice={selectedShowcase.id}
-            className="cyber-chamfer"
-            style={{
-              ...S.col,
-              padding: "1.5rem",
-              backgroundColor: "var(--bg-scroll-lacquer)",
-              border: "1px solid var(--accent-jade-wire)",
-            }}
-          >
-            <div style={{ ...S.betweenWrap, borderBottom: "1px solid var(--border-forge-brass)", paddingBottom: "0.75rem" }}>
-              <div>
-                <span style={{ ...S.monoTag, color: "var(--accent-wok-gold)" }}>
-                  [{selectedShowcase.id}] · {selectedShowcase.horizonBadge} · {selectedShowcase.durationLabel}
-                </span>
-                <h3 style={{ margin: "0.25rem 0 0 0", fontSize: "1.35rem" }}>
-                  {selectedShowcase.title} — {selectedShowcase.subtitle}
-                </h3>
-              </div>
-              {isFreebuffSliceActive && (
+                <a
+                  href="#xray"
+                  className="touch-target"
+                  style={{
+                    padding: "0 1.35rem",
+                    backgroundColor: "var(--accent-jade-wire)",
+                    color: "var(--bg-wok-iron)",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    borderRadius: "6px",
+                  }}
+                >
+                  {dictionary.hero.primaryCtaLabel} ↓
+                </a>
                 <a
                   href="#conversion"
                   className="touch-target"
                   style={{
-                    ...S.monoTag,
-                    padding: "0 0.85rem",
-                    backgroundColor: "var(--accent-bamboo-green)",
-                    color: "#080B10",
-                    borderRadius: "2px",
+                    padding: "0 1.25rem",
+                    backgroundColor: "var(--bg-smoked-basalt)",
+                    color: "var(--accent-wok-gold)",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    borderRadius: "6px",
                   }}
                 >
-                  [FREEBUFF + ZAP GLM REFERRAL ACTIVE]
+                  {dictionary.hero.secondaryCtaLabel}
                 </a>
-              )}
-            </div>
-
-            <div style={S.grid3}>
-              <div style={S.xrayBox}>
-                <div style={{ ...S.monoTag, color: "var(--accent-wok-gold)", marginBottom: "0.45rem" }}>
-                  {dictionary.xrayExplorer.layer1Label}
-                </div>
-                <pre style={S.preBox}>{selectedShowcase.xray.humanPrompt}</pre>
-              </div>
-              <div style={S.xrayBox}>
-                <div style={{ ...S.monoTag, color: "var(--accent-jade-wire)", marginBottom: "0.45rem" }}>
-                  {dictionary.xrayExplorer.layer2Label}
-                </div>
-                <pre style={S.preBox}>{selectedShowcase.xray.orchestratorTool}</pre>
-              </div>
-              <div style={S.xrayBox}>
-                <div style={{ ...S.monoTag, color: "var(--accent-bamboo-green)", marginBottom: "0.45rem" }}>
-                  {dictionary.xrayExplorer.layer3Label}
-                </div>
-                <pre style={S.preBox}>{selectedShowcase.xray.engineExecution}</pre>
               </div>
             </div>
 
+            {/* Right 58%: Interactive 3D WebGL Cyber-Wok Stage + Studio Hardware Cutaway Toggle */}
             <div
+              data-rise=""
               style={{
-                backgroundColor: "var(--bg-smoked-basalt)",
-                borderLeft: "3px solid var(--accent-wok-gold)",
-                padding: "0.85rem 1rem",
+                ["--d" as string]: 2,
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.55rem",
               }}
             >
-              <div style={{ ...S.monoTag, color: "var(--accent-wok-gold)", marginBottom: "0.25rem" }}>
-                {dictionary.xrayExplorer.proNotBroHeader}
-              </div>
-              <p style={{ margin: 0, fontSize: "0.9375rem" }}>{selectedShowcase.proNotBroLesson}</p>
-            </div>
-          </div>
-        )}
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "1rem" }}>
-          {filteredShowcases.map((card) => {
-            const isSelected = selectedShowcase?.id === card.id;
-            return (
-              <article
-                key={card.id}
-                data-showcase-card={card.id}
-                className="cyber-chamfer"
+              <div
                 style={{
-                  padding: "1.1rem",
-                  borderColor: isSelected ? "var(--accent-jade-wire)" : "var(--border-forge-brass)",
-                  backgroundColor: isSelected ? "var(--bg-scroll-lacquer)" : "var(--bg-smoked-basalt)",
                   display: "flex",
-                  flexDirection: "column",
+                  flexWrap: "wrap",
                   justifyContent: "space-between",
-                  gap: "0.85rem",
+                  alignItems: "center",
+                  gap: "0.45rem",
                 }}
               >
-                <div style={{ ...S.col, gap: "0.4rem" }}>
-                  <div style={{ ...S.betweenWrap, fontFamily: "var(--font-mono)", fontSize: "0.75rem" }}>
-                    <span style={{ color: "var(--accent-wok-gold)", fontWeight: 700 }}>
-                      [{card.id}] · {card.horizonBadge}
-                    </span>
-                    <span style={{ color: "var(--text-ash-slate)" }}>{card.durationLabel}</span>
-                  </div>
-                  <h3 style={{ margin: 0, fontSize: "1.1rem" }}>{card.title}</h3>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--accent-jade-wire)" }}>
-                    {card.subtitle}
-                  </div>
-                  <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--text-ash-slate)" }}>{card.summary}</p>
-                </div>
-
-                <div style={{ ...S.betweenWrap, borderTop: "1px solid var(--border-forge-brass)", paddingTop: "0.65rem" }}>
-                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", color: "var(--text-ash-slate)" }}>
-                    {card.sourceGrounding}
-                  </span>
+                <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
                   <button
                     type="button"
-                    aria-pressed={isSelected}
                     onClick={() => {
-                      setSelectedShowcaseId(card.id);
-                      setActiveHarness(card.harnessNode);
+                      setHeroVisualMode("webgl");
+                      setReducedMotion(false);
                     }}
-                    className="touch-target cyber-chamfer"
+                    aria-pressed={heroVisualMode === "webgl" && !reducedMotion}
+                    className="touch-target"
                     style={{
-                      ...S.monoTag,
-                      padding: "0 0.75rem",
-                      color: isSelected ? "var(--accent-wok-gold)" : "var(--accent-jade-wire)",
+                      padding: "0 0.7rem",
+                      borderRadius: "6px",
+                      border: "none",
+                      backgroundColor:
+                        heroVisualMode === "webgl" && !reducedMotion
+                          ? "var(--accent-wok-gold)"
+                          : "var(--bg-smoked-basalt)",
+                      color:
+                        heroVisualMode === "webgl" && !reducedMotion
+                          ? "var(--bg-wok-iron)"
+                          : "var(--text-parchment)",
+                      fontWeight: 700,
+                      fontSize: "14px",
                       cursor: "pointer",
                     }}
                   >
-                    {dictionary.xrayExplorer.inspectSliceCta}
+                    {dictionary.hero.reducedMotionToggleOff}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setHeroVisualMode("plate")}
+                    aria-pressed={heroVisualMode === "plate"}
+                    className="touch-target"
+                    style={{
+                      padding: "0 0.7rem",
+                      borderRadius: "6px",
+                      border: "none",
+                      backgroundColor:
+                        heroVisualMode === "plate"
+                          ? "var(--accent-jade-wire)"
+                          : "var(--bg-smoked-basalt)",
+                      color:
+                        heroVisualMode === "plate"
+                          ? "var(--bg-wok-iron)"
+                          : "var(--text-parchment)",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {locale === "vi" ? "Ảnh Chụp Cắt Lớp Lò" : "Studio Cutaway Plate"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHeroVisualMode("webgl");
+                      setReducedMotion((prev) => !prev);
+                    }}
+                    aria-pressed={reducedMotion}
+                    className="touch-target"
+                    style={{
+                      padding: "0 0.7rem",
+                      borderRadius: "6px",
+                      border: "none",
+                      backgroundColor: reducedMotion
+                        ? "var(--accent-bamboo-green)"
+                        : "var(--bg-smoked-basalt)",
+                      color: reducedMotion
+                        ? "var(--bg-wok-iron)"
+                        : "var(--text-ash-slate)",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {dictionary.hero.reducedMotionToggleOn}
                   </button>
                 </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section
-        id="greenfield"
-        aria-label={dictionary.greenfieldSection.sectionTitle}
-        className="cyber-chamfer"
-        style={{ ...S.col, padding: "1.75rem" }}
-      >
-        <div>
-          <span style={{ ...S.monoTag, color: "var(--accent-bamboo-green)" }}>
-            {dictionary.greenfieldSection.verificationBadge} · {greenfield.durationLabel}
-          </span>
-          <h2 style={{ fontSize: "clamp(1.5rem, 2.2vw + 0.5rem, 2.2rem)", margin: "0.25rem 0" }}>{greenfield.title}</h2>
-          <p style={{ margin: 0, color: "var(--text-ash-slate)" }}>{greenfield.overview}</p>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "0.5rem" }}>
-          {greenfield.steps.map((step) => {
-            const isStepActive = activeGreenfieldStage?.stepNumber === step.stepNumber;
-            return (
-              <button
-                key={step.phaseCode}
-                type="button"
-                aria-pressed={isStepActive}
-                onClick={() => {
-                  setActiveGreenfieldStep(step.stepNumber);
-                  setActiveHarness(step.harnessId);
-                }}
-                className="touch-target cyber-chamfer"
-                style={{
-                  padding: "0.6rem 0.75rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  backgroundColor: isStepActive ? "var(--bg-scroll-lacquer)" : "var(--bg-wok-iron)",
-                  borderColor: isStepActive ? "var(--accent-wok-gold)" : "var(--border-forge-brass)",
-                  color: "var(--text-parchment)",
-                  cursor: "pointer",
-                  textAlign: "left",
-                }}
-              >
-                <span style={{ ...S.monoTag, color: isStepActive ? "var(--accent-wok-gold)" : "var(--accent-jade-wire)" }}>
-                  {step.phaseCode} · {step.harnessId.toUpperCase()}
-                </span>
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", color: "var(--text-ash-slate)" }}>
-                  {step.modelSlot}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {activeGreenfieldStage && (
-          <div style={{ ...S.xrayBox, padding: "1.25rem", ...S.col, gap: "0.85rem" }}>
-            <div style={S.betweenWrap}>
-              <h3 style={{ margin: 0, fontSize: "1.2rem" }}>
-                [{activeGreenfieldStage.phaseCode}] {activeGreenfieldStage.title}
-              </h3>
-              <span style={{ ...S.monoTag, color: "var(--accent-bamboo-green)" }}>
-                GATE: {activeGreenfieldStage.verificationGate}
-              </span>
-            </div>
-            <p style={{ margin: 0, color: "var(--text-ash-slate)" }}>{activeGreenfieldStage.actionSummary}</p>
-            <div style={{ ...S.grid3, fontFamily: "var(--font-mono)", fontSize: "0.75rem" }}>
-              <div className="cyber-chamfer" style={{ padding: "0.75rem" }}>
-                <div style={{ color: "var(--accent-wok-gold)", fontWeight: 700 }}>{dictionary.xrayExplorer.layer1Label}</div>
-                <div style={{ marginTop: "0.3rem" }}>{activeGreenfieldStage.xray.humanPrompt}</div>
               </div>
-              <div className="cyber-chamfer" style={{ padding: "0.75rem" }}>
-                <div style={{ color: "var(--accent-jade-wire)", fontWeight: 700 }}>{dictionary.xrayExplorer.layer2Label}</div>
-                <div style={{ marginTop: "0.3rem" }}>{activeGreenfieldStage.xray.orchestratorTool}</div>
-              </div>
-              <div className="cyber-chamfer" style={{ padding: "0.75rem" }}>
-                <div style={{ color: "var(--accent-bamboo-green)", fontWeight: 700 }}>{dictionary.xrayExplorer.layer3Label}</div>
-                <div style={{ marginTop: "0.3rem" }}>{activeGreenfieldStage.xray.engineExecution}</div>
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
 
-      <section id="substrate" aria-label={dictionary.substrateSection.sectionTitle} style={S.col}>
-        <div>
-          <h2 style={{ fontSize: "clamp(1.65rem, 2.5vw + 0.5rem, 2.5rem)", marginBottom: "0.35rem" }}>
-            {dictionary.substrateSection.sectionTitle}
-          </h2>
-          <p style={{ margin: 0, color: "var(--text-ash-slate)" }}>{dictionary.substrateSection.sectionSubtitle}</p>
-        </div>
-
-        <div style={S.grid3}>
-          {[
-            {
-              layer: "LAYER 01 · .session-archive/blobs/<sha256>.txt",
-              accent: "var(--accent-wok-gold)",
-              subAccent: "var(--accent-jade-wire)",
-              title: dictionary.substrateSection.spineTitle,
-              subtitle: dictionary.substrateSection.spineSubtitle,
-              desc: dictionary.substrateSection.spineDescription,
-            },
-            {
-              layer: "LAYER 02 · index.sqlite + AST + PageRank RepoMap",
-              accent: "var(--accent-jade-wire)",
-              subAccent: "var(--accent-wok-gold)",
-              title: dictionary.substrateSection.honeycombTitle,
-              subtitle: dictionary.substrateSection.honeycombSubtitle,
-              desc: dictionary.substrateSection.honeycombDescription,
-            },
-            {
-              layer: "LAYER 03 · < 2 ms Prune · < 1,200 Tokens",
-              accent: "var(--accent-bamboo-green)",
-              subAccent: "var(--accent-dragon-ember)",
-              title: dictionary.substrateSection.valveTitle,
-              subtitle: dictionary.substrateSection.valveSubtitle,
-              desc: dictionary.substrateSection.valveDescription,
-            },
-          ].map((card) => (
-            <div key={card.layer} className="cyber-chamfer" style={{ padding: "1.25rem" }}>
-              <div style={{ ...S.monoTag, color: card.accent }}>{card.layer}</div>
-              <h3 style={{ margin: "0.35rem 0", fontSize: "1.25rem" }}>{card.title}</h3>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8rem", color: card.subAccent, marginBottom: "0.5rem" }}>
-                {card.subtitle}
-              </div>
-              <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-ash-slate)" }}>{card.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="conversion" aria-label={dictionary.conversionSection.sectionTitle} style={S.col}>
-        <div style={S.betweenWrap}>
-          <div>
-            <h2 style={{ fontSize: "clamp(1.65rem, 2.5vw + 0.5rem, 2.5rem)", marginBottom: "0.35rem" }}>
-              {dictionary.conversionSection.sectionTitle}
-            </h2>
-            <p style={{ margin: 0, color: "var(--text-ash-slate)" }}>{dictionary.conversionSection.sectionSubtitle}</p>
-          </div>
-
-          <div style={S.rowWrap}>
-            {(
-              [
-                { id: "builders", label: dictionary.conversionSection.audienceBuildersTab },
-                { id: "supporters", label: dictionary.conversionSection.audienceSupportersTab },
-                { id: "sponsors", label: dictionary.conversionSection.audienceSponsorsTab },
-              ] as const
-            ).map((tab) => {
-              const active = activeAudience === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => setActiveAudience(tab.id)}
-                  className="touch-target cyber-chamfer"
-                  style={{
-                    ...S.monoTag,
-                    padding: "0 0.9rem",
-                    fontSize: "0.8125rem",
-                    backgroundColor: active ? "var(--bg-scroll-lacquer)" : "var(--bg-smoked-basalt)",
-                    color: active ? "var(--accent-wok-gold)" : "var(--text-parchment)",
-                    borderColor: active ? "var(--accent-wok-gold)" : "var(--border-forge-brass)",
-                    cursor: "pointer",
-                  }}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {activeAudience !== "sponsors" ? (
-          <div style={S.grid3}>
-            {visibleConversionItems.map((item) => {
-              const accentHex = ACCENT_HEX_BY_TOKEN[item.accentToken];
-              return (
+              {heroVisualMode === "plate" ? (
                 <div
-                  key={item.id}
-                  className="cyber-chamfer"
+                  data-ui="wok-studio-plate"
                   style={{
-                    padding: "1.25rem",
-                    borderColor: item.isHighlighted ? accentHex : "var(--border-forge-brass)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    gap: "0.85rem",
+                    position: "relative",
+                    minHeight: "520px",
+                    aspectRatio: "16 / 10",
+                    borderRadius: "8px",
+                    overflow: "hidden",
+                    backgroundColor: "#06090F",
                   }}
                 >
-                  <div>
-                    <span style={{ ...S.monoTag, color: accentHex }}>{item.badge}</span>
-                    <h3 style={{ margin: "0.35rem 0", fontSize: "1.2rem" }}>{item.headline}</h3>
-                    <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--text-ash-slate)" }}>{item.description}</p>
-                  </div>
-                  <div style={{ ...S.col, gap: "0.5rem" }}>
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="touch-target"
-                      style={{
-                        ...S.monoTag,
-                        padding: "0 1rem",
-                        backgroundColor: accentHex,
-                        color: "#080B10",
-                        fontSize: "0.8125rem",
-                        borderRadius: "2px",
-                        alignSelf: "flex-start",
-                      }}
-                    >
-                      {item.label} ↗
-                    </a>
-                    <span style={{ fontSize: "0.75rem", color: "var(--text-ash-slate)" }}>{item.disclosure}</span>
+                  <img
+                    src="/assets/cyber-wok-hero-plate.jpg"
+                    alt="Cyber-Wok Multi-Harness Reactor Hardware Cutaway"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: "auto 1rem 1rem 1rem",
+                      backgroundColor: "rgba(8, 11, 16, 0.88)",
+                      padding: "1rem 1.25rem",
+                      borderRadius: "6px",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                    }}
+                  >
+                    <div>
+                      <strong style={{ color: activeHarnessInfo.color, fontSize: "17px" }}>
+                        {activeHarnessInfo.label}
+                      </strong>
+                      <div style={{ fontSize: "14px", color: "var(--text-ash-slate)" }}>
+                        {locale === "vi" ? activeHarnessInfo.roleVi : activeHarnessInfo.roleEn}
+                      </div>
+                    </div>
+                    <code style={{ color: "var(--accent-jade-wire)", fontSize: "14px" }}>
+                      {activeHarnessInfo.modelCode}
+                    </code>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div style={S.grid3}>
-            {initialConversion.sponsorTiers.map((tier) => (
-              <div
-                key={tier.id}
-                className="cyber-chamfer"
-                style={{
-                  padding: "1.25rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  gap: "1rem",
-                }}
-              >
-                <div>
-                  <div style={{ ...S.monoTag, color: "var(--accent-wok-gold)", fontSize: "0.8rem" }}>{tier.priceLabel}</div>
-                  <h3 style={{ margin: "0.25rem 0", fontSize: "1.25rem" }}>{tier.name}</h3>
-                  <p style={{ margin: "0 0 0.75rem 0", fontSize: "0.875rem", color: "var(--text-ash-slate)" }}>{tier.tagline}</p>
-                  <ul style={{ margin: 0, paddingLeft: "1.1rem", fontSize: "0.85rem", color: "var(--text-parchment)" }}>
-                    {tier.deliverables.map((d) => (
-                      <li key={d} style={{ marginBottom: "0.3rem" }}>
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <a
-                  href={tier.ctaHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="touch-target cyber-chamfer"
-                  style={{ ...S.monoTag, padding: "0 1rem", fontSize: "0.8rem", color: "var(--accent-jade-wire)", borderColor: "var(--accent-jade-wire)" }}
-                >
-                  {tier.ctaLabel}
-                </a>
-              </div>
-            ))}
-          </div>
-        )}
+              ) : null}
 
-        <div className="cyber-chamfer" style={{ ...S.col, padding: "1.5rem", backgroundColor: "var(--bg-scroll-lacquer)" }}>
-          <div>
-            <h3 style={{ margin: "0 0 0.25rem 0", fontSize: "1.25rem" }}>{dictionary.conversionSection.calculatorTitle}</h3>
-            <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--text-ash-slate)" }}>
-              {dictionary.conversionSection.calculatorSubtitle}
-            </p>
-          </div>
-
-          <div style={{ ...S.col, gap: "0.5rem" }}>
-            <label htmlFor="quota-hours-slider" style={{ ...S.monoTag, fontSize: "0.875rem", color: "var(--accent-wok-gold)" }}>
-              {dictionary.conversionSection.hoursPerWeekLabel}: {quotaEstimate.hoursPerWeek} hrs/wk
-            </label>
-            <input
-              id="quota-hours-slider"
-              type="range"
-              min={5}
-              max={80}
-              step={5}
-              value={hoursPerWeek}
-              onChange={(e) => setHoursPerWeek(Number(e.target.value))}
-              style={{ width: "100%", accentColor: "var(--accent-wok-gold)" }}
-            />
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "0.75rem", fontFamily: "var(--font-mono)" }}>
-            <div style={S.xrayBox}>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-ash-slate)" }}>{dictionary.conversionSection.baselineCostLabel}</div>
-              <div style={{ fontSize: "1.25rem", fontWeight: 700 }}>${quotaEstimate.baselineMonthlyUsd}/mo</div>
-            </div>
-            <div style={S.xrayBox}>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-ash-slate)" }}>{dictionary.conversionSection.optimizedCostLabel}</div>
-              <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--accent-jade-wire)" }}>${quotaEstimate.optimizedMonthlyUsd}/mo</div>
-            </div>
-            <div style={S.xrayBox}>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-ash-slate)" }}>{dictionary.conversionSection.monthlySavingsLabel}</div>
-              <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--accent-bamboo-green)" }}>
-                ${quotaEstimate.monthlySavingsUsd}/mo ({quotaEstimate.savingsPercentage}%)
-              </div>
-            </div>
-            <div style={S.xrayBox}>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-ash-slate)" }}>{dictionary.conversionSection.prunedTokensLabel}</div>
-              <div style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--accent-wok-gold)" }}>
-                {(quotaEstimate.prunedTokensPerMonth / 1_000_000).toFixed(1)}M tok
+              <div style={{ display: heroVisualMode === "plate" ? "none" : "block" }}>
+                <WokReactorStage
+                  activeHarness={activeHarness}
+                  activeHorizon={activeHorizon}
+                  reducedMotion={reducedMotion}
+                  locale={locale}
+                  onSelectNode={(node) => setActiveHarness(node)}
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <SignalFlowSection
+        locale={locale}
+        dictionary={dictionary}
+        horizons={horizons}
+        activeHorizon={activeHorizon}
+        setActiveHorizon={setActiveHorizon}
+        activeHarness={activeHarness}
+        setActiveHarness={setActiveHarness}
+      />
+
+      <XrayWorkbenchSection
+        locale={locale}
+        dictionary={dictionary}
+        activePlugin={activePlugin}
+        setActivePlugin={setActivePlugin}
+        activeHorizon={activeHorizon}
+        setActiveHorizon={setActiveHorizon}
+        filteredShowcases={filteredShowcases}
+        selectedShowcase={selectedShowcase}
+        setSelectedShowcaseId={setSelectedShowcaseId}
+        setActiveHarness={setActiveHarness}
+        activeXrayLayer={activeXrayLayer}
+        setActiveXrayLayer={setActiveXrayLayer}
+      />
+
+      <GreenfieldSubstrateSection
+        locale={locale}
+        dictionary={dictionary}
+        greenfield={greenfield}
+        activeGreenfieldItem={activeGreenfieldItem}
+        setActiveGreenfieldStep={setActiveGreenfieldStep}
+        setActiveHarness={setActiveHarness}
+        valvePrunedMode={valvePrunedMode}
+        setValvePrunedMode={setValvePrunedMode}
+      />
+
+      <QuotaPartnerSection
+        locale={locale}
+        dictionary={dictionary}
+        hoursPerWeek={hoursPerWeek}
+        setHoursPerWeek={setHoursPerWeek}
+        savings={savings}
+        activeAudience={activeAudience}
+        setActiveAudience={setActiveAudience}
+        allConversionItems={allConversionItems}
+      />
     </div>
   );
 }

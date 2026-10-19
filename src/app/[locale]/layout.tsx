@@ -32,11 +32,11 @@ export default async function LocaleLayout({
     <div
       data-locale={locale}
       style={{
-        minHeight: "100vh",
+        minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "var(--bg-wok-iron)",
-        color: "var(--text-parchment)",
+        backgroundColor: "var(--bg-tokyo-void)",
+        color: "var(--text-titanium)",
       }}
     >
       <header
@@ -44,67 +44,65 @@ export default async function LocaleLayout({
           position: "sticky",
           top: 0,
           zIndex: 40,
-          backgroundColor: "rgba(8, 11, 16, 0.94)",
-          borderBottom: "1px solid var(--border-forge-brass)",
-          backdropFilter: "blur(8px)",
+          backgroundColor: "rgba(5, 6, 11, 0.92)",
+          backdropFilter: "blur(10px)",
         }}
       >
         <div
           className="cyber-shell"
           style={{
             display: "flex",
-            flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: "1rem",
-            paddingTop: "0.75rem",
-            paddingBottom: "0.75rem",
+            gap: "0.75rem",
+            paddingTop: "0.6rem",
+            paddingBottom: "0.6rem",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.65rem", minWidth: 0 }}>
             <Link
               href={`/${locale}`}
               className="touch-target"
               style={{
-                fontFamily: "var(--font-mono)",
                 fontWeight: 700,
-                fontSize: "1rem",
-                color: "var(--accent-wok-gold)",
-                letterSpacing: "-0.02em",
+                fontSize: "17px",
+                color: "var(--accent-cyber-cyan)",
+                letterSpacing: "-0.03em",
               }}
             >
               {dict.nav.brandName}
             </Link>
-            <span
+            <code
+              className="hide-on-compact"
               style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.75rem",
-                padding: "0.2rem 0.5rem",
-                backgroundColor: "var(--bg-smoked-basalt)",
-                border: "1px solid var(--border-forge-brass)",
-                color: "var(--accent-jade-wire)",
+                fontSize: "14px",
+                padding: "0.2rem 0.55rem",
+                backgroundColor: "var(--bg-akihabara-deck)",
+                color: "var(--accent-voltage-gold)",
+                borderRadius: "4px",
               }}
             >
               {dict.nav.brandSubtag}
-            </span>
+            </code>
           </div>
 
           <nav
             aria-label="Primary Navigation"
             style={{
               display: "flex",
-              flexWrap: "wrap",
               alignItems: "center",
-              gap: "0.5rem",
+              flexWrap: "wrap",
+              justifyContent: "flex-end",
+              gap: "0.25rem",
             }}
           >
             <Link
               href={`/${locale}#cockpit`}
-              className="touch-target"
+              className="touch-target hide-on-compact"
               style={{
-                padding: "0 0.75rem",
-                fontSize: "0.875rem",
-                color: "var(--text-parchment)",
+                padding: "0 0.55rem",
+                fontSize: "14px",
+                color: "var(--text-titanium)",
               }}
             >
               {dict.nav.cockpitLink}
@@ -113,80 +111,58 @@ export default async function LocaleLayout({
               href={`/${locale}#xray`}
               className="touch-target"
               style={{
-                padding: "0 0.75rem",
-                fontSize: "0.875rem",
-                color: "var(--text-parchment)",
+                padding: "0 0.55rem",
+                fontSize: "14px",
+                color: "var(--text-titanium)",
               }}
             >
               {dict.nav.xrayLink}
             </Link>
             <Link
-              href={`/${locale}#greenfield`}
-              className="touch-target"
-              style={{
-                padding: "0 0.75rem",
-                fontSize: "0.875rem",
-                color: "var(--text-parchment)",
-              }}
-            >
-              {dict.nav.greenfieldLink}
-            </Link>
-            <Link
               href={`/${locale}#conversion`}
-              className="touch-target"
+              className="touch-target hide-on-compact"
               style={{
-                padding: "0 0.75rem",
-                fontSize: "0.875rem",
-                color: "var(--text-parchment)",
+                padding: "0 0.55rem",
+                fontSize: "14px",
+                color: "var(--accent-voltage-gold)",
+                fontWeight: 600,
               }}
             >
               {dict.nav.conversionLink}
             </Link>
             <Link
-              href={`/${locale}/blog`}
-              className="touch-target"
+              href={`/${locale}#greenfield`}
+              className="touch-target hide-on-compact"
               style={{
-                padding: "0 0.75rem",
-                fontSize: "0.875rem",
-                color: "var(--accent-jade-wire)",
-                fontFamily: "var(--font-mono)",
+                padding: "0 0.55rem",
+                fontSize: "14px",
+                color: "var(--text-cyber-slate)",
+              }}
+            >
+              {dict.nav.greenfieldLink}
+            </Link>
+            <Link
+              href={`/${locale}/blog`}
+              className="touch-target hide-on-compact"
+              style={{
+                padding: "0 0.55rem",
+                fontSize: "14px",
+                fontWeight: 600,
+                color: "var(--accent-cyber-cyan)",
               }}
             >
               {dict.nav.blogLink}
             </Link>
             <Link
-              href={`/${locale}/episodes`}
-              className="touch-target"
-              style={{
-                padding: "0 0.75rem",
-                fontSize: "0.875rem",
-                color: "var(--accent-wok-gold)",
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              {dict.nav.episodesLink}
-            </Link>
-            <Link
-              href={`/${locale}/showroom`}
-              className="touch-target"
-              style={{
-                padding: "0 0.75rem",
-                fontSize: "0.875rem",
-                color: "var(--accent-bamboo-green)",
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              {dict.nav.showroomLink}
-            </Link>
-            <Link
               href={`/${alternateLocale}`}
-              className="touch-target cyber-chamfer"
+              className="touch-target"
               style={{
-                padding: "0 0.85rem",
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.8125rem",
-                fontWeight: 600,
-                color: "var(--accent-wok-gold)",
+                padding: "0 0.75rem",
+                backgroundColor: "var(--bg-kabuki-panel)",
+                borderRadius: "4px",
+                fontSize: "14px",
+                fontWeight: 700,
+                color: "var(--accent-voltage-gold)",
               }}
             >
               {dict.meta.switchLocaleLabel}
@@ -199,10 +175,9 @@ export default async function LocaleLayout({
 
       <footer
         style={{
-          marginTop: "4rem",
-          borderTop: "1px solid var(--border-forge-brass)",
-          backgroundColor: "var(--bg-smoked-basalt)",
-          padding: "2.5rem 0",
+          marginTop: "6rem",
+          backgroundColor: "var(--bg-akihabara-deck)",
+          padding: "3.5rem 0",
         }}
       >
         <div
@@ -211,38 +186,105 @@ export default async function LocaleLayout({
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "space-between",
-            alignItems: "center",
-            gap: "1rem",
+            alignItems: "flex-start",
+            gap: "2rem",
           }}
         >
-          <div>
+          <div style={{ maxWidth: "56ch" }}>
             <div
               style={{
-                fontFamily: "var(--font-mono)",
                 fontWeight: 700,
-                color: "var(--accent-wok-gold)",
+                fontSize: "17px",
+                color: "var(--accent-cyber-cyan)",
               }}
             >
               {dict.footer.tagline}
             </div>
             <div
               style={{
-                fontSize: "0.875rem",
-                color: "var(--text-ash-slate)",
-                marginTop: "0.25rem",
+                fontSize: "14px",
+                color: "var(--text-cyber-slate)",
+                marginTop: "0.45rem",
               }}
             >
               {dict.footer.builtWithLine}
             </div>
+            <div
+              style={{
+                fontSize: "14px",
+                color: "var(--text-cyber-slate)",
+                marginTop: "0.35rem",
+              }}
+            >
+              {dict.footer.copyrightNotice}
+            </div>
           </div>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.8125rem",
-              color: "var(--text-ash-slate)",
-            }}
-          >
-            {dict.footer.copyrightNotice}
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
+            <a
+              href="https://github.com/shynlee04/hivemind-steward-oc-devin-dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="touch-target"
+              style={{
+                padding: "0 0.9rem",
+                backgroundColor: "var(--bg-tokyo-void)",
+                color: "var(--text-titanium)",
+                borderRadius: "4px",
+                fontSize: "14px",
+                fontWeight: 600,
+              }}
+            >
+              GitHub
+            </a>
+            <a
+              href="https://youtube.com/@chingchongchingvibecoding"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="touch-target"
+              style={{
+                padding: "0 0.9rem",
+                backgroundColor: "var(--bg-tokyo-void)",
+                color: "var(--accent-neon-crimson)",
+                borderRadius: "4px",
+                fontSize: "14px",
+                fontWeight: 600,
+              }}
+            >
+              YouTube
+            </a>
+            <a
+              href="https://reddit.com/r/opencode"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="touch-target"
+              style={{
+                padding: "0 0.9rem",
+                backgroundColor: "var(--bg-tokyo-void)",
+                color: "var(--accent-voltage-gold)",
+                borderRadius: "4px",
+                fontSize: "14px",
+                fontWeight: 600,
+              }}
+            >
+              Reddit
+            </a>
+            <a
+              href="https://discord.gg/opencode"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="touch-target"
+              style={{
+                padding: "0 0.9rem",
+                backgroundColor: "var(--bg-tokyo-void)",
+                color: "var(--accent-cyber-cyan)",
+                borderRadius: "4px",
+                fontSize: "14px",
+                fontWeight: 600,
+              }}
+            >
+              Discord
+            </a>
           </div>
         </div>
       </footer>
