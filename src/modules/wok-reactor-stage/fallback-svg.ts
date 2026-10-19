@@ -1,90 +1,118 @@
-import type {
-  Locale,
-  ReactorNodeId,
-  WokReactorStageProps,
-} from "../../types/portal";
-import { getReactorNodeMetadata } from "./reactor-nodes";
+import type { ReactorNodeId, WokReactorStageProps } from "../../types/portal";
+import { getReactorNodeMetadata, REACTOR_NODE_IDS } from "./reactor-nodes";
 
-interface SvgNodeCoordinate {
+interface NodeCoord {
   readonly id: ReactorNodeId;
   readonly cx: number;
   readonly cy: number;
-  readonly r: number;
+  readonly labelX: number;
+  readonly labelY: number;
 }
 
-const NODE_COORDINATES: ReadonlyArray<SvgNodeCoordinate> = [
-  { id: "devin", cx: 210, cy: 155, r: 46 },
-  { id: "antigravity", cx: 590, cy: 155, r: 46 },
-  { id: "freebuff", cx: 400, cy: 405, r: 48 },
-  { id: "substrate", cx: 400, cy: 245, r: 62 },
+const NODE_COORDS: ReadonlyArray<NodeCoord> = [
+  { id: "devin", cx: 210, cy: 145, labelX: 74, labelY: 96 },
+  { id: "antigravity", cx: 590, cy: 145, labelX: 548, labelY: 96 },
+  { id: "freebuff", cx: 400, cy: 82, labelX: 310, labelY: 34 },
+  { id: "substrate", cx: 400, cy: 295, labelX: 295, labelY: 428 },
 ];
 
-function escapeXml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
+function hexPoints(cx: number, cy: number, r: number): string {
+  const pts: string[] = [];
+  for (let i = 0; i < 6; i++) {
+    const angle = (Math.PI / 3) * i - Math.PI / 6;
+    const x = (cx + r * Math.cos(angle)).toFixed(1);
+    const y = (cy + r * Math.sin(angle)).toFixed(1);
+    pts.push(`${x},${y}`);
+  }
+  return pts.join(" ");
 }
 
 export function renderDeterministicFallbackSvg(
   props: WokReactorStageProps
 ): string {
-  const locale: Locale = props.locale ?? "en";
-  const activeHarness: ReactorNodeId = props.activeHarness;
+  const locale = props.locale ?? "en";
+  const activeHarness = props.activeHarness;
   const activeHorizon = props.activeHorizon ?? "all";
-  const activeMeta = getReactorNodeMetadata(activeHarness, locale);
 
-  const headerTitle =
-    locale === "vi"
-      ? "SƠ ĐỒ LÒ PHẢN ỨNG CYBER-WOK · CHẾ ĐỘ TĨNH TẤT ĐỊNH"
-      : "CYBER-WOK REACTOR SCHEMATIC · DETERMINISTIC FALLBACK";
+  const hexRingOffsets = [
+    { dx: 0, dy: 0, r: 26 },
+    { dx: -44, dy: 0, r: 22 },
+    { dx: 44, dy: 0, r: 22 },
+    { dx: -22, dy: -36, r: 22 },
+    { dx: 22, dy: -36, r: 22 },
+    { dx: -22, dy: 36, r: 22 },
+    { dx: 22, dy: 36, r: 22 },
+  ];
 
-  const statusPrefix = locale === "vi" ? "NODE ĐANG CHỌN" : "ACTIVE NODE";
+  const honeycombPolygons = hexRingOffsets
+    .map(
+      (cell, idx) =>
+        `<polygon points="${hexPoints(400 + cell.dx, 295 + cell.dy * 0.72, cell.r)}" fill="${
+          activeHarness === "substrate" ? "#132A38" : "#0D1824"
+        }" stroke="#22D3EE" stroke-width="${
+          idx === 0 && activeHarness === "substrate" ? "2.4" : "1.2"
+        }" stroke-opacity="${activeHarness === "substrate" ? "0.95" : "0.55"}" />`
+    )
+    .join("");
 
-  const nodeGroups = NODE_COORDINATES.map((coord) => {
+  const nodeMarkup = NODE_COORDS.map((coord) => {
     const meta = getReactorNodeMetadata(coord.id, locale);
     const isActive = coord.id === activeHarness;
-    const strokeWidth = isActive ? 3.5 : 1.75;
-    const strokeColor = isActive ? meta.accentHex : "#3A2E1E";
-    const fillColor = isActive ? "#171F2E" : "#111622";
-    const modelLine = meta.modelIds.join(" / ");
+    const isDimmed =
+      activeHorizon !== "all" && meta.horizon !== activeHorizon && !isActive;
+    const opacity = isDimmed ? "0.42" : "1";
+    const modelsText = meta.modelIds.join(" · ");
 
-    const activeRing = isActive
-      ? `<circle cx="${coord.cx}" cy="${coord.cy}" r="${coord.r + 12}" fill="none" stroke="${meta.accentHex}" stroke-width="2.5" stroke-dasharray="6 4" data-active-ring="${coord.id}" />`
-      : "";
-
-    return [
-      `<g data-reactor-node="${coord.id}" data-node-active="${isActive ? "true" : "false"}">`,
-      activeRing,
-      `<circle cx="${coord.cx}" cy="${coord.cy}" r="${coord.r}" fill="${fillColor}" stroke="${strokeColor}" stroke-width="${strokeWidth}" />`,
-      `<text x="${coord.cx}" y="${coord.cy - 10}" text-anchor="middle" fill="#F4EFE6" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700">${escapeXml(meta.id.toUpperCase())}</text>`,
-      `<text x="${coord.cx}" y="${coord.cy + 8}" text-anchor="middle" fill="${meta.accentHex}" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">${escapeXml(modelLine)}</text>`,
-      `<text x="${coord.cx}" y="${coord.cy + 24}" text-anchor="middle" fill="#94A3B8" font-family="Be Vietnam Pro, sans-serif" font-size="10">${escapeXml(meta.label)}</text>`,
-      `</g>`,
-    ].join("");
+    return `<g data-reactor-node="${coord.id}" opacity="${opacity}">
+      <path d="M ${coord.cx} ${coord.cy} Q 400 220 400 295" fill="none" stroke="${meta.accentHex}" stroke-width="${
+        isActive ? "2.6" : "1.2"
+      }" stroke-dasharray="${isActive ? "none" : "5 4"}" opacity="${
+        isActive ? "0.95" : "0.45"
+      }" />
+      ${
+        isActive
+          ? `<circle data-active-ring="${coord.id}" cx="${coord.cx}" cy="${coord.cy}" r="36" fill="none" stroke="${meta.accentHex}" stroke-width="2.2" stroke-dasharray="6 3" />
+             <circle cx="${coord.cx}" cy="${coord.cy}" r="44" fill="none" stroke="${meta.accentHex}" stroke-width="1" opacity="0.4" />`
+          : ""
+      }
+      <circle cx="${coord.cx}" cy="${coord.cy}" r="${
+        isActive ? "22" : "17"
+      }" fill="#0B1018" stroke="${meta.accentHex}" stroke-width="${
+        isActive ? "2.8" : "1.8"
+      }" />
+      <circle cx="${coord.cx}" cy="${coord.cy}" r="${
+        isActive ? "8" : "5"
+      }" fill="${meta.accentHex}" />
+      <g transform="translate(${coord.labelX}, ${coord.labelY})">
+        <rect x="0" y="0" width="204" height="44" rx="2" fill="#0B1018" fill-opacity="0.92" stroke="${
+          isActive ? meta.accentHex : "#263244"
+        }" stroke-width="${isActive ? "1.6" : "1"}" />
+        <text x="10" y="17" fill="#F4EFE6" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">${meta.label}</text> // taste-skill-ignore
+        <text x="10" y="33" fill="${meta.accentHex}" font-family="JetBrains Mono, monospace" font-size="10">${modelsText}</text> // taste-skill-ignore
+      </g>
+    </g>`;
   }).join("");
 
-  return [
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%" role="img" aria-label="${escapeXml(headerTitle)} - ${escapeXml(activeMeta.label)}" data-fallback-adapter="DeterministicCanvasFallbackAdapter" data-active-harness="${activeHarness}" data-active-horizon="${activeHorizon}" data-locale="${locale}">`,
-    `<rect x="0" y="0" width="800" height="500" fill="#080B10" />`,
-    `<rect x="12" y="12" width="776" height="476" rx="2" fill="none" stroke="#3A2E1E" stroke-width="1.5" />`,
-    `<text x="28" y="38" fill="#F5A623" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">${escapeXml(headerTitle)}</text>`,
-    `<text x="772" y="38" text-anchor="end" fill="#22D3EE" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">${escapeXml(statusPrefix)}: ${escapeXml(activeHarness.toUpperCase())} (${escapeXml(activeMeta.modelIds.join(", "))})</text>`,
-    `<ellipse cx="400" cy="265" rx="295" ry="185" fill="#111622" stroke="#F5A623" stroke-width="2" stroke-opacity="0.65" data-wok-basin="seasoned-cast-iron" />`,
-    `<ellipse cx="400" cy="265" rx="255" ry="155" fill="none" stroke="#3A2E1E" stroke-width="1.5" stroke-dasharray="8 6" />`,
-    `<polygon points="400,155 478,200 478,290 400,335 322,290 322,200" fill="#080B10" stroke="#22D3EE" stroke-width="2" data-substrate-lattice="honeycomb-hexagon" />`,
-    `<polygon points="400,175 460,210 460,280 400,315 340,280 340,210" fill="none" stroke="#3A2E1E" stroke-width="1.25" />`,
-    `<g data-wire-arcs="acp-jsonrpc">`,
-    `<path d="M 252 175 Q 325 205 342 225" fill="none" stroke="#F5A623" stroke-width="2" stroke-dasharray="5 4" />`,
-    `<path d="M 548 175 Q 475 205 458 225" fill="none" stroke="#22D3EE" stroke-width="2" stroke-dasharray="5 4" />`,
-    `<path d="M 400 357 L 400 307" fill="none" stroke="#10B981" stroke-width="2" stroke-dasharray="5 4" />`,
-    `<path d="M 256 155 Q 400 95 544 155" fill="none" stroke="#3A2E1E" stroke-width="1.5" />`,
-    `</g>`,
-    nodeGroups,
-    `<rect x="28" y="446" width="744" height="28" rx="2" fill="#111622" stroke="#3A2E1E" stroke-width="1" />`,
-    `<text x="40" y="464" fill="#F4EFE6" font-family="JetBrains Mono, monospace" font-size="11">ACP WIRE: ${escapeXml(activeMeta.wireProtocol)} · CMD: ${escapeXml(activeMeta.sampleCommand)}</text>`,
-    `</svg>`,
-  ].join("");
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%" role="img" aria-label="Cyber-Wok 3D Reactor Schematic" data-fallback-adapter="DeterministicCanvasFallbackAdapter" data-active-harness="${activeHarness}" data-active-horizon="${activeHorizon}">
+    <rect width="800" height="500" fill="#080B10" />
+    <g opacity="0.22" stroke="#1E293B" stroke-width="1">
+      <line x1="0" y1="250" x2="800" y2="250" />
+      <line x1="400" y1="0" x2="400" y2="500" />
+      <ellipse cx="400" cy="285" rx="330" ry="128" fill="none" stroke-dasharray="4 6" />
+    </g>
+    <g data-wok-basin="cast-iron">
+      <path d="M 140 245 C 165 385, 635 385, 660 245 Z" fill="#0E141F" stroke="#3A2E1E" stroke-width="2.5" />
+      <ellipse cx="400" cy="245" rx="260" ry="78" fill="#0A0F18" stroke="#F5A623" stroke-width="2.2" stroke-opacity="0.78" />
+      <ellipse cx="400" cy="245" rx="210" ry="60" fill="none" stroke="#22D3EE" stroke-width="1.2" stroke-dasharray="8 5" stroke-opacity="0.55" />
+      <ellipse cx="400" cy="245" rx="150" ry="42" fill="none" stroke="#EF4444" stroke-width="1.2" stroke-opacity="0.5" />
+      <path d="M 112 238 C 92 220, 92 265, 140 252" fill="none" stroke="#F5A623" stroke-width="4" />
+      <path d="M 688 238 C 708 220, 708 265, 660 252" fill="none" stroke="#F5A623" stroke-width="4" />
+    </g>
+    <g data-honeycomb-core="substrate-lattice">
+      ${honeycombPolygons}
+    </g>
+    ${nodeMarkup}
+  </svg>`;
 }
+
+export { REACTOR_NODE_IDS };
