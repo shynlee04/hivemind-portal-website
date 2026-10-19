@@ -65,7 +65,7 @@ const HARNESS_CHROME_COPY: Readonly<
 > = {
   en: {
     badge: "[SHOWCASE HARNESS · STORYBOOK 8 & ISOLATED STAGE]",
-    defaultTitle: "Cyber-Wok Component Showroom Harness",
+    defaultTitle: "Neo-Tokyo Component Showroom Harness",
     defaultDescription:
       "Inspect isolated portal modules with live EN/VI dictionary switching, 3-Horizon maturity filtering, and deterministic reduced-motion SVG fallbacks.",
     localeGroupLabel: "Locale",
@@ -78,7 +78,7 @@ const HARNESS_CHROME_COPY: Readonly<
   },
   vi: {
     badge: "[KHUNG TRÌNH DIỄN · STORYBOOK 8 & SÂN KHẤU ĐỘC LẬP]",
-    defaultTitle: "Khung Thử Nghiệm Thành Phần Cyber-Wok",
+    defaultTitle: "Khung Thử Nghiệm Thành Phần Neo-Tokyo",
     defaultDescription:
       "Kiểm tra độc lập từng mô-đun cổng thông tin với chuyển đổi song ngữ EN/VI tức thời, bộ lọc 3 Chân Trời và chế độ SVG dự phòng tất định.",
     localeGroupLabel: "Ngôn ngữ",

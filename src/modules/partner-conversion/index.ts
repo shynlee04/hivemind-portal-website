@@ -51,44 +51,44 @@ function buildSponsorTiers(locale: Locale): ReadonlyArray<SponsorTierView> {
     return [
       {
         id: "wok-burner",
-        name: "Gói Wok Burner · Đối Tác Harness & Công Cụ",
+        name: "Gói Channel Slot: Đối Tác Coding Pass & CLI",
         priceLabel: "$1,500 / tháng",
         tagline:
-          "Đưa CLI hoặc model của bạn vào danh mục 20 Clip X-Ray kèm dữ liệu đường truyền thực tế.",
+          "Đưa gói cước hoặc CLI của bạn lên danh mục 20 video X-Ray và README GitHub công khai.",
         deliverables: [
-          "1 Lát cắt X-Ray 3 tầng chuyên biệt (EN/VI) với vết chạy thật",
-          "Gắn huy hiệu đối tác trong Showroom Linh Kiện và LAUNCH_PACK.md",
-          "Đo lường chuyển đổi minh bạch kèm nhãn công bố rõ ràng",
+          "1 video thực chiến song ngữ EN/VI trên kênh YouTube và cổng Hivemind",
+          "Đặt liên kết giới thiệu chính thức trên trang chủ và LAUNCH_PACK.md",
+          "Báo cáo lưu lượng chuyển đổi minh bạch cho nhà cung cấp",
         ],
-        ctaLabel: "Đăng Ký Gói Wok Burner",
+        ctaLabel: "Đăng Ký Channel Slot",
         ctaHref: PARTNER_URLS.kofi,
       },
       {
         id: "honeycomb-core",
-        name: "Gói Honeycomb Core · Đối Tác Hạ Tầng Suy Luận",
+        name: "Gói Gateway Core: Nhà Cung Cấp AI API & Subscription Pass",
         priceLabel: "$3,500 / tháng",
         tagline:
-          "Tích hợp trực tiếp vào ModelSlotChain 3-slot và Máy Tính Tiết Kiệm Quota.",
+          "Tích hợp trực tiếp vào chuỗi ModelSlotChain mặc định của Hivemind-Steward.",
         deliverables: [
-          "Xuất hiện trong chuỗi định tuyến ModelSlotChain mặc định trên cổng",
-          "Tập phim Vibecoding < 2 phút song ngữ EN/VI kèm vết TUI đồng bộ",
-          "Bài phân tích kiến trúc chuyên sâu trên Blog Payload CMS 3.0",
+          "Hiển thị trực tiếp trong bảng tính tiết kiệm chi phí của Vibecoder",
+          "Video hướng dẫn dưới 2 phút phát tán trên YouTube, Reddit và Discord",
+          "Bài viết phân tích chuyên sâu trên Blog kỹ thuật Payload CMS 3.0",
         ],
-        ctaLabel: "Đặt Chỗ Honeycomb Core",
+        ctaLabel: "Đặt Chỗ Gateway Core",
         ctaHref: PARTNER_URLS.kofi,
       },
       {
         id: "ecosystem-title",
-        name: "Gói Ecosystem Title · Nhà Tài Trợ Danh Dự Toàn Hệ Sinh Thái",
+        name: "Gói Ecosystem Title: Đối Tác Chiến Lược Toàn Hệ Sinh Thái",
         priceLabel: "$7,500 / tháng",
         tagline:
-          "Đồng hành chiến lược cùng Sân Khấu 3D Cyber-Wok và màn dựng Greenfield 5 phút.",
+          "Đồng hành cùng buồng lái 3D Neo-Tokyo và chuỗi video dựng dự án thực tế.",
         deliverables: [
-          "Nút Telemetry 3D nổi bật trên Sân Khấu Lò Phản Ứng Cyber-Wok",
-          "Đồng thương hiệu trong màn dựng Greenfield 5 phút (V1–V5)",
-          "Hỗ trợ kỹ thuật ưu tiên cho tích hợp giao thức ACP stdio chuẩn",
+          "Vị trí nổi bật trên mô hình 3D trung tâm và toàn bộ kho mã nguồn GitHub",
+          "Xuất hiện xuyên suốt trong chuỗi video Greenfield 5 phút (V1-V5)",
+          "Hỗ trợ kỹ thuật trực tiếp để kết nối chuẩn giao thức ACP stdio",
         ],
-        ctaLabel: "Liên Hệ Tài Trợ Danh Dự",
+        ctaLabel: "Liên Hệ Đối Tác Chiến Lược",
         ctaHref: PARTNER_URLS.kofi,
       },
     ];
@@ -97,44 +97,44 @@ function buildSponsorTiers(locale: Locale): ReadonlyArray<SponsorTierView> {
   return [
     {
       id: "wok-burner",
-      name: "Wok Burner Tier · Harness & DevTool Partner",
+      name: "Channel Slot Tier: Coding-Pass & CLI Partner",
       priceLabel: "$1,500 / mo",
       tagline:
-        "Feature your CLI or inference endpoint inside the 20-Clip 3-Layer X-Ray Explorer with verified wire traces.",
+        "Feature your coding subscription pass or CLI in our 20-clip video showcase and public GitHub READMEs.",
       deliverables: [
-        "1 dedicated bilingual (EN/VI) 3-Layer X-Ray showcase slice",
-        "Partner badge placement in the Interactive Component Showroom",
-        "Transparent referral attribution in docs/LAUNCH_PACK.md",
+        "1 dedicated bilingual (EN/VI) video & 3-Layer X-Ray showcase slice",
+        "Verified referral placement in the Portal & docs/LAUNCH_PACK.md",
+        "Direct exposure to active OpenCode vibecoders across GitHub & Discord",
       ],
-      ctaLabel: "Claim Wok Burner Slot",
+      ctaLabel: "Claim Channel Slot",
       ctaHref: PARTNER_URLS.kofi,
     },
     {
       id: "honeycomb-core",
-      name: "Honeycomb Core Tier · Inference & Memory Partner",
+      name: "Gateway Core Tier: AI API & Subscription Provider",
       priceLabel: "$3,500 / mo",
       tagline:
-        "Benchmark your model slot inside our 3-Slot ModelSlotChain and Quota-Savings Estimator.",
+        "Integrate your coding pass into Hivemind-Steward default ModelSlotChain routing and pocket calculator.",
       deliverables: [
-        "Featured slot in the interactive Quota-Savings Estimator",
-        "Synchronized < 2-minute bilingual Episode Hub TUI replay",
-        "Architecture deep-dive article in the Payload 3.0 Blog",
+        "Featured slot in the interactive Vibecoder Pocket-Savings Calculator",
+        "Dedicated YouTube tutorial + Reddit & Discord launch breakdown",
+        "Technical integration guide published in the Payload 3.0 Blog",
       ],
-      ctaLabel: "Reserve Honeycomb Core",
+      ctaLabel: "Reserve Gateway Core",
       ctaHref: PARTNER_URLS.kofi,
     },
     {
       id: "ecosystem-title",
-      name: "Ecosystem Title Sponsor · Flagship Cyber-Wok Partner",
+      name: "Ecosystem Title Tier: Flagship Hivemind Partner",
       priceLabel: "$7,500 / mo",
       tagline:
-        "Co-headline the 3D Cyber-Wok Reactor Stage and the 5-Minute 3-Harness Greenfield Build.",
+        "Co-headline the 3D Neo-Tokyo Orbital Command Stage and the 5-Minute Greenfield Video Series.",
       deliverables: [
-        "Primary telemetry callout on the 3D Cyber-Wok Reactor Stage",
-        "Co-featured walkthrough step in the 5-Minute Greenfield Build",
-        "Priority ACP stdio wire dialect conformance & co-engineering",
+        "Primary 3D telemetry node placement on the Neo-Tokyo Hero Stage",
+        "Featured harness slot across the 5-Minute Greenfield Build series",
+        "Priority ACP stdio adapter engineering & public repo placement",
       ],
-      ctaLabel: "Inquire Title Sponsorship",
+      ctaLabel: "Inquire Flagship Sponsorship",
       ctaHref: PARTNER_URLS.kofi,
     },
   ];
@@ -163,76 +163,76 @@ export function resolveConversionCtas(input: {
           {
             id: "freebuff-referral",
             audience: "builders",
-            label: "Kích Hoạt Freebuff (Slot 1 Trinh Sát)",
+            label: "Mở Freebuff Pass",
             badge: isFreebuffSlice
-              ? "ĐƯỢC ĐỀ XUẤT CHO LÁT CẮT FREEBUFF (S8–S10)"
-              : "DÀNH CHO DEV · SLOT 1 TỐC ĐỘ CAO",
+              ? "Đề xuất cho lát cắt Freebuff (S8-S10)"
+              : "Gói trinh sát tốc độ cao cho Vibecoder",
             headline:
-              "Freebuff Candidate · deepseek-4.1-flash & glm-5.3-flash",
+              "Freebuff Coding Pass (deepseek-4.1-flash & glm-5.3-flash)",
             description:
-              "San tải toàn bộ bước quét cây thư mục và dựng khung sang Freebuff với khôi phục mã xoay vòng fbm1.... và giữ phiên keepSlotForResume.",
+              "Chuyển 62% tác vụ quét kho code và dựng khung sang Freebuff để giữ nguyên hạn ngạch Devin và Antigravity cho việc khó.",
             href: PARTNER_URLS.freebuffReferral,
             disclosure:
-              "Liên kết giới thiệu chính thức (Referral) · tiếp sức duy trì phát triển Hivemind-* miễn phí cho cộng đồng.",
+              "Liên kết giới thiệu chính thức giúp bạn tiết kiệm chi phí và ủng hộ dự án mã nguồn mở.",
             isHighlighted: highlightBuilders,
             accentToken: "wok-gold",
           },
           {
             id: "zap-glm-coding-plan",
             audience: "builders",
-            label: "Đăng Ký Zap GLM Coding Plan",
+            label: "Đăng Ký Zap GLM Plan",
             badge: isFreebuffSlice
-              ? "COMBO TỐI ƯU QUOTA CÙNG S8–S10"
-              : "GÓI CODE GLM · CHI PHÍ THẤP",
+              ? "Cặp đôi tối ưu hạn ngạch (S8-S10)"
+              : "Gói cước GLM dành cho Vibecoder",
             headline:
-              "Z.ai GLM Coding Plan · Cặp Bài Trùng Cùng ModelSlotChain",
+              "Z.ai GLM Coding Plan: Hạn Ngạch Dồi Dào Giá Mềm",
             description:
-              "Nguồn token GLM tốc độ cao, chi phí cực thấp cho các vòng lặp TDD và kiểm thử biên tự động trong OpenCode V2.",
+              "Chạy các vòng lặp TDD và dịch thuật song ngữ liên tục với mức phí cố định cực nhẹ túi tiền.",
             href: PARTNER_URLS.zapGlm,
             disclosure:
-              "Liên kết đối tác có mã giới thiệu (ic=LTWUT4H2RS) · bạn nhận ưu đãi gói code, dự án nhận kinh phí duy trì.",
+              "Mã giới thiệu chính thức (ic=LTWUT4H2RS) mở quyền lợi ưu đãi và tài trợ trực tiếp cho Hivemind-Steward.",
             isHighlighted: highlightBuilders,
             accentToken: "jade-wire",
           },
           {
             id: "kofi-supporter-vault",
             audience: "supporters",
-            label: "Tiếp Lửa Qua Ko-fi (shynlee04)",
-            badge: "KHO ỦNG HỘ CỘNG ĐỒNG · KO-FI",
-            headline: "Ủng Hộ Trực Tiếp Kỹ Sư Rèn Lò Hivemind-*",
+            label: "Ủng Hộ Qua Ko-fi",
+            badge: "Quỹ cộng đồng Ko-fi (shynlee04)",
+            headline: "Tài Trợ Phát Triển Cổng Mở Hivemind-Steward",
             description:
-              "Giúp duy trì chuỗi kiểm thử đa nền tảng, tài liệu song ngữ EN/VI và phát triển bộ nhớ 3 tầng Hivemind Substrate.",
+              "Giúp duy trì bản phát hành miễn phí, chuỗi video hướng dẫn thực chiến và phát triển lộ trình Hivemind-Substrate.",
             href: PARTNER_URLS.kofi,
             disclosure:
-              "Đóng góp trực tiếp 100% cho tác giả mã nguồn mở (shynlee04).",
+              "Đóng góp trực tiếp 100% cho tác giả dự án mã nguồn mở (shynlee04).",
             isHighlighted: highlightSupporters,
             accentToken: BAMBOO_ACCENT,
           },
           {
             id: "buymeacoffee-supporter-vault",
             audience: "supporters",
-            label: "Mời Cà Phê Qua Buy Me a Coffee",
-            badge: "TIẾP SỨC ĐÊM KHUYA · BMC",
-            headline: "Một Ly Cà Phê Đậm Đặc Cho Những Đêm Săn Lỗi ACP",
+            label: "Mời Cà Phê Qua BMC",
+            badge: "Quỹ ủng hộ Buy Me a Coffee (shynlee04l)",
+            headline: "Tiếp Sức Cho Các Bản Cập Nhật OpenCode V2",
             description:
-              "Đóng góp nhanh gọn để cổ vũ tinh thần {CHINGCHONGCHINGVIBECODING} · Pro, Not Bro, nói không với code rác.",
+              "Đóng góp nhanh gọn cho đội ngũ phát triển Hivemind-Steward giữ toàn bộ công cụ miễn phí cho cộng đồng.",
             href: PARTNER_URLS.buyMeACoffee,
             disclosure:
-              "Ủng hộ trực tiếp qua cổng Buy Me a Coffee chính thức (shynlee04l).",
+              "Ủng hộ trực tiếp qua trang Buy Me a Coffee chính thức (shynlee04l).",
             isHighlighted: highlightSupporters,
             accentToken: EMBER_ACCENT,
           },
           {
             id: "b2b-sponsor-inquiry",
             audience: "sponsors",
-            label: "Đặt Chỗ Tài Trợ Hệ Sinh Thái B2B",
-            badge: "DÀNH CHO HARNESS & INFERENCE B2B",
-            headline: "Đưa Engine Của Bạn Vào Sân Khấu 3D Cyber-Wok",
+            label: "Đặt Chỗ Nhà Cung Cấp",
+            badge: "Kênh đối tác Coding Pass & AI API",
+            headline: "Đưa Gói Cước & Model Của Bạn Đến Hàng Ngàn Vibecoder",
             description:
-              "Ba gói tài trợ minh bạch (Wok Burner, Honeycomb Core, Ecosystem Title) kèm bài kiểm chứng X-Ray 3 tầng thực chất.",
+              "Quảng bá trực tiếp trên kho GitHub công khai, chuỗi video YouTube, thảo luận Reddit/Discord và buồng lái Hivemind-Steward.",
             href: PARTNER_URLS.kofi,
             disclosure:
-              "Tài trợ thương mại B2B · mọi số liệu benchmark đều được kiểm chứng độc lập bằng test thực tế.",
+              "Kênh hợp tác nhà cung cấp với số liệu kiểm chứng thực tế trên OpenCode V2.",
             isHighlighted: highlightSponsors,
             accentToken: "wok-gold",
           },
@@ -241,45 +241,45 @@ export function resolveConversionCtas(input: {
           {
             id: "freebuff-referral",
             audience: "builders",
-            label: "Launch Freebuff (Slot 1 Recon Engine)",
+            label: "Activate Freebuff Pass",
             badge: isFreebuffSlice
-              ? "HIGHLIGHTED FOR FREEBUFF SLICES (S8–S10)"
-              : "BUILDER PICK · ZERO-COST RECON SLOT",
+              ? "Recommended for Freebuff slices (S8-S10)"
+              : "Vibecoder pick: High-speed recon pass",
             headline:
-              "Freebuff Candidate · deepseek-4.1-flash & glm-5.3-flash",
+              "Freebuff Coding Pass (deepseek-4.1-flash & glm-5.3-flash)",
             description:
-              "Offload high-frequency repo recon and schema scaffolding to Freebuff with rotated fbm1.... handle recovery and keepSlotForResume continuity.",
+              "Route 62% of daily repo recon and fast edits through Freebuff inside OpenCode so your flagship quotas last all month.",
             href: PARTNER_URLS.freebuffReferral,
             disclosure:
-              "Verified partner referral link · supports open-source Hivemind-* development at zero extra cost to you.",
+              "Verified partner referral link that saves your pocket and backs open-source Hivemind-Steward development.",
             isHighlighted: highlightBuilders,
             accentToken: "wok-gold",
           },
           {
             id: "zap-glm-coding-plan",
             audience: "builders",
-            label: "Get the Zap GLM Coding Plan",
+            label: "Get Zap GLM Plan",
             badge: isFreebuffSlice
-              ? "RECOMMENDED SLOT-CHAIN PAIRING (S8–S10)"
-              : "HIGH-VELOCITY GLM CODING PLAN",
+              ? "Recommended slot-chain pairing (S8-S10)"
+              : "Pocket-friendly GLM coding pass",
             headline:
-              "Z.ai GLM Coding Plan · High-Throughput Token Companion",
+              "Z.ai GLM Coding Plan: High-Volume Builder Subscription",
             description:
-              "Power sustained multi-harness TDD loops and parallel worktree lanes with predictable, developer-friendly GLM coding quota.",
+              "Run parallel worktree loops, schema generation, and bilingual docs on predictable, wallet-friendly GLM coding quota.",
             href: PARTNER_URLS.zapGlm,
             disclosure:
-              "Verified referral invite (ic=LTWUT4H2RS) · unlocks builder subscription perks while funding Hivemind-* maintenance.",
+              "Verified referral invite (ic=LTWUT4H2RS) activating subscriber perks while funding Hivemind-Steward.",
             isHighlighted: highlightBuilders,
             accentToken: "jade-wire",
           },
           {
             id: "kofi-supporter-vault",
             audience: "supporters",
-            label: "Back Hivemind-* on Ko-fi (shynlee04)",
-            badge: "COMMUNITY SUPPORTER VAULT · KO-FI",
-            headline: "Fuel Independent OpenCode V2 Plugin Engineering",
+            label: "Back on Ko-fi",
+            badge: "Community supporter vault (shynlee04)",
+            headline: "Fund Open-Source Hivemind-Steward Engineering",
             description:
-              "Directly fund cross-OS ACP compatibility testing, bilingual EN/VI architecture guides, and the Hivemind Substrate memory engine.",
+              "Directly support cross-OS OpenCode V2 plugin releases, YouTube video breakdowns, and the Hivemind-Substrate roadmap.",
             href: PARTNER_URLS.kofi,
             disclosure:
               "100% direct creator support via verified Ko-fi vault (shynlee04).",
@@ -289,28 +289,28 @@ export function resolveConversionCtas(input: {
           {
             id: "buymeacoffee-supporter-vault",
             audience: "supporters",
-            label: "Buy a Late-Night Wok Coffee",
-            badge: "SUPPORTER VAULT · BUY ME A COFFEE",
-            headline: "Keep the Cyber-Wok Seasoned & Open Source",
+            label: "Buy Me a Coffee",
+            badge: "Creator tip jar (shynlee04l)",
+            headline: "Fuel Late-Night Tokyo Cyberpunk Builds",
             description:
-              "One-click community backing for developers who appreciate zero-slop deep modules, honest horizon badges, and real wire traces.",
+              "One-click backing from vibecoders who use Hivemind-Steward every day to centralize their AI coding subscriptions.",
             href: PARTNER_URLS.buyMeACoffee,
             disclosure:
-              "Direct creator tip jar via verified Buy Me a Coffee link (shynlee04l).",
+              "Direct creator support via verified Buy Me a Coffee page (shynlee04l).",
             isHighlighted: highlightSupporters,
             accentToken: EMBER_ACCENT,
           },
           {
             id: "b2b-sponsor-inquiry",
             audience: "sponsors",
-            label: "Sponsor the Hivemind-* Showroom",
-            badge: "B2B ECOSYSTEM SPONSORSHIP",
-            headline: "Put Your Harness or Inference API Inside the 3-Layer X-Ray",
+            label: "Partner & Sponsor",
+            badge: "For coding-pass & AI API providers",
+            headline: "Put Your Coding Pass & Models in Front of Active Builders",
             description:
-              "Partner across Wok Burner, Honeycomb Core, or Ecosystem Title tiers with reproducible OpenCode V2 wire traces and bilingual episodes.",
+              "Get featured inside Hivemind-Steward, public GitHub READMEs, YouTube tutorials, and Reddit/Discord community benchmarks.",
             href: PARTNER_URLS.kofi,
             disclosure:
-              "B2B sponsorship track · every sponsored slice undergoes the same executable verification gate.",
+              "Provider & sponsor channel with reproducible OpenCode V2 benchmarks.",
             isHighlighted: highlightSponsors,
             accentToken: "wok-gold",
           },

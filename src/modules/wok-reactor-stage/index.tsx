@@ -2,7 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import type { WokReactorStageProps } from "../../types/portal";
-import { renderDeterministicFallbackSvg } from "./fallback-svg";
+import {
+  NEO_TOKYO_NODE_HEX,
+  renderDeterministicFallbackSvg,
+} from "./fallback-svg";
 import {
   getReactorNodeMetadata,
   REACTOR_NODE_IDS,
@@ -12,10 +15,15 @@ import { ThreeWokCanvas } from "./three-wok-canvas";
 
 export {
   getReactorNodeMetadata,
+  NEO_TOKYO_NODE_HEX,
   REACTOR_NODE_IDS,
   REACTOR_NODES,
   renderDeterministicFallbackSvg,
 };
+
+function stripMiddleDots(input: string, replacement = " / "): string {
+  return input.replace(/\s*·\s*/g, replacement);
+}
 
 export function WokReactorStage({
   activeHarness,
@@ -46,9 +54,11 @@ export function WokReactorStage({
   const shouldUseFallback =
     Boolean(reducedMotion) || osPrefersReducedMotion || !mountedOnClient;
   const activeMeta = getReactorNodeMetadata(activeHarness, locale);
-  const allNodes = REACTOR_NODE_IDS.map((id) =>
-    getReactorNodeMetadata(id, locale)
-  );
+  const activeAccentHex = NEO_TOKYO_NODE_HEX[activeHarness];
+  const allNodes = REACTOR_NODE_IDS.map((id) => ({
+    ...getReactorNodeMetadata(id, locale),
+    cyberAccentHex: NEO_TOKYO_NODE_HEX[id],
+  }));
 
   const fallbackSvgMarkup = shouldUseFallback
     ? renderDeterministicFallbackSvg({
@@ -73,21 +83,57 @@ export function WokReactorStage({
         minHeight: "520px",
         aspectRatio: "16 / 10",
         width: "100%",
-        backgroundColor: "#080B10",
+        backgroundColor: "#05060A",
+        border: `1px solid ${activeAccentHex}44`,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         position: "relative",
         borderRadius: "8px",
-        overflow: "hidden",
       }}
     >
       <div
         style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "8px",
+          flexWrap: "wrap",
+          padding: "10px 14px",
+          backgroundColor: "#0B0E17",
+          borderBottom: "1px solid #151C2C",
+          borderTopLeftRadius: "8px",
+          borderTopRightRadius: "8px",
+        }}
+      >
+        <code
+          style={{
+            color: activeAccentHex,
+            fontSize: "14px",
+            fontWeight: 700,
+          }}
+        >
+          {stripMiddleDots(activeMeta.horizonBadge)} / {activeMeta.wireProtocol}
+        </code>
+        <code
+          style={{
+            color: "#94A3B8",
+            fontSize: "14px",
+          }}
+        >
+          {locale === "vi"
+            ? "Kéo xoay quỹ đạo 3D / Chọn nút khóa tín hiệu"
+            : "Drag 3D orbital core / Select node"}
+        </code>
+      </div>
+
+      <div
+        style={{
           position: "relative",
           width: "100%",
-          height: "360px",
-          backgroundColor: "#080B10",
+          height: "300px",
+          overflow: "hidden",
+          backgroundColor: "#05060A",
           flexShrink: 0,
         }}
       >
@@ -105,52 +151,12 @@ export function WokReactorStage({
             onSelectNode={onSelectNode}
           />
         )}
-
-        <div
-          style={{
-            position: "absolute",
-            top: "12px",
-            left: "14px",
-            right: "14px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            pointerEvents: "none",
-            gap: "8px",
-            flexWrap: "wrap",
-          }}
-        >
-          <code
-            style={{
-              padding: "6px 10px",
-              backgroundColor: "rgba(8, 11, 16, 0.88)",
-              color: activeMeta.accentHex,
-              fontSize: "14px",
-              fontWeight: 600,
-              borderRadius: "4px",
-            }}
-          >
-            {activeMeta.horizonBadge} · {activeMeta.wireProtocol}
-          </code>
-          <code
-            style={{
-              padding: "6px 10px",
-              backgroundColor: "rgba(8, 11, 16, 0.88)",
-              color: "#94A3B8",
-              fontSize: "14px",
-              borderRadius: "4px",
-            }}
-          >
-            {locale === "vi"
-              ? "Kéo để xoay 3D · Chạm nút để đổi Harness"
-              : "Drag to orbit 3D · Select node to inspect wire"}
-          </code>
-        </div>
       </div>
 
       <div
         style={{
-          backgroundColor: "#0D131D",
+          backgroundColor: "#0B0E17",
+          borderTop: "1px solid #151C2C",
           padding: "12px 14px",
           display: "flex",
           flexDirection: "column",
@@ -161,14 +167,15 @@ export function WokReactorStage({
           role="group"
           aria-label={
             locale === "vi"
-              ? "Bộ chọn nút Lò phản ứng Cyber-Wok"
-              : "Cyber-Wok Reactor Node Selector"
+              ? "Bộ chọn nút Lõi Chỉ Huy Neo-Tokyo"
+              : "Neo-Tokyo Orbital Command Core Node Selector"
           }
           style={{
             display: "flex",
             flexWrap: "wrap",
             gap: "8px",
-            backgroundColor: "#080B10",
+            backgroundColor: "#05060A",
+            border: "1px solid #151C2C",
             padding: "6px",
             borderRadius: "6px",
           }}
@@ -191,14 +198,16 @@ export function WokReactorStage({
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-start",
-                  justifyContent: "center",
-                  gap: "2px",
-                  backgroundColor: "transparent",
+                  justifyContent: "flex-start",
+                  gap: "4px",
+                  backgroundColor: isSelected
+                    ? "rgba(11, 14, 23, 0.95)"
+                    : "transparent",
                   border: "none",
                   borderBottom: `3px solid ${
-                    isSelected ? node.accentHex : "transparent"
+                    isSelected ? node.cyberAccentHex : "transparent"
                   }`,
-                  color: "#EEF2F6",
+                  color: "#F8FAFC",
                   cursor: "pointer",
                   textAlign: "left",
                 }}
@@ -207,7 +216,7 @@ export function WokReactorStage({
                   style={{
                     fontSize: "14px",
                     fontWeight: 700,
-                    color: isSelected ? node.accentHex : "#EEF2F6",
+                    color: isSelected ? node.cyberAccentHex : "#F8FAFC",
                   }}
                 >
                   {node.label}
@@ -215,10 +224,10 @@ export function WokReactorStage({
                 <code
                   style={{
                     fontSize: "14px",
-                    color: "#94A3B8",
+                    color: isSelected ? "#E2E8F0" : "#94A3B8",
                   }}
                 >
-                  {node.modelIds.join(" · ")}
+                  {node.modelIds.join(" / ")}
                 </code>
               </button>
             );
@@ -233,7 +242,8 @@ export function WokReactorStage({
             alignItems: "center",
             justifyContent: "space-between",
             gap: "10px",
-            backgroundColor: "#080B10",
+            backgroundColor: "#05060A",
+            border: "1px solid #151C2C",
             padding: "8px 12px",
             borderRadius: "6px",
           }}
@@ -242,11 +252,11 @@ export function WokReactorStage({
             style={{
               margin: 0,
               fontSize: "14px",
-              color: "#10B981",
+              color: "#00E5A3",
               whiteSpace: "pre-wrap",
             }}
           >
-            <code>$ {activeMeta.sampleCommand}</code>
+            <code>$ {stripMiddleDots(activeMeta.sampleCommand, " ")}</code>
           </pre>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "14px" }}>
             {activeMeta.telemetryMetrics.map((metric) => (
@@ -261,7 +271,7 @@ export function WokReactorStage({
                   style={{
                     fontSize: "14px",
                     fontWeight: 700,
-                    color: activeMeta.accentHex,
+                    color: activeAccentHex,
                   }}
                 >
                   {metric.value}

@@ -31,7 +31,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           text: "Everyone keeps tab-switching between four terminal windows. Watch what happens when we wire Devin ACP directly into OpenCode V2 with one command.",
           tuiCommand: "npx hmoc-steward-acp --scope project",
           tuiOutput:
-            "[hmoc-steward-acp] Patched opencode.json (comments preserved) · Registered /devin & delegate-devin",
+            "[hmoc-steward-acp] Patched opencode.json (comments preserved) / Registered /devin & delegate-devin",
         },
         {
           timestamp: "01:14",
@@ -48,7 +48,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           harness: "antigravity",
           text: "Now we cross into Horizon 2: origin-labelled @ mentions and /antigravity join the exact same ACP catalog core.",
           tuiCommand:
-            "@hivemind-delegate --harness antigravity --model argon-4-high Verify 3D Cyber-Wok shader seams",
+            "@hivemind-delegate --harness antigravity --model argon-4-high Verify 3D Neo-Tokyo orbital shader seams",
           tuiOutput:
             "[acp-session-core] Bound child ses_01J9AGYHIGH -> foreign acp_agy_8821 (mode: native, status: running)",
         },
@@ -60,7 +60,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
       locale: "en",
       horizon: "next-release",
       duration: "05:00",
-      title: "The 5-Minute 3-Harness Greenfield Wok Build",
+      title: "The 5-Minute 3-Harness Greenfield Build",
       subtitle:
         "Watching Freebuff (deepseek-4.1-flash / glm-5.3-flash), Devin (swe-2-max), and Antigravity (argon-4-high) ship a verified slice together.",
       summary:
@@ -80,7 +80,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           tuiCommand:
             "hivemind-delegate --slot scout --model deepseek-4.1-flash Map public module seams",
           tuiOutput:
-            "[freebuff-native] Lease active · handle fbm1.9a4c2e10 · Ed25519 signature verified · 5 module seams indexed",
+            "[freebuff-native] Lease active / handle fbm1.9a4c2e10 / Ed25519 signature verified / 5 module seams indexed",
         },
         {
           timestamp: "01:40",
@@ -90,7 +90,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           tuiCommand:
             "session/set_config_option { configId: 'model', value: 'glm-5.3-flash', keepSlotForResume: true }",
           tuiOutput:
-            "[targeted-request-broker] Fence acquired · Rotated fbm1.9a4c2e10 -> fbm1.c7710b44 · Confirmed config write",
+            "[targeted-request-broker] Fence acquired / Rotated fbm1.9a4c2e10 -> fbm1.c7710b44 / Confirmed config write",
         },
         {
           timestamp: "03:10",
@@ -137,7 +137,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           text: "index.sqlite links SemanticSessionDigest, IntentPivot, DelegationTurn, and ProvenanceChain nodes with AST symbol skeletons and git_cochange coupling weights.",
           tuiCommand: "substrate query --pivot 'catalog-evidence' --graph-depth 2",
           tuiOutput:
-            "[The Honeycomb] SQLite BM25+PageRank hit in 1.4 ms · Matched src/acp-session-core.ts (cochange: 0.91)",
+            "[The Honeycomb] SQLite BM25+PageRank hit in 1.4 ms / Matched src/acp-session-core.ts (cochange: 0.91)",
         },
         {
           timestamp: "04:30",
@@ -146,7 +146,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           text: "Before the next prompt fires, the Valve swaps stale 40 KB logs for compact blob pointers and emits a < 1,200-token CompactionContinuationPacket.",
           tuiCommand: "/substrate valve --budget-tokens 1200",
           tuiOutput:
-            "[Working-Set Valve] Pruned 38,400 stale tokens in 1.62 ms · Emitted CompactionContinuationPacket (940 tokens)",
+            "[Working-Set Valve] Pruned 38,400 stale tokens in 1.62 ms / Emitted CompactionContinuationPacket (940 tokens)",
         },
       ],
     },
@@ -177,7 +177,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           text: "Anh em thường phải bật bốn cửa sổ terminal khác nhau. Hãy xem chuyện gì xảy ra khi gắn trực tiếp Devin ACP vào OpenCode V2 chỉ bằng một câu lệnh.",
           tuiCommand: "npx hmoc-steward-acp --scope project",
           tuiOutput:
-            "[hmoc-steward-acp] Đã cập nhật opencode.json (bảo toàn chú thích) · Đã đăng ký /devin & delegate-devin",
+            "[hmoc-steward-acp] Đã cập nhật opencode.json (bảo toàn chú thích) / Đã đăng ký /devin & delegate-devin",
         },
         {
           timestamp: "01:14",
@@ -194,7 +194,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           harness: "antigravity",
           text: "Bây giờ chúng ta bước sang Chân Trời 2: gợi ý @ gắn nhãn nguồn gốc và /antigravity cùng chạy trên một lõi ACP thống nhất.",
           tuiCommand:
-            "@hivemind-delegate --harness antigravity --model argon-4-high Kiểm증 đường nối shader 3D Cyber-Wok",
+            "@hivemind-delegate --harness antigravity --model argon-4-high Kiểm chứng đường nối shader 3D Neo-Tokyo",
           tuiOutput:
             "[acp-session-core] Đã gắn phiên con ses_01J9AGYHIGH -> acp_agy_8821 (chế độ: native, trạng thái: running)",
         },
@@ -226,7 +226,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           tuiCommand:
             "hivemind-delegate --slot scout --model deepseek-4.1-flash Lập bản đồ các đường nối mô-đun",
           tuiOutput:
-            "[freebuff-native] Phiên hoạt động · mã fbm1.9a4c2e10 · Chữ ký Ed25519 hợp lệ · Đã lập chỉ mục 5 mô-đun",
+            "[freebuff-native] Phiên hoạt động / mã fbm1.9a4c2e10 / Chữ ký Ed25519 hợp lệ / Đã lập chỉ mục 5 mô-đun",
         },
         {
           timestamp: "01:40",
@@ -236,7 +236,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           tuiCommand:
             "session/set_config_option { configId: 'model', value: 'glm-5.3-flash', keepSlotForResume: true }",
           tuiOutput:
-            "[targeted-request-broker] Đã khóa hàng rào · Xoay mã fbm1.9a4c2e10 -> fbm1.c7710b44 · Xác nhận ghi cấu hình",
+            "[targeted-request-broker] Đã khóa hàng rào / Xoay mã fbm1.9a4c2e10 -> fbm1.c7710b44 / Xác nhận ghi cấu hình",
         },
         {
           timestamp: "03:10",
@@ -283,7 +283,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           text: "index.sqlite liên kết các nút SemanticSessionDigest, IntentPivot, DelegationTurn và ProvenanceChain cùng bộ khung AST và trọng số đồng thay đổi git_cochange.",
           tuiCommand: "substrate query --pivot 'catalog-evidence' --graph-depth 2",
           tuiOutput:
-            "[The Honeycomb] Truy vấn SQLite BM25+PageRank trong 1.4 ms · Khớp src/acp-session-core.ts (cochange: 0.91)",
+            "[The Honeycomb] Truy vấn SQLite BM25+PageRank trong 1.4 ms / Khớp src/acp-session-core.ts (cochange: 0.91)",
         },
         {
           timestamp: "04:30",
@@ -292,7 +292,7 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           text: "Trước lượt nhắc tiếp theo, Van Lọc thay thế các bản log 40 KB cũ bằng con trỏ blob gọn nhẹ và xuất gói CompactionContinuationPacket dưới 1.200 token.",
           tuiCommand: "/substrate valve --budget-tokens 1200",
           tuiOutput:
-            "[Working-Set Valve] Đã cắt gọn 38.400 token cũ trong 1.62 ms · Xuất CompactionContinuationPacket (940 token)",
+            "[Working-Set Valve] Đã cắt gọn 38.400 token cũ trong 1.62 ms / Xuất CompactionContinuationPacket (940 token)",
         },
       ],
     },
@@ -312,7 +312,7 @@ export const SEED_ARTICLES: Readonly<Record<Locale, ReadonlyArray<ArticleDetail>
       excerpt:
         "Most AI devtool portals blur shipped code with aspirational slides. Here is how Hivemind separates Shipped Devin ACP, Next-Release Tri-Harness Steward, and Roadmap Substrate memory.",
       publishedAt: "2026-10-14",
-      authorRole: "Principal Systems Architect · Hivemind Core",
+      authorRole: "Principal Systems Architect / Hivemind Core",
       tags: ["architecture", "acp", "opencode", "steward"],
       proNotBroTakeaway:
         "Pro, Not Bro means never faking runtime capabilities: every UI badge maps to an explicit repository contract, wire frame, and deterministic test gate.",
@@ -354,7 +354,7 @@ export const SEED_ARTICLES: Readonly<Record<Locale, ReadonlyArray<ArticleDetail>
       excerpt:
         "Switching models or reasoning effort mid-session is notorious for corrupting optimistic UI state. Dive into our fenced JSON-RPC broker and Ed25519 Freebuff lease recovery.",
       publishedAt: "2026-10-16",
-      authorRole: "Staff Protocol Engineer · Multi-Harness Steward",
+      authorRole: "Staff Protocol Engineer / Multi-Harness Steward",
       tags: ["freebuff", "json-rpc", "concurrency", "ed25519"],
       proNotBroTakeaway:
         "Never mutate session state optimistically on keystroke; serialize config writes through a per-session fence and commit only when the foreign harness echoes confirmation.",
@@ -390,7 +390,7 @@ export const SEED_ARTICLES: Readonly<Record<Locale, ReadonlyArray<ArticleDetail>
       excerpt:
         "Long-running agent sessions fail when raw grep outputs and stale file dumps crowd out reasoning capacity. Here is how Hivemind Substrate solves context bloat.",
       publishedAt: "2026-10-18",
-      authorRole: "Lead Storage & Graph Engineer · Hivemind Substrate",
+      authorRole: "Lead Storage & Graph Engineer / Hivemind Substrate",
       tags: ["substrate", "sqlite", "pagerank", "context-valve"],
       proNotBroTakeaway:
         "Context windows are working memory, not cold storage. Keep immutable blobs in The Spine, index relationships in The Honeycomb, and prune working sets in under 2 ms.",
@@ -434,7 +434,7 @@ export const SEED_ARTICLES: Readonly<Record<Locale, ReadonlyArray<ArticleDetail>
       excerpt:
         "Nhiều cổng thông tin công cụ AI đánh tráo giữa tính năng đã chạy thật và ý tưởng trên giấy. Đây là cách Hivemind phân tách minh bạch 3 chân trời trưởng thành.",
       publishedAt: "2026-10-14",
-      authorRole: "Kiến Trúc Sư Hệ Thống Chính · Hivemind Core",
+      authorRole: "Kiến Trúc Sư Hệ Thống Chính / Hivemind Core",
       tags: ["architecture", "acp", "opencode", "steward"],
       proNotBroTakeaway:
         "Pro, Not Bro nghĩa là không bao giờ làm màu về khả năng vận hành: mỗi huy hiệu trên giao diện đều ánh xạ tới hợp đồng mã nguồn, gói tin thực tế và cổng kiểm thử tất định.",
@@ -476,7 +476,7 @@ export const SEED_ARTICLES: Readonly<Record<Locale, ReadonlyArray<ArticleDetail>
       excerpt:
         "Đổi mô hình hoặc mức suy luận giữa phiên chạy rất dễ làm lệch trạng thái giao diện. Cùng mổ xẻ bộ điều phối JSON-RPC có rào chắn và cơ chế chữ ký Ed25519 của Freebuff.",
       publishedAt: "2026-10-16",
-      authorRole: "Kỹ Sư Giao Thức Cấp Cao · Multi-Harness Steward",
+      authorRole: "Kỹ Sư Giao Thức Cấp Cao / Multi-Harness Steward",
       tags: ["freebuff", "json-rpc", "concurrency", "ed25519"],
       proNotBroTakeaway:
         "Không bao giờ cập nhật trạng thái phiên một cách lạc quan ngay khi bấm phím; hãy tuần tự hóa lệnh ghi qua rào chắn từng phiên và chỉ chốt khi harness phản hồi xác nhận.",
@@ -512,7 +512,7 @@ export const SEED_ARTICLES: Readonly<Record<Locale, ReadonlyArray<ArticleDetail>
       excerpt:
         "Các phiên chạy tác tử dài hơi thường sụp đổ khi kết quả tìm kiếm thô và nội dung tệp cũ lấp đầy cửa sổ ngữ cảnh. Đây là lời giải của Hivemind Substrate.",
       publishedAt: "2026-10-18",
-      authorRole: "Kỹ Sư Trưởng Lưu Trữ & Đồ Thị · Hivemind Substrate",
+      authorRole: "Kỹ Sư Trưởng Lưu Trữ & Đồ Thị / Hivemind Substrate",
       tags: ["substrate", "sqlite", "pagerank", "context-valve"],
       proNotBroTakeaway:
         "Cửa sổ ngữ cảnh là bộ nhớ làm việc, không phải kho chứa lạnh. Hãy lưu blob bất biến ở The Spine, lập chỉ mục quan hệ ở The Honeycomb và lọc gọn tập làm việc dưới 2 ms.",

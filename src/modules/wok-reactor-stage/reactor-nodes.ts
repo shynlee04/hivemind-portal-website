@@ -18,15 +18,15 @@ const REACTOR_NODE_TABLE: Readonly<
     devin: {
       id: "devin",
       label: "Devin ACP Steward",
-      roleBadge: "HARNESS 01 · AUTONOMOUS SWE",
+      roleBadge: "HARNESS 01 / AUTONOMOUS SWE",
       modelIds: ["swe-2-max"],
       horizon: "shipped",
-      horizonBadge: "[SHIPPED · v0.1]",
+      horizonBadge: "[SHIPPED / v0.1]",
       accentHex: "#F5A623",
       wireProtocol: "ACP JSON-RPC 2.0 over stdio (ndjson)",
       description:
         "Live /devin Hosted View and native delegate-devin child sessions (ses_*) with deterministic crash reconcile and fenced permission mediation.",
-      sampleCommand: "/devin · delegate-devin --model swe-2-max",
+      sampleCommand: "/devin / delegate-devin --model swe-2-max",
       telemetryMetrics: [
         { label: "Session Handle", value: "ses_* (Owned Child Ledger)" },
         { label: "Primary Engine", value: "swe-2-max (#max effort)" },
@@ -36,15 +36,15 @@ const REACTOR_NODE_TABLE: Readonly<
     antigravity: {
       id: "antigravity",
       label: "Antigravity ACP Bridge",
-      roleBadge: "HARNESS 02 · DEEP ARCHITECT",
+      roleBadge: "HARNESS 02 / DEEP ARCHITECT",
       modelIds: ["argon-4-high"],
       horizon: "next-release",
-      horizonBadge: "[NEXT · v0.2]",
+      horizonBadge: "[NEXT / v0.2]",
       accentHex: "#22D3EE",
       wireProtocol: "ACP Server Bridge + Origin-Labelled @Mentions",
       description:
         "Independent Agy ACP server identity with S6 origin-labelled / & @ autocomplete and S7 fenced live option switching (ctrl+m / ctrl+e / ctrl+t).",
-      sampleCommand: "/antigravity · hivemind-delegate --slot architect",
+      sampleCommand: "/antigravity / hivemind-delegate --slot architect",
       telemetryMetrics: [
         { label: "Primary Engine", value: "argon-4-high" },
         { label: "Live Controls", value: "ctrl+m / ctrl+e / ctrl+t" },
@@ -54,10 +54,10 @@ const REACTOR_NODE_TABLE: Readonly<
     freebuff: {
       id: "freebuff",
       label: "Freebuff 3rd-Harness",
-      roleBadge: "HARNESS 03 · HIGH-THROUGHPUT RECON",
+      roleBadge: "HARNESS 03 / HIGH-THROUGHPUT RECON",
       modelIds: ["glm-5.3-flash", "deepseek-4.1-flash"],
       horizon: "next-release",
-      horizonBadge: "[NEXT · v0.2]",
+      horizonBadge: "[NEXT / v0.2]",
       accentHex: "#10B981",
       wireProtocol: "Ed25519 Signed Admission Lease + Rotated fbm1 Handle",
       description:
@@ -72,15 +72,15 @@ const REACTOR_NODE_TABLE: Readonly<
     substrate: {
       id: "substrate",
       label: "Hivemind Substrate Core",
-      roleBadge: "MEMORY ENGINE · 3-LAYER HONEYCOMB",
+      roleBadge: "MEMORY ENGINE / 3-LAYER HONEYCOMB",
       modelIds: ["The Spine", "The Honeycomb", "Working-Set Valve"],
       horizon: "roadmap",
-      horizonBadge: "[ROADMAP · SUBSTRATE]",
+      horizonBadge: "[ROADMAP / SUBSTRATE]",
       accentHex: "#EF4444",
       wireProtocol: "SQLite WAL + Tree-sitter AST + PageRank RepoMap",
       description:
         "Lossless .session-archive/blobs/<sha256>.txt Spine, hybrid SQLite + AST + PageRank Honeycomb index, and < 2 ms Working-Set Valve context pruning.",
-      sampleCommand: "/substrate · substrate_prune --budget 1200",
+      sampleCommand: "/substrate / substrate_prune --budget 1200",
       telemetryMetrics: [
         { label: "Valve Latency", value: "< 2 ms Surgical Prune" },
         { label: "Continuation Packet", value: "< 1,200 Tokens" },
@@ -92,15 +92,15 @@ const REACTOR_NODE_TABLE: Readonly<
     devin: {
       id: "devin",
       label: "Điều phối viên Devin ACP",
-      roleBadge: "HARNESS 01 · KỸ SƯ TỰ HÀNH",
+      roleBadge: "HARNESS 01 / KỸ SƯ TỰ HÀNH",
       modelIds: ["swe-2-max"],
       horizon: "shipped",
-      horizonBadge: "[ĐÃ PHÁT HÀNH · v0.1]",
+      horizonBadge: "[ĐÃ PHÁT HÀNH / v0.1]",
       accentHex: "#F5A623",
       wireProtocol: "ACP JSON-RPC 2.0 qua stdio (ndjson)",
       description:
         "Khung nhìn Hosted /devin trực tiếp và phiên con delegate-devin (ses_*) với khả năng phục hồi sự cố tất định và kiểm duyệt quyền hạn có rào chắn.",
-      sampleCommand: "/devin · delegate-devin --model swe-2-max",
+      sampleCommand: "/devin / delegate-devin --model swe-2-max",
       telemetryMetrics: [
         { label: "Định danh phiên", value: "ses_* (Sổ cái phiên con)" },
         { label: "Mô hình chính", value: "swe-2-max (nỗ lực #max)" },
@@ -110,15 +110,15 @@ const REACTOR_NODE_TABLE: Readonly<
     antigravity: {
       id: "antigravity",
       label: "Cầu nối Antigravity ACP",
-      roleBadge: "HARNESS 02 · KIẾN TRÚC SƯ SÂU",
+      roleBadge: "HARNESS 02 / KIẾN TRÚC SƯ SÂU",
       modelIds: ["argon-4-high"],
       horizon: "next-release",
-      horizonBadge: "[BẢN KẾ TIẾP · v0.2]",
+      horizonBadge: "[BẢN KẾ TIẾP / v0.2]",
       accentHex: "#22D3EE",
       wireProtocol: "Cầu nối máy chủ ACP + Gợi ý @Mentions gắn nhãn nguồn",
       description:
         "Định danh máy chủ Agy ACP độc lập với tự động hoàn thành / & @ gắn nhãn nguồn (S6) và chuyển đổi cấu hình trực tiếp có rào chắn (S7: ctrl+m / ctrl+e / ctrl+t).",
-      sampleCommand: "/antigravity · hivemind-delegate --slot architect",
+      sampleCommand: "/antigravity / hivemind-delegate --slot architect",
       telemetryMetrics: [
         { label: "Mô hình chính", value: "argon-4-high" },
         { label: "Phím tắt trực tiếp", value: "ctrl+m / ctrl+e / ctrl+t" },
@@ -128,10 +128,10 @@ const REACTOR_NODE_TABLE: Readonly<
     freebuff: {
       id: "freebuff",
       label: "Harness thứ 3 Freebuff",
-      roleBadge: "HARNESS 03 · TRINH SÁT TỐC ĐỘ CAO",
+      roleBadge: "HARNESS 03 / TRINH SÁT TỐC ĐỘ CAO",
       modelIds: ["glm-5.3-flash", "deepseek-4.1-flash"],
       horizon: "next-release",
-      horizonBadge: "[BẢN KẾ TIẾP · v0.2]",
+      horizonBadge: "[BẢN KẾ TIẾP / v0.2]",
       accentHex: "#10B981",
       wireProtocol: "Thuê bao ký số Ed25519 + Xoay vòng định danh fbm1",
       description:
@@ -146,15 +146,15 @@ const REACTOR_NODE_TABLE: Readonly<
     substrate: {
       id: "substrate",
       label: "Lõi bộ nhớ Hivemind Substrate",
-      roleBadge: "ĐỘNG CƠ BỘ NHỚ · TỔ ONG 3 TẦNG",
+      roleBadge: "ĐỘNG CƠ BỘ NHỚ / TỔ ONG 3 TẦNG",
       modelIds: ["The Spine", "The Honeycomb", "Working-Set Valve"],
       horizon: "roadmap",
-      horizonBadge: "[PHÒNG LAB LỘ TRÌNH · SUBSTRATE]",
+      horizonBadge: "[PHÒNG LAB LỘ TRÌNH / SUBSTRATE]",
       accentHex: "#EF4444",
       wireProtocol: "SQLite WAL + Cây cú pháp AST + PageRank RepoMap",
       description:
         "Kho lưu trữ nguyên vẹn .session-archive/blobs/<sha256>.txt (The Spine), chỉ mục lai SQLite + AST + PageRank (The Honeycomb) và van cắt tỉa ngữ cảnh < 2 ms (Working-Set Valve).",
-      sampleCommand: "/substrate · substrate_prune --budget 1200",
+      sampleCommand: "/substrate / substrate_prune --budget 1200",
       telemetryMetrics: [
         { label: "Độ trễ van", value: "< 2 ms cắt tỉa chính xác" },
         { label: "Gói tiếp nối", value: "< 1.200 Token" },

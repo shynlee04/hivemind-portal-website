@@ -18,6 +18,8 @@ export interface ThreeWokCanvasProps {
 
 interface SatelliteRig {
   readonly id: ReactorNodeId;
+  readonly horizon: HorizonTier;
+  readonly colorHex: number;
   readonly root: THREE.Group;
   readonly coreMesh: THREE.Mesh;
   readonly innerGimbal: THREE.Mesh;
@@ -32,49 +34,75 @@ interface SatelliteRig {
   readonly baseY: number;
 }
 
-function buildForgeEnvironment(renderer: THREE.WebGLRenderer): THREE.Texture {
+const CYBER_PALETTE = {
+  shibuyaVoid: 0x05060a,
+  shinjukuChassis: 0x0b0e17,
+  sectorGridMajor: 0x00f0ff,
+  sectorGridMinor: 0x131c31,
+  devinCyan: 0x00f0ff,
+  antigravityCrimson: 0xff2a6d,
+  freebuffGold: 0xffb800,
+  substrateMint: 0x00e5a3,
+} as const;
+
+function buildNeoTokyoEnvironment(renderer: THREE.WebGLRenderer): THREE.Texture {
   const pmrem = new THREE.PMREMGenerator(renderer);
   pmrem.compileEquirectangularShader();
   const envScene = new THREE.Scene();
-  envScene.background = new THREE.Color(0x06090e);
+  envScene.background = new THREE.Color(CYBER_PALETTE.shibuyaVoid);
 
-  const warmStripGeo = new THREE.PlaneGeometry(14, 4);
-  const warmStripMat = new THREE.MeshBasicMaterial({
-    color: new THREE.Color(0xf5a623),
+  const cyanBillboardGeo = new THREE.PlaneGeometry(14, 4);
+  const cyanBillboardMat = new THREE.MeshBasicMaterial({
+    color: new THREE.Color(CYBER_PALETTE.devinCyan),
     side: THREE.DoubleSide,
   });
-  const warmStrip = new THREE.Mesh(warmStripGeo, warmStripMat);
-  warmStrip.position.set(6, 7, 5);
-  warmStrip.lookAt(0, 0, 0);
-  envScene.add(warmStrip);
+  const cyanBillboard = new THREE.Mesh(cyanBillboardGeo, cyanBillboardMat);
+  cyanBillboard.position.set(6, 7, 5);
+  cyanBillboard.lookAt(0, 0, 0);
+  envScene.add(cyanBillboard);
 
-  const jadeStripGeo = new THREE.PlaneGeometry(12, 3.5);
-  const jadeStripMat = new THREE.MeshBasicMaterial({
-    color: new THREE.Color(0x22d3ee),
+  const crimsonBillboardGeo = new THREE.PlaneGeometry(12, 3.6);
+  const crimsonBillboardMat = new THREE.MeshBasicMaterial({
+    color: new THREE.Color(CYBER_PALETTE.antigravityCrimson),
     side: THREE.DoubleSide,
   });
-  const jadeStrip = new THREE.Mesh(jadeStripGeo, jadeStripMat);
-  jadeStrip.position.set(-7, 5, -5);
-  jadeStrip.lookAt(0, 0, 0);
-  envScene.add(jadeStrip);
+  const crimsonBillboard = new THREE.Mesh(
+    crimsonBillboardGeo,
+    crimsonBillboardMat
+  );
+  crimsonBillboard.position.set(-7, 5, -5);
+  crimsonBillboard.lookAt(0, 0, 0);
+  envScene.add(crimsonBillboard);
 
-  const emberDiscGeo = new THREE.CircleGeometry(5, 32);
-  const emberDiscMat = new THREE.MeshBasicMaterial({
-    color: new THREE.Color(0xef4444),
+  const goldHighwayGeo = new THREE.PlaneGeometry(10, 2.6);
+  const goldHighwayMat = new THREE.MeshBasicMaterial({
+    color: new THREE.Color(CYBER_PALETTE.freebuffGold),
     side: THREE.DoubleSide,
   });
-  const emberDisc = new THREE.Mesh(emberDiscGeo, emberDiscMat);
-  emberDisc.position.set(0, -6, 0);
-  emberDisc.lookAt(0, 0, 0);
-  envScene.add(emberDisc);
+  const goldHighway = new THREE.Mesh(goldHighwayGeo, goldHighwayMat);
+  goldHighway.position.set(0, 8, -6);
+  goldHighway.lookAt(0, 0, 0);
+  envScene.add(goldHighway);
+
+  const mintCoreDiscGeo = new THREE.CircleGeometry(5.5, 32);
+  const mintCoreDiscMat = new THREE.MeshBasicMaterial({
+    color: new THREE.Color(CYBER_PALETTE.substrateMint),
+    side: THREE.DoubleSide,
+  });
+  const mintCoreDisc = new THREE.Mesh(mintCoreDiscGeo, mintCoreDiscMat);
+  mintCoreDisc.position.set(0, -6, 0);
+  mintCoreDisc.lookAt(0, 0, 0);
+  envScene.add(mintCoreDisc);
 
   const target = pmrem.fromScene(envScene, 0.04);
-  warmStripGeo.dispose();
-  warmStripMat.dispose();
-  jadeStripGeo.dispose();
-  jadeStripMat.dispose();
-  emberDiscGeo.dispose();
-  emberDiscMat.dispose();
+  cyanBillboardGeo.dispose();
+  cyanBillboardMat.dispose();
+  crimsonBillboardGeo.dispose();
+  crimsonBillboardMat.dispose();
+  goldHighwayGeo.dispose();
+  goldHighwayMat.dispose();
+  mintCoreDiscGeo.dispose();
+  mintCoreDiscMat.dispose();
   pmrem.dispose();
   return target.texture;
 }
@@ -87,6 +115,7 @@ export function ThreeWokCanvas({
 }: ThreeWokCanvasProps): React.JSX.Element {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const activeHarnessRef = useRef<ReactorNodeId>(activeHarness);
+  const activeHorizonRef = useRef<HorizonTier | "all">(activeHorizon);
   const onSelectRef = useRef<((id: ReactorNodeId) => void) | undefined>(
     onSelectNode
   );
@@ -94,6 +123,7 @@ export function ThreeWokCanvas({
   const [hoveredNode, setHoveredNode] = useState<ReactorNodeId | null>(null);
 
   activeHarnessRef.current = activeHarness;
+  activeHorizonRef.current = activeHorizon;
   onSelectRef.current = onSelectNode;
 
   useEffect(() => {
@@ -119,7 +149,7 @@ export function ThreeWokCanvas({
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(initialWidth, initialHeight, false);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.35;
+    renderer.toneMappingExposure = 1.42;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.domElement.style.width = "100%";
     renderer.domElement.style.height = "100%";
@@ -139,10 +169,10 @@ export function ThreeWokCanvas({
     };
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x080b10);
-    scene.fog = new THREE.FogExp2(0x080b10, 0.068);
+    scene.background = new THREE.Color(CYBER_PALETTE.shibuyaVoid);
+    scene.fog = new THREE.FogExp2(CYBER_PALETTE.shibuyaVoid, 0.056);
 
-    const envTexture = buildForgeEnvironment(renderer);
+    const envTexture = buildNeoTokyoEnvironment(renderer);
     scene.environment = envTexture;
 
     const camera = new THREE.PerspectiveCamera(
@@ -152,106 +182,176 @@ export function ThreeWokCanvas({
       80
     );
     camera.position.set(0, 3.15, 6.6);
-    camera.lookAt(0, 0.1, 0);
+    camera.lookAt(0, 0.12, 0);
 
-    const hemiLight = new THREE.HemisphereLight(0xf4efe6, 0x080b10, 0.85);
-    const forgeLight = new THREE.DirectionalLight(0xf5a623, 2.6);
-    forgeLight.position.set(5, 7, 4);
-    const jadeRimLight = new THREE.DirectionalLight(0x22d3ee, 2.1);
-    jadeRimLight.position.set(-6, 4, -4);
-    const coreBurnerLight = new THREE.PointLight(0xef4444, 4.5, 8, 1.6);
-    coreBurnerLight.position.set(0, -0.35, 0);
-    scene.add(hemiLight, forgeLight, jadeRimLight, coreBurnerLight);
+    const hemiLight = new THREE.HemisphereLight(
+      0xe2e8f0,
+      CYBER_PALETTE.shibuyaVoid,
+      0.9
+    );
+    const cyanKeyLight = new THREE.DirectionalLight(
+      CYBER_PALETTE.devinCyan,
+      2.8
+    );
+    cyanKeyLight.position.set(5.5, 7.5, 4.5);
+    const crimsonRimLight = new THREE.DirectionalLight(
+      CYBER_PALETTE.antigravityCrimson,
+      2.4
+    );
+    crimsonRimLight.position.set(-6.5, 4.5, -4.5);
+    const goldFillLight = new THREE.DirectionalLight(
+      CYBER_PALETTE.freebuffGold,
+      1.6
+    );
+    goldFillLight.position.set(0, 6.5, -6);
+    const corePulseLight = new THREE.PointLight(
+      CYBER_PALETTE.devinCyan,
+      5.2,
+      9,
+      1.5
+    );
+    corePulseLight.position.set(0, 0.22, 0);
+    scene.add(
+      hemiLight,
+      cyanKeyLight,
+      crimsonRimLight,
+      goldFillLight,
+      corePulseLight
+    );
+
+    const holoGrid = new THREE.GridHelper(
+      24,
+      32,
+      CYBER_PALETTE.sectorGridMajor,
+      CYBER_PALETTE.sectorGridMinor
+    );
+    holoGrid.position.y = -1.24;
+    if (Array.isArray(holoGrid.material)) {
+      for (const mat of holoGrid.material) {
+        mat.transparent = true;
+        mat.opacity = 0.26;
+        trackMat(mat);
+      }
+    } else {
+      holoGrid.material.transparent = true;
+      holoGrid.material.opacity = 0.26;
+      trackMat(holoGrid.material);
+    }
+    trackGeo(holoGrid.geometry);
+    scene.add(holoGrid);
 
     const reactorRoot = new THREE.Group();
     scene.add(reactorRoot);
 
-    const lathePoints: THREE.Vector2[] = [];
-    for (let i = 0; i <= 28; i++) {
-      const t = i / 28;
-      const r = 0.36 + Math.pow(t, 0.82) * 2.28;
-      const y = -0.78 + Math.pow(t, 1.58) * 1.12;
-      lathePoints.push(new THREE.Vector2(r, y));
-    }
-    lathePoints.push(new THREE.Vector2(2.74, 0.36));
-    lathePoints.push(new THREE.Vector2(2.78, 0.31));
-    lathePoints.push(new THREE.Vector2(2.62, 0.25));
-
-    const wokGeo = trackGeo(new THREE.LatheGeometry(lathePoints, 72));
-    const wokMat = trackMat(
-      new THREE.MeshPhysicalMaterial({
-        color: 0x101622,
-        metalness: 0.9,
-        roughness: 0.24,
-        clearcoat: 0.72,
-        clearcoatRoughness: 0.18,
-        side: THREE.DoubleSide,
-      })
+    const spireTowerGeo = trackGeo(
+      new THREE.CylinderGeometry(0.44, 0.68, 1.56, 8, 1, false)
     );
-    const wokMesh = new THREE.Mesh(wokGeo, wokMat);
-    reactorRoot.add(wokMesh);
-
-    const rimGeo = trackGeo(new THREE.TorusGeometry(2.68, 0.055, 24, 96));
-    const rimMat = trackMat(
+    const spireTowerMat = trackMat(
       new THREE.MeshPhysicalMaterial({
-        color: 0xf5a623,
-        emissive: 0xf5a623,
-        emissiveIntensity: 0.38,
+        color: CYBER_PALETTE.shinjukuChassis,
+        emissive: 0x061524,
+        emissiveIntensity: 0.55,
         metalness: 0.92,
-        roughness: 0.16,
-        clearcoat: 0.8,
+        roughness: 0.18,
+        clearcoat: 0.92,
+        clearcoatRoughness: 0.14,
       })
     );
-    const rimMesh = new THREE.Mesh(rimGeo, rimMat);
-    rimMesh.rotation.x = Math.PI / 2;
-    rimMesh.position.y = 0.34;
-    reactorRoot.add(rimMesh);
+    const spireTowerMesh = new THREE.Mesh(spireTowerGeo, spireTowerMat);
+    spireTowerMesh.position.y = 0.04;
+    reactorRoot.add(spireTowerMesh);
 
-    const innerThermalRingGeo = trackGeo(
-      new THREE.TorusGeometry(1.88, 0.022, 16, 80)
-    );
-    const innerThermalRingMat = trackMat(
-      new THREE.MeshBasicMaterial({
-        color: 0x22d3ee,
+    const spireEdgesGeo = trackGeo(new THREE.EdgesGeometry(spireTowerGeo, 15));
+    const spireEdgesMat = trackMat(
+      new THREE.LineBasicMaterial({
+        color: CYBER_PALETTE.devinCyan,
         transparent: true,
-        opacity: 0.65,
+        opacity: 0.68,
       })
     );
-    const innerThermalRing = new THREE.Mesh(
-      innerThermalRingGeo,
-      innerThermalRingMat
-    );
-    innerThermalRing.rotation.x = Math.PI / 2;
-    innerThermalRing.position.y = -0.14;
-    reactorRoot.add(innerThermalRing);
+    const spireWireframe = new THREE.LineSegments(spireEdgesGeo, spireEdgesMat);
+    spireTowerMesh.add(spireWireframe);
 
-    const emberThermalRingGeo = trackGeo(
-      new THREE.TorusGeometry(1.22, 0.026, 16, 64)
+    const stewardCoreGeo = trackGeo(new THREE.OctahedronGeometry(0.36, 1));
+    const stewardCoreMat = trackMat(
+      new THREE.MeshPhysicalMaterial({
+        color: CYBER_PALETTE.devinCyan,
+        emissive: CYBER_PALETTE.devinCyan,
+        emissiveIntensity: 1.45,
+        metalness: 0.4,
+        roughness: 0.12,
+        clearcoat: 1.0,
+      })
     );
-    const emberThermalRingMat = trackMat(
+    const stewardCoreMesh = new THREE.Mesh(stewardCoreGeo, stewardCoreMat);
+    stewardCoreMesh.position.y = 0.34;
+    reactorRoot.add(stewardCoreMesh);
+
+    const outerTorusGeo = trackGeo(
+      new THREE.TorusGeometry(2.68, 0.046, 24, 96)
+    );
+    const outerTorusMat = trackMat(
+      new THREE.MeshPhysicalMaterial({
+        color: CYBER_PALETTE.devinCyan,
+        emissive: CYBER_PALETTE.devinCyan,
+        emissiveIntensity: 0.52,
+        metalness: 0.9,
+        roughness: 0.15,
+        clearcoat: 0.85,
+      })
+    );
+    const outerTorusMesh = new THREE.Mesh(outerTorusGeo, outerTorusMat);
+    outerTorusMesh.rotation.x = Math.PI / 2;
+    outerTorusMesh.position.y = 0.28;
+    reactorRoot.add(outerTorusMesh);
+
+    const crimsonTelemetryRingGeo = trackGeo(
+      new THREE.TorusGeometry(1.94, 0.024, 16, 84)
+    );
+    const crimsonTelemetryRingMat = trackMat(
       new THREE.MeshBasicMaterial({
-        color: 0xef4444,
+        color: CYBER_PALETTE.antigravityCrimson,
         transparent: true,
-        opacity: 0.72,
+        opacity: 0.78,
       })
     );
-    const emberThermalRing = new THREE.Mesh(
-      emberThermalRingGeo,
-      emberThermalRingMat
+    const crimsonTelemetryRing = new THREE.Mesh(
+      crimsonTelemetryRingGeo,
+      crimsonTelemetryRingMat
     );
-    emberThermalRing.rotation.x = Math.PI / 2;
-    emberThermalRing.position.y = -0.46;
-    reactorRoot.add(emberThermalRing);
+    crimsonTelemetryRing.rotation.x = Math.PI / 2;
+    crimsonTelemetryRing.position.y = -0.06;
+    reactorRoot.add(crimsonTelemetryRing);
 
-    for (const side of [-1, 1] as const) {
-      const handleGeo = trackGeo(
-        new THREE.TorusGeometry(0.38, 0.05, 16, 36, Math.PI * 1.15)
+    const goldTelemetryRingGeo = trackGeo(
+      new THREE.TorusGeometry(1.32, 0.024, 16, 72)
+    );
+    const goldTelemetryRingMat = trackMat(
+      new THREE.MeshBasicMaterial({
+        color: CYBER_PALETTE.freebuffGold,
+        transparent: true,
+        opacity: 0.82,
+      })
+    );
+    const goldTelemetryRing = new THREE.Mesh(
+      goldTelemetryRingGeo,
+      goldTelemetryRingMat
+    );
+    goldTelemetryRing.rotation.x = Math.PI / 2;
+    goldTelemetryRing.position.y = -0.36;
+    reactorRoot.add(goldTelemetryRing);
+
+    const pylonGeo = trackGeo(new THREE.BoxGeometry(0.28, 0.16, 0.18));
+    for (let i = 0; i < 4; i++) {
+      const angle = (i * Math.PI) / 2 + Math.PI / 4;
+      const pylonMesh = new THREE.Mesh(pylonGeo, outerTorusMat);
+      pylonMesh.position.set(
+        Math.cos(angle) * 2.68,
+        0.28,
+        Math.sin(angle) * 2.68
       );
-      const handleMesh = new THREE.Mesh(handleGeo, rimMat);
-      handleMesh.position.set(side * 2.74, 0.42, 0);
-      handleMesh.rotation.z = side * -0.45;
-      handleMesh.rotation.y = Math.PI / 2;
-      reactorRoot.add(handleMesh);
+      pylonMesh.rotation.y = -angle;
+      reactorRoot.add(pylonMesh);
     }
 
     const honeycombGroup = new THREE.Group();
@@ -259,7 +359,13 @@ export function ThreeWokCanvas({
     honeycombGroup.userData = { reactorNodeId: "substrate" as ReactorNodeId };
     reactorRoot.add(honeycombGroup);
 
-    const hexCoords: Array<{ q: number; r: number; dist: number; x: number; z: number }> = [];
+    const hexCoords: Array<{
+      q: number;
+      r: number;
+      dist: number;
+      x: number;
+      z: number;
+    }> = [];
     const hexSpacing = 0.41;
     for (let q = -2; q <= 2; q++) {
       for (let r = -2; r <= 2; r++) {
@@ -273,15 +379,17 @@ export function ThreeWokCanvas({
       }
     }
 
-    const hexCellGeo = trackGeo(new THREE.CylinderGeometry(0.21, 0.21, 0.34, 6));
+    const hexCellGeo = trackGeo(
+      new THREE.CylinderGeometry(0.21, 0.21, 0.34, 6)
+    );
     const hexCellMat = trackMat(
       new THREE.MeshPhysicalMaterial({
-        color: 0x0d1b2a,
-        emissive: 0x22d3ee,
-        emissiveIntensity: 0.42,
-        metalness: 0.85,
-        roughness: 0.2,
-        clearcoat: 0.9,
+        color: CYBER_PALETTE.shinjukuChassis,
+        emissive: CYBER_PALETTE.substrateMint,
+        emissiveIntensity: 0.58,
+        metalness: 0.86,
+        roughness: 0.18,
+        clearcoat: 0.92,
       })
     );
     const hexInstanced = new THREE.InstancedMesh(
@@ -293,14 +401,14 @@ export function ThreeWokCanvas({
     honeycombGroup.add(hexInstanced);
 
     const substrateHitGeo = trackGeo(
-      new THREE.CylinderGeometry(1.12, 1.12, 0.52, 6)
+      new THREE.CylinderGeometry(1.16, 1.16, 0.52, 6)
     );
     const substrateHitMat = trackMat(
       new THREE.MeshBasicMaterial({
-        color: 0x22d3ee,
+        color: CYBER_PALETTE.substrateMint,
         wireframe: true,
         transparent: true,
-        opacity: 0.28,
+        opacity: 0.32,
       })
     );
     const substrateHitMesh = new THREE.Mesh(substrateHitGeo, substrateHitMat);
@@ -309,6 +417,7 @@ export function ThreeWokCanvas({
 
     const satelliteSpecs: ReadonlyArray<{
       id: ReactorNodeId;
+      horizon: HorizonTier;
       colorHex: number;
       angle: number;
       radius: number;
@@ -316,23 +425,26 @@ export function ThreeWokCanvas({
     }> = [
       {
         id: "devin",
-        colorHex: 0xf5a623,
+        horizon: "shipped",
+        colorHex: CYBER_PALETTE.devinCyan,
         angle: -Math.PI * 0.72,
-        radius: 2.08,
-        baseY: 0.92,
+        radius: 2.12,
+        baseY: 0.94,
       },
       {
         id: "antigravity",
-        colorHex: 0x22d3ee,
+        horizon: "next-release",
+        colorHex: CYBER_PALETTE.antigravityCrimson,
         angle: -Math.PI * 0.28,
-        radius: 2.08,
-        baseY: 0.92,
+        radius: 2.12,
+        baseY: 0.94,
       },
       {
         id: "freebuff",
-        colorHex: 0x10b981,
+        horizon: "next-release",
+        colorHex: CYBER_PALETTE.freebuffGold,
         angle: Math.PI * 0.5,
-        radius: 1.95,
+        radius: 1.98,
         baseY: 1.18,
       },
     ];
@@ -340,10 +452,24 @@ export function ThreeWokCanvas({
     const satellites: SatelliteRig[] = [];
     const pickTargets: THREE.Object3D[] = [substrateHitMesh];
 
-    const packetCountPerConduit = 12;
+    const packetCountPerConduit = 14;
     const totalPacketCount = satelliteSpecs.length * packetCountPerConduit;
-    const packetPositions = new Float32Array(totalPacketCount * 3);
-    const packetColors = new Float32Array(totalPacketCount * 3);
+    const packetOrbGeo = trackGeo(new THREE.OctahedronGeometry(0.052, 0));
+    const packetOrbMat = trackMat(
+      new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.96,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      })
+    );
+    const packetInstanced = new THREE.InstancedMesh(
+      packetOrbGeo,
+      packetOrbMat,
+      totalPacketCount
+    );
+    packetInstanced.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
 
     satelliteSpecs.forEach((spec, sIdx) => {
       const root = new THREE.Group();
@@ -357,9 +483,9 @@ export function ThreeWokCanvas({
         new THREE.MeshPhysicalMaterial({
           color: spec.colorHex,
           emissive: spec.colorHex,
-          emissiveIntensity: 0.85,
+          emissiveIntensity: 0.95,
           metalness: 0.55,
-          roughness: 0.15,
+          roughness: 0.14,
           clearcoat: 1.0,
         })
       );
@@ -375,9 +501,9 @@ export function ThreeWokCanvas({
         new THREE.MeshPhysicalMaterial({
           color: spec.colorHex,
           emissive: spec.colorHex,
-          emissiveIntensity: 0.55,
+          emissiveIntensity: 0.65,
           metalness: 0.88,
-          roughness: 0.2,
+          roughness: 0.18,
         })
       );
       const innerGimbal = new THREE.Mesh(innerGimbalGeo, gimbalMat);
@@ -398,7 +524,7 @@ export function ThreeWokCanvas({
           color: spec.colorHex,
           side: THREE.DoubleSide,
           transparent: true,
-          opacity: 0.45,
+          opacity: 0.48,
         })
       );
       const haloMesh = new THREE.Mesh(haloGeo, haloMat);
@@ -407,33 +533,33 @@ export function ThreeWokCanvas({
 
       const curve = new THREE.QuadraticBezierCurve3(
         new THREE.Vector3(x, spec.baseY, z),
-        new THREE.Vector3(x * 0.42, 0.48, z * 0.42),
-        new THREE.Vector3(0, -0.52, 0)
+        new THREE.Vector3(x * 0.44, 0.54, z * 0.44),
+        new THREE.Vector3(0, 0.24, 0)
       );
       const conduitGeo = trackGeo(
-        new THREE.TubeGeometry(curve, 36, 0.018, 8, false)
+        new THREE.TubeGeometry(curve, 40, 0.018, 8, false)
       );
       const conduitMat = trackMat(
         new THREE.MeshBasicMaterial({
           color: spec.colorHex,
           transparent: true,
-          opacity: 0.48,
+          opacity: 0.52,
         })
       );
       const conduitMesh = new THREE.Mesh(conduitGeo, conduitMat);
       reactorRoot.add(conduitMesh);
       reactorRoot.add(root);
 
-      const c = new THREE.Color(spec.colorHex);
+      const packetColor = new THREE.Color(spec.colorHex);
       for (let p = 0; p < packetCountPerConduit; p++) {
-        const idx = (sIdx * packetCountPerConduit + p) * 3;
-        packetColors[idx] = c.r;
-        packetColors[idx + 1] = c.g;
-        packetColors[idx + 2] = c.b;
+        const instanceIdx = sIdx * packetCountPerConduit + p;
+        packetInstanced.setColorAt(instanceIdx, packetColor);
       }
 
       satellites.push({
         id: spec.id,
+        horizon: spec.horizon,
+        colorHex: spec.colorHex,
         root,
         coreMesh,
         innerGimbal,
@@ -449,41 +575,26 @@ export function ThreeWokCanvas({
       });
     });
 
-    const packetGeo = trackGeo(new THREE.BufferGeometry());
-    const packetPosAttr = new THREE.BufferAttribute(packetPositions, 3);
-    packetPosAttr.setUsage(THREE.DynamicDrawUsage);
-    packetGeo.setAttribute("position", packetPosAttr);
-    packetGeo.setAttribute(
-      "color",
-      new THREE.BufferAttribute(packetColors, 3)
-    );
-    const packetMat = trackMat(
-      new THREE.PointsMaterial({
-        size: 0.11,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.95,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      })
-    );
-    const packetPoints = new THREE.Points(packetGeo, packetMat);
-    reactorRoot.add(packetPoints);
+    if (packetInstanced.instanceColor) {
+      packetInstanced.instanceColor.needsUpdate = true;
+    }
+    reactorRoot.add(packetInstanced);
 
     const emberCount = 180;
     const emberPositions = new Float32Array(emberCount * 3);
     const emberColors = new Float32Array(emberCount * 3);
     const emberSeeds = new Float32Array(emberCount);
     const palette = [
-      new THREE.Color(0xf5a623),
-      new THREE.Color(0x22d3ee),
-      new THREE.Color(0xef4444),
+      new THREE.Color(CYBER_PALETTE.devinCyan),
+      new THREE.Color(CYBER_PALETTE.antigravityCrimson),
+      new THREE.Color(CYBER_PALETTE.freebuffGold),
+      new THREE.Color(CYBER_PALETTE.substrateMint),
     ];
     for (let i = 0; i < emberCount; i++) {
       const angle = (i / emberCount) * Math.PI * 2 * 7;
-      const rad = 0.25 + ((i * 19) % 100) / 100 * 2.25;
+      const rad = 0.25 + (((i * 19) % 100) / 100) * 2.35;
       emberPositions[i * 3] = Math.cos(angle) * rad;
-      emberPositions[i * 3 + 1] = -0.6 + ((i * 31) % 100) / 100 * 2.4;
+      emberPositions[i * 3 + 1] = -0.75 + (((i * 31) % 100) / 100) * 2.55;
       emberPositions[i * 3 + 2] = Math.sin(angle) * rad * 0.85;
       emberSeeds[i] = ((i * 53) % 100) / 100;
       const col = palette[i % palette.length]!;
@@ -501,7 +612,7 @@ export function ThreeWokCanvas({
         size: 0.055,
         vertexColors: true,
         transparent: true,
-        opacity: 0.72,
+        opacity: 0.76,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       })
@@ -549,7 +660,10 @@ export function ThreeWokCanvas({
         const dy = event.clientY - dragStartY;
         dragStartX = event.clientX;
         dragStartY = event.clientY;
-        userYawOffset = Math.max(-0.9, Math.min(0.9, userYawOffset + dx * 0.005));
+        userYawOffset = Math.max(
+          -0.9,
+          Math.min(0.9, userYawOffset + dx * 0.005)
+        );
         userPitchOffset = Math.max(
           -0.35,
           Math.min(0.35, userPitchOffset + dy * 0.004)
@@ -605,12 +719,14 @@ export function ThreeWokCanvas({
 
     const clock = new THREE.Clock();
     const dummy = new THREE.Object3D();
+    const packetDummy = new THREE.Object3D();
     const tempVec = new THREE.Vector3();
 
     const animate = () => {
       const delta = Math.min(clock.getDelta(), 0.1);
       const elapsed = clock.elapsedTime;
       const activeId = activeHarnessRef.current;
+      const horizonFilter = activeHorizonRef.current;
 
       const targetFocusYaw =
         activeId === "devin"
@@ -638,22 +754,43 @@ export function ThreeWokCanvas({
       reactorRoot.rotation.y = currentYaw;
       reactorRoot.rotation.x = currentPitch;
 
+      const activeAccentColor =
+        activeId === "devin"
+          ? CYBER_PALETTE.devinCyan
+          : activeId === "antigravity"
+            ? CYBER_PALETTE.antigravityCrimson
+            : activeId === "freebuff"
+              ? CYBER_PALETTE.freebuffGold
+              : CYBER_PALETTE.substrateMint;
+
+      stewardCoreMat.color.setHex(activeAccentColor);
+      stewardCoreMat.emissive.setHex(activeAccentColor);
+      stewardCoreMesh.rotation.y += delta * 1.4;
+      stewardCoreMesh.rotation.z += delta * 0.7;
+      corePulseLight.color.setHex(activeAccentColor);
+      corePulseLight.intensity = 4.6 + Math.sin(elapsed * 3.4) * 1.1;
+
       const isSubstrateActive = activeId === "substrate";
+      const isSubstrateDimmed =
+        horizonFilter !== "all" &&
+        horizonFilter !== "roadmap" &&
+        !isSubstrateActive;
+
       hexCellMat.emissiveIntensity = THREE.MathUtils.damp(
         hexCellMat.emissiveIntensity,
-        isSubstrateActive ? 1.35 : 0.45,
+        isSubstrateActive ? 1.55 : isSubstrateDimmed ? 0.22 : 0.58,
         5,
         delta
       );
-      substrateHitMat.opacity = isSubstrateActive ? 0.65 : 0.22;
+      substrateHitMat.opacity = isSubstrateActive ? 0.72 : 0.25;
 
       for (let i = 0; i < hexCoords.length; i++) {
         const cell = hexCoords[i]!;
         const wave =
           Math.sin(elapsed * 2.8 - cell.dist * 1.15) *
-          (isSubstrateActive ? 0.12 : 0.055);
+          (isSubstrateActive ? 0.13 : 0.055);
         dummy.position.set(cell.x, wave, cell.z);
-        dummy.scale.set(1, isSubstrateActive ? 1.25 : 1.0, 1);
+        dummy.scale.set(1, isSubstrateActive ? 1.28 : 1.0, 1);
         dummy.updateMatrix();
         hexInstanced.setMatrixAt(i, dummy.matrix);
       }
@@ -661,10 +798,12 @@ export function ThreeWokCanvas({
 
       satellites.forEach((sat, sIdx) => {
         const isActive = sat.id === activeId;
+        const isDimmed =
+          horizonFilter !== "all" && sat.horizon !== horizonFilter && !isActive;
         const bob = Math.sin(elapsed * 2.1 + sIdx * 2.0) * 0.08;
         sat.root.position.y = sat.baseY + bob;
 
-        const targetScale = isActive ? 1.34 : 0.96;
+        const targetScale = isActive ? 1.36 : isDimmed ? 0.84 : 0.98;
         const nextScale = THREE.MathUtils.damp(
           sat.root.scale.x,
           targetScale,
@@ -680,25 +819,39 @@ export function ThreeWokCanvas({
         sat.outerGimbal.rotation.y -= delta * (isActive ? 2.2 : 0.9);
         sat.haloMesh.rotation.z += delta * 0.6;
 
-        sat.coreMat.emissiveIntensity = isActive ? 2.1 : 0.72;
-        sat.gimbalMat.emissiveIntensity = isActive ? 1.35 : 0.42;
-        sat.conduitMat.opacity = isActive ? 0.92 : 0.32;
+        sat.coreMat.emissiveIntensity = isActive
+          ? 2.25
+          : isDimmed
+            ? 0.35
+            : 0.82;
+        sat.gimbalMat.emissiveIntensity = isActive
+          ? 1.45
+          : isDimmed
+            ? 0.22
+            : 0.48;
+        sat.conduitMat.opacity = isActive ? 0.94 : isDimmed ? 0.18 : 0.36;
 
-        const speed = isActive ? 0.68 : 0.28;
+        const speed = isActive ? 0.72 : 0.3;
+        const packetScale = isActive ? 1.32 : isDimmed ? 0.55 : 0.9;
         for (let p = 0; p < packetCountPerConduit; p++) {
           const u = (elapsed * speed + p / packetCountPerConduit) % 1;
           sat.curve.getPoint(u, tempVec);
-          const idx = (sIdx * packetCountPerConduit + p) * 3;
-          packetPositions[idx] = tempVec.x;
-          packetPositions[idx + 1] = tempVec.y;
-          packetPositions[idx + 2] = tempVec.z;
+          packetDummy.position.copy(tempVec);
+          packetDummy.rotation.set(elapsed * 2.0, elapsed * 3.0, 0);
+          packetDummy.scale.setScalar(packetScale);
+          packetDummy.updateMatrix();
+          packetInstanced.setMatrixAt(
+            sIdx * packetCountPerConduit + p,
+            packetDummy.matrix
+          );
         }
       });
-      packetPosAttr.needsUpdate = true;
+      packetInstanced.instanceMatrix.needsUpdate = true;
 
       for (let i = 0; i < emberCount; i++) {
         const yIdx = i * 3 + 1;
-        let nextY = emberPositions[yIdx]! + delta * (0.28 + emberSeeds[i]! * 0.35);
+        let nextY =
+          emberPositions[yIdx]! + delta * (0.28 + emberSeeds[i]! * 0.35);
         if (nextY > 1.85) {
           nextY = -0.65;
         }
@@ -706,8 +859,9 @@ export function ThreeWokCanvas({
       }
       emberPosAttr.needsUpdate = true;
 
-      innerThermalRing.rotation.z = elapsed * 0.24;
-      emberThermalRing.rotation.z = -elapsed * 0.36;
+      outerTorusMesh.rotation.z = elapsed * 0.18;
+      crimsonTelemetryRing.rotation.z = elapsed * 0.32;
+      goldTelemetryRing.rotation.z = -elapsed * 0.44;
 
       renderer.render(scene, camera);
     };
@@ -754,7 +908,7 @@ export function ThreeWokCanvas({
         position: "relative",
         width: "100%",
         height: "100%",
-        minHeight: "360px",
+        minHeight: "300px",
       }}
     >
       <div
@@ -764,7 +918,7 @@ export function ThreeWokCanvas({
         style={{
           width: "100%",
           height: "100%",
-          minHeight: "360px",
+          minHeight: "300px",
         }}
       />
     </div>

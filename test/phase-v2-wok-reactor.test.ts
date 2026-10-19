@@ -294,7 +294,7 @@ describe("Phase V2 · WokReactorStageModule & PortalCockpitClient", () => {
     );
 
     expect(html).toContain("npx hmoc-steward-acp");
-    expect(html).toContain("{CHINGCHONGCHINGVIBECODING}");
+    expect(html).toContain("Hivemind-Steward");
     expect(html).toContain('data-testid="xray-inspector-drawer"');
     expect(html).toContain("ses_01 + fbm1.a9f3");
     expect(html).toContain("https://freebuff.com/?ref=ref-6c980d54-a29a-4270-a160-35f13e62a2ff");
