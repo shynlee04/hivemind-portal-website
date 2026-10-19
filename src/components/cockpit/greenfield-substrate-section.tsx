@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import type {
   GreenfieldWalkthroughView,
   Locale,
@@ -13,9 +14,9 @@ export interface GreenfieldSubstrateSectionProps {
   readonly greenfield: GreenfieldWalkthroughView;
   readonly activeGreenfieldItem: GreenfieldWalkthroughView["steps"][number] | undefined;
   readonly setActiveGreenfieldStep: (step: number) => void;
-  readonly setActiveHarness: (n: ReactorNodeId) => void;
+  readonly setActiveHarness: (id: ReactorNodeId) => void;
   readonly valvePrunedMode: boolean;
-  readonly setValvePrunedMode: (v: boolean) => void;
+  readonly setValvePrunedMode: (mode: boolean) => void;
 }
 
 export function GreenfieldSubstrateSection({
@@ -27,20 +28,21 @@ export function GreenfieldSubstrateSection({
   setActiveHarness,
   valvePrunedMode,
   setValvePrunedMode,
-}: GreenfieldSubstrateSectionProps): React.JSX.Element {
+}: GreenfieldSubstrateSectionProps) {
   return (
-    <section
+      <section
         id="greenfield"
         data-reveal=""
         style={{
-          paddingTop: "clamp(5rem, 9vw, 8.5rem)",
-          paddingBottom: "clamp(5rem, 9vw, 8.5rem)",
-          backgroundColor: "var(--bg-smoked-basalt)",
+          scrollMarginTop: "5rem",
+          paddingTop: "clamp(4.5rem, 8vw, 7.5rem)",
+          paddingBottom: "clamp(4.5rem, 8vw, 7.5rem)",
+          backgroundColor: "var(--bg-tokyo-void)",
         }}
       >
         <div className="cyber-shell">
-          {/* Part A: Interactive 5-Minute Greenfield Timeline Scrubber */}
-          <div style={{ marginBottom: "4.5rem" }}>
+          {/* Part A: 5-Minute Tri-Harness Greenfield Build Scrubber */}
+          <div style={{ marginBottom: "4rem" }}>
             <div
               style={{
                 display: "flex",
@@ -48,7 +50,7 @@ export function GreenfieldSubstrateSection({
                 justifyContent: "space-between",
                 alignItems: "flex-end",
                 gap: "1.25rem",
-                marginBottom: "2rem",
+                marginBottom: "1.75rem",
               }}
             >
               <div>
@@ -62,7 +64,7 @@ export function GreenfieldSubstrateSection({
                 </h2>
                 <p
                   style={{
-                    color: "var(--text-parchment)",
+                    color: "var(--text-titanium)",
                     maxWidth: "60ch",
                     margin: 0,
                     fontSize: "17px",
@@ -74,9 +76,9 @@ export function GreenfieldSubstrateSection({
               <code
                 style={{
                   fontSize: "14px",
-                  padding: "0.45rem 0.85rem",
-                  backgroundColor: "var(--bg-wok-iron)",
-                  color: "var(--accent-bamboo-green)",
+                  padding: "0.4rem 0.8rem",
+                  backgroundColor: "var(--bg-akihabara-deck)",
+                  color: "var(--accent-matrix-mint)",
                   borderRadius: "6px",
                 }}
               >
@@ -84,14 +86,13 @@ export function GreenfieldSubstrateSection({
               </code>
             </div>
 
-            {/* Interactive V1 - V5 Timeline Scrubber Bar */}
             <div
               style={{
                 display: "flex",
                 flexWrap: "wrap",
                 gap: "0.5rem",
-                backgroundColor: "var(--bg-wok-iron)",
-                padding: "0.6rem",
+                backgroundColor: "var(--bg-akihabara-deck)",
+                padding: "0.55rem",
                 borderRadius: "8px",
                 marginBottom: "1.5rem",
               }}
@@ -110,14 +111,14 @@ export function GreenfieldSubstrateSection({
                     aria-pressed={isSelected}
                     className="touch-target"
                     style={{
-                      flex: "1 1 160px",
-                      padding: "0.65rem 0.9rem",
+                      flex: "1 1 150px",
+                      padding: "0.6rem 0.85rem",
                       borderRadius: "6px",
                       border: "none",
                       backgroundColor: isSelected
-                        ? "var(--bg-scroll-lacquer)"
+                        ? "var(--bg-kabuki-panel)"
                         : "transparent",
-                      color: "var(--text-parchment)",
+                      color: "var(--text-titanium)",
                       cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
@@ -126,27 +127,25 @@ export function GreenfieldSubstrateSection({
                       textAlign: "left",
                     }}
                   >
-                    <code style={{ color: hMeta.color, fontWeight: 800, fontSize: "14px" }}>
-                      {step.phaseCode} · {hMeta.label}
+                    <code style={{ color: hMeta.color, fontWeight: 700, fontSize: "14px" }}>
+                      {step.phaseCode} ({hMeta.label})
                     </code>
                   </button>
                 );
               })}
             </div>
 
-            {/* Active Greenfield Slice Inspector + Horological Forge Plate */}
             {activeGreenfieldItem ? (
               <div
                 className="split-62-38"
-                
                 style={{
-                  backgroundColor: "var(--bg-wok-iron)",
+                  backgroundColor: "var(--bg-akihabara-deck)",
                   borderRadius: "8px",
                   padding: "clamp(1.25rem, 2.5vw, 2rem)",
                   alignItems: "center",
                 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.95rem" }}>
                   <div
                     style={{
                       display: "flex",
@@ -157,13 +156,13 @@ export function GreenfieldSubstrateSection({
                     }}
                   >
                     <h3 style={{ fontSize: "22px", margin: 0 }}>
-                      {activeGreenfieldItem.phaseCode} · {HARNESS_META[activeGreenfieldItem.harnessId].label}
+                      {activeGreenfieldItem.phaseCode}: {HARNESS_META[activeGreenfieldItem.harnessId].label}
                     </h3>
                     <code
                       style={{
                         fontSize: "14px",
-                        color: "var(--accent-wok-gold)",
-                        backgroundColor: "var(--bg-smoked-basalt)",
+                        color: "var(--accent-voltage-gold)",
+                        backgroundColor: "var(--bg-tokyo-void)",
                         padding: "0.3rem 0.65rem",
                         borderRadius: "4px",
                       }}
@@ -172,44 +171,45 @@ export function GreenfieldSubstrateSection({
                     </code>
                   </div>
 
-                  <p style={{ margin: 0, fontWeight: 700, fontSize: "17px", color: "var(--text-parchment)" }}>
+                  <p style={{ margin: 0, fontWeight: 700, fontSize: "17px", color: "var(--text-titanium)" }}>
                     {activeGreenfieldItem.title}
                   </p>
 
-                  <p style={{ margin: 0, color: "var(--text-parchment)", fontSize: "17px" }}>
+                  <p style={{ margin: 0, color: "var(--text-titanium)", fontSize: "17px" }}>
                     {activeGreenfieldItem.actionSummary}
                   </p>
 
                   <pre
                     style={{
                       margin: 0,
-                      padding: "1rem",
-                      backgroundColor: "#05080D",
+                      padding: "0.95rem 1.15rem",
+                      backgroundColor: "var(--bg-tokyo-void)",
                       borderRadius: "6px",
-                      fontSize: "14px",
-                      color: "var(--accent-jade-wire)",
+                      color: "var(--accent-cyber-cyan)",
+                      overflowX: "hidden",
                       whiteSpace: "pre-wrap",
+                      wordBreak: "break-word",
                     }}
                   >
                     <code>
                       $ {activeGreenfieldItem.xray.orchestratorTool}
-                      {"\n"}→ {activeGreenfieldItem.xray.engineExecution}
-                      {"\n"}[PASS] Gate: {activeGreenfieldItem.verificationGate}
+                      {"\n"}
+                      {activeGreenfieldItem.xray.engineExecution}
                     </code>
                   </pre>
                 </div>
 
                 <div
                   style={{
-                    borderRadius: "6px",
+                    borderRadius: "8px",
                     overflow: "hidden",
-                    aspectRatio: "16 / 10",
-                    backgroundColor: "#05080D",
+                    backgroundColor: "#040509",
                   }}
                 >
                   <img
-                    src="/assets/greenfield-forge-plate.jpg" className="plate-drift"
-                    alt="Tri-Harness Greenfield Forge Escapement"
+                    src="/assets/greenfield-forge-plate.jpg"
+                    className="plate-drift"
+                    alt="Neo-Tokyo Broadcast Video Deck"
                     style={{
                       width: "100%",
                       height: "100%",
@@ -222,8 +222,14 @@ export function GreenfieldSubstrateSection({
             ) : null}
           </div>
 
-          {/* Part B: Interactive 3-Layer Substrate Memory & Context-Pruning Infographic */}
-          <div>
+          {/* Part B: Lightweight Hivemind-Substrate Roadmap Skeleton & Stage 2 Content Hub */}
+          <div
+            style={{
+              backgroundColor: "var(--bg-akihabara-deck)",
+              borderRadius: "8px",
+              padding: "clamp(1.35rem, 2.5vw, 2.25rem)",
+            }}
+          >
             <div
               style={{
                 display: "flex",
@@ -231,21 +237,21 @@ export function GreenfieldSubstrateSection({
                 justifyContent: "space-between",
                 alignItems: "flex-end",
                 gap: "1.25rem",
-                marginBottom: "2rem",
+                marginBottom: "1.75rem",
               }}
             >
               <div>
                 <h2
                   style={{
                     fontSize: "clamp(32px, 3.1vw, 44px)",
-                    marginBottom: "0.5rem",
+                    margin: "0 0 0.45rem 0",
                   }}
                 >
                   {dictionary.substrateSection.sectionTitle}
                 </h2>
                 <p
                   style={{
-                    color: "var(--text-parchment)",
+                    color: "var(--text-titanium)",
                     maxWidth: "60ch",
                     margin: 0,
                     fontSize: "17px",
@@ -255,7 +261,6 @@ export function GreenfieldSubstrateSection({
                 </p>
               </div>
 
-              {/* Interactive Valve Toggle: Raw 48K Bloat vs < 1,200-Token Pruned Packet */}
               <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                 <button
                   type="button"
@@ -263,19 +268,19 @@ export function GreenfieldSubstrateSection({
                   aria-pressed={!valvePrunedMode}
                   className="touch-target"
                   style={{
-                    padding: "0 1rem",
+                    padding: "0 0.9rem",
                     borderRadius: "6px",
                     border: "none",
                     backgroundColor: !valvePrunedMode
-                      ? "var(--accent-dragon-ember)"
-                      : "var(--bg-wok-iron)",
-                    color: "var(--text-parchment)",
+                      ? "var(--accent-neon-crimson)"
+                      : "var(--bg-tokyo-void)",
+                    color: "var(--text-titanium)",
                     fontWeight: 700,
                     fontSize: "14px",
                     cursor: "pointer",
                   }}
                 >
-                  {locale === "vi" ? "Trước Khi Tỉa: 48.000 Token" : "Unpruned Dump: 48,000 Tokens"}
+                  {locale === "vi" ? "Raw Log: 48.000 Token" : "Raw Session: 48,000 Tokens"}
                 </button>
                 <button
                   type="button"
@@ -283,113 +288,132 @@ export function GreenfieldSubstrateSection({
                   aria-pressed={valvePrunedMode}
                   className="touch-target"
                   style={{
-                    padding: "0 1rem",
+                    padding: "0 0.9rem",
                     borderRadius: "6px",
                     border: "none",
                     backgroundColor: valvePrunedMode
-                      ? "var(--accent-bamboo-green)"
-                      : "var(--bg-wok-iron)",
+                      ? "var(--accent-matrix-mint)"
+                      : "var(--bg-tokyo-void)",
                     color: valvePrunedMode
-                      ? "var(--bg-wok-iron)"
-                      : "var(--text-parchment)",
+                      ? "var(--bg-tokyo-void)"
+                      : "var(--text-titanium)",
                     fontWeight: 700,
                     fontSize: "14px",
                     cursor: "pointer",
                   }}
                 >
-                  {locale === "vi"
-                    ? "Qua Van < 2 ms: 1.140 Token (-97,6%)"
-                    : "Working-Set Valve < 2 ms: 1,140 Tokens (-97.6%)"}
+                  {locale === "vi" ? "Qua Van < 2 ms: 1.140 Token" : "Valve < 2 ms: 1,140 Tokens"}
                 </button>
               </div>
             </div>
 
-            {/* Unified Tonal Ledger + Substrate Honeycomb Visual Plate (unboxed child columns to prevent card-rows) */}
+            <div className="tonal-4-grid">
+              <div>
+                <h3 style={{ fontSize: "22px", margin: "0 0 0.45rem 0", color: "var(--accent-voltage-gold)" }}>
+                  The Spine
+                </h3>
+                <p style={{ margin: 0, fontSize: "17px", color: "var(--text-titanium)" }}>
+                  {dictionary.substrateSection.spineDescription}
+                </p>
+              </div>
+
+              <div>
+                <h3 style={{ fontSize: "22px", margin: "0 0 0.45rem 0", color: "var(--accent-cyber-cyan)" }}>
+                  The Honeycomb
+                </h3>
+                <p style={{ margin: 0, fontSize: "17px", color: "var(--text-titanium)" }}>
+                  {dictionary.substrateSection.honeycombDescription}
+                </p>
+              </div>
+
+              <div>
+                <h3 style={{ fontSize: "22px", margin: "0 0 0.45rem 0", color: "var(--accent-matrix-mint)" }}>
+                  Working-Set Valve
+                </h3>
+                <p style={{ margin: 0, fontSize: "17px", color: "var(--text-titanium)" }}>
+                  {dictionary.substrateSection.valveDescription}
+                </p>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "0.85rem" }}>
+                <h3 style={{ fontSize: "22px", margin: 0, color: "var(--accent-cyber-cyan)" }}>
+                  {valvePrunedMode ? "1,140 Tokens" : "48,000 Tokens"}
+                </h3>
+                <img
+                  src="/assets/substrate-honeycomb-plate.jpg"
+                  className="plate-drift"
+                  alt="Hivemind Substrate Roadmap Skeleton"
+                  style={{
+                    width: "100%",
+                    height: "150px",
+                    objectFit: "cover",
+                    borderRadius: "6px",
+                    display: "block",
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Stage 2 Content & Component Showroom Bar (Payload CMS 3.0 + Storybook 8) */}
             <div
               style={{
-                backgroundColor: "var(--bg-wok-iron)",
-                borderRadius: "8px",
-                padding: "clamp(1.5rem, 3vw, 2.25rem)",
+                marginTop: "2rem",
+                paddingTop: "1.35rem",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "1rem",
               }}
             >
-              <div className="tonal-4-grid">
-                <div>
-                  <code style={{ color: "var(--accent-wok-gold)", fontSize: "14px" }}>
-                    .session-archive/blobs/
-                  </code>
-                  <h3 style={{ fontSize: "22px", margin: "0.5rem 0" }}>
-                    The Spine
-                  </h3>
-                  <p style={{ margin: 0, fontSize: "17px", color: "var(--text-parchment)" }}>
-                    {dictionary.substrateSection.spineDescription}
-                  </p>
-                </div>
-
-                <div>
-                  <code style={{ color: "var(--accent-jade-wire)", fontSize: "14px" }}>
-                    index.sqlite · BM25 + AST
-                  </code>
-                  <h3 style={{ fontSize: "22px", margin: "0.5rem 0" }}>
-                    The Honeycomb
-                  </h3>
-                  <p style={{ margin: 0, fontSize: "17px", color: "var(--text-parchment)" }}>
-                    {dictionary.substrateSection.honeycombDescription}
-                  </p>
-                </div>
-
-                <div>
-                  <code style={{ color: "var(--accent-bamboo-green)", fontSize: "14px" }}>
-                    &lt; 2 ms · &lt; 1,200 tokens
-                  </code>
-                  <h3 style={{ fontSize: "22px", margin: "0.5rem 0" }}>
-                    Working-Set Valve
-                  </h3>
-                  <p style={{ margin: 0, fontSize: "17px", color: "var(--text-parchment)" }}>
-                    {dictionary.substrateSection.valveDescription}
-                  </p>
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "1rem" }}>
-                  <div>
-                    <code style={{ color: "var(--accent-wok-gold)", fontSize: "14px" }}>
-                      CompactionContinuationPacket
-                    </code>
-                    <h3 style={{ fontSize: "22px", margin: "0.5rem 0" }}>
-                      {valvePrunedMode ? "1,140 Tokens" : "48,000 Tokens"}
-                    </h3>
-                    <div
-                      style={{
-                        height: "12px",
-                        backgroundColor: "var(--bg-smoked-basalt)",
-                        borderRadius: "6px",
-                        overflow: "hidden",
-                        margin: "0.65rem 0",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: valvePrunedMode ? "8%" : "100%",
-                          height: "100%",
-                          backgroundColor: valvePrunedMode
-                            ? "var(--accent-bamboo-green)"
-                            : "var(--accent-dragon-ember)",
-                          transition: "width var(--dur-med) var(--ease-out)",
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <img
-                    src="/assets/substrate-honeycomb-plate.jpg" className="plate-drift"
-                    alt="Hivemind Substrate 3-Layer Memory Vault"
-                    style={{
-                      width: "100%",
-                      height: "130px",
-                      objectFit: "cover",
-                      borderRadius: "6px",
-                      display: "block",
-                    }}
-                  />
-                </div>
+              <span style={{ color: "var(--text-titanium)", fontSize: "17px" }}>
+                {locale === "vi"
+                  ? "Khung Stage 2 (Payload CMS 3.0 & Storybook 8): Bài hướng dẫn, Tập phim & Showroom"
+                  : "Stage 2 Scaffold (Payload CMS 3.0 & Storybook 8): Tutorials, Video Episodes & Showroom"}
+              </span>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
+                <Link
+                  href={`/${locale}/blog`}
+                  className="touch-target"
+                  style={{
+                    padding: "0 1rem",
+                    backgroundColor: "var(--bg-tokyo-void)",
+                    color: "var(--accent-cyber-cyan)",
+                    borderRadius: "6px",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                  }}
+                >
+                  {dictionary.nav.blogLink}
+                </Link>
+                <Link
+                  href={`/${locale}/episodes`}
+                  className="touch-target"
+                  style={{
+                    padding: "0 1rem",
+                    backgroundColor: "var(--bg-tokyo-void)",
+                    color: "var(--accent-voltage-gold)",
+                    borderRadius: "6px",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                  }}
+                >
+                  {dictionary.nav.episodesLink}
+                </Link>
+                <Link
+                  href={`/${locale}/showroom`}
+                  className="touch-target"
+                  style={{
+                    padding: "0 1rem",
+                    backgroundColor: "var(--bg-tokyo-void)",
+                    color: "var(--accent-matrix-mint)",
+                    borderRadius: "6px",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                  }}
+                >
+                  {dictionary.nav.showroomLink}
+                </Link>
               </div>
             </div>
           </div>

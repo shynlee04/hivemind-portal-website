@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import type {
   HorizonTier,
   Locale,
@@ -8,45 +9,43 @@ import type {
   ShowcaseCardView,
   ShowcaseId,
 } from "@/types/portal";
+import { PARTNER_URLS } from "@/modules/partner-conversion";
 import { HARNESS_META } from "./cockpit-shared";
 
 export interface XrayWorkbenchSectionProps {
   readonly locale: Locale;
   readonly dictionary: PortalDictionary;
-  readonly activePlugin: PluginGroup | "all";
-  readonly setActivePlugin: (p: PluginGroup | "all") => void;
   readonly activeHorizon: HorizonTier | "all";
   readonly setActiveHorizon: (h: HorizonTier | "all") => void;
+  readonly activePluginFilter: PluginGroup | "all";
+  readonly setActivePluginFilter: (p: PluginGroup | "all") => void;
+  readonly activeShowcase: ShowcaseCardView | undefined;
   readonly filteredShowcases: ReadonlyArray<ShowcaseCardView>;
-  readonly selectedShowcase: ShowcaseCardView | undefined;
-  readonly setSelectedShowcaseId: (id: ShowcaseId) => void;
-  readonly setActiveHarness: (n: ReactorNodeId) => void;
-  readonly activeXrayLayer: "all" | 1 | 2 | 3;
-  readonly setActiveXrayLayer: (t: "all" | 1 | 2 | 3) => void;
+  readonly setSelectedSliceId: (id: ShowcaseId) => void;
+  readonly setActiveHarness: (id: ReactorNodeId) => void;
 }
 
 export function XrayWorkbenchSection({
   locale,
   dictionary,
-  activePlugin,
-  setActivePlugin,
   activeHorizon,
   setActiveHorizon,
+  activePluginFilter,
+  setActivePluginFilter,
+  activeShowcase,
   filteredShowcases,
-  selectedShowcase,
-  setSelectedShowcaseId,
+  setSelectedSliceId,
   setActiveHarness,
-  activeXrayLayer,
-  setActiveXrayLayer,
-}: XrayWorkbenchSectionProps): React.JSX.Element {
+}: XrayWorkbenchSectionProps) {
   return (
-    <section
+      <section
         id="xray"
         data-reveal=""
         style={{
-          paddingTop: "clamp(5rem, 9vw, 8.5rem)",
-          paddingBottom: "clamp(5rem, 9vw, 8.5rem)",
-          backgroundColor: "var(--bg-wok-iron)",
+          scrollMarginTop: "5rem",
+          paddingTop: "clamp(4.5rem, 8vw, 7.5rem)",
+          paddingBottom: "clamp(4.5rem, 8vw, 7.5rem)",
+          backgroundColor: "var(--bg-tokyo-void)",
         }}
       >
         <div className="cyber-shell">
@@ -57,21 +56,21 @@ export function XrayWorkbenchSection({
               justifyContent: "space-between",
               alignItems: "flex-end",
               gap: "1.5rem",
-              marginBottom: "2.75rem",
+              marginBottom: "2.25rem",
             }}
           >
             <div>
               <h2
                 style={{
                   fontSize: "clamp(32px, 3.1vw, 44px)",
-                  marginBottom: "0.6rem",
+                  marginBottom: "0.5rem",
                 }}
               >
                 {dictionary.xrayExplorer.sectionTitle}
               </h2>
               <p
                 style={{
-                  color: "var(--text-parchment)",
+                  color: "var(--text-titanium)",
                   maxWidth: "60ch",
                   margin: 0,
                   fontSize: "17px",
@@ -81,34 +80,34 @@ export function XrayWorkbenchSection({
               </p>
             </div>
 
-            {/* Plugin Seam Filter Buttons */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem" }}>
+            {/* Filter by Horizon & Plugin */}
+            <div style={{ display: "flex", gap: "0.45rem", flexWrap: "wrap" }}>
               {(
                 [
-                  ["all", dictionary.xrayExplorer.pluginAll],
-                  ["steward", dictionary.xrayExplorer.pluginSteward],
-                  ["substrate", dictionary.xrayExplorer.pluginSubstrate],
-                  ["cross-plugin", dictionary.xrayExplorer.pluginCross],
+                  ["all", dictionary.horizons.filterAll],
+                  ["shipped", "v0.1 Shipped (Devin)"],
+                  ["next-release", "v0.2 Next (Tri-Harness)"],
+                  ["roadmap", "Stage 3 (Substrate)"],
                 ] as const
-              ).map(([pluginKey, label]) => {
-                const isSelected = activePlugin === pluginKey;
+              ).map(([tierKey, label]) => {
+                const isSelected = activeHorizon === tierKey;
                 return (
                   <button
-                    key={pluginKey}
+                    key={tierKey}
                     type="button"
-                    onClick={() => setActivePlugin(pluginKey)}
+                    onClick={() => setActiveHorizon(tierKey)}
                     aria-pressed={isSelected}
                     className="touch-target"
                     style={{
-                      padding: "0 0.95rem",
+                      padding: "0 0.85rem",
                       borderRadius: "6px",
                       border: "none",
                       backgroundColor: isSelected
-                        ? "var(--accent-wok-gold)"
-                        : "var(--bg-smoked-basalt)",
+                        ? "var(--accent-cyber-cyan)"
+                        : "var(--bg-akihabara-deck)",
                       color: isSelected
-                        ? "var(--bg-wok-iron)"
-                        : "var(--text-parchment)",
+                        ? "var(--bg-tokyo-void)"
+                        : "var(--text-titanium)",
                       fontWeight: 700,
                       fontSize: "14px",
                       cursor: "pointer",
@@ -122,225 +121,237 @@ export function XrayWorkbenchSection({
           </div>
 
           <div className="split-62-38">
-            {/* Left 62%: Interactive 3-Layer X-Ray Pipeline Workbench (data-ui) */}
-            {selectedShowcase ? (
-              <div
-                data-testid="xray-inspector-drawer"
-                data-ui="xray-inspector-workbench"
-                style={{
-                  maxHeight: "980px",
-                  overflowY: "auto",
-                  backgroundColor: "var(--bg-smoked-basalt)",
-                  borderRadius: "8px",
-                  padding: "clamp(1.35rem, 2.5vw, 2rem)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "1.25rem",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: "0.75rem",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-                    <code
-                      style={{
-                        padding: "0.3rem 0.65rem",
-                        backgroundColor: "var(--accent-wok-gold)",
-                        color: "var(--bg-wok-iron)",
-                        fontWeight: 800,
-                        borderRadius: "4px",
-                        fontSize: "14px",
-                      }}
-                    >
-                      {selectedShowcase.id}
-                    </code>
-                    <strong style={{ fontSize: "17px" }}>
-                      {selectedShowcase.title}
-                    </strong>
-                  </div>
-                  <code
+            {/* Left 62%: Live 3-Layer Terminal X-Ray & Video Showcase Stage */}
+            <div
+              data-testid="xray-inspector-drawer"
+              data-ui="true"
+              style={{
+                backgroundColor: "var(--bg-akihabara-deck)",
+                borderRadius: "8px",
+                padding: "clamp(1.25rem, 2.5vw, 2rem)",
+              }}
+            >
+              {activeShowcase ? (
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                  <div
                     style={{
-                      fontSize: "14px",
-                      color: "var(--accent-jade-wire)",
-                      backgroundColor: "var(--bg-wok-iron)",
-                      padding: "0.3rem 0.65rem",
-                      borderRadius: "4px",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      gap: "0.75rem",
                     }}
                   >
-                    {selectedShowcase.horizonBadge} · {selectedShowcase.durationLabel}
-                  </code>
-                </div>
-
-                <p style={{ margin: 0, color: "var(--text-parchment)", fontSize: "17px" }}>
-                  {selectedShowcase.summary}
-                </p>
-
-                {/* Visual 3-Stage Pipeline Selector Infographic */}
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: "0.5rem",
-                    backgroundColor: "var(--bg-wok-iron)",
-                    padding: "0.45rem",
-                    borderRadius: "6px",
-                  }}
-                >
-                  {(
-                    [
-                      ["all", locale === "vi" ? "Trọn 3 Tầng" : "All 3 Layers", "#EEF2F6"],
-                      [1, "1 · Prompt", "#F5A623"],
-                      [2, "2 · JSON-RPC", "#22D3EE"],
-                      [3, "3 · Engine Wire", "#10B981"],
-                    ] as const
-                  ).map(([layerId, label, accent]) => {
-                    const isSelected = activeXrayLayer === layerId;
-                    return (
-                      <button
-                        key={String(layerId)}
-                        type="button"
-                        onClick={() => setActiveXrayLayer(layerId)}
-                        aria-pressed={isSelected}
-                        className="touch-target"
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                      <code
                         style={{
-                          flex: "1 1 110px",
-                          padding: "0.45rem 0.65rem",
+                          padding: "0.25rem 0.65rem",
+                          backgroundColor: "var(--bg-tokyo-void)",
+                          color: HARNESS_META[activeShowcase.harnessNode].color,
                           borderRadius: "4px",
-                          border: "none",
-                          backgroundColor: isSelected
-                            ? "var(--bg-scroll-lacquer)"
-                            : "transparent",
-                          color: isSelected ? accent : "var(--text-ash-slate)",
                           fontWeight: 700,
                           fontSize: "14px",
-                          cursor: "pointer",
                         }}
                       >
-                        {label}
-                      </button>
-                    );
-                  })}
-                </div>
+                        {activeShowcase.id} ({activeShowcase.durationLabel})
+                      </code>
+                      <code style={{ fontSize: "14px", color: "var(--text-cyber-slate)" }}>
+                        {activeShowcase.sourceGrounding}
+                      </code>
+                    </div>
+                    <Link
+                      href={`/${locale}/episodes`}
+                      className="touch-target"
+                      style={{
+                        padding: "0 0.85rem",
+                        backgroundColor: "var(--bg-tokyo-void)",
+                        color: "var(--accent-neon-crimson)",
+                        borderRadius: "4px",
+                        fontSize: "14px",
+                        fontWeight: 700,
+                      }}
+                    >
+                      {locale === "vi" ? "Xem Video & Bản Ghi" : "Watch Video & Replay"}
+                    </Link>
+                  </div>
 
-                {/* Animated 3-Layer Wire Execution Flow */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem", backgroundColor: "#06090F", padding: "1.15rem", borderRadius: "6px" }}>
-                  {(activeXrayLayer === "all" || activeXrayLayer === 1) && (
-                    <div>
+                  <div>
+                    <h3 style={{ fontSize: "22px", marginBottom: "0.35rem" }}>
+                      {activeShowcase.title}
+                    </h3>
+                    <p style={{ color: "var(--text-titanium)", margin: 0, fontSize: "17px" }}>
+                      {activeShowcase.summary}
+                    </p>
+                  </div>
+
+                  {/* 3-Layer X-Ray Pipeline */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                    <div
+                      style={{
+                        backgroundColor: "var(--bg-tokyo-void)",
+                        padding: "0.95rem 1.15rem",
+                        borderRadius: "6px",
+                      }}
+                    >
                       <div
                         style={{
-                          display: "flex",
-                          justifyContent: "space-between",
                           fontSize: "14px",
-                          color: "var(--accent-wok-gold)",
-                          marginBottom: "0.4rem",
+                          fontWeight: 600,
+                          color: "var(--accent-voltage-gold)",
+                          marginBottom: "0.3rem",
                         }}
                       >
-                        <strong>{dictionary.xrayExplorer.layer1Label}</strong>
-                        <code>OpenCode TUI Stdin</code>
+                        1. {dictionary.xrayExplorer.layer1Label}
                       </div>
                       <pre
                         style={{
                           margin: 0,
                           whiteSpace: "pre-wrap",
-                          fontSize: "14px",
-                          color: "var(--text-parchment)",
+                          wordBreak: "break-word",
+                          color: "var(--text-titanium)",
                         }}
                       >
-                        <code>{selectedShowcase.xray.humanPrompt}</code>
+                        <code>{activeShowcase.xray.humanPrompt}</code>
                       </pre>
                     </div>
-                  )}
 
-                  {(activeXrayLayer === "all" || activeXrayLayer === 2) && (
-                    <div>
+                    <div
+                      style={{
+                        backgroundColor: "var(--bg-tokyo-void)",
+                        padding: "0.95rem 1.15rem",
+                        borderRadius: "6px",
+                      }}
+                    >
                       <div
                         style={{
-                          display: "flex",
-                          justifyContent: "space-between",
                           fontSize: "14px",
-                          color: "var(--accent-jade-wire)",
-                          marginBottom: "0.4rem",
+                          fontWeight: 600,
+                          color: "var(--accent-cyber-cyan)",
+                          marginBottom: "0.3rem",
                         }}
                       >
-                        <strong>{dictionary.xrayExplorer.layer2Label}</strong>
-                        <code>{selectedShowcase.sourceGrounding}</code>
+                        2. {dictionary.xrayExplorer.layer2Label}
                       </div>
                       <pre
                         style={{
                           margin: 0,
                           whiteSpace: "pre-wrap",
-                          fontSize: "14px",
-                          color: "var(--accent-jade-wire)",
+                          wordBreak: "break-word",
+                          color: "var(--accent-cyber-cyan)",
                         }}
                       >
-                        <code>{selectedShowcase.xray.orchestratorTool}</code>
+                        <code>{activeShowcase.xray.orchestratorTool}</code>
                       </pre>
                     </div>
-                  )}
 
-                  {(activeXrayLayer === "all" || activeXrayLayer === 3) && (
-                    <div>
+                    <div
+                      style={{
+                        backgroundColor: "var(--bg-tokyo-void)",
+                        padding: "0.95rem 1.15rem",
+                        borderRadius: "6px",
+                      }}
+                    >
                       <div
                         style={{
-                          display: "flex",
-                          justifyContent: "space-between",
                           fontSize: "14px",
-                          color: "var(--accent-bamboo-green)",
-                          marginBottom: "0.4rem",
+                          fontWeight: 600,
+                          color: "var(--accent-matrix-mint)",
+                          marginBottom: "0.3rem",
                         }}
                       >
-                        <strong>{dictionary.xrayExplorer.layer3Label}</strong>
-                        <code>{selectedShowcase.harnessNode.toUpperCase()}</code>
+                        3. {dictionary.xrayExplorer.layer3Label}
                       </div>
                       <pre
                         style={{
                           margin: 0,
                           whiteSpace: "pre-wrap",
-                          fontSize: "14px",
-                          color: "var(--accent-bamboo-green)",
+                          wordBreak: "break-word",
+                          color: "var(--text-titanium)",
                         }}
                       >
-                        <code>{selectedShowcase.xray.engineExecution}</code>
+                        <code>{activeShowcase.xray.engineExecution}</code>
                       </pre>
                     </div>
-                  )}
-                </div>
+                  </div>
 
-                {/* Pro, Not Bro Architectural Pass-Down Footer */}
-                <div
-                  style={{
-                    backgroundColor: "var(--bg-scroll-lacquer)",
-                    padding: "1rem 1.2rem",
-                    borderRadius: "6px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.35rem",
-                  }}
-                >
-                  <strong style={{ fontSize: "14px", color: "var(--accent-wok-gold)" }}>
-                    {dictionary.xrayExplorer.proNotBroHeader}
-                  </strong>
-                  <p style={{ margin: 0, fontSize: "17px", color: "var(--text-parchment)" }}>
-                    {selectedShowcase.proNotBroLesson}
-                  </p>
-                </div>
-              </div>
-            ) : null}
+                  {/* Takeaway + Contextual Referral CTA */}
+                  <div
+                    style={{
+                      backgroundColor: "var(--bg-kabuki-panel)",
+                      padding: "1rem 1.15rem",
+                      borderRadius: "6px",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      gap: "1rem",
+                    }}
+                  >
+                    <div style={{ maxWidth: "54ch" }}>
+                      <strong
+                        style={{
+                          display: "block",
+                          fontSize: "14px",
+                          color: "var(--accent-voltage-gold)",
+                          marginBottom: "0.2rem",
+                        }}
+                      >
+                        {dictionary.xrayExplorer.proNotBroHeader}
+                      </strong>
+                      <span style={{ fontSize: "17px", color: "var(--text-titanium)" }}>
+                        {activeShowcase.proNotBroLesson}
+                      </span>
+                    </div>
 
-            {/* Right 38%: Compact Two-Ended 20-Slice Interactive Trace Selector */}
+                    {activeShowcase.highlightsFreebuffReferral ? (
+                      <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+                        <a
+                          href={PARTNER_URLS.freebuffReferral}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="touch-target"
+                          style={{
+                            padding: "0 0.9rem",
+                            backgroundColor: "var(--accent-voltage-gold)",
+                            color: "var(--bg-tokyo-void)",
+                            borderRadius: "6px",
+                            fontWeight: 700,
+                            fontSize: "14px",
+                          }}
+                        >
+                          Freebuff Pass
+                        </a>
+                        <a
+                          href={PARTNER_URLS.zapGlm}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="touch-target"
+                          style={{
+                            padding: "0 0.9rem",
+                            backgroundColor: "var(--bg-tokyo-void)",
+                            color: "var(--accent-cyber-cyan)",
+                            borderRadius: "6px",
+                            fontWeight: 700,
+                            fontSize: "14px",
+                          }}
+                        >
+                          Zap GLM Pass
+                        </a>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+
+            {/* Right 38%: Compact 20-Clip Video Selector List */}
             <div
-              data-ui="xray-slice-selector"
+              data-ui="true"
               style={{
-                backgroundColor: "var(--bg-smoked-basalt)",
+                backgroundColor: "var(--bg-akihabara-deck)",
                 borderRadius: "8px",
-                padding: "1.25rem",
-                maxHeight: "660px",
+                padding: "1.1rem",
+                maxHeight: "650px",
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
@@ -350,30 +361,55 @@ export function XrayWorkbenchSection({
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "0.25rem 0.5rem 0.65rem 0.5rem",
-                  fontSize: "14px",
-                  color: "var(--text-ash-slate)",
+                  gap: "0.35rem",
+                  flexWrap: "wrap",
+                  paddingBottom: "0.6rem",
                 }}
               >
-                <strong>
-                  {locale === "vi"
-                    ? `Danh Mục Lát Cắt (${filteredShowcases.length}/20)`
-                    : `Capability Trace Index (${filteredShowcases.length}/20)`}
-                </strong>
-                <code>Click row to X-Ray</code>
+                {(
+                  [
+                    ["all", dictionary.xrayExplorer.pluginAll],
+                    ["steward", dictionary.xrayExplorer.pluginSteward],
+                    ["substrate", dictionary.xrayExplorer.pluginSubstrate],
+                  ] as const
+                ).map(([plugKey, label]) => (
+                  <button
+                    key={plugKey}
+                    type="button"
+                    onClick={() => setActivePluginFilter(plugKey)}
+                    aria-pressed={activePluginFilter === plugKey}
+                    className="touch-target"
+                    style={{
+                      padding: "0 0.7rem",
+                      borderRadius: "4px",
+                      border: "none",
+                      backgroundColor:
+                        activePluginFilter === plugKey
+                          ? "var(--bg-kabuki-panel)"
+                          : "var(--bg-tokyo-void)",
+                      color:
+                        activePluginFilter === plugKey
+                          ? "var(--accent-cyber-cyan)"
+                          : "var(--text-cyber-slate)",
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
               </div>
 
               {filteredShowcases.map((clip) => {
-                const isSelected = selectedShowcase?.id === clip.id;
+                const isSelected = activeShowcase?.id === clip.id;
                 const nodeMeta = HARNESS_META[clip.harnessNode];
                 return (
                   <button
                     key={clip.id}
                     type="button"
                     onClick={() => {
-                      setSelectedShowcaseId(clip.id);
+                      setSelectedSliceId(clip.id);
                       setActiveHarness(clip.harnessNode);
                     }}
                     aria-pressed={isSelected}
@@ -381,13 +417,13 @@ export function XrayWorkbenchSection({
                     style={{
                       width: "100%",
                       justifyContent: "space-between",
-                      padding: "0.55rem 0.85rem",
+                      padding: "0.6rem 0.85rem",
                       borderRadius: "6px",
                       border: "none",
                       backgroundColor: isSelected
-                        ? "var(--bg-scroll-lacquer)"
+                        ? "var(--bg-kabuki-panel)"
                         : "transparent",
-                      color: "var(--text-parchment)",
+                      color: "var(--text-titanium)",
                       cursor: "pointer",
                       textAlign: "left",
                       gap: "0.75rem",
@@ -406,7 +442,7 @@ export function XrayWorkbenchSection({
                           fontSize: "14px",
                           fontWeight: 700,
                           color: isSelected
-                            ? "var(--accent-wok-gold)"
+                            ? "var(--accent-voltage-gold)"
                             : nodeMeta.color,
                           flexShrink: 0,
                         }}
@@ -426,23 +462,15 @@ export function XrayWorkbenchSection({
                       </span>
                     </div>
 
-                    <div
+                    <code
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.5rem",
+                        fontSize: "14px",
+                        color: "var(--text-cyber-slate)",
                         flexShrink: 0,
                       }}
                     >
-                      <code
-                        style={{
-                          fontSize: "14px",
-                          color: "var(--text-ash-slate)",
-                        }}
-                      >
-                        {clip.durationLabel}
-                      </code>
-                    </div>
+                      {clip.durationLabel}
+                    </code>
                   </button>
                 );
               })}
