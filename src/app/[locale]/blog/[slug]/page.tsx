@@ -53,7 +53,7 @@ export default async function BlogDetailPage({
           marginBottom: "1.5rem",
         }}
       >
-        ← {dict.blogSection.backToBlogCta}
+        {dict.blogSection.backToBlogCta}
       </Link>
 
       <header
@@ -84,7 +84,7 @@ export default async function BlogDetailPage({
           }}
         >
           <code style={{ fontSize: "0.78rem", color: "var(--accent-wok-gold)" }}>
-            [{article.horizon.toUpperCase()}] · {article.publishedAt} · {article.readingTime}
+            [{article.horizon.toUpperCase()}] / {article.publishedAt} / {article.readingTime}
           </code>
         </div>
 

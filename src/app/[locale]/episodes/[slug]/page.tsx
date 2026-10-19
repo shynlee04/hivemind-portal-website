@@ -50,7 +50,7 @@ export default async function EpisodeDetailPage({
           marginBottom: "1.5rem",
         }}
       >
-        ← {dict.episodesSection.backToEpisodesCta}
+        {dict.episodesSection.backToEpisodesCta}
       </Link>
 
       <header
@@ -81,7 +81,7 @@ export default async function EpisodeDetailPage({
           }}
         >
           <code style={{ fontSize: "0.78rem", color: "var(--accent-wok-gold)" }}>
-            [EP-{episode.episodeNumber}] · [{episode.horizon.toUpperCase()}] · {episode.duration}
+            [EP-{episode.episodeNumber}] / [{episode.horizon.toUpperCase()}] / {episode.duration}
           </code>
         </div>
 

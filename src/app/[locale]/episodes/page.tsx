@@ -12,7 +12,7 @@ function resolveLocale(raw: string): Locale {
 }
 
 const EPISODE_PLATES = [
-  "/assets/cyber-wok-hero-plate.jpg",
+  "/assets/tri-harness-signal-plate.jpg",
   "/assets/greenfield-forge-plate.jpg",
   "/assets/substrate-honeycomb-plate.jpg",
 ] as const;
@@ -79,7 +79,7 @@ export default async function EpisodesIndexPage({
                     borderRadius: "4px",
                   }}
                 >
-                  EP-{ep.episodeNumber} · {ep.duration} · {ep.horizon.toUpperCase()}
+                  EP-{ep.episodeNumber} / {ep.duration} / {ep.horizon.toUpperCase()}
                 </code>
                 {ep.featuredShowcases.map((sliceId) => (
                   <code
@@ -109,7 +109,7 @@ export default async function EpisodesIndexPage({
                   borderRadius: "4px",
                 }}
               >
-                {dict.episodesSection.watchEpisodeCta} →
+                {dict.episodesSection.watchEpisodeCta}
               </Link>
             </div>
 

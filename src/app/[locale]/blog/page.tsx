@@ -12,7 +12,7 @@ function resolveLocale(raw: string): Locale {
 }
 
 const ARTICLE_IMAGES = [
-  "/assets/cyber-wok-hero-plate.jpg",
+  "/assets/tri-harness-signal-plate.jpg",
   "/assets/tri-harness-signal-plate.jpg",
   "/assets/substrate-honeycomb-plate.jpg",
 ] as const;
@@ -79,7 +79,7 @@ export default async function BlogIndexPage({
                     borderRadius: "4px",
                   }}
                 >
-                  {article.horizon.toUpperCase()} · {article.readingTime}
+                  {article.horizon.toUpperCase()} / {article.readingTime}
                 </code>
                 {article.tags.map((tag) => (
                   <code
@@ -109,7 +109,7 @@ export default async function BlogIndexPage({
                   borderRadius: "4px",
                 }}
               >
-                {dict.blogSection.readArticleCta} →
+                {dict.blogSection.readArticleCta}
               </Link>
             </div>
 

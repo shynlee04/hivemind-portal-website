@@ -190,7 +190,7 @@ export default async function LocaleLayout({
             gap: "2rem",
           }}
         >
-          <div style={{ maxWidth: "56ch" }}>
+          <div style={{ maxWidth: "52ch" }}>
             <div
               style={{
                 fontWeight: 700,
@@ -205,6 +205,7 @@ export default async function LocaleLayout({
                 fontSize: "14px",
                 color: "var(--text-cyber-slate)",
                 marginTop: "0.45rem",
+                maxWidth: "52ch",
               }}
             >
               {dict.footer.builtWithLine}

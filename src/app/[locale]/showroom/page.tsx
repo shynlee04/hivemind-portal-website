@@ -132,7 +132,7 @@ export default async function ShowroomPage({
                     color: "var(--accent-jade-wire)",
                   }}
                 >
-                  {item.label} ↗
+                  {item.label}
                 </a>
               </div>
             ))}
