@@ -5,7 +5,7 @@
     "switchLocaleLabel": "Chuyển sang Tiếng Việt",
     "siteTitle": "Hivemind-* Ecosystem Portal · Multi-Harness OpenCode V2 Cockpit",
     "siteDescription": "Interactive 3D Cyber-Wok showroom, 20-clip 3-Layer X-Ray explorer, and bilingual architecture hub for hivemind-steward-acp and hivemind-substrate.",
-    "ogTagline": "{CHINGCHONGCHINGVIBECODING} — Pro, Not Bro. Real ACP Wire, Lossless Memory, Zero Slop."
+    "ogTagline": "{CHINGCHONGCHINGVIBECODING} · Pro, Not Bro. Real ACP Wire, Lossless Memory, Zero Slop."
   },
   "nav": {
     "brandName": "HIVEMIND-*",
@@ -20,7 +20,7 @@
   },
   "hero": {
     "eyebrowTag": "[SHIPPED · v0.1] + [NEXT · v0.2] + [ROADMAP · SUBSTRATE]",
-    "headline": "Orchestrate Devin, Antigravity & Freebuff inside One Seasoned OpenCode Cockpit.",
+    "headline": "Three Agents. One Wok.",
     "subheadline": "Host real ACP stdio sessions in your TUI, fan out rank-routed subagents across a 3-slot ModelSlotChain, and preserve every turn in The Spine, The Honeycomb, and Working-Set Valve.",
     "philosophyBadge": "{CHINGCHONGCHINGVIBECODING} · PRO, NOT BRO",
     "philosophySummary": "Zero wrapper slop. Every visual claim on this portal opens a 3-Layer X-Ray: Human Prompt -> Orchestrator Tool -> Engine Execution.",
@@ -36,7 +36,7 @@
     "reactorStageHint": "Select any harness node (devin, antigravity, freebuff, substrate) to inspect live model IDs, ACP wire frames, and horizon status."
   },
   "horizons": {
-    "sectionTitle": "Reconciled 3-Horizon Architecture",
+    "sectionTitle": "Three Maturity Horizons",
     "sectionSubtitle": "Transparent engineering maturity: distinguish what runs in your terminal today from the incoming tri-harness release and the 3-layer memory lab.",
     "filterAll": "All Horizons (20)",
     "shippedBadge": "SHIPPED NOW · v0.1",
@@ -50,7 +50,7 @@
     "roadmapDescription": "The Spine (.session-archive/blobs/<sha256>.txt & shadow Git drafts), The Honeycomb (index.sqlite + AST skeletons + PageRank RepoMap + git_cochange), and Working-Set Valve (< 2 ms bloat pruning)."
   },
   "xrayExplorer": {
-    "sectionTitle": "20-Clip Ecosystem Catalog & 3-Layer X-Ray Explorer",
+    "sectionTitle": "Live Wire X-Ray Bench",
     "sectionSubtitle": "Every < 2-minute capability slice exposes its exact TUI prompt, JSON-RPC tool payload, and engine wire trace.",
     "pluginFilterLabel": "Filter by Plugin Seam",
     "pluginAll": "All Plugins (20)",
@@ -65,12 +65,12 @@
     "inspectSliceCta": "Inspect 3-Layer X-Ray"
   },
   "greenfieldSection": {
-    "sectionTitle": "Flagship 5-Minute 3-Harness Greenfield Build",
+    "sectionTitle": "Five-Minute Forge Build",
     "sectionSubtitle": "Watch Freebuff (deepseek-4.1-flash -> glm-5.3-flash), Devin (swe-2-max), and Antigravity (argon-4-high) build hivemind-portal across 5 verified slices (V1–V5).",
     "verificationBadge": "GATE: bun test + bun run typecheck + bun run build"
   },
   "substrateSection": {
-    "sectionTitle": "Hivemind Substrate · 3-Layer Memory Engine",
+    "sectionTitle": "Three-Layer Memory Engine",
     "sectionSubtitle": "Stop losing architectural context to blind token truncation. Archive losslessly, index structurally, and prune surgically in under 2 milliseconds.",
     "spineTitle": "Layer 1 · The Spine",
     "spineSubtitle": "Lossless Content-Addressed Archive & Shadow Git Drafts",
@@ -83,43 +83,43 @@
     "valveDescription": "Replaces stale 40KB tool dumps with compact sha256 pointers, emits deterministic CompactionContinuationPacket handoffs, and powers the /substrate Mudball Advisor."
   },
   "conversionSection": {
-    "sectionTitle": "Partner Conversion Hub, Referral Vault & Quota Estimator",
+    "sectionTitle": "Quota & Partner Vault",
     "sectionSubtitle": "Stretch your frontier AI coding budget by offloading high-frequency recon to Freebuff + Zap GLM while backing open-source Hivemind-* engineering.",
     "audienceBuildersTab": "For Builders & Vibecoders",
     "audienceSupportersTab": "For Community Supporters",
     "audienceSponsorsTab": "For B2B Ecosystem Sponsors",
-    "calculatorTitle": "Interactive Quota-Savings Estimator",
+    "calculatorTitle": "Quota Savings Model",
     "calculatorSubtitle": "Simulate monthly USD and token savings when routing recon and boilerplate through Freebuff (deepseek-4.1-flash / glm-5.3-flash) + Working-Set Valve pruning.",
     "hoursPerWeekLabel": "Active AI Coding Hours / Week",
     "baselineCostLabel": "Unpruned Frontier-Only Spend",
     "optimizedCostLabel": "Hivemind Tri-Harness Spend",
     "monthlySavingsLabel": "Estimated Monthly Savings",
     "prunedTokensLabel": "Bloat Tokens Pruned / Month",
-    "sponsorMatrixTitle": "B2B Sponsor Packages · Put Your Harness in the Wok"
+    "sponsorMatrixTitle": "Partner & Sponsor Matrix"
   },
   "blogSection": {
-    "pageTitle": "Hivemind-* Architecture Blog & Deep-Dives",
+    "pageTitle": "Architecture Deep-Dives",
     "pageSubtitle": "Bilingual technical essays on ACP stdio protocols, multi-harness slot chains, and lossless SQLite/AST memory engines.",
     "readArticleCta": "Read Full Deep-Dive",
     "backToBlogCta": "Back to Architecture Blog",
     "proNotBroTakeawayLabel": "Pro, Not Bro Takeaway"
   },
   "episodesSection": {
-    "pageTitle": "Vibecoding Episode Hub & Synchronized TUI Replays",
+    "pageTitle": "Episode & TUI Replays",
     "pageSubtitle": "Watch < 2-minute capability slices and the 5-minute greenfield build with side-by-side bilingual transcripts and raw OpenCode TUI traces.",
     "watchEpisodeCta": "Open Episode & TUI Replay",
-    "transcriptHeading": "Synchronized Bilingual Transcript",
-    "tuiReplayHeading": "Interactive OpenCode TUI Trace",
+    "transcriptHeading": "Bilingual Transcript",
+    "tuiReplayHeading": "OpenCode TUI Trace",
     "backToEpisodesCta": "Back to All Episodes"
   },
   "showroomSection": {
-    "pageTitle": "Interactive Component Showroom & Payload 3.0 Inspector",
+    "pageTitle": "Component Showroom",
     "pageSubtitle": "Test WokReactorStage, XRayExplorerCard, QuotaSavingsCalculator, and localized Payload CMS 3.0 collections in isolation with live EN/VI and Reduced-Motion controls.",
     "harnessControlsTitle": "Live Showroom Controls (Locale + Motion + Node)",
-    "storyWokTitle": "Story 01 · WokReactorStage & Deterministic SVG Fallback",
-    "storyXrayTitle": "Story 02 · 3-Layer X-Ray Explorer Card",
-    "storyConversionTitle": "Story 03 · Quota Savings Estimator & Referral Vault",
-    "payloadCollectionsTitle": "Story 04 · Payload CMS 3.0 Localized Collection Schemas"
+    "storyWokTitle": "WokReactorStage & SVG Fallback",
+    "storyXrayTitle": "Three-Layer X-Ray Inspector",
+    "storyConversionTitle": "Quota Savings & Partner Vault",
+    "payloadCollectionsTitle": "Payload 3.0 Schemas"
   },
   "footer": {
     "tagline": "Forged for OpenCode V2 operators who demand real wire telemetry, deep module seams, and zero prompt-wrapper theatre.",

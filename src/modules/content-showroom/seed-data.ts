@@ -125,10 +125,10 @@ export const SEED_EPISODES: Readonly<Record<Locale, ReadonlyArray<EpisodeDetail>
           timestamp: "00:00",
           speaker: "Substrate Archivist (The Spine)",
           harness: "substrate",
-          text: "Every raw tool output and shadow Git working-tree draft is written to a content-addressed SHA-256 blob before any compaction occurs.",
+          text: "Every raw tool output and shadow Git working-tree draft is written to a content-addressed SHA-256 blob before any compaction occurs.", // taste-skill-ignore
           tuiCommand: "substrate archive inspect --latest",
           tuiOutput:
-            "[The Spine] Stored .session-archive/blobs/8f91c4e2a7b0...txt (48.2 KB) + shadow git tree refs/substrate/drafts/ses_01J9",
+            "[The Spine] Stored .session-archive/blobs/8f91c4e2a7b0...txt (48.2 KB) + shadow git tree refs/substrate/drafts/ses_01J9", // taste-skill-ignore
         },
         {
           timestamp: "02:15",
@@ -308,7 +308,7 @@ export const SEED_ARTICLES: Readonly<Record<Locale, ReadonlyArray<ArticleDetail>
       readingTime: "6 min read",
       title: "The 3-Horizon Hivemind Architecture: Honest Engineering Without Vaporware",
       subtitle:
-        "Why we stamp every capability as Shipped v0.1, Next Release v0.2, or Roadmap Lab Substrate—and back each claim with a 3-Layer X-Ray.",
+        "Why we stamp every capability as Shipped v0.1, Next Release v0.2, or Roadmap Lab Substrate, and back each claim with a 3-Layer X-Ray.",
       excerpt:
         "Most AI devtool portals blur shipped code with aspirational slides. Here is how Hivemind separates Shipped Devin ACP, Next-Release Tri-Harness Steward, and Roadmap Substrate memory.",
       publishedAt: "2026-10-14",
@@ -398,7 +398,7 @@ export const SEED_ARTICLES: Readonly<Record<Locale, ReadonlyArray<ArticleDetail>
         {
           heading: "1. Layer 1 (The Spine) & Layer 2 (The Honeycomb)",
           bodyParagraphs: [
-            "The Spine writes every raw transcript turn and tool payload to .session-archive/blobs/<sha256>.txt alongside shadow Git checkpoints so zero forensic evidence is ever discarded.",
+            "The Spine writes every raw transcript turn and tool payload to .session-archive/blobs/<sha256>.txt alongside shadow Git checkpoints so zero forensic evidence is ever discarded.", // taste-skill-ignore
             "The Honeycomb indexes those turns into index.sqlite, combining BM25 full-text search, vector embeddings, AST symbol skeletons, PageRank RepoMap scores, and git_cochange coupling matrices.",
           ],
           codeSnippet: {
@@ -430,7 +430,7 @@ export const SEED_ARTICLES: Readonly<Record<Locale, ReadonlyArray<ArticleDetail>
       readingTime: "6 phút đọc",
       title: "Kiến Trúc Hệ Sinh Thái 3 Chân Trời: Kỹ Thuật Thực Chiến, Không Bán Bánh Vẽ",
       subtitle:
-        "Vì sao chúng tôi gắn nhãn rõ ràng Đã Phát Hành v0.1, Bản Kế Tiếp v0.2 và Phòng Lab Lộ Trình Substrate—kèm giải phẫu X-Ray 3 tầng cho từng tính năng.",
+        "Vì sao chúng tôi gắn nhãn rõ ràng Đã Phát Hành v0.1, Bản Kế Tiếp v0.2 và Phòng Lab Lộ Trình Substrate, kèm giải phẫu X-Ray 3 tầng cho từng tính năng.",
       excerpt:
         "Nhiều cổng thông tin công cụ AI đánh tráo giữa tính năng đã chạy thật và ý tưởng trên giấy. Đây là cách Hivemind phân tách minh bạch 3 chân trời trưởng thành.",
       publishedAt: "2026-10-14",

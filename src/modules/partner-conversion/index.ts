@@ -173,7 +173,7 @@ export function resolveConversionCtas(input: {
               "San tải toàn bộ bước quét cây thư mục và dựng khung sang Freebuff với khôi phục mã xoay vòng fbm1.... và giữ phiên keepSlotForResume.",
             href: PARTNER_URLS.freebuffReferral,
             disclosure:
-              "Liên kết giới thiệu chính thức (Referral) — tiếp sức duy trì phát triển Hivemind-* miễn phí cho cộng đồng.",
+              "Liên kết giới thiệu chính thức (Referral) · tiếp sức duy trì phát triển Hivemind-* miễn phí cho cộng đồng.",
             isHighlighted: highlightBuilders,
             accentToken: "wok-gold",
           },
@@ -190,7 +190,7 @@ export function resolveConversionCtas(input: {
               "Nguồn token GLM tốc độ cao, chi phí cực thấp cho các vòng lặp TDD và kiểm thử biên tự động trong OpenCode V2.",
             href: PARTNER_URLS.zapGlm,
             disclosure:
-              "Liên kết đối tác có mã giới thiệu (ic=LTWUT4H2RS) — bạn nhận ưu đãi gói code, dự án nhận kinh phí duy trì.",
+              "Liên kết đối tác có mã giới thiệu (ic=LTWUT4H2RS) · bạn nhận ưu đãi gói code, dự án nhận kinh phí duy trì.",
             isHighlighted: highlightBuilders,
             accentToken: "jade-wire",
           },
@@ -215,7 +215,7 @@ export function resolveConversionCtas(input: {
             badge: "TIẾP SỨC ĐÊM KHUYA · BMC",
             headline: "Một Ly Cà Phê Đậm Đặc Cho Những Đêm Săn Lỗi ACP",
             description:
-              "Đóng góp nhanh gọn để cổ vũ tinh thần {CHINGCHONGCHINGVIBECODING} — Pro, Not Bro, nói không với code rác.",
+              "Đóng góp nhanh gọn để cổ vũ tinh thần {CHINGCHONGCHINGVIBECODING} · Pro, Not Bro, nói không với code rác.",
             href: PARTNER_URLS.buyMeACoffee,
             disclosure:
               "Ủng hộ trực tiếp qua cổng Buy Me a Coffee chính thức (shynlee04l).",
@@ -232,7 +232,7 @@ export function resolveConversionCtas(input: {
               "Ba gói tài trợ minh bạch (Wok Burner, Honeycomb Core, Ecosystem Title) kèm bài kiểm chứng X-Ray 3 tầng thực chất.",
             href: PARTNER_URLS.kofi,
             disclosure:
-              "Tài trợ thương mại B2B — mọi số liệu benchmark đều được kiểm chứng độc lập bằng test thực tế.",
+              "Tài trợ thương mại B2B · mọi số liệu benchmark đều được kiểm chứng độc lập bằng test thực tế.",
             isHighlighted: highlightSponsors,
             accentToken: "wok-gold",
           },
@@ -251,7 +251,7 @@ export function resolveConversionCtas(input: {
               "Offload high-frequency repo recon and schema scaffolding to Freebuff with rotated fbm1.... handle recovery and keepSlotForResume continuity.",
             href: PARTNER_URLS.freebuffReferral,
             disclosure:
-              "Verified partner referral link — supports open-source Hivemind-* development at zero extra cost to you.",
+              "Verified partner referral link · supports open-source Hivemind-* development at zero extra cost to you.",
             isHighlighted: highlightBuilders,
             accentToken: "wok-gold",
           },
@@ -268,7 +268,7 @@ export function resolveConversionCtas(input: {
               "Power sustained multi-harness TDD loops and parallel worktree lanes with predictable, developer-friendly GLM coding quota.",
             href: PARTNER_URLS.zapGlm,
             disclosure:
-              "Verified referral invite (ic=LTWUT4H2RS) — unlocks builder subscription perks while funding Hivemind-* maintenance.",
+              "Verified referral invite (ic=LTWUT4H2RS) · unlocks builder subscription perks while funding Hivemind-* maintenance.",
             isHighlighted: highlightBuilders,
             accentToken: "jade-wire",
           },
@@ -310,7 +310,7 @@ export function resolveConversionCtas(input: {
               "Partner across Wok Burner, Honeycomb Core, or Ecosystem Title tiers with reproducible OpenCode V2 wire traces and bilingual episodes.",
             href: PARTNER_URLS.kofi,
             disclosure:
-              "B2B sponsorship track — every sponsored slice undergoes the same executable verification gate.",
+              "B2B sponsorship track · every sponsored slice undergoes the same executable verification gate.",
             isHighlighted: highlightSponsors,
             accentToken: "wok-gold",
           },

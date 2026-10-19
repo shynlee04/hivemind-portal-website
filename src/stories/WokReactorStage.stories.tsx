@@ -83,7 +83,7 @@ export function WokReactorStageStoryPreview({
           minHeight: "220px",
           display: "grid",
           gap: "0.75rem",
-          fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+          
         }}
       >
         <div>

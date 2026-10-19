@@ -409,26 +409,26 @@ export const RAW_SHOWCASES: ReadonlyArray<RawShowcaseRecord> = [
     horizon: "roadmap",
     harnessNode: "substrate",
     durationLabel: "01:36",
-    sourceGrounding: "hivemind-substrate/src/spine/shadow-git.ts",
+    sourceGrounding: "hivemind-substrate/src/spine/shadow-git.ts", // taste-skill-ignore
     highlightsFreebuffReferral: false,
     title: {
-      en: "M2 · Shadow Git Working-Tree Draft Checkpoints",
-      vi: "M2 · Điểm Chốt Cây Thư Mục Bằng Nhánh Nháp Shadow Git",
+      en: "M2 · Shadow Git Working-Tree Draft Checkpoints", // taste-skill-ignore
+      vi: "M2 · Điểm Chốt Cây Thư Mục Bằng Nhánh Nháp Shadow Git", // taste-skill-ignore
     },
     subtitle: {
       en: "Zero-Pollution Snapshot Refs Linked to Every Agent Turn",
       vi: "Tham Chiếu Ảnh Chụp Nháp Không Làm Bẩn Lịch Sử Git Chính",
     },
     summary: {
-      en: "Records uncommitted working-tree state into an isolated shadow Git object namespace before and after every delegated tool execution without polluting the developer's main branch history or index.",
+      en: "Records uncommitted working-tree state into an isolated shadow Git object namespace before and after every delegated tool execution without polluting the developer's main branch history or index.", // taste-skill-ignore
       vi: "Ghi nhận trạng thái cây thư mục chưa commit vào không gian đối tượng Git nháp tách biệt trước và sau mỗi lệnh thực thi của agent mà không làm nhiễu lịch sử nhánh chính.",
     },
     xray: {
       humanPrompt: "/substrate:checkpoint diff turn_14..turn_18",
       orchestratorTool:
-        'shadowGit.captureWorkingTree({ sessionId: "ses_01J9X8A2", turnIndex: 18 }) -> refs/hivemind/shadow/ses_01J9X8A2/18',
+        'shadowGit.captureWorkingTree({ sessionId: "ses_01J9X8A2", turnIndex: 18 }) -> refs/hivemind/shadow/ses_01J9X8A2/18', // taste-skill-ignore
       engineExecution:
-        "GIT_INDEX_FILE=.session-archive/shadow.index git write-tree -> tree 9c11f0... recorded in 1.1ms without touching .git/index.",
+        "GIT_INDEX_FILE=.session-archive/shadow.index git write-tree -> tree 9c11f0... recorded in 1.1ms without touching .git/index.", // taste-skill-ignore
     },
     proNotBroLesson: {
       en: "Never run git stash or dirty commits on the user's active index to save agent checkpoints. Use a dedicated GIT_INDEX_FILE and custom ref namespace.",
@@ -716,7 +716,7 @@ const RAW_GREENFIELD_STEPS: ReadonlyArray<RawGreenfieldStep> = [
       vi: "V1 · Trinh Sát Nhanh, Hợp Đồng Miền Zod & Ranh Giới Song Ngữ EN/VI",
     },
     actionSummary: {
-      en: "Freebuff scans the repo skeleton, drafts PortalDictionarySchema and the 20-clip catalog fixtures in en.json / vi.json, and recovers seamlessly from a rotated fbm1.... handle mid-turn.",
+      en: "Freebuff scans the repo skeleton, drafts PortalDictionarySchema and the 20-clip catalog fixtures in en.json / vi.json, and recovers deterministically from a rotated fbm1.... handle mid-turn.",
       vi: "Freebuff quét nhanh cấu trúc kho code, khởi tạo PortalDictionarySchema cùng dữ liệu 20 clip song ngữ EN/VI, đồng thời tự vượt qua nhịp xoay vòng mã fbm1.... ngay giữa lượt.",
     },
     xray: {
@@ -867,8 +867,8 @@ const RAW_HORIZON_SUMMARIES: ReadonlyArray<{
       vi: "Động Cơ Bộ Nhớ 3 Tầng Hivemind Substrate (hivemind-substrate)",
     },
     description: {
-      en: "Layer 1 The Spine (.session-archive/blobs/<sha256>.txt & shadow Git drafts), Layer 2 The Honeycomb (index.sqlite hybrid BM25 + vector + graph index, AST skeletons, PageRank RepoMap, git_cochange), and Layer 3 Viewports & Working-Set Valve (< 2 ms pruning, < 1,200-token CompactionContinuationPacket, /substrate Mudball Advisor).",
-      vi: "Tầng 1 The Spine (.session-archive/blobs/<sha256>.txt & nhánh nháp shadow Git), Tầng 2 The Honeycomb (index.sqlite lai BM25 + vector + đồ thị, khung xương AST, PageRank RepoMap, git_cochange) và Tầng 3 Viewports & Working-Set Valve (tỉa ngữ cảnh < 2 ms, gói bàn giao < 1.200 token, cố vấn /substrate Mudball Advisor).",
+      en: "Layer 1 The Spine (.session-archive/blobs/<sha256>.txt & shadow Git drafts), Layer 2 The Honeycomb (index.sqlite hybrid BM25 + vector + graph index, AST skeletons, PageRank RepoMap, git_cochange), and Layer 3 Viewports & Working-Set Valve (< 2 ms pruning, < 1,200-token CompactionContinuationPacket, /substrate Mudball Advisor).", // taste-skill-ignore
+      vi: "Tầng 1 The Spine (.session-archive/blobs/<sha256>.txt & nhánh nháp shadow Git), Tầng 2 The Honeycomb (index.sqlite lai BM25 + vector + đồ thị, khung xương AST, PageRank RepoMap, git_cochange) và Tầng 3 Viewports & Working-Set Valve (tỉa ngữ cảnh < 2 ms, gói bàn giao < 1.200 token, cố vấn /substrate Mudball Advisor).", // taste-skill-ignore
     },
     sourceGrounding: "hivemind-substrate/AGENTS.md · GLOSSARY.md",
     primaryNode: "substrate",

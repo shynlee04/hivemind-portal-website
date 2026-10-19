@@ -184,7 +184,7 @@ export function ShowcaseHarness({
         >
           <span
             style={{
-              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+              
               fontSize: "0.8125rem",
               color: "var(--accent-wok-gold, #F5A623)",
             }}
@@ -194,7 +194,7 @@ export function ShowcaseHarness({
           <span
             data-testid="showcase-harness-horizon-badge"
             style={{
-              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+              
               fontSize: "0.8125rem",
               color:
                 activeHorizon === "shipped"
@@ -270,7 +270,7 @@ export function ShowcaseHarness({
                     color: isSelected
                       ? "var(--bg-wok-iron, #080B10)"
                       : "var(--text-parchment, #F4EFE6)",
-                    fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+                    
                     fontWeight: 700,
                     cursor: "pointer",
                   }}
@@ -308,7 +308,7 @@ export function ShowcaseHarness({
                     color: isSelected
                       ? "var(--bg-wok-iron, #080B10)"
                       : "var(--text-parchment, #F4EFE6)",
-                    fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+                    
                     fontSize: "0.8125rem",
                     fontWeight: 600,
                     cursor: "pointer",
@@ -338,7 +338,7 @@ export function ShowcaseHarness({
               color: activeReducedMotion
                 ? "var(--bg-wok-iron, #080B10)"
                 : "var(--text-parchment, #F4EFE6)",
-              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+              
               fontSize: "0.8125rem",
               fontWeight: 600,
               cursor: "pointer",
@@ -349,7 +349,7 @@ export function ShowcaseHarness({
 
           <span
             style={{
-              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+              
               fontSize: "0.75rem",
               color: "var(--accent-bamboo-green, #10B981)",
               marginLeft: "auto",
@@ -373,7 +373,7 @@ export function ShowcaseHarness({
           <div
             data-testid="showcase-harness-default-stage"
             style={{
-              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+              
               fontSize: "0.875rem",
               lineHeight: 1.6,
               color: "var(--text-parchment, #F4EFE6)",

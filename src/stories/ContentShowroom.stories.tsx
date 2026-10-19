@@ -69,7 +69,7 @@ export function ContentShowroomStoryView({
           >
             <div
               style={{
-                fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+                
                 fontSize: "0.75rem",
                 color: "var(--accent-wok-gold, #F5A623)",
               }}
@@ -98,7 +98,7 @@ export function ContentShowroomStoryView({
           >
             <div
               style={{
-                fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+                
                 fontSize: "0.75rem",
                 color: "var(--accent-jade-wire, #22D3EE)",
               }}
