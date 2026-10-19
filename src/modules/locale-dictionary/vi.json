@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "locale": "vi",
+    "languageLabel": "VI · Tiếng Việt",
+    "switchLocaleLabel": "Switch to English",
+    "siteTitle": "Hivemind-* Ecosystem Portal · Buồng Lái Đa-Harness OpenCode V2",
+    "siteDescription": "Showroom 3D Cyber-Wok tương tác, bộ giải phẫu X-Ray 3 tầng cho 20 clip thực chiến và trung tâm kiến trúc song ngữ cho hivemind-steward-acp & hivemind-substrate.",
+    "ogTagline": "{CHINGCHONGCHINGVIBECODING} — Pro, Not Bro. Wire ACP Thật, Trí Nhớ Không Mất Mát, Không Màu Mè."
+  },
+  "nav": {
+    "brandName": "HIVEMIND-*",
+    "brandSubtag": "LÒ RÈN CYBER-WOK · OPENCODE V2",
+    "cockpitLink": "Lò Phản Ứng 3D",
+    "xrayLink": "20 Clip X-Ray",
+    "greenfieldLink": "5 Phút Greenfield",
+    "conversionLink": "Tiết Kiệm Quota & Vault",
+    "blogLink": "Blog Kiến Trúc",
+    "episodesLink": "Kho Tập Phim",
+    "showroomLink": "Showroom Linh Kiện"
+  },
+  "hero": {
+    "eyebrowTag": "[ĐÃ PHÁT HÀNH · v0.1] + [BẢN KẾ TIẾP · v0.2] + [LỘ TRÌNH · SUBSTRATE]",
+    "headline": "Điều Phối Devin, Antigravity & Freebuff Ngay Trong Một Buồng Lái OpenCode Đỏ Lửa.",
+    "subheadline": "Chạy phiên ACP stdio thật ngay trong TUI, phân luồng subagent theo thứ hạng qua ModelSlotChain 3-slot, và lưu giữ trọn vẹn từng bước suy luận với The Spine, The Honeycomb và Working-Set Valve.",
+    "philosophyBadge": "{CHINGCHONGCHINGVIBECODING} · PRO, NOT BRO",
+    "philosophySummary": "Nói không với wrapper phông bạt. Mọi tuyên bố kỹ thuật trên cổng này đều mở kèm X-Ray 3 tầng: Human Prompt -> Orchestrator Tool -> Engine Execution.",
+    "installLabel": "CUỘN LỤA CÀI ĐẶT · KHÔNG RƯỜM RÀ",
+    "installCommand": "npx hmoc-steward-acp",
+    "copyCommandLabel": "Chép Lệnh Cài",
+    "copiedCommandLabel": "Đã Chép Vào Clipboard",
+    "primaryCtaLabel": "Soi 20 Clip X-Ray",
+    "secondaryCtaLabel": "Tính Mức Tiết Kiệm Quota",
+    "reducedMotionToggleOn": "Sơ Đồ SVG Định Đạt (Tắt Chuyển Động): BẬT",
+    "reducedMotionToggleOff": "Sân Khấu WebGL Cyber-Wok: ĐANG CHẠY",
+    "reactorStageTitle": "LÒ PHẢN ỨNG CYBER-WOK · TELEMETRY 4 NÚT",
+    "reactorStageHint": "Bấm chọn bất kỳ nút harness nào (devin, antigravity, freebuff, substrate) để soi model ID thật, khung truyền dẫn ACP và trạng thái lộ trình."
+  },
+  "horizons": {
+    "sectionTitle": "Mô Hình 3 Chân Trời Thực Thi Đã Đối Soát",
+    "sectionSubtitle": "Minh bạch hóa độ chín kỹ thuật: phân biệt rõ tính năng đang chạy ngay trong terminal hôm nay với bản phát hành đa-harness kế tiếp và phòng lab bộ nhớ 3 tầng.",
+    "filterAll": "Tất Cả Chân Trời (20)",
+    "shippedBadge": "ĐÃ PHÁT HÀNH · v0.1",
+    "shippedScope": "Devin ACP Steward MVP",
+    "shippedDescription": "Hosted View /devin trực tiếp, phiên con Native Delegation delegate-devin (ses_*), khôi phục chống sập phiên, duyệt quyền tương tác và trình cài npx hmoc-steward-acp giữ nguyên chú thích.",
+    "nextReleaseBadge": "BẢN KẾ TIẾP · v0.2",
+    "nextReleaseScope": "Steward Tam-Harness & Ứng Viên Freebuff",
+    "nextReleaseDescription": "Lõi dùng chung acp-session-core.ts, Hosted View cho /devin & /antigravity, gợi ý lệnh / & @ gắn nhãn nguồn gốc, đổi cấu hình sống ctrl+m/ctrl+e/ctrl+t, ModelSlotChain 3-slot và freebuff-native (deepseek-4.1-flash & glm-5.3-flash).",
+    "roadmapBadge": "PHÒNG LAB LỘ TRÌNH · SUBSTRATE",
+    "roadmapScope": "Bộ Nhớ 3 Tầng Hivemind Substrate",
+    "roadmapDescription": "The Spine (.session-archive/blobs/<sha256>.txt & nhánh nháp shadow Git), The Honeycomb (index.sqlite + khung xương AST + PageRank RepoMap + git_cochange) và Working-Set Valve (cắt tỉa rác ngữ cảnh < 2 ms)."
+  },
+  "xrayExplorer": {
+    "sectionTitle": "Danh Mục 20 Clip Thực Chiến & Bộ Giải Phẫu X-Ray 3 Tầng",
+    "sectionSubtitle": "Mỗi lát cắt tính năng dưới 2 phút đều phơi bày nguyên vẹn câu lệnh TUI, gói tải JSON-RPC và vết chạy thực tế dưới engine.",
+    "pluginFilterLabel": "Lọc Theo Nhóm Plugin",
+    "pluginAll": "Tất Cả Plugin (20)",
+    "pluginSteward": "hivemind-steward-acp (S1–S10)",
+    "pluginSubstrate": "hivemind-substrate (M1–M9)",
+    "pluginCross": "Hợp Lực Liên Plugin (C1)",
+    "layer1Label": "Tầng 1 · Lệnh Từ Dev (Human Prompt)",
+    "layer2Label": "Tầng 2 · Tool Điều Phối (Orchestrator Tool)",
+    "layer3Label": "Tầng 3 · Thực Thi Engine (Engine Execution)",
+    "proNotBroHeader": "PRO, NOT BRO · BÀI HỌC KIẾN TRÚC ĐÚC KẾT",
+    "sourceGroundingLabel": "Mạch Nguồn Tham Chiếu Chính Thức",
+    "inspectSliceCta": "Mổ Xẻ X-Ray 3 Tầng"
+  },
+  "greenfieldSection": {
+    "sectionTitle": "Màn Dàn Dựng Greenfield 5 Phút Với 3 Harness",
+    "sectionSubtitle": "Theo dõi Freebuff (deepseek-4.1-flash -> glm-5.3-flash), Devin (swe-2-max) và Antigravity (argon-4-high) phối hợp dựng hivemind-portal qua 5 lát cắt kiểm chứng (V1–V5).",
+    "verificationBadge": "CỔNG KIỂM CHỨNG: bun test + bun run typecheck + bun run build"
+  },
+  "substrateSection": {
+    "sectionTitle": "Hivemind Substrate · Động Cơ Trí Nhớ 3 Tầng",
+    "sectionSubtitle": "Chấm dứt cảnh mất mạch kiến trúc vì cắt cụt token mù quáng. Lưu trữ không suy hao, đánh chỉ mục cấu trúc và tỉa gọn ngữ cảnh trong chưa đầy 2 mili-giây.",
+    "spineTitle": "Tầng 1 · The Spine",
+    "spineSubtitle": "Kho Lưu Trữ Định Danh Băm Không Suy Hao & Bản Nháp Shadow Git",
+    "spineDescription": "Mọi kết quả trả về từ tool và lượt hội thoại đều được băm vào .session-archive/blobs/<sha256>.txt kèm điểm chốt cây thư mục shadow Git trước khi quá trình nén ngữ cảnh diễn ra.",
+    "honeycombTitle": "Tầng 2 · The Honeycomb",
+    "honeycombSubtitle": "Chỉ Mục Lai SQLite BM25 + Vector + Đồ Thị (index.sqlite)",
+    "honeycombDescription": "Truy vấn SemanticSessionDigest, IntentPivot, DelegationTurn, ProvenanceChain, khung xương AST, PageRank RepoMap và ma trận git_cochange với độ trễ dưới 10ms.",
+    "valveTitle": "Tầng 3 · Viewports & Working-Set Valve",
+    "valveSubtitle": "Tỉa Ngữ Cảnh Trước Lượt < 2 ms & Gói Chuyển Tiếp < 1.200 Token",
+    "valveDescription": "Thay thế các khối log 40KB cũ kỹ bằng con trỏ sha256 gọn nhẹ, xuất gói bàn giao CompactionContinuationPacket định đạt và cấp dữ liệu cho cố vấn /substrate Mudball Advisor."
+  },
+  "conversionSection": {
+    "sectionTitle": "Trung Tâm Chuyển Đổi Đối Tác, Kho Referral & Máy Tính Quota",
+    "sectionSubtitle": "Kéo dài ngân sách code AI đỉnh cao bằng cách san tải tác vụ trinh sát sang Freebuff + Zap GLM đồng thời tiếp lửa cho hệ sinh thái mã nguồn mở Hivemind-*.",
+    "audienceBuildersTab": "Dành Cho Dev & Vibecoder",
+    "audienceSupportersTab": "Dành Cho Người Ủng Hộ",
+    "audienceSponsorsTab": "Dành Cho Nhà Tài Trợ B2B",
+    "calculatorTitle": "Máy Tính Tiết Kiệm Quota Tương Tác",
+    "calculatorSubtitle": "Mô phỏng số tiền USD và lượng token tiết kiệm mỗi tháng khi định tuyến việc dò code và viết khung sang Freebuff (deepseek-4.1-flash / glm-5.3-flash) kết hợp van tỉa Working-Set Valve.",
+    "hoursPerWeekLabel": "Số Giờ Code Cùng AI Mỗi Tuần",
+    "baselineCostLabel": "Chi Phí Chỉ Dùng Model Đắt Nhất",
+    "optimizedCostLabel": "Chi Phí Qua Hivemind Tam-Harness",
+    "monthlySavingsLabel": "Ước Tính Tiết Kiệm Mỗi Tháng",
+    "prunedTokensLabel": "Lượng Token Rác Được Tỉa / Tháng",
+    "sponsorMatrixTitle": "Gói Tài Trợ B2B · Đưa Harness Của Bạn Vào Chảo Lửa"
+  },
+  "blogSection": {
+    "pageTitle": "Blog Kiến Trúc & Giải Phẫu Chuyên Sâu Hivemind-*",
+    "pageSubtitle": "Chuỗi bài phân tích kỹ thuật song ngữ về giao thức ACP stdio, chuỗi slot đa-harness và động cơ bộ nhớ SQLite/AST không suy hao.",
+    "readArticleCta": "Đọc Bài Phân Tích",
+    "backToBlogCta": "Quay Lại Blog Kiến Trúc",
+    "proNotBroTakeawayLabel": "Đúc Kết Pro, Not Bro"
+  },
+  "episodesSection": {
+    "pageTitle": "Kho Tập Phim Vibecoding & Bản Phát Lại TUI Đồng Bộ",
+    "pageSubtitle": "Xem trọn 20 clip tính năng dưới 2 phút và màn dựng greenfield 5 phút cùng phụ đề song ngữ đối chiếu trực tiếp với vết lệnh OpenCode TUI.",
+    "watchEpisodeCta": "Mở Tập Phim & Vết TUI",
+    "transcriptHeading": "Bản Ghi Lời Thoại Song Ngữ Đồng Bộ",
+    "tuiReplayHeading": "Vết Thực Thi OpenCode TUI Tương Tác",
+    "backToEpisodesCta": "Quay Lại Kho Tập Phim"
+  },
+  "showroomSection": {
+    "pageTitle": "Showroom Linh Kiện Tương Tác & Trình Soi Payload 3.0",
+    "pageSubtitle": "Kiểm thử độc lập WokReactorStage, XRayExplorerCard, QuotaSavingsCalculator và cấu trúc bộ sưu tập Payload CMS 3.0 với nút chuyển EN/VI và Reduced-Motion trực tiếp.",
+    "harnessControlsTitle": "Bảng Điều Khiển Showroom (Ngôn Ngữ + Chuyển Động + Nút)",
+    "storyWokTitle": "Story 01 · WokReactorStage & Sơ Đồ SVG Định Đạt",
+    "storyXrayTitle": "Story 02 · Thẻ Giải Phẫu X-Ray 3 Tầng",
+    "storyConversionTitle": "Story 03 · Máy Tính Tiết Kiệm Quota & Kho Referral",
+    "payloadCollectionsTitle": "Story 04 · Lược Đồ Bộ Sưu Tập Đa Ngôn Ngữ Payload CMS 3.0"
+  },
+  "footer": {
+    "tagline": "Rèn giũa cho những người vận hành OpenCode V2 đòi hỏi dữ liệu đường truyền thật, ranh giới module sâu và nói không với kịch bản màu mè.",
+    "copyrightNotice": "© 2026 Hệ Sinh Thái Hivemind-* (shynlee04). Xây dựng theo chuẩn {CHINGCHONGCHINGVIBECODING}.",
+    "builtWithLine": "Next.js 15 · Three.js Cyber-Wok · Payload CMS 3.0 · Kỷ Luật Ranh Giới Zod"
+  }
+}
