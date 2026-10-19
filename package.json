@@ -1,0 +1,28 @@
+{
+  "name": "hivemind-portal-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bilingual (EN/VI) Hivemind-* Ecosystem Portal, 3D Cyber-Wok Reactor Stage, 3-Layer X-Ray Explorer, Partner Conversion Hub, Payload 3.0 Content Collections & Component Showroom",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "15.1.6",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "three": "0.172.0",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "22.10.7",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "19.0.3",
+    "@types/three": "0.172.0",
+    "typescript": "5.7.3"
+  }
+}
