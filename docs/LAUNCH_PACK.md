@@ -27,7 +27,7 @@ Watch how a **Pro (Not Bro) Vibecoder** builds a complete Greenfield Next.js + T
 - **Freebuff (100% Free Coding Agent + Daily Credits)**: https://freebuff.com/?ref=ref-6c980d54-a29a-4270-a160-35f13e62a2ff
 - **Zap GLM (High-Speed GLM Coding Subscription)**: https://z.ai/subscribe?ic=LTWUT4H2RS
 
-### Fuel the Open-Source Build (Ủng Hộ Tác Giả):
+### Fuel the Hivemind Build (Ủng Hộ Tác Giả):
 - **Ko-fi**: https://ko-fi.com/shynlee04
 - **Buy Me a Coffee**: https://buymeacoffee.com/shynlee04l
 
@@ -35,7 +35,7 @@ Watch how a **Pro (Not Bro) Vibecoder** builds a complete Greenfield Next.js + T
 
 ## 3. Ready-to-Post Reddit / Discord / GitHub Announcement (EN + VI)
 
-**Install in one command:**
+**Available now on npm (https://www.npmjs.com/package/hmoc-steward-acp) — install in one command:**
 ```sh
 npx hmoc-steward-acp
 ```

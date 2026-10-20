@@ -9,7 +9,7 @@
 
 | Horizon | Badge | Canonical Scope |
 | :--- | :--- | :--- |
-| **Horizon 1** | `SHIPPED NOW · v0.1` | **Devin ACP Steward MVP**: Live `/devin` Hosted View, `delegate-devin` Native children (`ses_*`), comment-preserving `npx hmoc-steward-acp` installer, and `devin_run` / `devin_session`. |
+| **Horizon 1** | `SHIPPED NOW · v0.1` | **Devin ACP Steward MVP**: Live `/devin` Hosted View, `delegate-devin` Native children (`ses_*`), comment-preserving `npx hmoc-steward-acp` installer ([npmjs.com/package/hmoc-steward-acp](https://www.npmjs.com/package/hmoc-steward-acp)), and `devin_run` / `devin_session`. |
 | **Horizon 2** | `NEXT RELEASE · v0.2` | **Tri-Harness Steward**: Shared ACP catalog core, `/devin` & `/antigravity` Hosted Views, `S6` origin-labelled `/` & `@` autocomplete, `S7` fenced live option switching (`ctrl+m`/`ctrl+e`/`ctrl+t`), `S8` rank-routed parallel delegation (`hivemind-delegate`) with 3-slot `ModelSlotChain`, plus `freebuff-native` (`deepseek-4.1-flash` & `glm-5.3-flash`, OAuth login, Ed25519 signing, rotated `fbm1....` handle recovery, `keepSlotForResume` pause continuity). |
 | **Horizon 3** | `ROADMAP LAB · SUBSTRATE` | **Hivemind Substrate (`hivemind-substrate`)**: 3-Layer Memory Engine — **The Spine** (`.session-archive/blobs/` & shadow Git drafts), **The Honeycomb** (`index.sqlite` indexing `SemanticSessionDigest`, `IntentPivot`, `DelegationTurn`, `ProvenanceChain`, AST skeletons, PageRank `RepoMap`, and `git_cochange`), and **Viewports & Working-Set Valve** (`< 2 ms` bloat pruning + `< 1,200`-token `CompactionContinuationPacket` + `/substrate` Mudball Advisor). |
 
