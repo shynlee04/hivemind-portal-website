@@ -54,7 +54,7 @@ function buildSponsorTiers(locale: Locale): ReadonlyArray<SponsorTierView> {
         name: "Gói Harness Slot: Đối Tác Coding Pass & CLI",
         priceLabel: "$1,500 / tháng",
         tagline:
-          "Đưa Harness hoặc gói Coding Pass của bạn lên 20 lát cắt X-Ray và README GitHub công khai của Hivemind.",
+          "Đưa Harness hoặc gói Coding Pass của bạn lên 20 lát cắt X-Ray và trang gói npm hmoc-steward-acp và cổng Hivemind.",
         deliverables: [
           "1 video thực chiến song ngữ EN/VI trên kênh YouTube và cổng Hivemind",
           "Đặt liên kết giới thiệu chính thức trên trang chủ và LAUNCH_PACK.md",
@@ -84,7 +84,7 @@ function buildSponsorTiers(locale: Locale): ReadonlyArray<SponsorTierView> {
         tagline:
           "Đồng hành cùng buồng lái 3D Neo-Tokyo và chuỗi video dựng dự án Greenfield 3-Harness trong 5 phút.",
         deliverables: [
-          "Vị trí nổi bật trên mô hình 3D trung tâm và toàn bộ kho mã nguồn GitHub",
+          "Vị trí nổi bật trên mô hình 3D trung tâm và trang gói npm hmoc-steward-acp và toàn hệ sinh thái",
           "Xuất hiện xuyên suốt trong chuỗi video Greenfield 5 phút (V1-V5)",
           "Hỗ trợ kỹ thuật trực tiếp kết nối chuẩn giao thức ACP stdio hai chiều",
         ],
@@ -100,11 +100,11 @@ function buildSponsorTiers(locale: Locale): ReadonlyArray<SponsorTierView> {
       name: "Harness Slot Tier: Coding-Pass & CLI Partner",
       priceLabel: "$1,500 / mo",
       tagline:
-        "Feature your coding pass or harness CLI in our 20-clip X-Ray showcase and public GitHub READMEs.",
+        "Feature your coding pass or harness CLI in our 20-clip X-Ray showcase and the official hmoc-steward-acp npm package page.",
       deliverables: [
         "1 dedicated bilingual (EN/VI) video & 3-Layer X-Ray showcase slice",
         "Verified referral placement in the Portal & docs/LAUNCH_PACK.md",
-        "Direct exposure to active OpenCode vibecoders across GitHub & Discord",
+        "Direct exposure to active OpenCode vibecoders across npm, YouTube & Discord",
       ],
       ctaLabel: "Claim Harness Slot",
       ctaHref: PARTNER_URLS.kofi,
@@ -204,7 +204,7 @@ export function resolveConversionCtas(input: {
               "Giúp duy trì cầu nối đa Harness miễn phí, chuỗi video thực chiến Pro Not Bro và lộ trình động cơ bộ nhớ Hivemind-Substrate.",
             href: PARTNER_URLS.kofi,
             disclosure:
-              "Đóng góp trực tiếp 100% cho tác giả dự án mã nguồn mở (shynlee04).",
+              "Đóng góp trực tiếp 100% cho tác giả phát triển gói npm hmoc-steward-acp (shynlee04).",
             isHighlighted: highlightSupporters,
             accentToken: BAMBOO_ACCENT,
           },
@@ -213,7 +213,7 @@ export function resolveConversionCtas(input: {
             audience: "supporters",
             label: "Mời Cà Phê Qua BMC",
             badge: "Quỹ ủng hộ Buy Me a Coffee (shynlee04l)",
-            headline: "Tiếp Lửa Cho Hệ Sinh Thái Mã Nguồn Mở Hivemind",
+            headline: "Tiếp Lửa Cho Hệ Sinh Thái Hivemind (hmoc-steward-acp)",
             description:
               "Đóng góp nhanh gọn từ các Vibecoder dùng Hivemind-Steward mỗi ngày để vắt kiệt gói promo và đồng bộ phiên hai chiều.",
             href: PARTNER_URLS.buyMeACoffee,
@@ -229,7 +229,7 @@ export function resolveConversionCtas(input: {
             badge: "Kênh đối tác Harness, Coding Pass & AI API",
             headline: "Đưa Harness & Gói Cước Của Bạn Đến Cộng Đồng OpenCode",
             description:
-              "Quảng bá trực tiếp trên kho GitHub công khai, chuỗi video YouTube 3-Harness, thảo luận Reddit/Discord và buồng lái Hivemind-Steward.",
+              "Quảng bá trực tiếp trên trang gói npm hmoc-steward-acp, chuỗi video YouTube 3-Harness, thảo luận Reddit/Discord và buồng lái Hivemind-Steward.",
             href: PARTNER_URLS.kofi,
             disclosure:
               "Kênh hợp tác nhà cung cấp với số liệu kiểm chứng thực tế trên OpenCode V2.",
@@ -251,7 +251,7 @@ export function resolveConversionCtas(input: {
               "Use free AI every day inside OpenCode V2 for $0 repo recon and spec drafting so you can save your $20 Devin swe-2 promo and Antigravity quota for heavy lifting.",
             href: PARTNER_URLS.freebuffReferral,
             disclosure:
-              "Verified partner referral link bridging daily free credits while backing open-source Hivemind-Steward.",
+              "Verified partner referral link bridging daily free credits while backing Hivemind-Steward (hmoc-steward-acp on npm).",
             isHighlighted: highlightBuilders,
             accentToken: "wok-gold",
           },
@@ -277,7 +277,7 @@ export function resolveConversionCtas(input: {
             audience: "supporters",
             label: "Back on Ko-fi",
             badge: "Community supporter vault (shynlee04)",
-            headline: "Fund Open-Source Hivemind-Steward & Substrate Engineering",
+            headline: "Fund Hivemind-Steward (npm) & Substrate Engineering",
             description:
               "Directly support cross-OS OpenCode V2 harness bridges, Pro Not Bro YouTube builds, and the Stage 3 Hivemind-Substrate memory engine.",
             href: PARTNER_URLS.kofi,
@@ -307,7 +307,7 @@ export function resolveConversionCtas(input: {
             badge: "For coding-pass, harness & AI providers",
             headline: "Put Your Harness & Coding Pass in Front of Active Builders",
             description:
-              "Get featured inside Hivemind-Steward, public GitHub READMEs, 5-minute YouTube builds, and Reddit/Discord community benchmarks.",
+              "Get featured inside Hivemind-Steward, the official hmoc-steward-acp npm package page, 5-minute YouTube builds, and Reddit/Discord community benchmarks.",
             href: PARTNER_URLS.kofi,
             disclosure:
               "Provider & sponsor channel with reproducible OpenCode V2 benchmarks.",

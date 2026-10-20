@@ -294,6 +294,7 @@ describe("Phase V2 · WokReactorStageModule & PortalCockpitClient", () => {
     );
 
     expect(html).toContain("npx hmoc-steward-acp");
+    expect(html).toContain("https://www.npmjs.com/package/hmoc-steward-acp");
     expect(html).toContain("Hivemind-Steward");
     expect(html).toContain('data-testid="xray-inspector-drawer"');
     expect(html).toContain("ses_01 + fbm1.a9f3");

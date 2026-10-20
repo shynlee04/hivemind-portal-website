@@ -19,12 +19,12 @@
     "showroomLink": "UI Showroom"
   },
   "hero": {
-    "eyebrowTag": "Open-source OpenCode V2 harness bridge for vibecoders",
+    "eyebrowTag": "Published on npm (hmoc-steward-acp) for OpenCode V2 vibecoders",
     "headline": "All Harnesses. One Cockpit.",
     "subheadline": "OpenCode already connects 127+ API providers and multi-account switching. Hivemind Steward breaks harness-locked models and coding passes (Devin, Antigravity, Freebuff) into native OpenCode TUI views, bi-directional main agents, and shared ses_* child sessions via a 3-slot ModelSlotChain, while Stage 3 Hivemind-Substrate adds The Spine, The Honeycomb, and Working-Set Valve.",
     "philosophyBadge": "Zero UX Compromise",
     "philosophySummary": "Run Devin (swe-2-max), Antigravity (argon-4-high), and Freebuff daily free AI right on OpenCode's main menu, delegate across foreign harnesses and 127+ OpenCode providers, or reuse warm ses_* child sessions in the host harness to squeeze $20 promos.",
-    "installLabel": "Install the OpenCode V2 harness bridge in one command",
+    "installLabel": "Available now on npm (https://www.npmjs.com/package/hmoc-steward-acp)",
     "installCommand": "npx hmoc-steward-acp",
     "copyCommandLabel": "Copy install command",
     "copiedCommandLabel": "Copied to clipboard",
@@ -84,7 +84,7 @@
   },
   "conversionSection": {
     "sectionTitle": "Passes, Promos & Sponsors",
-    "sectionSubtitle": "Vibecoders use Hivemind Steward free to squeeze daily Freebuff AI credits, Zap GLM plans, and $20 lab promos inside OpenCode, while coding-pass providers sponsor our GitHub, YouTube, Reddit, and Discord showcases.",
+    "sectionSubtitle": "Install hmoc-steward-acp from npm to squeeze Freebuff daily AI, Zap GLM, and $20 promos in OpenCode, or sponsor our showcases.",
     "audienceBuildersTab": "Passes for Vibecoders",
     "audienceSupportersTab": "Community Tip Jar",
     "audienceSponsorsTab": "For Pass & Harness Providers",

@@ -119,8 +119,8 @@ export function QuotaPartnerSection({
                   }}
                 >
                   {locale === "vi"
-                    ? "Hệ thống GitHub, YouTube, Reddit và Discord của Hivemind là kênh phân phối uy tín nơi các builder khám phá, kiểm thử và đăng ký gói cước AI thực chiến."
-                    : "Our GitHub repos, YouTube showcases, Reddit breakdowns, and Discord community form a high-trust channel where active terminal builders discover and subscribe to your models."}
+                    ? "Gói npm hmoc-steward-acp cùng kênh YouTube, Reddit và Discord của Hivemind là kênh phân phối uy tín nơi các builder khám phá, kiểm thử và đăng ký gói cước AI thực chiến."
+                    : "Our npm package (hmoc-steward-acp), YouTube showcases, Reddit breakdowns, and Discord community form a high-trust channel where active terminal builders discover and subscribe to your models."}
                 </p>
               </div>
             </div>
@@ -207,7 +207,7 @@ export function QuotaPartnerSection({
                 {dictionary.conversionSection.sponsorMatrixTitle}
               </h3>
               <code style={{ fontSize: "14px", color: "var(--text-cyber-slate)" }}>
-                GitHub / YouTube / Reddit / Discord
+                npmjs / YouTube / Reddit / Discord
               </code>
             </div>
 

@@ -274,29 +274,47 @@ export function PortalCockpitClient({
                   >
                     $ {dictionary.hero.installCommand}
                   </code>
-                  <button
-                    type="button"
-                    onClick={handleCopyInstall}
-                    className="touch-target"
-                    style={{
-                      padding: "0 0.9rem",
-                      backgroundColor: copiedCommand
-                        ? "var(--text-titanium)"
-                        : "var(--bg-kabuki-panel)",
-                      color: copiedCommand
-                        ? "var(--bg-tokyo-void)"
-                        : "var(--text-titanium)",
-                      border: "none",
-                      borderRadius: "4px",
-                      fontWeight: 500,
-                      fontSize: "14px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {copiedCommand
-                      ? dictionary.hero.copiedCommandLabel
-                      : dictionary.hero.copyCommandLabel}
-                  </button>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", flexWrap: "wrap" }}>
+                    <a
+                      href="https://www.npmjs.com/package/hmoc-steward-acp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="touch-target"
+                      style={{
+                        padding: "0 0.75rem",
+                        backgroundColor: "var(--bg-kabuki-panel)",
+                        color: "var(--accent-cyber-cyan)",
+                        borderRadius: "4px",
+                        fontWeight: 500,
+                        fontSize: "14px",
+                      }}
+                    >
+                      {locale === "vi" ? "Tải trên npm" : "View on npm"}
+                    </a>
+                    <button
+                      type="button"
+                      onClick={handleCopyInstall}
+                      className="touch-target"
+                      style={{
+                        padding: "0 0.9rem",
+                        backgroundColor: copiedCommand
+                          ? "var(--text-titanium)"
+                          : "var(--bg-kabuki-panel)",
+                        color: copiedCommand
+                          ? "var(--bg-tokyo-void)"
+                          : "var(--text-titanium)",
+                        border: "none",
+                        borderRadius: "4px",
+                        fontWeight: 500,
+                        fontSize: "14px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {copiedCommand
+                        ? dictionary.hero.copiedCommandLabel
+                        : dictionary.hero.copyCommandLabel}
+                    </button>
+                  </div>
                 </div>
                 <p
                   style={{
@@ -385,7 +403,7 @@ export function PortalCockpitClient({
                   YouTube
                 </a>
                 <a
-                  href="https://github.com/shynlee04/hivemind-steward-oc-devin-dev"
+                  href="https://www.npmjs.com/package/hmoc-steward-acp"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="touch-target"
@@ -398,7 +416,7 @@ export function PortalCockpitClient({
                     fontWeight: 400,
                   }}
                 >
-                  GitHub
+                  npm: hmoc-steward-acp
                 </a>
                 <a
                   href="https://reddit.com/r/opencode"

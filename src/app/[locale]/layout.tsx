@@ -210,7 +210,7 @@ export default async function LocaleLayout({
 
           <div style={{ display: "flex", flexWrap: "nowrap", gap: "0.45rem", flexShrink: 0 }}>
             <a
-              href="https://github.com/shynlee04/hivemind-steward-oc-devin-dev"
+              href="https://www.npmjs.com/package/hmoc-steward-acp"
               target="_blank"
               rel="noopener noreferrer"
               className="touch-target"
@@ -224,7 +224,7 @@ export default async function LocaleLayout({
                 fontWeight: 400,
               }}
             >
-              GitHub
+              npm: hmoc-steward-acp
             </a>
             <a
               href="https://youtube.com/@chingchongchingvibecoding"

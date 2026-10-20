@@ -19,12 +19,12 @@
     "showroomLink": "Phòng Thử UI"
   },
   "hero": {
-    "eyebrowTag": "Cầu nối mã nguồn mở phá khóa Harness trên OpenCode V2 cho Vibecoder",
+    "eyebrowTag": "Đã phát hành gói npm (hmoc-steward-acp) cho cộng đồng Vibecoder OpenCode V2",
     "headline": "Mọi Harness. Một Buồng Lái.",
     "subheadline": "OpenCode đã có sẵn hơn 127 nhà cung cấp API và đổi nhiều tài khoản. Hivemind Steward mở khóa các model và gói cước bị khóa cứng theo từng Harness (Devin, Antigravity, Freebuff) ngay trong TUI OpenCode qua chuỗi ModelSlotChain, đồng bộ phiên hai chiều và mở đường cho Hivemind-Substrate với The Spine, The Honeycomb cùng Working-Set Valve.",
     "philosophyBadge": "Chuẩn Mực TUI Nguyên Bản",
     "philosophySummary": "Điều khiển Devin (swe-2-max), Antigravity (argon-4-high) và AI miễn phí mỗi ngày của Freebuff ngay trên menu chính OpenCode, ủy quyền chéo giữa các Harness lẫn 127+ provider OpenCode, hoặc tái sử dụng phiên con ses_* để vắt kiệt gói promo $20.",
-    "installLabel": "Cài đặt cầu nối đa Harness cho OpenCode V2 bằng một câu lệnh",
+    "installLabel": "Tải ngay qua npm (https://www.npmjs.com/package/hmoc-steward-acp)",
     "installCommand": "npx hmoc-steward-acp",
     "copyCommandLabel": "Sao chép lệnh cài",
     "copiedCommandLabel": "Đã chép lệnh",
@@ -84,7 +84,7 @@
   },
   "conversionSection": {
     "sectionTitle": "Gói Code, Promo & Tài Trợ",
-    "sectionSubtitle": "Vibecoder dùng Hivemind Steward miễn phí để tận dụng credit AI miễn phí mỗi ngày từ Freebuff, gói Zap GLM tốc độ cao và gói khuyến mãi $20 của Devin ngay trong OpenCode; các nhà cung cấp tài trợ kênh GitHub, YouTube, Reddit và Discord.",
+    "sectionSubtitle": "Cài hmoc-steward-acp từ npm để vắt credit Freebuff mỗi ngày, Zap GLM và promo $20 trong OpenCode, hoặc tài trợ kênh.",
     "audienceBuildersTab": "Gói Code Cho Vibecoder",
     "audienceSupportersTab": "Quỹ Ủng Hộ Cộng Đồng",
     "audienceSponsorsTab": "Nhà Cung Cấp & Tài Trợ",

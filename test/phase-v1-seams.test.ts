@@ -282,5 +282,6 @@ describe("PartnerConversionModule seam & LAUNCH_PACK.md", () => {
     expect(content).toContain(PARTNER_URLS.kofi);
     expect(content).toContain(PARTNER_URLS.buyMeACoffee);
     expect(content).toContain("npx hmoc-steward-acp");
+    expect(content).toContain("https://www.npmjs.com/package/hmoc-steward-acp");
   });
 });

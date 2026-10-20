@@ -274,9 +274,19 @@ export function SignalFlowSection({
                     borderRadius: "4px",
                   }}
                 >
-                  <code style={{ fontSize: "14px", color: "var(--accent-cyber-cyan)" }}>
-                    $ npx hmoc-steward-acp
-                  </code>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
+                    <code style={{ fontSize: "14px", color: "var(--accent-cyber-cyan)" }}>
+                      $ npx hmoc-steward-acp
+                    </code>
+                    <a
+                      href="https://www.npmjs.com/package/hmoc-steward-acp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ fontSize: "14px", color: "var(--text-titanium)", textDecoration: "underline" }}
+                    >
+                      npm package
+                    </a>
+                  </div>
                   <div
                     style={{
                       fontSize: "14px",
