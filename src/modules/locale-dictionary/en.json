@@ -1,101 +1,98 @@
 {
   "meta": {
     "locale": "en",
-    "languageLabel": "English (EN)",
-    "switchLocaleLabel": "Chuyển sang Tiếng Việt",
-    "siteTitle": "Hivemind Steward: Bridge Harness-Locked AI Models in OpenCode V2",
-    "siteDescription": "OpenCode already connects 127+ API providers. Hivemind Steward bridges harness-exclusive models and coding passes (Devin, Antigravity, Freebuff) as native OpenCode TUI views, bi-directional main agents, and shared ses_* child sessions.",
-    "ogTagline": "Break harness lock-in inside OpenCode V2 with bi-directional session sync and Stage 3 Hivemind-Substrate memory."
+    "languageLabel": "English",
+    "switchLocaleLabel": "Tiếng Việt",
+    "siteTitle": "Hivemind Steward: Devin and Antigravity inside OpenCode",
+    "siteDescription": "An OpenCode V2 plugin. Open real Devin or Antigravity sessions in the OpenCode TUI, or let your agent delegate tasks to them.",
+    "ogTagline": "An OpenCode V2 plugin. Open real Devin or Antigravity sessions in the OpenCode TUI, or let your agent delegate tasks to them."
   },
   "nav": {
     "brandName": "Hivemind Steward",
-    "brandSubtag": "OpenCode V2 Bridge",
-    "cockpitLink": "Terminal Cockpit",
-    "xrayLink": "Wire X-Ray",
-    "greenfieldLink": "5-Min Build",
-    "conversionLink": "Passes & Sponsors",
-    "blogLink": "Engineering Notes",
-    "episodesLink": "Video Showcases",
-    "showroomLink": "UI Showroom"
+    "tryLink": "Try it",
+    "setupLink": "Setup",
+    "keysLink": "Keys",
+    "installLabel": "Install",
+    "menuLabel": "Menu"
   },
-  "hero": {
-    "eyebrowTag": "Published on npm (hmoc-steward-acp) for OpenCode V2 vibecoders",
-    "headline": "All Harnesses. One Cockpit.",
-    "subheadline": "OpenCode already connects 127+ API providers and multi-account switching. Hivemind Steward breaks harness-locked models and coding passes (Devin, Antigravity, Freebuff) into native OpenCode TUI views, bi-directional main agents, and shared ses_* child sessions via a 3-slot ModelSlotChain, while Stage 3 Hivemind-Substrate adds The Spine, The Honeycomb, and Working-Set Valve.",
-    "philosophyBadge": "Zero UX Compromise",
-    "philosophySummary": "Run Devin (swe-2-max), Antigravity (argon-4-high), and Freebuff daily free AI right on OpenCode's main menu, delegate across foreign harnesses and 127+ OpenCode providers, or reuse warm ses_* child sessions in the host harness to squeeze $20 promos.",
-    "installLabel": "Available now on npm (https://www.npmjs.com/package/hmoc-steward-acp)",
-    "installCommand": "npx hmoc-steward-acp",
-    "copyCommandLabel": "Copy install command",
-    "copiedCommandLabel": "Copied to clipboard",
-    "primaryCtaLabel": "Explore 20 wire X-Ray clips",
-    "secondaryCtaLabel": "See 3 bi-directional bridge modes",
-    "reducedMotionToggleOn": "Static schematic mode: On",
-    "reducedMotionToggleOff": "Interactive 3D telemetry: Live",
-    "reactorStageTitle": "Neo-Tokyo 4-Node Harness Telemetry",
-    "reactorStageHint": "Select any node (devin, antigravity, freebuff, or substrate) to inspect live model IDs, ACP wire frames, and bi-directional session sync."
-  },
-  "horizons": {
-    "sectionTitle": "Three Release Horizons",
-    "sectionSubtitle": "Focus on Hivemind Steward first (v0.1 shipped and v0.2 multi-harness bridge), then explore how Stage 3 Hivemind-Substrate solves long-horizon agent amnesia.",
-    "filterAll": "All stages (20)",
-    "shippedBadge": "SHIPPED NOW · v0.1",
-    "shippedScope": "Devin ACP Steward MVP",
-    "shippedDescription": "Native /devin hosted TUI view on OpenCode's main menu, shared delegate-devin child sessions (ses_*), crash-safe session reconcile, interactive permission prompts, and npx hmoc-steward-acp.",
-    "nextReleaseBadge": "NEXT RELEASE · v0.2",
-    "nextReleaseScope": "Tri-Harness Bridge & Freebuff Daily AI",
-    "nextReleaseDescription": "Shared acp-session-core.ts, native /devin and /antigravity TUI views, foreign models as main OpenCode agents delegating across 127+ providers, live ctrl+m/ctrl+e/ctrl+t switching, and freebuff-native (daily free AI credits, rotated fbm1.... recovery, and keepSlotForResume).",
-    "roadmapBadge": "ROADMAP LAB · SUBSTRATE",
-    "roadmapScope": "Stage 3 Hivemind-Substrate Memory Engine",
-    "roadmapDescription": "Local Bun SQLite engine stopping 300k-token bloat and fake subagent successes: The Spine (.session-archive/blobs/<sha256>.txt and shadow Git drafts), The Honeycomb (Reported vs Verified truth classifier and 0.21ms 4-tier AST code graph), and Working-Set Valve (< 2ms FRESH — DO NOT REREAD breadcrumbs)."
-  },
-  "xrayExplorer": {
-    "sectionTitle": "Live Terminal X-Ray",
-    "sectionSubtitle": "Inspect how Hivemind Steward bridges harness-locked models and how Hivemind-Substrate prunes bloat across 20 verified slices.",
-    "pluginFilterLabel": "Filter by module",
-    "pluginAll": "All slices (20)",
-    "pluginSteward": "Hivemind Steward (S1 to S10)",
-    "pluginSubstrate": "Hivemind Substrate (M1 to M9)",
-    "pluginCross": "Combined Workflow (C1)",
-    "layer1Label": "Layer 1: Terminal Prompt",
-    "layer2Label": "Layer 2: Orchestrator Call",
-    "layer3Label": "Layer 3: Engine Wire Trace",
-    "proNotBroHeader": "Pro, Not Bro Takeaway",
-    "sourceGroundingLabel": "Source file reference",
-    "inspectSliceCta": "Open 3-layer trace"
-  },
-  "greenfieldSection": {
-    "sectionTitle": "Five-Minute 3-Harness Build",
-    "sectionSubtitle": "Watch Antigravity (argon-4-high), Devin (swe-2-max), and Freebuff ($0 daily AI to glm-5.3-flash swap) ship a 60fps 3D app.",
-    "verificationBadge": "Verified gate: bun test + bun run typecheck + bun run build"
-  },
-  "substrateSection": {
-    "sectionTitle": "Stage 3: Hivemind Substrate",
-    "sectionSubtitle": "Stops 300k-token bloat, 28-file re-reads after compaction, and fake subagent 'succeeded' reports in under 2ms.",
-    "spineTitle": "1. The Spine (E1.1)",
-    "spineSubtitle": "Zero 7-day amnesia and full tool-output spill vault",
-    "spineDescription": "Archives every prompt, full tool log (.session-archive/blobs/<sha256>.txt), ses_* binding, and shadow Git draft before 7-day GC.",
-    "honeycombTitle": "2. The Honeycomb (E1.2)",
-    "honeycombSubtitle": "Fake-success catcher and 0.21ms 4-tier AST code map",
-    "honeycombDescription": "Separates Reported vs Verified child runs and indexes a 0.21ms PageRank RepoMap, Depth-2 AST skeletons (-89% tokens), and Git co-change.",
-    "valveTitle": "3. Working-Set Valve (E1.3)",
-    "valveSubtitle": "Sub-2ms bloat pruner and FRESH — DO NOT REREAD manifest",
-    "valveDescription": "Swaps stale dumps for blob:<sha12> FRESH — DO NOT REREAD pointers in < 2ms, < 1,200-token handoffs, and 1ms FTS5 vibe search."
-  },
-  "conversionSection": {
-    "sectionTitle": "Passes, Promos & Sponsors",
-    "sectionSubtitle": "Install hmoc-steward-acp from npm to squeeze Freebuff daily AI, Zap GLM, and $20 promos in OpenCode, or sponsor our showcases.",
-    "audienceBuildersTab": "Passes for Vibecoders",
-    "audienceSupportersTab": "Community Tip Jar",
-    "audienceSponsorsTab": "For Pass & Harness Providers",
-    "calculatorTitle": "Promo & Daily-Credit Squeezing Estimator",
-    "calculatorSubtitle": "See how reusing warm ses_* child sessions and routing recon/docs to Freebuff $0 daily AI credits and Zap GLM stretches your $20 Devin swe-2 promo and Antigravity quota.",
-    "hoursPerWeekLabel": "Active multi-harness hours per week",
-    "baselineCostLabel": "Single expensive model for everything (Bro mode)",
-    "optimizedCostLabel": "3-Harness role split + Freebuff daily free AI (Pro mode)",
-    "monthlySavingsLabel": "Quota & promo value stretched per month",
-    "prunedTokensLabel": "Re-read & bloat tokens saved per month",
-    "sponsorMatrixTitle": "Vibecoder Passes & Provider Sponsorship Channels"
+  "home": {
+    "hero": {
+      "accessibleHeadline": "Devin and Antigravity, inside OpenCode",
+      "lineOneWord": "INSIDE",
+      "lineTwoWord": "OPENCODE.",
+      "support": "Open a real Devin or Antigravity session in your OpenCode terminal, or let your agent hand one a task.",
+      "installCommand": "opencode plugin add hmoc-steward-acp@0.2.0",
+      "copyLabel": "Copy",
+      "copiedLabel": "Copied",
+      "copyAriaLabel": "Copy install command"
+    },
+    "try": {
+      "heading": "Try a command",
+      "inputLabel": "Type a plugin command",
+      "examplesLabel": "Or try",
+      "sideTitle": "Watch it, or hand it off.",
+      "sideBody": "Open a session when you want to watch the work and answer its questions. Delegate when you don't: the task runs in a real OpenCode child session and the result comes back to your agent."
+    },
+    "setup": {
+      "heading": "Set up once.",
+      "requirement": "You need OpenCode V2, plus the devin CLI signed in (devin auth login) or the Antigravity ACP server. The plugin checks for them; it won't install or sign in for you.",
+      "stages": [
+        {
+          "duration": "Seconds",
+          "clause": "First, run the install command."
+        },
+        {
+          "duration": "Seconds",
+          "clause": "Then reload OpenCode."
+        },
+        {
+          "duration": "About a minute",
+          "clause": "Next, run /hivemind-setup and answer."
+        },
+        {
+          "duration": "Every session after",
+          "clause": "After that, it stays out of your way."
+        }
+      ]
+    },
+    "keys": {
+      "heading": "Every key it adds.",
+      "headingLine1": "Every key",
+      "headingLine2": "it adds.",
+      "tableName": "Commands",
+      "cardTitle": "Devin wants to run a command",
+      "cardCommand": "bun test",
+      "cardOptions": [
+        "Allow once",
+        "Always allow",
+        "Reject"
+      ],
+      "caption": "Permission requests show up as cards. The options come from the agent."
+    },
+    "closing": {
+      "heading": "Claude Code is next.",
+      "headingLine1": "Claude Code",
+      "headingLine2": "is next.",
+      "body": "Cursor after that. Your support pays for the hours it takes to build them.",
+      "button": "Support on Ko-fi"
+    },
+    "footer": {
+      "note1": "hmoc-steward-acp 0.2.0, a plugin for OpenCode V2.",
+      "note2Before": "Prefer Buy Me a Coffee? It's",
+      "note2Link": "here",
+      "note2After": ".",
+      "note3Before": "Referral links for tools I use alongside it:",
+      "note3Freebuff": "Freebuff",
+      "note3Middle": "and the",
+      "note3Zai": "Z.ai GLM Coding Plan",
+      "note3After": ". They aren't part of the plugin, and I get credit if you sign up.",
+      "backToTop": "Back to top",
+      "githubLabel": "GitHub",
+      "npmLabel": "npm",
+      "issuesLabel": "Report an issue",
+      "credit": "Made by shynlee04",
+      "copyright": "© 2026"
+    }
   },
   "blogSection": {
     "pageTitle": "Engineering Notes & Wire Architecture",
@@ -120,10 +117,5 @@
     "storyXrayTitle": "Three-Layer Wire X-Ray Inspector",
     "storyConversionTitle": "Promo Squeezing Estimator & Provider Channels",
     "payloadCollectionsTitle": "Payload CMS 3.0 Collection Schemas"
-  },
-  "footer": {
-    "tagline": "Built in Neo-Tokyo cyberpunk style for OpenCode V2 vibecoders who break harness lock-in and orchestrate every AI coding agent from one cockpit.",
-    "copyrightNotice": "© 2026 Hivemind Steward Ecosystem (shynlee04). Released under the engineering standard.",
-    "builtWithLine": "Next.js 15, Three.js WebGL Telemetry, Payload CMS 3.0, and Zod Schema Validation"
   }
 }

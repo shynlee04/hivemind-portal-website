@@ -1,11 +1,24 @@
 import type { Metadata } from "next";
+import { Anton, Work_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
+const anton = Anton({
+  weight: "400",
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-display",
+});
+
+const workSans = Work_Sans({
+  weight: ["400", "600"],
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-text",
+});
+
 export const metadata: Metadata = {
-  title: "Hivemind Steward | Neo-Tokyo OpenCode Multi-Pass Gateway",
+  title: "Hivemind Steward: Devin and Antigravity inside OpenCode",
   description:
-    "Run Devin, Antigravity, Freebuff, and GLM coding passes inside one OpenCode V2 terminal cockpit. Stop paying $200/mo across fragmented AI coding tools.",
+    "An OpenCode V2 plugin. Open real Devin or Antigravity sessions in the OpenCode TUI, or let your agent delegate tasks to them.",
 };
 
 export default function RootLayout({
@@ -14,17 +27,17 @@ export default function RootLayout({
   readonly children: ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${anton.variable} ${workSans.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" /* taste-skill-ignore */
-          rel="stylesheet"
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('reveal-ready')",
+          }}
         />
       </head>
       <body>{children}</body>

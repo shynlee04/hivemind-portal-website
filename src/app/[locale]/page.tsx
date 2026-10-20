@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { PortalCockpitClient } from "@/components/portal-cockpit-client";
-import {
-  getGreenfieldWalkthrough,
-  getHorizonSummaries,
-  queryShowcases,
-} from "@/modules/ecosystem-catalog";
+import { HomePage } from "@/components/home/home-page";
 import {
   getPortalDictionary,
   LocaleSchema,
   type Locale,
 } from "@/modules/locale-dictionary";
-import { resolveConversionCtas } from "@/modules/partner-conversion";
+import "./home.css";
 
 function resolveLocale(raw: string): Locale {
   const parsed = LocaleSchema.safeParse(raw);
@@ -51,23 +46,6 @@ export default async function LocalePortalHomePage({
   const { locale: rawLocale } = await params;
   const locale = resolveLocale(rawLocale);
   const dictionary = getPortalDictionary(locale);
-  const horizons = getHorizonSummaries(locale);
-  const showcases = queryShowcases({ locale, plugin: "all", horizon: "all" });
-  const greenfield = getGreenfieldWalkthrough(locale);
-  const initialConversion = resolveConversionCtas({
-    locale,
-    audience: "builders",
-    sliceId: "S8",
-  });
 
-  return (
-    <PortalCockpitClient
-      locale={locale}
-      dictionary={dictionary}
-      horizons={horizons}
-      showcases={showcases}
-      greenfield={greenfield}
-      initialConversion={initialConversion}
-    />
-  );
+  return <HomePage locale={locale} dictionary={dictionary} />;
 }

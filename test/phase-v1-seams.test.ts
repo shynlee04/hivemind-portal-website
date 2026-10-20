@@ -26,11 +26,11 @@ describe("LocaleDictionaryModule seam", () => {
     const parity = verifyDictionaryParity();
     expect(parity).toEqual({
       valid: true,
-      keyCount: 103,
+      keyCount: 74,
     });
   });
 
-  test("returns schema-validated dictionaries for en and vi with canonical terms preserved", () => {
+  test("returns schema-validated dictionaries for en and vi with truthful product claims", () => {
     expect(SUPPORTED_LOCALES).toEqual(["en", "vi"]);
 
     const en = getPortalDictionary("en");
@@ -39,20 +39,28 @@ describe("LocaleDictionaryModule seam", () => {
     expect(PortalDictionarySchema.parse(en)).toEqual(en);
     expect(PortalDictionarySchema.parse(vi)).toEqual(vi);
 
-    expect(en.hero.installCommand).toBe("npx hmoc-steward-acp");
-    expect(vi.hero.installCommand).toBe("npx hmoc-steward-acp");
+    expect(en.home.hero.installCommand).toBe(
+      "opencode plugin add hmoc-steward-acp@0.2.0",
+    );
+    expect(vi.home.hero.installCommand).toBe(
+      "opencode plugin add hmoc-steward-acp@0.2.0",
+    );
 
-    expect(en.horizons.shippedBadge).toBe("SHIPPED NOW · v0.1");
-    expect(vi.horizons.shippedBadge).toBe("ĐÃ PHÁT HÀNH · v0.1");
-    expect(en.horizons.nextReleaseBadge).toBe("NEXT RELEASE · v0.2");
-    expect(vi.horizons.nextReleaseBadge).toBe("BẢN KẾ TIẾP · v0.2");
-    expect(en.horizons.roadmapBadge).toBe("ROADMAP LAB · SUBSTRATE");
-    expect(vi.horizons.roadmapBadge).toBe("PHÒNG LAB LỘ TRÌNH · SUBSTRATE");
-
-    expect(vi.hero.subheadline).toContain("ModelSlotChain");
-    expect(vi.hero.subheadline).toContain("The Spine");
-    expect(vi.hero.subheadline).toContain("The Honeycomb");
-    expect(vi.hero.subheadline).toContain("Working-Set Valve");
+    const bannedClaims = [
+      "npx",
+      "swe-2-max",
+      "argon-4-high",
+      "glm-5.3",
+      "127+",
+      "ModelSlotChain",
+      "Neo-Tokyo",
+    ];
+    for (const dict of [en, vi]) {
+      const homeJson = JSON.stringify(dict.home);
+      for (const claim of bannedClaims) {
+        expect(homeJson).not.toContain(claim);
+      }
+    }
   });
 
   test("rejects unsupported locale codes at the module boundary", () => {

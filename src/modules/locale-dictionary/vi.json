@@ -1,101 +1,98 @@
 {
   "meta": {
     "locale": "vi",
-    "languageLabel": "Tiếng Việt (VI)",
-    "switchLocaleLabel": "Switch to English",
-    "siteTitle": "Hivemind Steward: Mở Khóa Mọi Model Độc Quyền Theo Harness Trong OpenCode V2",
-    "siteDescription": "OpenCode đã nối sẵn hơn 127 API provider. Hivemind Steward mở khóa các model và gói cước bị khóa cứng theo từng nền tảng (Devin, Antigravity, Freebuff) ngay trên menu chính OpenCode với đồng bộ phiên hai chiều.",
-    "ogTagline": "Phá bỏ khóa độc quyền Harness trong OpenCode V2, tận dụng tối đa khuyến mãi và lộ trình bộ nhớ Hivemind-Substrate."
+    "languageLabel": "Tiếng Việt",
+    "switchLocaleLabel": "English",
+    "siteTitle": "Hivemind Steward: Devin và Antigravity ngay trong OpenCode",
+    "siteDescription": "Plugin cho OpenCode V2. Mở phiên Devin hoặc Antigravity thật trong TUI OpenCode, hoặc để agent giao việc cho chúng.",
+    "ogTagline": "Plugin cho OpenCode V2. Mở phiên Devin hoặc Antigravity thật trong TUI OpenCode, hoặc để agent giao việc cho chúng."
   },
   "nav": {
     "brandName": "Hivemind Steward",
-    "brandSubtag": "Cầu Nối OpenCode V2",
-    "cockpitLink": "Buồng Lái TUI",
-    "xrayLink": "Soi Mạch X-Ray",
-    "greenfieldLink": "Dựng Web 5 Phút",
-    "conversionLink": "Gói Code & Tài Trợ",
-    "blogLink": "Ghi Chép Kỹ Thuật",
-    "episodesLink": "Video Thực Chiến",
-    "showroomLink": "Phòng Thử UI"
+    "tryLink": "Thử ngay",
+    "setupLink": "Cài đặt",
+    "keysLink": "Phím tắt",
+    "installLabel": "Cài",
+    "menuLabel": "Menu"
   },
-  "hero": {
-    "eyebrowTag": "Đã phát hành gói npm (hmoc-steward-acp) cho cộng đồng Vibecoder OpenCode V2",
-    "headline": "Mọi Harness. Một Buồng Lái.",
-    "subheadline": "OpenCode đã có sẵn hơn 127 nhà cung cấp API và đổi nhiều tài khoản. Hivemind Steward mở khóa các model và gói cước bị khóa cứng theo từng Harness (Devin, Antigravity, Freebuff) ngay trong TUI OpenCode qua chuỗi ModelSlotChain, đồng bộ phiên hai chiều và mở đường cho Hivemind-Substrate với The Spine, The Honeycomb cùng Working-Set Valve.",
-    "philosophyBadge": "Chuẩn Mực TUI Nguyên Bản",
-    "philosophySummary": "Điều khiển Devin (swe-2-max), Antigravity (argon-4-high) và AI miễn phí mỗi ngày của Freebuff ngay trên menu chính OpenCode, ủy quyền chéo giữa các Harness lẫn 127+ provider OpenCode, hoặc tái sử dụng phiên con ses_* để vắt kiệt gói promo $20.",
-    "installLabel": "Tải ngay qua npm (https://www.npmjs.com/package/hmoc-steward-acp)",
-    "installCommand": "npx hmoc-steward-acp",
-    "copyCommandLabel": "Sao chép lệnh cài",
-    "copiedCommandLabel": "Đã chép lệnh",
-    "primaryCtaLabel": "Xem 20 lát cắt X-Ray",
-    "secondaryCtaLabel": "Xem 3 chế độ đồng bộ hai chiều",
-    "reducedMotionToggleOn": "Sơ đồ mạch tĩnh: Bật",
-    "reducedMotionToggleOff": "Đồ họa 3D trực tiếp: Bật",
-    "reactorStageTitle": "Trạm Điều Phối 4 Nút Neo-Tokyo",
-    "reactorStageHint": "Chọn nút bất kỳ (devin, antigravity, freebuff hoặc substrate) để xem mã model, đường truyền ACP và trạng thái đồng bộ phiên."
-  },
-  "horizons": {
-    "sectionTitle": "Ba Giai Đoạn Phát Triển",
-    "sectionSubtitle": "Tập trung vào Hivemind Steward trước tiên (v0.1 đã chạy và v0.2 cầu nối 3 Harness), sau đó khám phá Hivemind-Substrate ở Stage 3 giúp trị dứt điểm bệnh mất trí nhớ dài hạn.",
-    "filterAll": "Tất cả (20)",
-    "shippedBadge": "ĐÃ PHÁT HÀNH · v0.1",
-    "shippedScope": "Devin ACP Steward MVP",
-    "shippedDescription": "Giao diện /devin nguyên bản ngay trên menu chính OpenCode V2, phiên con dùng chung delegate-devin (ses_*), tự khôi phục phiên khi đứt kết nối, duyệt quyền trực tiếp và bộ cài npx hmoc-steward-acp.",
-    "nextReleaseBadge": "BẢN KẾ TIẾP · v0.2",
-    "nextReleaseScope": "Cầu Nối 3 Harness & AI Miễn Phí Freebuff",
-    "nextReleaseDescription": "Lõi acp-session-core.ts dùng chung, giao diện /devin và /antigravity nguyên bản, dùng model ngoại làm agent chính điều phối cả 127+ provider OpenCode, đổi nhanh ctrl+m/ctrl+e/ctrl+t và tích hợp freebuff-native (credit miễn phí mỗi ngày, tự bắt mã fbm1.... xoay vòng và keepSlotForResume).",
-    "roadmapBadge": "PHÒNG LAB LỘ TRÌNH · SUBSTRATE",
-    "roadmapScope": "Stage 3: Động Cơ Bộ Nhớ Hivemind-Substrate",
-    "roadmapDescription": "Động cơ SQLite nội bộ chặn đứng phình 300k token và báo cáo thành công giả: The Spine (lưu trọn vẹn .session-archive/blobs/<sha256>.txt và bản nháp Git), The Honeycomb (phân loại Reported vs Verified và bản đồ AST 4 tầng trong 0.21ms) cùng Working-Set Valve (nhãn FRESH — DO NOT REREAD dưới 2ms)."
-  },
-  "xrayExplorer": {
-    "sectionTitle": "Soi Mạch Terminal X-Ray",
-    "sectionSubtitle": "Kiểm chứng cách Hivemind Steward mở khóa model độc quyền theo Harness và cách Hivemind-Substrate cắt tỉa ngữ cảnh qua 20 lát cắt thực tế.",
-    "pluginFilterLabel": "Lọc theo phân hệ",
-    "pluginAll": "Tất cả lát cắt (20)",
-    "pluginSteward": "Hivemind Steward (S1 đến S10)",
-    "pluginSubstrate": "Hivemind Substrate (M1 đến M9)",
-    "pluginCross": "Luồng Kết Hợp (C1)",
-    "layer1Label": "Tầng 1: Câu Lệnh Terminal",
-    "layer2Label": "Tầng 2: Lệnh Điều Phối",
-    "layer3Label": "Tầng 3: Mạch Thực Thi Engine",
-    "proNotBroHeader": "Bí Truyền Hệ Pro, Not Bro",
-    "sourceGroundingLabel": "Tệp mã nguồn đối chiếu",
-    "inspectSliceCta": "Mở mạch 3 tầng"
-  },
-  "greenfieldSection": {
-    "sectionTitle": "Dựng Web 3-Harness 5 Phút",
-    "sectionSubtitle": "Xem Antigravity (argon-4-high), Devin (swe-2-max) và Freebuff (đổi não sang glm-5.3-flash) dựng web 3D 60fps từ thư mục trống.",
-    "verificationBadge": "Cổng kiểm định: bun test + bun run typecheck + bun run build"
-  },
-  "substrateSection": {
-    "sectionTitle": "Lộ Trình: Hivemind Substrate",
-    "sectionSubtitle": "Chặn đứng phình 300k token, bệnh đọc lại 28 file sau khi nén và báo cáo 'succeeded' giả của subagent dưới 2ms.",
-    "spineTitle": "1. The Spine (E1.1)",
-    "spineSubtitle": "Không còn mất trí nhớ sau 7 ngày & kho lưu trọn vẹn kết quả",
-    "spineDescription": "Lưu trọn câu lệnh, log (.session-archive/blobs/<sha256>.txt), liên kết ses_* và nhánh nháp Git trước khi bị xóa sau 7 ngày.",
-    "honeycombTitle": "2. The Honeycomb (E1.2)",
-    "honeycombSubtitle": "Bắt sống báo cáo thành công giả & bản đồ code 4 tầng 0.21ms",
-    "honeycombDescription": "Tách Reported vs Verified bắt lỗi timeout ngầm, lập chỉ mục PageRank RepoMap 0.21ms, khung AST Depth-2 (-89% token) và Git co-change.",
-    "valveTitle": "3. Working-Set Valve (E1.3)",
-    "valveSubtitle": "Cắt tỉa log rác dưới 2ms & nhãn FRESH — DO NOT REREAD",
-    "valveDescription": "Thay log cũ bằng con trỏ blob:<sha12> FRESH — DO NOT REREAD dưới 2ms, giữ gói bàn giao < 1.200 token và tìm kiếm FTS5 1ms."
-  },
-  "conversionSection": {
-    "sectionTitle": "Gói Code, Promo & Tài Trợ",
-    "sectionSubtitle": "Cài hmoc-steward-acp từ npm để vắt credit Freebuff mỗi ngày, Zap GLM và promo $20 trong OpenCode, hoặc tài trợ kênh.",
-    "audienceBuildersTab": "Gói Code Cho Vibecoder",
-    "audienceSupportersTab": "Quỹ Ủng Hộ Cộng Đồng",
-    "audienceSponsorsTab": "Nhà Cung Cấp & Tài Trợ",
-    "calculatorTitle": "Bảng Ước Tính Hiệu Suất Vắt Token & Khuyến Mãi",
-    "calculatorSubtitle": "Xem việc tái sử dụng phiên con ses_* ấm và giao phần nghiên cứu/tài liệu cho credit miễn phí mỗi ngày của Freebuff cùng Zap GLM giúp kéo dài gói promo $20 Devin swe-2 và hạn ngạch Antigravity ra sao.",
-    "hoursPerWeekLabel": "Số giờ điều phối đa Harness mỗi tuần",
-    "baselineCostLabel": "Hệ Bro: Cắm đầu dùng 1 model đắt đỏ cho mọi việc",
-    "optimizedCostLabel": "Hệ Pro: Phân vai 3 Harness + Freebuff miễn phí mỗi ngày",
-    "monthlySavingsLabel": "Giá trị hạn ngạch & promo tiết kiệm mỗi tháng",
-    "prunedTokensLabel": "Lượng token khỏi phải đọc lại mỗi tháng",
-    "sponsorMatrixTitle": "Gói Ưu Đãi Vibecoder & Kênh Phân Phối Cho Nhà Cung Cấp"
+  "home": {
+    "hero": {
+      "accessibleHeadline": "Devin và Antigravity, ngay trong OpenCode",
+      "lineOneWord": "NGAY TRONG",
+      "lineTwoWord": "OPENCODE.",
+      "support": "Mở phiên Devin hoặc Antigravity thật ngay trong terminal OpenCode, hoặc để agent của bạn giao việc cho chúng.",
+      "installCommand": "opencode plugin add hmoc-steward-acp@0.2.0",
+      "copyLabel": "Sao chép",
+      "copiedLabel": "Đã chép",
+      "copyAriaLabel": "Sao chép lệnh cài"
+    },
+    "try": {
+      "heading": "Thử một lệnh",
+      "inputLabel": "Gõ một lệnh của plugin",
+      "examplesLabel": "Hoặc thử",
+      "sideTitle": "Ngồi xem, hoặc giao việc.",
+      "sideBody": "Mở phiên khi bạn muốn xem agent làm và trả lời câu hỏi của nó. Giao việc khi bạn bận: tác vụ chạy trong một phiên con OpenCode thật, xong thì kết quả quay về agent của bạn."
+    },
+    "setup": {
+      "heading": "Cài một lần.",
+      "requirement": "Bạn cần OpenCode V2, cùng devin CLI đã đăng nhập (devin auth login) hoặc Antigravity ACP server. Plugin chỉ kiểm tra, không tự cài hay tự đăng nhập.",
+      "stages": [
+        {
+          "duration": "Vài giây",
+          "clause": "Đầu tiên, chạy lệnh cài."
+        },
+        {
+          "duration": "Vài giây",
+          "clause": "Sau đó, nạp lại OpenCode."
+        },
+        {
+          "duration": "Khoảng một phút",
+          "clause": "Tiếp theo, chạy /hivemind-setup và trả lời."
+        },
+        {
+          "duration": "Mọi phiên sau đó",
+          "clause": "Từ đó, nó không làm phiền bạn nữa."
+        }
+      ]
+    },
+    "keys": {
+      "heading": "Mọi phím nó thêm vào.",
+      "headingLine1": "Mọi phím",
+      "headingLine2": "nó thêm vào.",
+      "tableName": "Lệnh",
+      "cardTitle": "Devin muốn chạy một lệnh",
+      "cardCommand": "bun test",
+      "cardOptions": [
+        "Cho phép lần này",
+        "Luôn cho phép",
+        "Từ chối"
+      ],
+      "caption": "Yêu cầu cấp quyền hiện thành thẻ. Các lựa chọn do agent đưa ra."
+    },
+    "closing": {
+      "heading": "Tiếp theo: Claude Code.",
+      "headingLine1": "Tiếp theo:",
+      "headingLine2": "Claude Code.",
+      "body": "Sau đó là Cursor. Tiền ủng hộ giúp mình có thời gian làm ra chúng.",
+      "button": "Ủng hộ qua Ko-fi"
+    },
+    "footer": {
+      "note1": "hmoc-steward-acp 0.2.0, plugin cho OpenCode V2.",
+      "note2Before": "Thích Buy Me a Coffee hơn?",
+      "note2Link": "Ở đây",
+      "note2After": ".",
+      "note3Before": "Link giới thiệu các công cụ mình dùng kèm:",
+      "note3Freebuff": "Freebuff",
+      "note3Middle": "và gói",
+      "note3Zai": "Z.ai GLM Coding Plan",
+      "note3After": ". Chúng không thuộc plugin, và mình được thưởng nếu bạn đăng ký.",
+      "backToTop": "Lên đầu trang",
+      "githubLabel": "GitHub",
+      "npmLabel": "npm",
+      "issuesLabel": "Báo lỗi",
+      "credit": "Làm bởi shynlee04",
+      "copyright": "© 2026"
+    }
   },
   "blogSection": {
     "pageTitle": "Ghi Chép Kỹ Thuật & Kiến Trúc Đường Truyền",
@@ -120,10 +117,5 @@
     "storyXrayTitle": "Ngăn Kéo Soi Mạch X-Ray 3 Tầng",
     "storyConversionTitle": "Bảng Tính Vắt Promo & Kênh Nhà Cung Cấp",
     "payloadCollectionsTitle": "Cấu Trúc Bộ Sưu Tập Payload CMS 3.0"
-  },
-  "footer": {
-    "tagline": "Thiết kế theo phong cách Cyberpunk Neo-Tokyo dành cho cộng đồng Vibecoder OpenCode V2 muốn mở khóa mọi AI Coding Harness trong một buồng lái duy nhất.",
-    "copyrightNotice": "© 2026 Hệ sinh thái Hivemind Steward (shynlee04). Phát hành theo tiêu chuẩn kỹ thuật thực chiến.",
-    "builtWithLine": "Next.js 15, Three.js WebGL Telemetry, Payload CMS 3.0 và Zod Schema Validation"
   }
 }
