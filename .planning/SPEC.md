@@ -30,13 +30,26 @@ Every feature, showcase card, and interactive node on the portal carries an expl
 
 ## 3. User Stories & Acceptance Criteria
 
-### 3.1 Hero, 3D Cyber-Wok Stage & Bilingual Navigation
+### 3.0 Homepage revamp (2026-10-20, supersedes the homepage parts of 3.1–3.3)
+
+The homepage `/[locale]` sells only what `hmoc-steward-acp` 0.2.0 ships, per its README and ROADMAP: Devin and Antigravity inside OpenCode V2, as hosted sessions or native delegation. Freebuff, invented model IDs, provider counts, savings figures and substrate are not homepage claims. A test enforces this (`test/phase-v1-seams.test.ts`).
+
+- **HP-01 (Hero):** Visitors see "Devin and Antigravity, inside OpenCode", with a live TUI slot inside the headline, and the copyable install command `opencode plugin add hmoc-steward-acp@0.2.0`.
+- **HP-02 (Try a command):** Visitors type a plugin command (`/devin <task>`, `/antigravity`, `hivemind-delegate …`, `/hivemind-setup`, `ctrl+o` …) and see what it does. `CommandConsoleModule.interpretCommand` produces the answer. The prefilled answer renders without JavaScript.
+- **HP-03 (Set up once):** Install, reload, `/hivemind-setup`, plus the prerequisites (OpenCode V2 and a signed-in `devin` CLI or the Antigravity ACP server).
+- **HP-04 (Every key it adds):** A table of the 14 commands and keys from `listPluginCommands`, next to a permission-card fragment.
+- **HP-05 (Close):** Claude Code is next and Cursor follows (the plugin ROADMAP), with one Ko-fi action. Buy Me a Coffee and the Freebuff and Z.ai referral links sit in the footer, disclosed as referrals that are not part of the plugin.
+- **HP-06 (Locale):** `/en` ⇄ `/vi` share one dictionary schema with 100% key parity. The locale wrapper carries `lang`.
+- Blog, episodes and showroom routes stay buildable but leave the navigation. The 3D reactor, X-ray explorer and quota estimator modules survive only for the showroom.
+- Art direction: `.taste-skill/direction.json` (sentence-as-layout, sky/navy, Anton + Work Sans).
+
+### 3.1 Hero, 3D Cyber-Wok Stage & Bilingual Navigation (superseded on the homepage by 3.0)
 - **US-01 (Asymmetric Split Cockpit Hero):** As a developer landing on `/en` or `/vi`, I see a 45%/55% split cockpit hero: left column displays the 3-Horizon maturity strip, primary value proposition, and copyable `npx hmoc-steward-acp` Silk Scroll command ledger; right column hosts the interactive 3D Cyber-Wok Reactor Stage with reserved layout dimensions (`min-height: 520px; aspect-ratio: 16 / 10`, `CLS < 0.1`).
 - **US-02 (Interactive 3D Cyber-Wok Reactor):** As a visitor, I can click or keyboard-focus 4 nodes in the Cyber-Wok Reactor (`devin`, `antigravity`, `freebuff`, `substrate`) to inspect real model IDs (`swe-2-max`, `argon-4-high`, `glm-5.3-flash` / `deepseek-4.1-flash`), ACP wire telemetry, and horizon tier.
 - **US-03 (Deterministic Reduced-Motion & SSR Fallback):** As a visitor with `prefers-reduced-motion: reduce` or without WebGL, I automatically receive a deterministic high-contrast SVG schematic (`DeterministicCanvasFallbackAdapter`) with identical interactive node controls and zero animation loops.
 - **US-04 (Zero-Reload EN/VI Locale Parity):** As a Vietnamese or English reader, I can toggle between `/en` and `/vi` preserving my active horizon filter and selected showcase slice; every dictionary key is validated at build and test time for 100% schema parity.
 
-### 3.2 20-Clip Ecosystem Catalog & 3-Layer X-Ray Explorer
+### 3.2 20-Clip Ecosystem Catalog & 3-Layer X-Ray Explorer (showroom only)
 - **US-05 (Horizon & Plugin Filtering):** As an evaluator, I can filter showcases by plugin (`all`, `steward`, `substrate`, `cross-plugin`) and maturity horizon (`all`, `shipped`, `next-release`, `roadmap`).
 - **US-06 (Steward S1–S10 Showcases):** As an OpenCode user, I can inspect all 10 Steward clips (`S1` Zero-Ceremony Setup, `S2` Hosted Pair-Programming, `S3` Native Subagent Delegation, `S4` Crash Recovery & Reconcile, `S5` Permission Mediation, `S6` Origin-Labelled `/` & `@` Mentions, `S7` Fenced Live Option Switching, `S8` Rank-Routed Parallel Swarm, `S9` Freebuff Rotated Handle Recovery, `S10` KeepSlotForResume Pause Continuity).
 - **US-07 (Substrate M1–M9 & C1 Showcases):** As a systems engineer, I can inspect all 9 Substrate clips (`M1` The Spine Blob Archive, `M2` Shadow Git Checkpoints, `M3` The Honeycomb Hybrid Index, `M4` AST Skeleton & PageRank RepoMap, `M5` Working-Set Valve <2ms Pruning, `M6` CompactionContinuationPacket <1200 Tokens, `M7` ProvenanceChain Forensics, `M8` Git Co-Change Coupling Radar, `M9` `/substrate` Mudball Advisor) plus `C1` Cross-Plugin Steward+Substrate Synergy.
@@ -47,7 +60,7 @@ Every feature, showcase card, and interactive node on the portal carries an expl
 - **US-09 ("Pro, Not Bro" Pass-Down Lesson):** Every showcase card includes a concise bilingual architectural lesson explaining why deep seams, boundary validation, and deterministic recovery beat superficial prompt hacking.
 - **US-10 (5-Minute 3-Harness Greenfield Build Walkthrough):** As a viewer of the flagship demo, I can step through the 5-stage greenfield build timeline where `Freebuff` (`deepseek-4.1-flash` -> `glm-5.3-flash`), `Devin` (`swe-2-max`), and `Antigravity` (`argon-4-high`) collaborate under OpenCode V2 orchestration.
 
-### 3.3 Partner Conversion Hub, Referral Vault & Quota Estimator
+### 3.3 Partner Conversion Hub, Referral Vault & Quota Estimator (showroom only; homepage uses `PARTNER_URLS` per HP-05)
 - **US-11 (3-Audience Conversion Hub):** As a visitor, I can switch between 3 tailored conversion tracks:
   1. `builders` (Vibecoders & Indie Devs): Freebuff referral (`https://freebuff.com/?ref=ref-6c980d54-a29a-4270-a160-35f13e62a2ff`) and Zap GLM Coding Plan (`https://z.ai/subscribe?ic=LTWUT4H2RS`).
   2. `supporters` (Community Backers): Ko-fi (`https://ko-fi.com/shynlee04`) and Buy Me a Coffee (`https://buymeacoffee.com/shynlee04l`).
@@ -73,6 +86,7 @@ Every feature, showcase card, and interactive node on the portal carries an expl
 | `EcosystemCatalogModule` | `src/modules/ecosystem-catalog/index.ts` | `queryShowcases(query)`, `getShowcaseById(id, locale)`, `getGreenfieldWalkthrough(locale)`, `getHorizonSummaries(locale)` |
 | `PartnerConversionModule` | `src/modules/partner-conversion/index.ts` | `resolveConversionCtas(query)`, `calculateQuotaSavings(hoursPerWeek)`, `PARTNER_URLS` |
 | `ContentShowroomModule` | `src/modules/content-showroom/index.ts` | `listEpisodes(locale)`, `getEpisodeBySlug(slug, locale)`, `listArticles(query)`, `getArticleBySlug(slug, locale)`, `payloadCollections`, `<ShowcaseHarness />` |
+| `CommandConsoleModule` | `src/modules/command-console/index.ts` | `interpretCommand(input, locale)`, `listPluginCommands(locale)`, `commandExamples(locale)`, `commandPrefill(locale)` |
 
 ---
 
