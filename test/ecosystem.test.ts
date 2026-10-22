@@ -17,12 +17,19 @@ import {
 } from "@/modules/locale-dictionary";
 
 const ROOT = process.cwd();
-const STEWARD_REF = "hmoc-steward-acp@0.4.0";
-const SUBSTRATE_REF = "hivemind-substrate@0.2.0-beta.1";
+const STEWARD_REF = "hmoc-steward-acp";
+const SUBSTRATE_REF = "hivemind-substrate";
 const STEWARD_PROJECT_JSON = `{
   "plugins": [
     {
       "package": "${STEWARD_REF}"
+    }
+  ]
+}`;
+const SUBSTRATE_PROJECT_JSON = `{
+  "plugins": [
+    {
+      "package": "${SUBSTRATE_REF}"
     }
   ]
 }`;
@@ -97,17 +104,13 @@ describe("EcosystemModule install plans", () => {
       global: [
         {
           kind: "shell",
-          text: `npx ${SUBSTRATE_REF} --global`,
+          text: `opencode plugin add ${SUBSTRATE_REF}`,
           note: "substrateGlobal",
         },
         { kind: "shell", text: "opencode", note: "reload" },
       ],
       project: [
-        {
-          kind: "shell",
-          text: `npx ${SUBSTRATE_REF}`,
-          note: "substrateProject",
-        },
+        { kind: "json", text: SUBSTRATE_PROJECT_JSON, note: "substrateProject" },
         { kind: "shell", text: "opencode", note: "reload" },
       ],
     },
@@ -120,7 +123,7 @@ describe("EcosystemModule install plans", () => {
         },
         {
           kind: "shell",
-          text: `npx ${SUBSTRATE_REF} --global`,
+          text: `opencode plugin add ${SUBSTRATE_REF}`,
           note: "substrateGlobal",
         },
         { kind: "shell", text: "opencode", note: "reload" },
@@ -128,11 +131,7 @@ describe("EcosystemModule install plans", () => {
       ],
       project: [
         { kind: "json", text: STEWARD_PROJECT_JSON, note: "stewardProject" },
-        {
-          kind: "shell",
-          text: `npx ${SUBSTRATE_REF}`,
-          note: "substrateProject",
-        },
+        { kind: "json", text: SUBSTRATE_PROJECT_JSON, note: "substrateProject" },
         { kind: "shell", text: "opencode", note: "reload" },
         { kind: "tui", text: "/hivemind-setup", note: "setup" },
       ],

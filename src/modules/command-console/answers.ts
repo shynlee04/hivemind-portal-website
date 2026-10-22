@@ -287,12 +287,12 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
       {
         group: "open",
         key: "/devin <task>",
-        what: "Phiên mới, gửi luôn tác vụ",
+        what: "Phiên mới, gửi luôn task",
       },
       {
         group: "open",
         key: "/devin_delegate <task>",
-        what: "Giao cho Devin bằng lệnh",
+        what: "Giao cho Devin ngay từ lệnh",
       },
       { group: "open", key: "/hivemind-setup", what: "Lưu thiết lập một lần" },
       {
@@ -306,7 +306,7 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
       {
         group: "session",
         key: "ctrl+t",
-        what: "Chọn mức suy nghĩ (Devin)",
+        what: "Chọn mức thinking (Devin)",
       },
       { group: "session", key: "ctrl+x", what: "Huỷ lệnh đang chạy" },
       {
@@ -369,7 +369,7 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
     hostedTask: {
       titleSuffix: " · phiên mới",
       summary:
-        "Mở phiên mới và gửi luôn tác vụ. Câu trả lời, suy nghĩ, lệnh gọi công cụ và kế hoạch hiện ra ngay khi agent làm.",
+        "Mở phiên mới và gửi luôn task. Câu trả lời, suy nghĩ, lệnh gọi công cụ và kế hoạch hiện ra ngay khi agent làm.",
       promptLabel: "bạn",
       planLabel: "kế hoạch",
       planText: "Tái hiện lỗi, sửa, chạy test",
@@ -381,7 +381,7 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
     delegate: {
       titlePrefix: "Đã giao cho ",
       summary:
-        "Agent giao tác vụ cho Devin hoặc Antigravity trong một phiên con OpenCode thật. Chạy tiền cảnh thì chờ kết quả; chạy nền thì kết quả tự về agent khi xong.",
+        "Agent giao task cho Devin hoặc Antigravity trong một phiên con OpenCode thật. Foreground thì chờ kết quả; background thì kết quả tự về agent khi xong.",
       agentLabel: "agent",
       childLabel: "phiên con",
       childText: "ses_4f9c… đang chạy",
@@ -397,7 +397,7 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
     setupHealth: {
       title: "/hivemind-setup health",
       summary:
-        "Một lần đọc tĩnh thiết lập đã lưu, không khởi động engine. Kết quả là ready, action-required hoặc blocked, kèm đúng một việc cần làm tiếp.",
+        "Kiểm tra tĩnh một lượt thiết lập đã lưu, không khởi động engine. Kết quả là ready, action-required hoặc blocked, kèm đúng một việc cần làm tiếp.",
       agentLabel: "health",
       agentText: "ready",
       statusText: "Devin: đã đăng nhập · Antigravity: đã có server",
@@ -420,10 +420,10 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
         "Mở lại danh sách phiên ngay trong phiên đang chạy. Phiên đang bận sẽ chờ làm xong.",
       "ctrl+m": "Chọn model.",
       "ctrl+e": "Chọn chế độ phiên.",
-      "ctrl+t": "Chọn mức suy nghĩ (Devin).",
+      "ctrl+t": "Chọn mức thinking (Devin).",
       "ctrl+x": "Huỷ lệnh đang chạy.",
       esc: "Về màn hình chính. Phiên vẫn chạy nền và quay lại nguyên vẹn.",
-      "@": "Gõ @ để gợi ý file. @đường-dẫn thành file agent đọc được.",
+      "@": "Gõ @ để gợi ý file. @path trở thành file agent đọc được.",
       "/": "Trong phiên, / liệt kê các lệnh riêng của agent đó.",
       "devin-children": "Liệt kê các phiên con của phiên hiện tại.",
       "hivemind-doctor":

@@ -201,17 +201,17 @@
       "heading": "Three steps, then work.",
       "items": [
         {
-          "image": "plate",
+          "image": "catba",
           "name": "Install it",
           "body": "One command per plugin, for every project or just this one."
         },
         {
-          "image": "catba",
+          "image": "comb",
           "name": "Reload OpenCode",
           "body": "Plugins load at startup, so restart once after installing."
         },
         {
-          "image": "comb",
+          "image": "freshComb",
           "name": "Set up once, then forget it",
           "body": "/hivemind-setup asks which harnesses and models to use, saves the answers and stays out of the way."
         }
@@ -304,7 +304,7 @@
       "line1": "Three real agents,",
       "line2": "inside OpenCode.",
       "support": "Open Devin, Antigravity or Freebuff as a real session in your OpenCode terminal when you want to watch. Hand any of them a task in the background when you don't.",
-      "installCommand": "opencode plugin add hmoc-steward-acp@0.4.0",
+      "installCommand": "opencode plugin add hmoc-steward-acp",
       "installNote": "Latest on npm: 0.4.0. Needs OpenCode 2.1.2 or later, below v3."
     },
     "switches": {
@@ -423,8 +423,8 @@
       "line1": "Nothing your agent did",
       "line2": "goes missing.",
       "support": "Substrate archives every OpenCode session tree into your project, indexes it, and gives your agent two calls to find out exactly what changed and who changed it.",
-      "installCommand": "npx hivemind-substrate@0.2.0-beta.1",
-      "installNote": "Beta. Adds the plugin to ./opencode.json; add --global for every project. Then reload OpenCode."
+      "installCommand": "opencode plugin add hivemind-substrate",
+      "installNote": "Beta. Adds Substrate to your global OpenCode config, then reload OpenCode."
     },
     "intro": [
       {

@@ -55,8 +55,8 @@ export function buildInstallPlan(
   scope: InstallScope,
 ): ReadonlyArray<InstallStep> {
   const steps: Array<InstallStep> = [];
-  const stewardRef = `${PRODUCTS.steward.pkg}@${PRODUCTS.steward.version}`;
-  const substrateRef = `${PRODUCTS.substrate.pkg}@${PRODUCTS.substrate.version}`;
+  const stewardRef = PRODUCTS.steward.pkg;
+  const substrateRef = PRODUCTS.substrate.pkg;
 
   if (plugins !== "substrate") {
     steps.push(
@@ -75,11 +75,19 @@ export function buildInstallPlan(
   }
 
   if (plugins !== "steward") {
-    steps.push({
-      kind: "shell",
-      text: `npx ${substrateRef}${scope === "global" ? " --global" : ""}`,
-      note: scope === "global" ? "substrateGlobal" : "substrateProject",
-    });
+    steps.push(
+      scope === "global"
+        ? {
+          kind: "shell",
+          text: `opencode plugin add ${substrateRef}`,
+          note: "substrateGlobal",
+        }
+        : {
+          kind: "json",
+          text: JSON.stringify({ plugins: [{ package: substrateRef }] }, null, 2),
+          note: "substrateProject",
+        },
+    );
   }
 
   steps.push({ kind: "shell", text: "opencode", note: "reload" });

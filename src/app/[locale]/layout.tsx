@@ -27,7 +27,7 @@ export default async function LocaleLayout({
   const dict = getPortalDictionary(locale);
 
   return (
-    <div id="top">
+    <div id="top" lang={locale}>
       <SiteHeader
         locale={locale}
         nav={dict.nav}

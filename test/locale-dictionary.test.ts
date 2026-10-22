@@ -37,11 +37,11 @@ describe("LocaleDictionaryModule seam", () => {
 
   test("hero install commands equal the strings built by buildInstallPlan", () => {
     const stewardGlobal = buildInstallPlan("steward", "global")[0]!.text;
-    const substrateProject = buildInstallPlan("substrate", "project")[0]!.text;
+    const substrateGlobal = buildInstallPlan("substrate", "global")[0]!.text;
     for (const locale of SUPPORTED_LOCALES) {
       const dict = getPortalDictionary(locale);
       expect(dict.steward.hero.installCommand).toBe(stewardGlobal);
-      expect(dict.substrate.hero.installCommand).toBe(substrateProject);
+      expect(dict.substrate.hero.installCommand).toBe(substrateGlobal);
     }
   });
 });

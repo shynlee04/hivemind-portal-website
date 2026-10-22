@@ -38,7 +38,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "document.documentElement.classList.add('reveal-ready')",
+              "document.documentElement.lang=location.pathname.startsWith('/vi')?'vi':'en';document.documentElement.classList.add('reveal-ready')",
           }}
         />
       </head>
