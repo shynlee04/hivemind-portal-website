@@ -1,20 +1,21 @@
 # CODING_STANDARDS.md
 
 ## 1. Deep Modules & Narrow Seams (`CS-ARCH`, `CS-SEAM`)
-- Every domain capability lives behind one of the five deep modules under `src/modules/<module-name>/index.ts(x)`.
-- Route files under `src/app/[locale]/**` are thin composition shells that call module seams and pass typed props to UI views.
-- Never scatter raw translation strings, partner referral URLs, or showcase fixtures across page components.
+- Every domain capability lives behind a module seam under `src/modules/<module-name>/index.ts` (see `AGENTS.md`).
+- Route files under `src/app/[locale]/**` are thin composition shells that call module seams and pass typed props to UI components.
+- Never scatter copy strings, product versions, install commands or external URLs across components: copy comes from the dictionary, versions/URLs from `EcosystemModule`.
 
 ## 2. Boundary Validation & Total Types (`CS-TYPE`, `CS-SEC`)
-- Validate locale inputs (`"en" | "vi"`), dictionary payloads, and query filters at module boundaries using Zod schemas.
-- Enforce `noUncheckedIndexedAccess: true` and strict TypeScript checks (`bun run typecheck`).
-- External links (`target="_blank"`) must include `rel="noopener noreferrer"`.
+- Validate locale inputs (`"en" | "vi"`) and dictionary payloads with Zod at module boundaries.
+- Strict TypeScript (`bun run typecheck`); no `any`, `@ts-ignore` or `@ts-expect-error`.
+- External links (`target="_blank"`) include `rel="noopener noreferrer"`.
 
 ## 3. Observable Behavioral Tests (`CS-TEST`)
-- Tests in `test/*.test.ts` exercise only the public module seams and rendered HTML/SVG outputs.
-- No phase-narrating comments or tautological mock assertions.
+- Tests in `test/*.test.ts` exercise public module seams with independently written expectations.
+- No phase-narrating comments or tautological assertions.
 
-## 4. Visual & Accessibility Discipline (`{CHINGCHONGCHINGVIBECODING}`)
-- Follow `design-system/hivemind-portal/MASTER.md` tokens (`--bg-wok-iron`, `--bg-smoked-basalt`, `--border-forge-brass`, `--text-parchment`, `--accent-wok-gold`, `--accent-jade-wire`, `--accent-dragon-ember`).
-- Preserve `line-height >= 1.18` on headings for Vietnamese stacked diacritics.
-- Provide `DeterministicCanvasFallbackAdapter` whenever `reducedMotion` is active or WebGL is unavailable.
+## 4. Visual & Accessibility Discipline
+- Follow the one-motif direction (`.planning/SPEC.md` §4): the hexagon is the only shape; no gradients, rules, shadows at rest, eyebrows or monospace outside code and `data-ui` fragments.
+- Every headline fits two lines at 1440, 768 and 390px in both locales; heading line-height stays ≥ 1.0 with room for Vietnamese diacritics.
+- Every interactive live element works without JavaScript from its server-rendered default and honours `prefers-reduced-motion`.
+- Every photograph is credited in the footer via `PHOTO_CREDITS`.

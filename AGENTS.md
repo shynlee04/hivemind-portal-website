@@ -1,32 +1,32 @@
 # AGENTS.md — `hivemind-portal-website`
 
 ## Purpose & Scope
-Bilingual (`en` and `vi`) product portal, 3D Cyber-Wok Reactor Stage, 20-slice 3-Layer X-Ray Explorer, Partner Conversion Hub, Payload 3.0 localized content collections, and interactive Component Showroom for the **Hivemind-\*** OpenCode V2 ecosystem (`hivemind-steward-acp` + `hivemind-substrate`).
+Bilingual (`en` / `vi`) public site for the Hivemind OpenCode V2 plugins: ecosystem home `/[locale]`, `/[locale]/steward` (`hmoc-steward-acp`) and `/[locale]/substrate` (`hivemind-substrate`).
 
-Read [`GLOSSARY.md`](GLOSSARY.md), [`.planning/SPEC.md`](.planning/SPEC.md), [`design-system/hivemind-portal/MASTER.md`](design-system/hivemind-portal/MASTER.md), and [`CODING_STANDARDS.md`](CODING_STANDARDS.md) before modifying code.
+Read [`GLOSSARY.md`](GLOSSARY.md), [`.planning/SPEC.md`](.planning/SPEC.md) and [`CODING_STANDARDS.md`](CODING_STANDARDS.md) before modifying code. Claims come only from the plugin repos (README, CHANGELOG, source) or an explicit owner release decision recorded in the SPEC.
 
 ## Commands
 ```sh
-bun test                # Run all seam unit and integration tests
+bun test                # module seam tests
 bun run typecheck       # tsc --noEmit
-bun run build           # Next.js production build verification
+bun run build           # Next.js production build (static en/vi routes)
+node ~/.config/devin/skills/design-taste-frontend/scripts/lint.mjs src
+node ~/.config/devin/skills/design-taste-frontend/scripts/inspect.mjs http://localhost:3000/en
 ```
 
-## Five Deep Modules (One Seam Per Module)
+## Modules (one seam each)
 
-| Module | Public Entry Seam | Responsibility |
+| Module | Public seam | Owns |
 | :--- | :--- | :--- |
-| `LocaleDictionaryModule` | `src/modules/locale-dictionary/index.ts` | Bilingual (`en` / `vi`) dictionary lookup + Zod 100% key parity verification. |
-| `WokReactorStageModule` | `src/modules/wok-reactor-stage/index.tsx` | Three.js 3D Cyber-Wok Reactor (`devin`, `antigravity`, `freebuff`, `substrate`) + `DeterministicCanvasFallbackAdapter` for SSR and `prefers-reduced-motion`. |
-| `EcosystemCatalogModule` | `src/modules/ecosystem-catalog/index.ts` | Queries all 20 `< 2-min` clips (`S1`–`S10`, `M1`–`M9`, `C1`) + `5-min` 3-Harness Greenfield build with 3-Layer X-Rays and `"Pro, Not Bro"` lessons. |
-| `PartnerConversionModule` | `src/modules/partner-conversion/index.ts` | Resolves verified referral links (`Freebuff`, `Zap GLM`), supporter vaults (`Ko-fi`, `Buy Me a Coffee`), B2B sponsor tiers, and quota savings. |
-| `ContentShowroomModule` | `src/modules/content-showroom/index.ts` | Bridges localized Payload 3.0 collections (`episodes`, `articles`, `showcase-slices`, `sponsors`), bilingual blog/episode queries, and `<ShowcaseHarness />`. |
-| `CommandConsoleModule` | `src/modules/command-console/index.ts` | Homepage "try a command" answers and the commands/keys table for the real `hmoc-steward-acp` 0.2.0 surface (EN/VI). |
+| `LocaleDictionaryModule` | `src/modules/locale-dictionary/index.ts` | `en`/`vi` copy, Zod schema (`schema.ts`), parity check. All page copy lives here. |
+| `EcosystemModule` | `src/modules/ecosystem/index.ts` | `PRODUCTS` (packages, versions, URLs), `LINKS`, `buildInstallPlan`, `PHOTO_CREDITS`. Bump versions here only. |
+| `CommandConsoleModule` | `src/modules/command-console/index.ts` | Steward "Try a command" answers and the commands/keys table. |
+| `TraceExplorerModule` | `src/modules/trace-explorer/index.ts` | Substrate sample change-set package and leaves. |
 
-Homepage (`src/components/home/`, styles in `src/app/[locale]/home.css`) claims only what the plugin README/ROADMAP ship; see `.planning/SPEC.md` §3.0.
+UI lives in `src/components/` (shared) and `src/components/{home,steward,substrate}/`; routes in `src/app/[locale]/` are thin shells. Art direction: `.taste-skill/direction.json` (one-motif hexagon); house rules in `.planning/SPEC.md` §4.
 
 ## Non-Negotiable Rules
-- Atomic git commits per logical unit (`docs`, `feat`, `test`). Never leave an uncommitted dirty tree.
-- Zero unnecessary comments. Only document non-obvious rationale.
+- Atomic git commits per logical unit (`docs`, `feat`, `test`, `chore`). Never leave an uncommitted dirty tree.
+- Zero unnecessary comments.
 - Keep every file well under 1,000 LOC.
-- Test external behavior at the 5 module seams (`test/*.test.ts`).
+- Test external behavior at the module seams (`test/*.test.ts`); `test/banned-claims.test.ts` guards against stale or invented claims.
