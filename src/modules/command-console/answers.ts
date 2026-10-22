@@ -1,4 +1,4 @@
-import type { Locale } from "@/types/portal";
+import type { Locale } from "@/modules/locale-dictionary";
 
 export type ConsoleKeyId =
   | "ctrl+o"
@@ -37,6 +37,11 @@ export interface ConsoleCopy {
       readonly summary: string;
       readonly sessions: readonly [string, string];
     };
+    readonly freebuff: {
+      readonly title: string;
+      readonly summary: string;
+      readonly sessions: readonly [string, string];
+    };
   };
   readonly hostedTask: {
     readonly titleSuffix: string;
@@ -57,6 +62,20 @@ export interface ConsoleCopy {
     readonly childText: string;
     readonly resultLabel: string;
     readonly resultText: string;
+  };
+  readonly delegateFreebuff: {
+    readonly summary: string;
+    readonly childText: string;
+    readonly resultText: string;
+  };
+  readonly setupHealth: {
+    readonly title: string;
+    readonly summary: string;
+    readonly agentLabel: string;
+    readonly agentText: string;
+    readonly statusText: string;
+    readonly nextLabel: string;
+    readonly nextText: string;
   };
   readonly setup: {
     readonly title: string;
@@ -89,10 +108,25 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
       },
       {
         group: "open",
+        key: "/freebuff",
+        what: "Open a Freebuff session",
+      },
+      {
+        group: "open",
         key: "/devin <task>",
         what: "New session with the task sent",
       },
+      {
+        group: "open",
+        key: "/devin_delegate <task>",
+        what: "Delegate to Devin from a command",
+      },
       { group: "open", key: "/hivemind-setup", what: "Save your setup once" },
+      {
+        group: "open",
+        key: "/hivemind-setup health",
+        what: "Check setup, no engine started",
+      },
       { group: "session", key: "ctrl+o", what: "Switch session" },
       { group: "session", key: "ctrl+m", what: "Pick model" },
       { group: "session", key: "ctrl+e", what: "Pick session mode" },
@@ -116,14 +150,20 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
       {
         group: "agent",
         key: "hivemind-delegate",
-        what: "Hand a task to Devin or Antigravity",
+        what: "Hand a task to Devin, Antigravity or Freebuff",
       },
       { group: "agent", key: "devin-children", what: "List child sessions" },
+      {
+        group: "agent",
+        key: "hivemind-doctor",
+        what: "Check a harness; install and sign-in need approval",
+      },
     ],
     examples: [
-      "/antigravity",
+      "/freebuff",
       "hivemind-delegate review src/retry.ts",
-      "/hivemind-setup",
+      "hivemind-delegate freebuff explain src/queue.ts",
+      "/hivemind-setup health",
       "ctrl+o",
     ],
     prefill: "/devin fix the flaky retry test",
@@ -145,6 +185,15 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
         sessions: [
           "Draft the release notes   ~/app   1h ago",
           "Audit the build script   ~/web   Monday",
+        ],
+      },
+      freebuff: {
+        title: "Freebuff · sessions",
+        summary:
+          "Opens Freebuff's session picker. Pick one to continue, or start a new one.",
+        sessions: [
+          "Explain the queue worker   ~/app   3h ago",
+          "Draft migration notes   ~/api   yesterday",
         ],
       },
     },
@@ -169,6 +218,22 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
       childText: "ses_4f9c… running",
       resultLabel: "result",
       resultText: "Delivered to your agent",
+    },
+    delegateFreebuff: {
+      summary:
+        "Your agent hands the task to Freebuff in a real OpenCode child session, on the model you picked from Freebuff's catalog.",
+      childText: "ses_3Rd8… running",
+      resultText: "Delivered to your agent",
+    },
+    setupHealth: {
+      title: "/hivemind-setup health",
+      summary:
+        "One static read of your saved setup, no engine started. It answers ready, action-required or blocked, with the one next thing to do.",
+      agentLabel: "health",
+      agentText: "ready",
+      statusText: "Devin: signed in · Antigravity: server found",
+      nextLabel: "next",
+      nextText: "Nothing to do",
     },
     setup: {
       title: "/hivemind-setup",
@@ -216,10 +281,25 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
       },
       {
         group: "open",
+        key: "/freebuff",
+        what: "Mở phiên Freebuff",
+      },
+      {
+        group: "open",
         key: "/devin <task>",
         what: "Phiên mới, gửi luôn tác vụ",
       },
+      {
+        group: "open",
+        key: "/devin_delegate <task>",
+        what: "Giao cho Devin bằng lệnh",
+      },
       { group: "open", key: "/hivemind-setup", what: "Lưu thiết lập một lần" },
+      {
+        group: "open",
+        key: "/hivemind-setup health",
+        what: "Kiểm tra thiết lập, không khởi động engine",
+      },
       { group: "session", key: "ctrl+o", what: "Đổi phiên" },
       { group: "session", key: "ctrl+m", what: "Chọn model" },
       { group: "session", key: "ctrl+e", what: "Chọn chế độ phiên" },
@@ -239,14 +319,20 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
       {
         group: "agent",
         key: "hivemind-delegate",
-        what: "Giao việc cho Devin hoặc Antigravity",
+        what: "Giao việc cho Devin, Antigravity hoặc Freebuff",
       },
       { group: "agent", key: "devin-children", what: "Xem các phiên con" },
+      {
+        group: "agent",
+        key: "hivemind-doctor",
+        what: "Kiểm tra harness; cài và đăng nhập cần bạn duyệt",
+      },
     ],
     examples: [
-      "/antigravity",
+      "/freebuff",
       "hivemind-delegate review src/retry.ts",
-      "/hivemind-setup",
+      "hivemind-delegate freebuff explain src/queue.ts",
+      "/hivemind-setup health",
       "ctrl+o",
     ],
     prefill: "/devin sửa test retry chập chờn",
@@ -268,6 +354,15 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
         sessions: [
           "Viết release notes   ~/app   1 giờ trước",
           "Rà script build   ~/web   thứ Hai",
+        ],
+      },
+      freebuff: {
+        title: "Freebuff · phiên",
+        summary:
+          "Mở bộ chọn phiên của Freebuff. Chọn một phiên để tiếp tục, hoặc mở phiên mới.",
+        sessions: [
+          "Giải thích queue worker   ~/app   3 giờ trước",
+          "Soạn ghi chú migration   ~/api   hôm qua",
         ],
       },
     },
@@ -292,6 +387,22 @@ export const CONSOLE_COPY: Record<Locale, ConsoleCopy> = {
       childText: "ses_4f9c… đang chạy",
       resultLabel: "kết quả",
       resultText: "Đã gửi về agent của bạn",
+    },
+    delegateFreebuff: {
+      summary:
+        "Agent của bạn giao việc cho Freebuff trong một phiên con OpenCode thật, trên model bạn chọn từ catalog của Freebuff.",
+      childText: "ses_3Rd8… đang chạy",
+      resultText: "Đã gửi về agent của bạn",
+    },
+    setupHealth: {
+      title: "/hivemind-setup health",
+      summary:
+        "Một lần đọc tĩnh thiết lập đã lưu, không khởi động engine. Kết quả là ready, action-required hoặc blocked, kèm đúng một việc cần làm tiếp.",
+      agentLabel: "health",
+      agentText: "ready",
+      statusText: "Devin: đã đăng nhập · Antigravity: đã có server",
+      nextLabel: "tiếp",
+      nextText: "Không cần làm gì",
     },
     setup: {
       title: "/hivemind-setup",

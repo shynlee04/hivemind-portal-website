@@ -3,119 +3,632 @@
     "locale": "en",
     "languageLabel": "English",
     "switchLocaleLabel": "Tiếng Việt",
-    "siteTitle": "Hivemind Steward: Devin and Antigravity inside OpenCode",
-    "siteDescription": "An OpenCode V2 plugin. Open real Devin or Antigravity sessions in the OpenCode TUI, or let your agent delegate tasks to them.",
-    "ogTagline": "An OpenCode V2 plugin. Open real Devin or Antigravity sessions in the OpenCode TUI, or let your agent delegate tasks to them."
+    "pages": {
+      "home": {
+        "title": "Hivemind: a team and a memory for OpenCode",
+        "description": "Two OpenCode V2 plugins. Steward brings Devin, Antigravity and Freebuff into your session. Substrate keeps an exact local record of everything they did."
+      },
+      "steward": {
+        "title": "Hivemind Steward: Devin, Antigravity and Freebuff inside OpenCode",
+        "description": "Open real Devin, Antigravity or Freebuff sessions in the OpenCode TUI, or let your agent delegate tasks to them, on any model they offer. hmoc-steward-acp 0.4.0 on npm."
+      },
+      "substrate": {
+        "title": "Hivemind Substrate: exact memory for OpenCode agents",
+        "description": "Archive every OpenCode session tree into your project, index who did what, prune stale tool output and trace any change back to the session that made it. Beta."
+      }
+    }
   },
   "nav": {
-    "brandName": "Hivemind Steward",
-    "tryLink": "Try it",
-    "setupLink": "Setup",
-    "keysLink": "Keys",
-    "installLabel": "Install",
-    "menuLabel": "Menu"
+    "brand": "Hivemind",
+    "steward": "Steward",
+    "substrate": "Substrate",
+    "install": "Install",
+    "menu": "Menu",
+    "close": "Close",
+    "skip": "Skip to content"
+  },
+  "common": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyAria": "Copy command",
+    "copyAll": "Copy all",
+    "npm": "npm",
+    "github": "GitHub",
+    "example": "Example",
+    "images": {
+      "queen": {
+        "alt": "A marked queen bee surrounded by worker bees"
+      },
+      "comb": {
+        "alt": "A honey bee walking across empty wax honeycomb cells"
+      },
+      "freshComb": {
+        "alt": "A piece of fresh honeycomb held up, honey dripping into a bowl"
+      },
+      "catba": {
+        "alt": "A beekeeper in Cát Bà, Vietnam, holding up a hive frame beside a wooden hive"
+      },
+      "nectar": {
+        "alt": "A honey bee collecting nectar from an aster flower"
+      },
+      "plate": {
+        "alt": "Plate XI from Langstroth's 1853 hive treatise: a hive box, bee veil, glove and tools"
+      }
+    }
+  },
+  "fragments": {
+    "hosted": {
+      "caption": "Steward · hosted session",
+      "lines": [
+        {
+          "tone": "prompt",
+          "label": "you",
+          "text": "/devin fix the flaky retry test"
+        },
+        {
+          "tone": "plan",
+          "label": "plan",
+          "text": "Reproduce, fix, run the tests"
+        },
+        {
+          "tone": "tool",
+          "label": "tool",
+          "text": "read src/retry.ts"
+        },
+        {
+          "tone": "agent",
+          "label": "Devin",
+          "text": "Found it: the timer isn't reset between attempts."
+        },
+        {
+          "tone": "muted",
+          "label": "",
+          "text": "ctrl+x cancel   ctrl+o sessions   esc home"
+        }
+      ]
+    },
+    "delegate": {
+      "caption": "Steward · delegation",
+      "lines": [
+        {
+          "tone": "tool",
+          "label": "agent",
+          "text": "hivemind-delegate → Antigravity"
+        },
+        {
+          "tone": "muted",
+          "label": "child",
+          "text": "ses_7Kq2 · background"
+        },
+        {
+          "tone": "agent",
+          "label": "agent",
+          "text": "Handed off. Carrying on with the docs."
+        },
+        {
+          "tone": "ok",
+          "label": "result",
+          "text": "Antigravity finished: 3 files changed, tests pass"
+        }
+      ]
+    },
+    "trace": {
+      "caption": "Substrate · trace",
+      "lines": [
+        {
+          "tone": "muted",
+          "label": "signal",
+          "text": "[substrate] dirty c7f2 · 3 files"
+        },
+        {
+          "tone": "tool",
+          "label": "call 1",
+          "text": "trace({ change: \"c7f2\" })"
+        },
+        {
+          "tone": "agent",
+          "label": "package",
+          "text": "source 2 · test 1 · actors 1 · evidence stale"
+        },
+        {
+          "tone": "tool",
+          "label": "call 2",
+          "text": "trace({ handle: \"c7f2:evidence\" })"
+        },
+        {
+          "tone": "ok",
+          "label": "leaf",
+          "text": "bun test ran before the last edit to retry.ts"
+        }
+      ]
+    }
   },
   "home": {
     "hero": {
-      "accessibleHeadline": "Devin and Antigravity, inside OpenCode",
-      "lineOneWord": "INSIDE",
-      "lineTwoWord": "OPENCODE.",
-      "support": "Open a real Devin or Antigravity session in your OpenCode terminal, or let your agent hand one a task.",
-      "installCommand": "opencode plugin add hmoc-steward-acp@0.2.0",
-      "copyLabel": "Copy",
-      "copiedLabel": "Copied",
-      "copyAriaLabel": "Copy install command"
+      "accessibleHeadline": "A team and a memory for OpenCode",
+      "line1": "A team and a memory",
+      "line2": "for OpenCode.",
+      "support": "Hivemind is two plugins for OpenCode V2. Steward runs Devin, Antigravity and Freebuff inside your session, as the agent you talk to or as delegates. Substrate keeps an exact record of everything they did.",
+      "primary": "Install",
+      "links": [
+        "Steward",
+        "Substrate"
+      ]
+    },
+    "intro": [
+      {
+        "text": "Steward gives your agent"
+      },
+      {
+        "image": "queen"
+      },
+      {
+        "text": "colleagues. Substrate"
+      },
+      {
+        "image": "comb"
+      },
+      {
+        "text": "remembers every session, child and diff, on your own disk."
+      }
+    ],
+    "showcase": {
+      "tabsLabel": "Plugins",
+      "tabs": [
+        {
+          "id": "steward",
+          "tab": "Steward",
+          "image": "queen",
+          "title": "Three agents, one terminal",
+          "body": "Open Devin, Antigravity or Freebuff as a real session in the OpenCode terminal and watch it work, or let your agent delegate to any of them and keep going. Pick any model each one offers.",
+          "version": "hmoc-steward-acp 0.4.0, latest on npm",
+          "primary": "Read about Steward",
+          "secondary": "npm"
+        },
+        {
+          "id": "substrate",
+          "tab": "Substrate",
+          "image": "comb",
+          "title": "Keep an exact memory",
+          "body": "Archive every session tree into your project, index who did what, prune stale tool output without losing the facts, and trace any change back to the session and subagent that made it.",
+          "version": "hivemind-substrate 0.2.0-beta.1, beta on npm",
+          "primary": "Read about Substrate",
+          "secondary": "npm"
+        }
+      ]
+    },
+    "steps": {
+      "heading": "Three steps, then work.",
+      "items": [
+        {
+          "image": "plate",
+          "name": "Install it",
+          "body": "One command per plugin, for every project or just this one."
+        },
+        {
+          "image": "catba",
+          "name": "Reload OpenCode",
+          "body": "Plugins load at startup, so restart once after installing."
+        },
+        {
+          "image": "comb",
+          "name": "Set up once, then forget it",
+          "body": "/hivemind-setup asks which harnesses and models to use, saves the answers and stays out of the way."
+        }
+      ]
+    },
+    "ledger": {
+      "heading": "What ships, and what's next.",
+      "tableName": "Releases",
+      "image": "nectar",
+      "groups": [
+        {
+          "rows": [
+            {
+              "kind": "Steward",
+              "what": "hmoc-steward-acp",
+              "value": "0.4.0 · latest"
+            },
+            {
+              "kind": "Steward",
+              "what": "Devin, Antigravity, Freebuff",
+              "value": "Sessions + delegation"
+            },
+            {
+              "kind": "Steward",
+              "what": "Models",
+              "value": "Each agent's full catalog"
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "Substrate",
+              "what": "hivemind-substrate",
+              "value": "0.2.0-beta.1 · beta"
+            },
+            {
+              "kind": "Substrate",
+              "what": "Archive, index, valve, trace",
+              "value": "In owner testing"
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "Next",
+              "what": "Claude Code in Steward",
+              "value": "Planned"
+            },
+            {
+              "kind": "After",
+              "what": "Cursor in Steward",
+              "value": "Planned"
+            }
+          ]
+        }
+      ]
+    },
+    "install": {
+      "line1": "Pick a plugin,",
+      "line2": "then reload.",
+      "body": "Copy the commands for your setup. Nothing installs itself: OpenCode picks the plugins up the next time it starts.",
+      "dialogTitle": "Add to OpenCode",
+      "pluginLabel": "Plugins",
+      "plugins": {
+        "steward": "Steward",
+        "substrate": "Substrate",
+        "both": "Both"
+      },
+      "scopeLabel": "Where",
+      "scopes": {
+        "global": "Every project",
+        "project": "This project"
+      },
+      "stepsLabel": "Run these",
+      "notes": {
+        "stewardGlobal": "Installs Steward for every project.",
+        "stewardProject": "Add this entry to the plugins array in this project's opencode.json.",
+        "substrateGlobal": "Adds Substrate to ~/.config/opencode/opencode.json.",
+        "substrateProject": "Adds Substrate to ./opencode.json, keeping your comments.",
+        "reload": "Quit and reopen OpenCode.",
+        "setup": "In OpenCode, run this once and answer the questions."
+      }
+    }
+  },
+  "steward": {
+    "hero": {
+      "accessibleHeadline": "Devin, Antigravity and Freebuff, inside OpenCode",
+      "line1": "Three real agents,",
+      "line2": "inside OpenCode.",
+      "support": "Open Devin, Antigravity or Freebuff as a real session in your OpenCode terminal when you want to watch. Hand any of them a task in the background when you don't.",
+      "installCommand": "opencode plugin add hmoc-steward-acp@0.4.0",
+      "installNote": "Latest on npm: 0.4.0. Needs OpenCode 2.1.2 or later, below v3."
+    },
+    "switches": {
+      "label": "What it does",
+      "items": [
+        {
+          "sentence": "Watch them work in your terminal.",
+          "consequence": "/devin, /antigravity or /freebuff opens a real session: streaming replies, file mentions and a model picker.",
+          "on": true
+        },
+        {
+          "sentence": "Hand off a task and keep going.",
+          "consequence": "hivemind-delegate runs it in a genuine child session on Devin, Antigravity or Freebuff. Foreground waits for the result; background returns now and reports later.",
+          "on": true
+        },
+        {
+          "sentence": "Answer every permission yourself.",
+          "consequence": "Requests show up as cards with the agent's own options. Auto-approve on delegated sessions is off unless you turn it on.",
+          "on": false
+        },
+        {
+          "sentence": "Pick up where a crash left off.",
+          "consequence": "Each child records its binding. Recovery reloads the same foreign session and checks the replay, so your prompt is never sent twice.",
+          "on": false
+        },
+        {
+          "sentence": "Use every model they offer.",
+          "consequence": "Models come from each agent's live catalog, so new ones show up without a plugin update. Pick one per agent in /hivemind-setup or switch with ctrl+m.",
+          "on": false
+        }
+      ]
     },
     "try": {
       "heading": "Try a command",
       "inputLabel": "Type a plugin command",
       "examplesLabel": "Or try",
       "sideTitle": "Watch it, or hand it off.",
-      "sideBody": "Open a session when you want to watch the work and answer its questions. Delegate when you don't: the task runs in a real OpenCode child session and the result comes back to your agent."
+      "sideBody": "Open a session when you want to see the work and answer its questions. Delegate when you don't: the task runs in a real OpenCode child session and the result comes back to your agent."
     },
     "setup": {
       "heading": "Set up once.",
-      "requirement": "You need OpenCode V2, plus the devin CLI signed in (devin auth login) or the Antigravity ACP server. The plugin checks for them; it won't install or sign in for you.",
-      "stages": [
+      "body": "Run /hivemind-setup. If your saved setup is healthy it stops right away: no questions, no writes. If something is missing, your agent asks one question at a time and saves the answers.",
+      "steps": [
         {
-          "duration": "Seconds",
-          "clause": "First, run the install command."
+          "command": "/hivemind-setup",
+          "what": "Choose which agents to enable, their fallback order, and a model for each."
         },
         {
-          "duration": "Seconds",
-          "clause": "Then reload OpenCode."
+          "command": "/hivemind-setup health",
+          "what": "One static read: ready, action-required or blocked, plus the one next thing to do."
         },
         {
-          "duration": "About a minute",
-          "clause": "Next, run /hivemind-setup and answer."
+          "command": "hivemind-doctor",
+          "what": "Goes further only when you ask: a handshake by default, a session check with consent, install and sign-in after approval."
+        }
+      ],
+      "card": {
+        "title": "Which agents should I enable?",
+        "options": [
+          "Devin",
+          "Antigravity",
+          "Freebuff"
+        ],
+        "hint": "Answers are saved to config/delegate.",
+        "health": "health: ready"
+      },
+      "needsHeading": "You need",
+      "needs": [
+        "OpenCode V2, version 2.1.2 or later, below v3.",
+        "For Devin: the devin CLI, signed in with devin auth login.",
+        "For Antigravity: the official Antigravity ACP server. The plugin can install the pinned build after you approve.",
+        "For Freebuff: your existing Freebuff login, or CODEBUFF_API_KEY in your environment."
+      ],
+      "needsNote": "The plugin checks for these. It never installs anything or signs you in on its own, and its settings accept no credentials."
+    },
+    "keys": {
+      "line1": "Every command",
+      "line2": "and key it adds.",
+      "tableName": "Commands",
+      "image": "plate"
+    },
+    "closing": {
+      "line1": "Claude Code",
+      "line2": "is next.",
+      "body": "Cursor follows. Each ships only when both hosted sessions and delegation work. Your support pays for the hours.",
+      "button": "Support on Ko-fi",
+      "alt": "Prefer Buy Me a Coffee?",
+      "roadmapTitle": "Harnesses",
+      "roadmap": [
+        {
+          "name": "Devin",
+          "state": "Ships in 0.4.0"
         },
         {
-          "duration": "Every session after",
-          "clause": "After that, it stays out of your way."
+          "name": "Antigravity",
+          "state": "Ships in 0.4.0"
+        },
+        {
+          "name": "Freebuff",
+          "state": "Ships in 0.4.0"
+        },
+        {
+          "name": "Claude Code",
+          "state": "Next"
+        },
+        {
+          "name": "Cursor",
+          "state": "After Claude Code"
+        }
+      ]
+    }
+  },
+  "substrate": {
+    "hero": {
+      "accessibleHeadline": "Nothing your agent did goes missing",
+      "line1": "Nothing your agent did",
+      "line2": "goes missing.",
+      "support": "Substrate archives every OpenCode session tree into your project, indexes it, and gives your agent two calls to find out exactly what changed and who changed it.",
+      "installCommand": "npx hivemind-substrate@0.2.0-beta.1",
+      "installNote": "Beta. Adds the plugin to ./opencode.json; add --global for every project. Then reload OpenCode."
+    },
+    "intro": [
+      {
+        "text": "The Spine"
+      },
+      {
+        "image": "freshComb"
+      },
+      {
+        "text": "keeps every transcript. The Honeycomb"
+      },
+      {
+        "image": "comb"
+      },
+      {
+        "text": "indexes who did what. The valve clears old tool output and keeps the facts."
+      }
+    ],
+    "layers": {
+      "tabsLabel": "Layers",
+      "tabs": [
+        {
+          "id": "spine",
+          "tab": "Spine",
+          "title": "Every transcript, on disk",
+          "body": "Each session tree, the root plus every subagent, delegate-devin and hivemind-delegate child, lands in .session-archive/ as JSONL. Long text goes to blobs named by their SHA-256, so nothing is stored twice. Running it again on unchanged sessions writes nothing.",
+          "plate": [
+            ".session-archive/",
+            "  sessions/ses_4Fh1/ses_4Fh1.jsonl",
+            "  sessions/ses_4Fh1/info.json",
+            "  sessions/ses_4Fh1/subagents/ses_7Kq2/",
+            "  blobs/9a2de9b1….txt",
+            "  index.sqlite"
+          ]
+        },
+        {
+          "id": "honeycomb",
+          "tab": "Honeycomb",
+          "title": "Who did what, queryable",
+          "body": "index.sqlite records sessions, delegations and their harness, file touches, test and build receipts, and a map of your code: AST skeletons, a PageRank repo map, and the files that change together in git.",
+          "plate": [
+            "delegation   harness       mode",
+            "ses_7Kq2     antigravity   spawn",
+            "ses_9Vb3     devin         continue",
+            "ses_2Lm8     opencode      spawn"
+          ]
+        },
+        {
+          "id": "viewports",
+          "tab": "Viewports",
+          "title": "Prune noise, keep the facts",
+          "body": "substrate.valve swaps older tool output for breadcrumbs that point to the stored blob, and keeps a manifest of what is FRESH, SLICE or STALE. After compaction the agent picks up from the index instead of re-reading everything.",
+          "plate": [
+            "Working-memory manifest",
+            "FRESH   src/retry.ts",
+            "SLICE   src/queue.ts  40–88",
+            "STALE   test/retry.test.ts  re-read"
+          ]
+        }
+      ],
+      "primary": "See the trace demo",
+      "secondary": "npm"
+    },
+    "trace": {
+      "heading": "Two calls to the truth.",
+      "body": "When the agent goes idle, Substrate posts one line per change-set. The first call returns the package: branches ranked by what matters, in 800 tokens or fewer. The second opens a leaf: the diff with SHA-256 proof, the subagents that touched it, or which test results are now stale.",
+      "demoTitle": "Example change-set",
+      "demoNote": "Sample data. In your project it comes from git and OpenCode's tool ledger.",
+      "packageLabel": "Call 1 · package",
+      "leafLabel": "Call 2 · leaf",
+      "pickBranch": "Pick a branch to open its leaf."
+    },
+    "switches": {
+      "label": "How it behaves",
+      "items": [
+        {
+          "sentence": "Never writes to OpenCode's database.",
+          "consequence": "opencode.db is opened read-only. The archive lives in .session-archive/ at your project root, outside .opencode/.",
+          "on": true
+        },
+        {
+          "sentence": "Keeps the per-step hook in memory.",
+          "consequence": "The context hook runs on every model step, so it does no disk work. It is built to a 2 ms budget, checked in tests.",
+          "on": true
+        },
+        {
+          "sentence": "Shows which files change together.",
+          "consequence": "Git history tells the agent which files usually change with the one it is editing, before it forgets one.",
+          "on": false
+        },
+        {
+          "sentence": "Keeps its place through compaction.",
+          "consequence": "A compaction hook writes a continuity packet from the index, so the agent knows what was done and what is still open.",
+          "on": false
         }
       ]
     },
-    "keys": {
-      "heading": "Every key it adds.",
-      "headingLine1": "Every key",
-      "headingLine2": "it adds.",
+    "commands": {
+      "line1": "Commands",
+      "line2": "it adds.",
       "tableName": "Commands",
-      "cardTitle": "Devin wants to run a command",
-      "cardCommand": "bun test",
-      "cardOptions": [
-        "Allow once",
-        "Always allow",
-        "Reject"
-      ],
-      "caption": "Permission requests show up as cards. The options come from the agent."
+      "image": "plate",
+      "groups": [
+        {
+          "label": "In the TUI",
+          "rows": [
+            {
+              "key": "/substrate",
+              "what": "Open the Substrate view"
+            },
+            {
+              "key": "/substrate-sync",
+              "what": "Sync the archive and code index"
+            },
+            {
+              "key": "/substrate-provenance",
+              "what": "Check recorded files against disk"
+            },
+            {
+              "key": "/substrate-prune",
+              "what": "Prune the working set now"
+            }
+          ]
+        },
+        {
+          "label": "",
+          "rows": [
+            {
+              "key": "/substrate-brief",
+              "what": "Build a brief for a child agent"
+            },
+            {
+              "key": "/substrate-panel",
+              "what": "Toggle the session inspector"
+            },
+            {
+              "key": "/substrate-repomap",
+              "what": "Open the repo map"
+            },
+            {
+              "key": "/substrate-compaction",
+              "what": "Preview the compaction packet"
+            }
+          ]
+        },
+        {
+          "label": "Agent tools",
+          "rows": [
+            {
+              "key": "substrate.viewport",
+              "what": "trace, search, repomap, skeleton, slice, coupled, brief, timeline"
+            },
+            {
+              "key": "substrate.valve",
+              "what": "prune, status, reset"
+            },
+            {
+              "key": "archive.persist",
+              "what": "Archive the session tree now"
+            },
+            {
+              "key": "ctx.context-prune",
+              "what": "Old name for substrate.valve"
+            }
+          ]
+        }
+      ]
     },
     "closing": {
-      "heading": "Claude Code is next.",
-      "headingLine1": "Claude Code",
-      "headingLine2": "is next.",
-      "body": "Cursor after that. Your support pays for the hours it takes to build them.",
-      "button": "Support on Ko-fi"
-    },
-    "footer": {
-      "note1": "hmoc-steward-acp 0.2.0, a plugin for OpenCode V2.",
-      "note2Before": "Prefer Buy Me a Coffee? It's",
-      "note2Link": "here",
-      "note2After": ".",
-      "note3Before": "Referral links for tools I use alongside it:",
-      "note3Freebuff": "Freebuff",
-      "note3Middle": "and the",
-      "note3Zai": "Z.ai GLM Coding Plan",
-      "note3After": ". They aren't part of the plugin, and I get credit if you sign up.",
-      "backToTop": "Back to top",
-      "githubLabel": "GitHub",
-      "npmLabel": "npm",
-      "issuesLabel": "Report an issue",
-      "credit": "Made by shynlee04",
-      "copyright": "© 2026"
+      "line1": "It's a beta.",
+      "line2": "Break it.",
+      "body": "Owner testing is still running. If something breaks, open an issue and include your OpenCode version: Substrate reads OpenCode's own data.",
+      "button": "Open an issue",
+      "privacy": "Transcripts can hold anything pasted into a session. Treat .session-archive/ like a secret and decide yourself whether to commit it."
     }
   },
-  "blogSection": {
-    "pageTitle": "Engineering Notes & Wire Architecture",
-    "pageSubtitle": "Bilingual deep-dives on breaking harness lock-in inside OpenCode V2, bi-directional ses_* session sync, Freebuff lease continuity, and the Stage 3 Hivemind-Substrate engine.",
-    "readArticleCta": "Read engineering note",
-    "backToBlogCta": "Back to all engineering notes",
-    "proNotBroTakeawayLabel": "Key architectural takeaway"
-  },
-  "episodesSection": {
-    "pageTitle": "Video Showcases & Terminal Replays",
-    "pageSubtitle": "Watch sub-2-minute workflow clips and the 5-minute 3-Harness Greenfield build with side-by-side bilingual transcripts and raw OpenCode V2 terminal traces.",
-    "watchEpisodeCta": "Watch showcase and terminal trace",
-    "transcriptHeading": "Bilingual transcript",
-    "tuiReplayHeading": "OpenCode V2 terminal trace",
-    "backToEpisodesCta": "Back to all video showcases"
-  },
-  "showroomSection": {
-    "pageTitle": "Interactive UI Showroom",
-    "pageSubtitle": "Inspect the 4-node telemetry stage, 3-layer X-Ray drawer, promo-squeezing estimator, and localized Payload CMS 3.0 schemas with live EN/VI and motion toggles.",
-    "harnessControlsTitle": "Live preview controls (language, motion, and active node)",
-    "storyWokTitle": "4-Node Telemetry Stage & Static Schematic",
-    "storyXrayTitle": "Three-Layer Wire X-Ray Inspector",
-    "storyConversionTitle": "Promo Squeezing Estimator & Provider Channels",
-    "payloadCollectionsTitle": "Payload CMS 3.0 Collection Schemas"
+  "footer": {
+    "tagline": "Two plugins for OpenCode V2, made by shynlee04.",
+    "columns": {
+      "plugins": "Plugins",
+      "install": "Install",
+      "source": "Source",
+      "watch": "Watch",
+      "support": "Support"
+    },
+    "links": {
+      "steward": "Steward",
+      "substrate": "Substrate",
+      "stewardNpm": "hmoc-steward-acp",
+      "substrateNpm": "hivemind-substrate",
+      "stewardGithub": "Steward on GitHub",
+      "substrateGithub": "Substrate on GitHub",
+      "video": "Demo video",
+      "channel": "YouTube channel",
+      "kofi": "Ko-fi",
+      "bmc": "Buy Me a Coffee"
+    },
+    "referralBefore": "Referral links for tools I use alongside them:",
+    "referralFreebuff": "Freebuff",
+    "referralMiddle": "and the",
+    "referralZai": "Z.ai GLM Coding Plan",
+    "referralAfter": ". They aren't part of the plugins, and I get credit if you sign up.",
+    "creditsLabel": "Photographs",
+    "backToTop": "Back to top",
+    "copyright": "© 2026 shynlee04"
   }
 }

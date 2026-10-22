@@ -1,7 +1,7 @@
-import { LocaleSchema, type Locale } from "@/types/portal";
+import { LocaleSchema, type Locale } from "@/modules/locale-dictionary";
 import { CONSOLE_COPY, type ConsoleCopy, type ConsoleKeyId } from "./answers";
 
-export type Harness = "devin" | "antigravity";
+export type Harness = "devin" | "antigravity" | "freebuff";
 export type TuiTone = "prompt" | "agent" | "tool" | "plan" | "muted" | "ok";
 
 export interface TuiLine {
@@ -19,12 +19,13 @@ interface AnswerBase {
 export type CommandAnswer =
   | (AnswerBase & { readonly kind: "hosted-picker"; readonly harness: Harness })
   | (AnswerBase & {
-      readonly kind: "hosted-task";
-      readonly harness: Harness;
-      readonly task: string;
-    })
+    readonly kind: "hosted-task";
+    readonly harness: Harness;
+    readonly task: string;
+  })
   | (AnswerBase & { readonly kind: "delegate"; readonly harness: Harness })
   | (AnswerBase & { readonly kind: "setup" })
+  | (AnswerBase & { readonly kind: "setup-health" })
   | (AnswerBase & { readonly kind: "key"; readonly key: string })
   | (AnswerBase & { readonly kind: "unknown" });
 
@@ -40,6 +41,7 @@ export interface PluginCommand {
 const HARNESS_NAMES: Record<Harness, string> = {
   devin: "Devin",
   antigravity: "Antigravity",
+  freebuff: "Freebuff",
 };
 
 const KEY_IDS: ReadonlySet<string> = new Set<ConsoleKeyId>([
@@ -121,11 +123,12 @@ function delegateAnswer(
   copy: ConsoleCopy,
   harness: Harness,
 ): CommandAnswer {
+  const freebuff = copy.delegateFreebuff;
   return {
     kind: "delegate",
     harness,
     title: `${copy.delegate.titlePrefix}${HARNESS_NAMES[harness]}`,
-    summary: copy.delegate.summary,
+    summary: harness === "freebuff" ? freebuff.summary : copy.delegate.summary,
     lines: [
       {
         tone: "tool",
@@ -135,12 +138,15 @@ function delegateAnswer(
       {
         tone: "muted",
         label: copy.delegate.childLabel,
-        text: copy.delegate.childText,
+        text: harness === "freebuff" ? freebuff.childText : copy.delegate.childText,
       },
       {
         tone: "ok",
         label: copy.delegate.resultLabel,
-        text: copy.delegate.resultText,
+        text:
+          harness === "freebuff"
+            ? freebuff.resultText
+            : copy.delegate.resultText,
       },
     ],
   };
@@ -163,6 +169,20 @@ function setupAnswer(copy: ConsoleCopy): CommandAnswer {
         label: copy.setup.savedLabel,
         text: copy.setup.savedText,
       },
+    ],
+  };
+}
+
+function setupHealthAnswer(copy: ConsoleCopy): CommandAnswer {
+  const health = copy.setupHealth;
+  return {
+    kind: "setup-health",
+    title: health.title,
+    summary: health.summary,
+    lines: [
+      { tone: "agent", label: health.agentLabel, text: health.agentText },
+      { tone: "muted", label: "", text: health.statusText },
+      { tone: "ok", label: health.nextLabel, text: health.nextText },
     ],
   };
 }
@@ -197,16 +217,21 @@ export function interpretCommand(input: string, locale: Locale): CommandAnswer {
   ).toLowerCase();
   const rest = firstSpace === -1 ? "" : trimmed.slice(firstSpace + 1).trim();
 
-  if (token === "/devin" || token === "/antigravity") {
-    const harness: Harness = token === "/devin" ? "devin" : "antigravity";
+  if (
+    token === "/devin" ||
+    token === "/antigravity" ||
+    token === "/freebuff"
+  ) {
+    const harness = token.slice(1) as Harness;
     return rest === ""
       ? pickerAnswer(copy, harness)
       : hostedTaskAnswer(copy, harness, rest);
   }
   if (token === "/hivemind-setup") {
-    return setupAnswer(copy);
+    return /^health$/i.test(rest) ? setupHealthAnswer(copy) : setupAnswer(copy);
   }
   if (token === "hivemind-delegate" || token === "delegate") {
+    if (/freebuff/i.test(rest)) return delegateAnswer(copy, "freebuff");
     return delegateAnswer(
       copy,
       /antigravity/i.test(rest) ? "antigravity" : "devin",

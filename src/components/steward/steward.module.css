@@ -1,0 +1,604 @@
+/* Hero */
+.hero {
+  position: relative;
+  overflow: clip;
+  background: var(--bg);
+  min-height: 92svh;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(3rem, 9vh, 6rem);
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+
+.heroText {
+  grid-column: 1 / span 7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.headline {
+  font-size: var(--step-display);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.headline span {
+  display: block;
+}
+
+.support {
+  margin-top: 1.6rem;
+  font-size: var(--step-lead);
+  line-height: 1.4;
+  max-width: 34ch;
+}
+
+.installBox {
+  margin-top: 2rem;
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.installCode {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  background: var(--ink);
+  color: var(--field);
+  padding: 0.8em 1em;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.installCopy {
+  flex: none;
+  clip-path: var(--hex-flat);
+  background: var(--ink);
+  color: var(--bg);
+  border: 0;
+  padding: 0 1.5em;
+  font-size: var(--step-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+
+.installCopy:hover {
+  transform: translateY(-2px);
+}
+
+.installNote {
+  margin-top: 0.9rem;
+  font-size: var(--step-body);
+  max-width: 46ch;
+}
+
+/* Try a command */
+.try {
+  background: var(--field);
+  padding-block: var(--section-pad);
+  overflow: clip;
+}
+
+.tryPlate {
+  grid-column: 1 / span 6;
+  background: var(--bg);
+  aspect-ratio: 1;
+  align-self: start;
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+.tryPhoto {
+  position: absolute;
+  right: -1.5rem;
+  bottom: -1.5rem;
+  width: 7rem;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.tryAnswer {
+  width: 100%;
+  max-width: 30rem;
+}
+
+code.answerTitle {
+  display: block;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--field);
+  background: var(--ink);
+  padding: 0.6rem 0.9rem 0;
+}
+
+.answerSummary {
+  font-size: var(--step-body);
+  margin-top: 0.9rem;
+  text-align: left;
+}
+
+.tryRight {
+  grid-column: 8 / span 5;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.tryHeading {
+  font-size: var(--step-head);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+.inputLabel {
+  font-size: var(--step-small);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.tryInput {
+  width: 100%;
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  padding: 0.7em 0.9em;
+  background: var(--field);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+}
+
+.tryInput:focus-visible {
+  outline-offset: 2px;
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+}
+
+.examplesLabel {
+  font-size: var(--step-small);
+  color: var(--muted);
+  width: 100%;
+}
+
+.example {
+  background: none;
+  border: 0;
+  padding: 0.15em 0;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+.example code {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+}
+
+.example:hover {
+  text-decoration-thickness: 2.5px;
+}
+
+.trySideTitle {
+  font-size: var(--step-lead);
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.trySideBody {
+  font-size: var(--step-body);
+  max-width: 38ch;
+}
+
+/* Setup on orange */
+.setup {
+  background: var(--bg);
+  padding-block: var(--section-pad);
+}
+
+.setupLeft {
+  grid-column: 1 / span 6;
+}
+
+.setupHeading {
+  font-size: var(--step-head);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+.setupBody {
+  margin-top: 1.2rem;
+  max-width: 40ch;
+}
+
+.setupSteps {
+  margin-top: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.setupStep {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+.setupStep .hex-bullet {
+  margin-top: 0.35em;
+  color: var(--ink);
+}
+
+.setupStep code {
+  font-family: var(--font-code);
+  font-size: 0.85em;
+  font-weight: 600;
+  background: var(--ink);
+  color: var(--field);
+  padding: 0.15em 0.5em;
+}
+
+.setupStep p {
+  max-width: 42ch;
+  font-size: var(--step-body);
+}
+
+.setupStep p span {
+  display: block;
+  margin-top: 0.2em;
+  font-size: var(--step-body);
+}
+
+.setupRight {
+  grid-column: 8 / span 5;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.setupPhoto {
+  width: min(11rem, 40%);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  align-self: flex-end;
+}
+
+[data-ui].questionCard {
+  background: var(--field);
+  padding: 1.4rem 1.5rem;
+  font-family: var(--font-code);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  box-shadow: 0 24px 64px rgb(5 15 22 / 0.3);
+}
+
+.questionPre {
+  margin: 0;
+  font-family: var(--font-code);
+  font-size: inherit;
+  white-space: normal;
+}
+
+.questionTitle {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.8em;
+}
+
+.questionOption {
+  display: block;
+  padding-left: 1.2em;
+  position: relative;
+}
+
+.questionOption::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.55em;
+  height: 0.62em;
+  background: var(--surface);
+  clip-path: var(--hex-point);
+}
+
+.questionHint {
+  display: block;
+  margin-top: 0.9em;
+  color: var(--muted);
+}
+
+.questionHealth {
+  display: block;
+  margin-top: 1em;
+  padding-top: 0.8em;
+  color: var(--muted);
+  border-top: 2px solid color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.needsHeading {
+  font-size: var(--step-lead);
+  font-weight: 600;
+}
+
+.needsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.needsList li {
+  display: flex;
+  gap: 0.7em;
+  align-items: flex-start;
+  font-size: var(--step-body);
+}
+
+.needsList .hex-bullet {
+  margin-top: 0.4em;
+}
+
+.needsNote {
+  font-size: var(--step-body);
+  max-width: 44ch;
+}
+
+/* Keys table on white */
+.keys {
+  background: var(--field);
+  padding-block: var(--section-pad);
+}
+
+.keysHeading {
+  grid-column: 1 / -1;
+  font-size: var(--step-head);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  margin-bottom: 6rem;
+}
+
+.keysHeading span {
+  display: block;
+}
+
+.keysName {
+  grid-column: 5;
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+.keysTable {
+  grid-column: 6 / span 7;
+}
+
+.keysGroup+.keysGroup {
+  margin-top: 44px;
+}
+
+.keysGroupLabel {
+  font-size: var(--step-small);
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+
+.keysRow {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) 3fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: 0.55rem;
+}
+
+.keysRow+.keysRow {
+  margin-top: 0.7rem;
+}
+
+.keysKey {
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+}
+
+.keysKey code {
+  font-family: var(--font-code);
+}
+
+.keysWhat {
+  font-size: var(--step-body);
+}
+
+.keysPhoto {
+  grid-column: 1 / span 4;
+  align-self: end;
+}
+
+.keysPhoto img {
+  width: min(22vw, 26rem);
+  height: auto;
+  aspect-ratio: 0.8;
+  object-fit: cover;
+}
+
+/* Closing on ink */
+.closing {
+  background: var(--ink);
+  color: var(--field);
+  padding-block: var(--section-pad);
+  min-height: 80svh;
+}
+
+.closingLeft {
+  grid-column: 1 / span 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.closingHeadline {
+  font-size: var(--step-display);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.closingHeadline span {
+  display: block;
+}
+
+.closingBody {
+  margin-top: 1.4rem;
+  max-width: 42ch;
+  color: color-mix(in srgb, var(--field) 72%, var(--ink));
+}
+
+.closingPhoto {
+  width: min(15rem, 55%);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+
+.closingActions {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+}
+
+.closingAlt {
+  font-size: var(--step-body);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1.5px;
+}
+
+.closingAlt:hover {
+  text-decoration-thickness: 3px;
+}
+
+.closingRight {
+  grid-column: 7 / span 5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+[data-ui].roadmap {
+  background: var(--field);
+  color: var(--ink);
+  padding: 1.4rem 1.5rem;
+  width: min(100%, 26rem);
+  box-shadow: 0 24px 64px rgb(0 0 0 / 0.3);
+}
+
+.roadmapTitle {
+  font-size: var(--step-small);
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.9rem;
+}
+
+.roadmapRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: var(--step-body);
+  padding-block: 0.55rem;
+}
+
+.roadmapRow+.roadmapRow {
+  margin-top: 0.3rem;
+}
+
+.roadmapState {
+  color: var(--muted);
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 0;
+  }
+
+  .heroText {
+    grid-column: 1 / -1;
+  }
+
+  .tryPlate {
+    grid-column: 1 / -1;
+  }
+
+  .tryRight {
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+  }
+
+  .setupLeft {
+    grid-column: 1 / -1;
+  }
+
+  .setupRight {
+    grid-column: 1 / -1;
+    margin-top: 2.5rem;
+  }
+
+  .keysHeading {
+    margin-bottom: 2.5rem;
+  }
+
+  .keysHeading span:first-child {
+    text-indent: 0;
+  }
+
+  .keysName {
+    display: none;
+  }
+
+  .keysTable {
+    grid-column: 1 / -1;
+  }
+
+  .keysPhoto {
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+  }
+
+  .keysPhoto img {
+    width: 60%;
+  }
+
+  .closingLeft {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .closingRight {
+    grid-column: 1 / -1;
+    margin-top: 2.5rem;
+    justify-content: flex-start;
+  }
+}

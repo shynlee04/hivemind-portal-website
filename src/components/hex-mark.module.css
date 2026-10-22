@@ -1,0 +1,25 @@
+.mark {
+  display: block;
+  width: 100%;
+  height: 34svh;
+  min-height: 150px;
+}
+
+.mark polygon[data-fill="ink"] {
+  fill: var(--ink);
+}
+
+.mark polygon[data-fill="field"] {
+  fill: var(--field);
+}
+
+.mark polygon[data-fill="surface"] {
+  fill: var(--surface);
+}
+
+@media (max-width: 720px) {
+  .mark {
+    height: 22svh;
+    min-height: 110px;
+  }
+}

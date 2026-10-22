@@ -1,0 +1,102 @@
+[data-ui].dialog {
+  background: var(--field);
+  color: var(--ink);
+  padding: clamp(1.25rem, 2vw, 2rem);
+  max-width: 30rem;
+  width: 100%;
+  font-family: var(--font-text);
+  box-shadow: 0 24px 64px rgb(5 15 22 / 0.35);
+}
+
+.title {
+  font-size: var(--step-lead);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.1rem;
+}
+
+.groupLabel {
+  font-size: var(--step-small);
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: 1rem;
+  margin-bottom: 0.45rem;
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+}
+
+.segment {
+  flex: 1;
+  padding: 0.55em 0.5em;
+  font-size: var(--step-small);
+  font-weight: 500;
+  background: color-mix(in srgb, var(--ink) 7%, var(--field));
+  color: var(--ink);
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.segment:hover {
+  background: color-mix(in srgb, var(--ink) 14%, var(--field));
+}
+
+.segment[data-selected] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+.stepCode {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: var(--ink);
+  padding: 0.6rem 0.75rem;
+}
+
+.stepCode pre {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--field);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+[data-ui] .stepCopy {
+  flex: none;
+  font-size: 0.72rem;
+  padding: 0.2em 0.6em;
+  background: none;
+  color: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--surface) 55%, transparent);
+  cursor: pointer;
+}
+
+.stepCopy:hover {
+  background: color-mix(in srgb, var(--surface) 18%, transparent);
+}
+
+.stepNote {
+  margin-top: 0.35rem;
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+.copyAll {
+  margin-top: 1.25rem;
+  width: 100%;
+}

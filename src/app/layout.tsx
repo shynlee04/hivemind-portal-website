@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
-import { Anton, Work_Sans } from "next/font/google";
+import { Albert_Sans, Be_Vietnam_Pro } from "next/font/google";
 import type { ReactNode } from "react";
+import { getPortalDictionary } from "@/modules/locale-dictionary";
 import "./globals.css";
 
-const anton = Anton({
-  weight: "400",
-  subsets: ["latin", "vietnamese"],
-  variable: "--font-display",
+const albertSans = Albert_Sans({
+  weight: ["400", "500", "600"],
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-albert",
 });
 
-const workSans = Work_Sans({
-  weight: ["400", "600"],
+const beVietnamPro = Be_Vietnam_Pro({
+  weight: ["400", "500", "600"],
   subsets: ["latin", "vietnamese"],
-  variable: "--font-text",
+  variable: "--font-vi",
 });
+
+const home = getPortalDictionary("en").meta.pages.home;
 
 export const metadata: Metadata = {
-  title: "Hivemind Steward: Devin and Antigravity inside OpenCode",
-  description:
-    "An OpenCode V2 plugin. Open real Devin or Antigravity sessions in the OpenCode TUI, or let your agent delegate tasks to them.",
+  title: home.title,
+  description: home.description,
 };
 
 export default function RootLayout({
@@ -29,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${workSans.variable}`}
+      className={`${albertSans.variable} ${beVietnamPro.variable}`}
       suppressHydrationWarning
     >
       <head>

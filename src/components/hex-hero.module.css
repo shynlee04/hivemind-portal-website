@@ -1,0 +1,109 @@
+.hexfield {
+  --hx: calc(var(--gutter) + (100vw - 2 * var(--gutter)) * 7 / 12);
+  position: absolute;
+  top: 50%;
+  left: var(--hx);
+  height: 115vh;
+  aspect-ratio: 0.866;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.hex {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  clip-path: var(--hex-point);
+  background: var(--ink);
+}
+
+/* The inscribed rectangle of a pointy-top hex is full width × 50% height,
+   centred. The pane is confined to it, pulled inward by however much of
+   the hex is cropped by the right viewport edge. */
+.pane {
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 0;
+  right: max(0px, calc(0.866 * 115vh - 100vw + var(--hx)));
+  display: grid;
+  place-items: center;
+  opacity: 1;
+  transition: opacity 1.6s ease;
+  pointer-events: auto;
+}
+
+.pane>* {
+  width: 100%;
+  max-width: 34em;
+  min-width: 0;
+}
+
+.pane :global(.tui) {
+  font-size: clamp(1rem, 0.92rem + 0.35vw, 1.125rem);
+  background: color-mix(in srgb, var(--field) 6%, var(--ink));
+}
+
+.pane :global(.tui__label) {
+  min-width: 0;
+  width: 8ch;
+  flex: none;
+}
+
+.paneHidden {
+  composes: pane;
+  opacity: 0;
+}
+
+.revealLine {
+  opacity: 0;
+  animation: line-in 0.5s ease forwards;
+}
+
+@keyframes line-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pane {
+    transition: none;
+  }
+
+  .paneHidden {
+    display: none;
+  }
+
+  .revealLine {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .hexfield {
+    position: relative;
+    top: auto;
+    left: 50%;
+    width: 130vw;
+    height: auto;
+    aspect-ratio: 0.866;
+    margin-top: 2.5rem;
+    transform: translateX(-50%);
+  }
+
+  .pane {
+    left: 15vw;
+    right: 15vw;
+  }
+
+  .pane :global(.tui) {
+    font-size: clamp(0.8125rem, 3.5vw, 0.9rem);
+    padding: 0.8rem;
+  }
+
+  .pane :global(.tui__label) {
+    width: 6.5ch;
+  }
+}

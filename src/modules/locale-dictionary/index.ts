@@ -1,17 +1,21 @@
-import {
-  LocaleSchema,
-  PortalDictionarySchema,
-  SUPPORTED_LOCALES,
-  type Locale,
-  type PortalDictionary,
-} from "@/types/portal";
 import enRaw from "./en.json";
 import viRaw from "./vi.json";
-
-export {
+import {
+  ImageIdSchema,
   LocaleSchema,
   PortalDictionarySchema,
   SUPPORTED_LOCALES,
+  type ImageId,
+  type Locale,
+  type PortalDictionary,
+} from "./schema";
+
+export {
+  ImageIdSchema,
+  LocaleSchema,
+  PortalDictionarySchema,
+  SUPPORTED_LOCALES,
+  type ImageId,
   type Locale,
   type PortalDictionary,
 };
@@ -21,31 +25,44 @@ const DICTIONARIES: Record<Locale, PortalDictionary> = {
   vi: PortalDictionarySchema.parse(viRaw),
 };
 
+export function getPortalDictionary(locale: Locale): PortalDictionary {
+  return DICTIONARIES[LocaleSchema.parse(locale)];
+}
+
 function collectLeafKeyPaths(
   node: Record<string, unknown>,
-  prefix = "",
-): ReadonlyArray<string> {
-  const keys = Object.keys(node).sort();
-  const paths: string[] = [];
-
-  for (const key of keys) {
+  prefix: string,
+  paths: Array<string>,
+): void {
+  for (const key of Object.keys(node).sort()) {
     const fullPath = prefix ? `${prefix}.${key}` : key;
     const value = node[key];
     if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-      paths.push(
-        ...collectLeafKeyPaths(value as Record<string, unknown>, fullPath),
-      );
+      collectLeafKeyPaths(value as Record<string, unknown>, fullPath, paths);
     } else {
       paths.push(fullPath);
     }
   }
-
-  return paths;
 }
 
-export function getPortalDictionary(locale: Locale): PortalDictionary {
-  const parsedLocale = LocaleSchema.parse(locale);
-  return DICTIONARIES[parsedLocale];
+function collectArrayLengths(
+  node: unknown,
+  prefix: string,
+  lengths: Map<string, number>,
+): void {
+  if (Array.isArray(node)) {
+    lengths.set(prefix, node.length);
+    return;
+  }
+  if (typeof node === "object" && node !== null) {
+    for (const key of Object.keys(node)) {
+      collectArrayLengths(
+        (node as Record<string, unknown>)[key],
+        prefix ? `${prefix}.${key}` : key,
+        lengths,
+      );
+    }
+  }
 }
 
 export function verifyDictionaryParity(): {
@@ -55,11 +72,17 @@ export function verifyDictionaryParity(): {
   const enValidated = PortalDictionarySchema.parse(enRaw);
   const viValidated = PortalDictionarySchema.parse(viRaw);
 
-  const enPaths = collectLeafKeyPaths(
+  const enPaths: Array<string> = [];
+  const viPaths: Array<string> = [];
+  collectLeafKeyPaths(
     enValidated as unknown as Record<string, unknown>,
+    "",
+    enPaths,
   );
-  const viPaths = collectLeafKeyPaths(
+  collectLeafKeyPaths(
     viValidated as unknown as Record<string, unknown>,
+    "",
+    viPaths,
   );
 
   if (enPaths.length !== viPaths.length) {
@@ -78,8 +101,18 @@ export function verifyDictionaryParity(): {
     }
   }
 
-  return {
-    valid: true,
-    keyCount: enPaths.length,
-  };
+  const enLengths = new Map<string, number>();
+  const viLengths = new Map<string, number>();
+  collectArrayLengths(enValidated, "", enLengths);
+  collectArrayLengths(viValidated, "", viLengths);
+
+  for (const [path, length] of enLengths) {
+    if (viLengths.get(path) !== length) {
+      throw new Error(
+        `Locale dictionary array length mismatch at "${path}": en=${length}, vi=${String(viLengths.get(path))}`,
+      );
+    }
+  }
+
+  return { valid: true, keyCount: enPaths.length };
 }

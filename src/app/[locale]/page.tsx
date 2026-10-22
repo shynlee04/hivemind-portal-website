@@ -1,51 +1,29 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { HomePage } from "@/components/home/home-page";
 import {
   getPortalDictionary,
   LocaleSchema,
-  type Locale,
 } from "@/modules/locale-dictionary";
-import "./home.css";
-
-function resolveLocale(raw: string): Locale {
-  const parsed = LocaleSchema.safeParse(raw);
-  return parsed.success ? parsed.data : "en";
-}
+import { buildPageMetadata } from "./metadata";
 
 export async function generateMetadata({
   params,
 }: {
   readonly params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale: rawLocale } = await params;
-  const locale = resolveLocale(rawLocale);
-  const dict = getPortalDictionary(locale);
-
-  return {
-    title: dict.meta.siteTitle,
-    description: dict.meta.siteDescription,
-    openGraph: {
-      title: dict.meta.siteTitle,
-      description: dict.meta.ogTagline,
-      locale: locale === "vi" ? "vi_VN" : "en_US",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: dict.meta.siteTitle,
-      description: dict.meta.ogTagline,
-    },
-  };
+  const { locale } = await params;
+  return buildPageMetadata(locale, "home");
 }
 
-export default async function LocalePortalHomePage({
+export default async function LocaleHomePage({
   params,
 }: {
   readonly params: Promise<{ locale: string }>;
 }) {
   const { locale: rawLocale } = await params;
-  const locale = resolveLocale(rawLocale);
-  const dictionary = getPortalDictionary(locale);
-
-  return <HomePage locale={locale} dictionary={dictionary} />;
+  const parsed = LocaleSchema.safeParse(rawLocale);
+  if (!parsed.success) notFound();
+  const dict = getPortalDictionary(parsed.data);
+  return <HomePage dict={dict} locale={parsed.data} />;
 }

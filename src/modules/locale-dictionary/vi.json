@@ -3,119 +3,632 @@
     "locale": "vi",
     "languageLabel": "Tiếng Việt",
     "switchLocaleLabel": "English",
-    "siteTitle": "Hivemind Steward: Devin và Antigravity ngay trong OpenCode",
-    "siteDescription": "Plugin cho OpenCode V2. Mở phiên Devin hoặc Antigravity thật trong TUI OpenCode, hoặc để agent giao việc cho chúng.",
-    "ogTagline": "Plugin cho OpenCode V2. Mở phiên Devin hoặc Antigravity thật trong TUI OpenCode, hoặc để agent giao việc cho chúng."
+    "pages": {
+      "home": {
+        "title": "Hivemind: đồng đội và trí nhớ cho OpenCode",
+        "description": "Hai plugin cho OpenCode V2. Steward đưa Devin, Antigravity và Freebuff vào phiên làm việc của bạn. Substrate lưu lại chính xác, ngay trên máy, mọi việc chúng đã làm."
+      },
+      "steward": {
+        "title": "Hivemind Steward: Devin, Antigravity và Freebuff ngay trong OpenCode",
+        "description": "Mở phiên Devin, Antigravity hoặc Freebuff thật trong TUI của OpenCode, hoặc để agent của bạn giao việc cho chúng, với mọi model chúng cung cấp. hmoc-steward-acp 0.4.0 trên npm."
+      },
+      "substrate": {
+        "title": "Hivemind Substrate: trí nhớ chính xác cho agent OpenCode",
+        "description": "Lưu trữ mọi cây phiên OpenCode vào dự án, lập chỉ mục ai đã làm gì, dọn output công cụ cũ và truy mọi thay đổi về đúng phiên đã tạo ra nó. Bản beta."
+      }
+    }
   },
   "nav": {
-    "brandName": "Hivemind Steward",
-    "tryLink": "Thử ngay",
-    "setupLink": "Cài đặt",
-    "keysLink": "Phím tắt",
-    "installLabel": "Cài",
-    "menuLabel": "Menu"
+    "brand": "Hivemind",
+    "steward": "Steward",
+    "substrate": "Substrate",
+    "install": "Cài đặt",
+    "menu": "Menu",
+    "close": "Đóng",
+    "skip": "Bỏ qua tới nội dung"
+  },
+  "common": {
+    "copy": "Sao chép",
+    "copied": "Đã chép",
+    "copyAria": "Sao chép lệnh",
+    "copyAll": "Chép tất cả",
+    "npm": "npm",
+    "github": "GitHub",
+    "example": "Ví dụ",
+    "images": {
+      "queen": {
+        "alt": "Ong chúa được đánh dấu, xung quanh là ong thợ"
+      },
+      "comb": {
+        "alt": "Một con ong mật bò trên các ô sáp tổ ong còn trống"
+      },
+      "freshComb": {
+        "alt": "Một miếng sáp ong tươi được giơ lên, mật nhỏ xuống chậu"
+      },
+      "catba": {
+        "alt": "Người nuôi ong ở Cát Bà, Việt Nam, giơ một cầu ong bên thùng gỗ"
+      },
+      "nectar": {
+        "alt": "Ong mật hút mật trên một bông cúc tây"
+      },
+      "plate": {
+        "alt": "Bản XI trong sách nuôi ong năm 1853 của Langstroth: thùng ong, mạng che mặt, găng tay và dụng cụ"
+      }
+    }
+  },
+  "fragments": {
+    "hosted": {
+      "caption": "Steward · phiên hosted",
+      "lines": [
+        {
+          "tone": "prompt",
+          "label": "bạn",
+          "text": "/devin sửa test retry chập chờn"
+        },
+        {
+          "tone": "plan",
+          "label": "kế hoạch",
+          "text": "Tái hiện, sửa, chạy test"
+        },
+        {
+          "tone": "tool",
+          "label": "công cụ",
+          "text": "read src/retry.ts"
+        },
+        {
+          "tone": "agent",
+          "label": "Devin",
+          "text": "Thấy rồi: bộ hẹn giờ không được reset giữa các lần thử."
+        },
+        {
+          "tone": "muted",
+          "label": "",
+          "text": "ctrl+x huỷ   ctrl+o phiên   esc về"
+        }
+      ]
+    },
+    "delegate": {
+      "caption": "Steward · giao việc",
+      "lines": [
+        {
+          "tone": "tool",
+          "label": "agent",
+          "text": "hivemind-delegate → Antigravity"
+        },
+        {
+          "tone": "muted",
+          "label": "phiên con",
+          "text": "ses_7Kq2 · chạy nền"
+        },
+        {
+          "tone": "agent",
+          "label": "agent",
+          "text": "Đã giao. Mình làm tiếp phần tài liệu."
+        },
+        {
+          "tone": "ok",
+          "label": "kết quả",
+          "text": "Antigravity xong: đổi 3 tệp, test đạt"
+        }
+      ]
+    },
+    "trace": {
+      "caption": "Substrate · truy vết",
+      "lines": [
+        {
+          "tone": "muted",
+          "label": "tín hiệu",
+          "text": "[substrate] dirty c7f2 · 3 tệp"
+        },
+        {
+          "tone": "tool",
+          "label": "lần gọi 1",
+          "text": "trace({ change: \"c7f2\" })"
+        },
+        {
+          "tone": "agent",
+          "label": "gói",
+          "text": "source 2 · test 1 · actors 1 · evidence cũ"
+        },
+        {
+          "tone": "tool",
+          "label": "lần gọi 2",
+          "text": "trace({ handle: \"c7f2:evidence\" })"
+        },
+        {
+          "tone": "ok",
+          "label": "lá",
+          "text": "bun test chạy trước lần sửa cuối của retry.ts"
+        }
+      ]
+    }
   },
   "home": {
     "hero": {
-      "accessibleHeadline": "Devin và Antigravity, ngay trong OpenCode",
-      "lineOneWord": "NGAY TRONG",
-      "lineTwoWord": "OPENCODE.",
-      "support": "Mở phiên Devin hoặc Antigravity thật ngay trong terminal OpenCode, hoặc để agent của bạn giao việc cho chúng.",
-      "installCommand": "opencode plugin add hmoc-steward-acp@0.2.0",
-      "copyLabel": "Sao chép",
-      "copiedLabel": "Đã chép",
-      "copyAriaLabel": "Sao chép lệnh cài"
+      "accessibleHeadline": "Đồng đội và trí nhớ cho OpenCode",
+      "line1": "Đồng đội và trí nhớ",
+      "line2": "cho OpenCode.",
+      "support": "Hivemind là hai plugin cho OpenCode V2. Steward chạy Devin, Antigravity và Freebuff ngay trong phiên của bạn, làm agent chính hoặc làm người được giao việc. Substrate lưu lại chính xác mọi việc chúng đã làm.",
+      "primary": "Cài đặt",
+      "links": [
+        "Steward",
+        "Substrate"
+      ]
+    },
+    "intro": [
+      {
+        "text": "Steward cho agent của bạn"
+      },
+      {
+        "image": "queen"
+      },
+      {
+        "text": "thêm đồng nghiệp. Substrate"
+      },
+      {
+        "image": "comb"
+      },
+      {
+        "text": "nhớ mọi phiên, phiên con và diff, ngay trên ổ đĩa của bạn."
+      }
+    ],
+    "showcase": {
+      "tabsLabel": "Plugin",
+      "tabs": [
+        {
+          "id": "steward",
+          "tab": "Steward",
+          "image": "queen",
+          "title": "Ba agent, một terminal",
+          "body": "Mở Devin, Antigravity hoặc Freebuff thành một phiên thật trong terminal OpenCode và xem nó làm, hoặc để agent của bạn giao việc cho bất kỳ ai trong số đó rồi làm tiếp. Chọn bất kỳ model nào mỗi agent cung cấp.",
+          "version": "hmoc-steward-acp 0.4.0, bản mới nhất trên npm",
+          "primary": "Tìm hiểu Steward",
+          "secondary": "npm"
+        },
+        {
+          "id": "substrate",
+          "tab": "Substrate",
+          "image": "comb",
+          "title": "Giữ một trí nhớ chính xác",
+          "body": "Lưu mọi cây phiên vào dự án, lập chỉ mục ai đã làm gì, dọn output công cụ cũ mà không mất dữ kiện, và truy mọi thay đổi về đúng phiên và subagent đã tạo ra nó.",
+          "version": "hivemind-substrate 0.2.0-beta.1, bản beta trên npm",
+          "primary": "Tìm hiểu Substrate",
+          "secondary": "npm"
+        }
+      ]
+    },
+    "steps": {
+      "heading": "Ba bước, rồi làm việc.",
+      "items": [
+        {
+          "image": "plate",
+          "name": "Cài đặt",
+          "body": "Mỗi plugin một lệnh, cho mọi dự án hoặc chỉ dự án này."
+        },
+        {
+          "image": "catba",
+          "name": "Mở lại OpenCode",
+          "body": "Plugin chỉ nạp lúc khởi động, nên khởi động lại một lần sau khi cài."
+        },
+        {
+          "image": "comb",
+          "name": "Thiết lập một lần, rồi quên đi",
+          "body": "/hivemind-setup hỏi dùng harness và model nào, lưu câu trả lời rồi không làm phiền nữa."
+        }
+      ]
+    },
+    "ledger": {
+      "heading": "Đã phát hành, và sắp tới.",
+      "tableName": "Phát hành",
+      "image": "nectar",
+      "groups": [
+        {
+          "rows": [
+            {
+              "kind": "Steward",
+              "what": "hmoc-steward-acp",
+              "value": "0.4.0 · mới nhất"
+            },
+            {
+              "kind": "Steward",
+              "what": "Devin, Antigravity, Freebuff",
+              "value": "Phiên + giao việc"
+            },
+            {
+              "kind": "Steward",
+              "what": "Model",
+              "value": "Toàn bộ catalog của từng agent"
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "Substrate",
+              "what": "hivemind-substrate",
+              "value": "0.2.0-beta.1 · beta"
+            },
+            {
+              "kind": "Substrate",
+              "what": "Lưu trữ, chỉ mục, van, truy vết",
+              "value": "Đang được chủ dự án kiểm thử"
+            }
+          ]
+        },
+        {
+          "rows": [
+            {
+              "kind": "Tiếp theo",
+              "what": "Claude Code trong Steward",
+              "value": "Dự kiến"
+            },
+            {
+              "kind": "Sau đó",
+              "what": "Cursor trong Steward",
+              "value": "Dự kiến"
+            }
+          ]
+        }
+      ]
+    },
+    "install": {
+      "line1": "Chọn plugin,",
+      "line2": "rồi mở lại.",
+      "body": "Chép lệnh cho cấu hình của bạn. Không có gì tự cài: OpenCode nhận plugin ở lần khởi động tiếp theo.",
+      "dialogTitle": "Thêm vào OpenCode",
+      "pluginLabel": "Plugin",
+      "plugins": {
+        "steward": "Steward",
+        "substrate": "Substrate",
+        "both": "Cả hai"
+      },
+      "scopeLabel": "Phạm vi",
+      "scopes": {
+        "global": "Mọi dự án",
+        "project": "Dự án này"
+      },
+      "stepsLabel": "Chạy các lệnh này",
+      "notes": {
+        "stewardGlobal": "Cài Steward cho mọi dự án.",
+        "stewardProject": "Thêm mục này vào mảng plugins trong opencode.json của dự án.",
+        "substrateGlobal": "Thêm Substrate vào ~/.config/opencode/opencode.json.",
+        "substrateProject": "Thêm Substrate vào ./opencode.json, giữ nguyên comment của bạn.",
+        "reload": "Thoát rồi mở lại OpenCode.",
+        "setup": "Trong OpenCode, chạy lệnh này một lần và trả lời các câu hỏi."
+      }
+    }
+  },
+  "steward": {
+    "hero": {
+      "accessibleHeadline": "Devin, Antigravity và Freebuff, ngay trong OpenCode",
+      "line1": "Ba agent thật,",
+      "line2": "ngay trong OpenCode.",
+      "support": "Mở Devin, Antigravity hoặc Freebuff thành phiên thật trong terminal OpenCode khi bạn muốn ngồi xem. Giao việc chạy nền cho bất kỳ ai trong số đó khi bạn không ngồi đó.",
+      "installCommand": "opencode plugin add hmoc-steward-acp@0.4.0",
+      "installNote": "Bản mới nhất trên npm: 0.4.0. Cần OpenCode từ 2.1.2 trở lên, dưới v3."
+    },
+    "switches": {
+      "label": "Nó làm gì",
+      "items": [
+        {
+          "sentence": "Xem chúng làm việc ngay trong terminal.",
+          "consequence": "/devin, /antigravity hoặc /freebuff mở một phiên thật: phản hồi trực tiếp, mention tệp và bộ chọn model.",
+          "on": true
+        },
+        {
+          "sentence": "Giao việc rồi làm tiếp việc mình.",
+          "consequence": "hivemind-delegate chạy việc trong một phiên con thật trên Devin, Antigravity hoặc Freebuff. Foreground chờ kết quả; background trả về ngay rồi báo sau.",
+          "on": true
+        },
+        {
+          "sentence": "Mọi quyền đều do bạn trả lời.",
+          "consequence": "Yêu cầu hiện thành thẻ với đúng các lựa chọn của agent. Tự động duyệt trên phiên được giao mặc định tắt.",
+          "on": false
+        },
+        {
+          "sentence": "Sập giữa chừng vẫn nối tiếp được.",
+          "consequence": "Mỗi phiên con ghi lại liên kết của nó. Khôi phục nạp lại đúng phiên gốc và kiểm tra bản phát lại, nên prompt không bao giờ bị gửi hai lần.",
+          "on": false
+        },
+        {
+          "sentence": "Dùng mọi model chúng cung cấp.",
+          "consequence": "Model lấy từ catalog trực tiếp của từng agent, nên model mới tự xuất hiện mà không cần cập nhật plugin. Chọn model cho từng agent trong /hivemind-setup hoặc đổi bằng ctrl+m.",
+          "on": false
+        }
+      ]
     },
     "try": {
       "heading": "Thử một lệnh",
       "inputLabel": "Gõ một lệnh của plugin",
       "examplesLabel": "Hoặc thử",
-      "sideTitle": "Ngồi xem, hoặc giao việc.",
-      "sideBody": "Mở phiên khi bạn muốn xem agent làm và trả lời câu hỏi của nó. Giao việc khi bạn bận: tác vụ chạy trong một phiên con OpenCode thật, xong thì kết quả quay về agent của bạn."
+      "sideTitle": "Ngồi xem, hoặc giao đi.",
+      "sideBody": "Mở phiên khi bạn muốn thấy agent làm và trả lời câu hỏi của nó. Giao việc khi bạn không cần: tác vụ chạy trong một phiên con OpenCode thật và kết quả quay về agent của bạn."
     },
     "setup": {
-      "heading": "Cài một lần.",
-      "requirement": "Bạn cần OpenCode V2, cùng devin CLI đã đăng nhập (devin auth login) hoặc Antigravity ACP server. Plugin chỉ kiểm tra, không tự cài hay tự đăng nhập.",
-      "stages": [
+      "heading": "Thiết lập một lần.",
+      "body": "Chạy /hivemind-setup. Nếu thiết lập đã lưu vẫn ổn, nó dừng ngay: không hỏi, không ghi. Nếu còn thiếu, agent hỏi từng câu một và lưu câu trả lời.",
+      "steps": [
         {
-          "duration": "Vài giây",
-          "clause": "Đầu tiên, chạy lệnh cài."
+          "command": "/hivemind-setup",
+          "what": "Chọn agent nào được bật, thứ tự dự phòng, và model cho từng agent."
         },
         {
-          "duration": "Vài giây",
-          "clause": "Sau đó, nạp lại OpenCode."
+          "command": "/hivemind-setup health",
+          "what": "Một lần đọc tĩnh: ready, action-required hoặc blocked, kèm đúng một việc cần làm tiếp."
         },
         {
-          "duration": "Khoảng một phút",
-          "clause": "Tiếp theo, chạy /hivemind-setup và trả lời."
+          "command": "hivemind-doctor",
+          "what": "Chỉ đi xa hơn khi bạn yêu cầu: mặc định bắt tay, kiểm tra phiên khi bạn đồng ý, cài và đăng nhập sau khi bạn duyệt."
+        }
+      ],
+      "card": {
+        "title": "Bật những agent nào?",
+        "options": [
+          "Devin",
+          "Antigravity",
+          "Freebuff"
+        ],
+        "hint": "Câu trả lời được lưu vào config/delegate.",
+        "health": "health: ready"
+      },
+      "needsHeading": "Bạn cần",
+      "needs": [
+        "OpenCode V2, từ bản 2.1.2 trở lên, dưới v3.",
+        "Với Devin: CLI devin, đã đăng nhập bằng devin auth login.",
+        "Với Antigravity: ACP server chính thức của Antigravity. Plugin có thể cài bản đã ghim sau khi bạn duyệt.",
+        "Với Freebuff: đăng nhập Freebuff sẵn có của bạn, hoặc CODEBUFF_API_KEY trong biến môi trường."
+      ],
+      "needsNote": "Plugin chỉ kiểm tra những thứ này. Nó không tự cài hay tự đăng nhập, và phần cài đặt không nhận credential."
+    },
+    "keys": {
+      "line1": "Mọi lệnh",
+      "line2": "và phím nó thêm vào.",
+      "tableName": "Lệnh",
+      "image": "plate"
+    },
+    "closing": {
+      "line1": "Claude Code",
+      "line2": "là tiếp theo.",
+      "body": "Sau đó là Cursor. Mỗi harness chỉ phát hành khi cả phiên hosted lẫn giao việc đều chạy được. Ủng hộ của bạn trả cho những giờ làm đó.",
+      "button": "Ủng hộ trên Ko-fi",
+      "alt": "Thích Buy Me a Coffee hơn?",
+      "roadmapTitle": "Harness",
+      "roadmap": [
+        {
+          "name": "Devin",
+          "state": "Có trong 0.4.0"
         },
         {
-          "duration": "Mọi phiên sau đó",
-          "clause": "Từ đó, nó không làm phiền bạn nữa."
+          "name": "Antigravity",
+          "state": "Có trong 0.4.0"
+        },
+        {
+          "name": "Freebuff",
+          "state": "Có trong 0.4.0"
+        },
+        {
+          "name": "Claude Code",
+          "state": "Tiếp theo"
+        },
+        {
+          "name": "Cursor",
+          "state": "Sau Claude Code"
+        }
+      ]
+    }
+  },
+  "substrate": {
+    "hero": {
+      "accessibleHeadline": "Không việc nào agent đã làm bị thất lạc",
+      "line1": "Không việc nào agent làm",
+      "line2": "bị thất lạc.",
+      "support": "Substrate lưu mọi cây phiên OpenCode vào dự án của bạn, lập chỉ mục, và cho agent hai lần gọi để biết chính xác cái gì đã đổi và ai đã đổi.",
+      "installCommand": "npx hivemind-substrate@0.2.0-beta.1",
+      "installNote": "Bản beta. Thêm plugin vào ./opencode.json; thêm --global để dùng cho mọi dự án. Sau đó mở lại OpenCode."
+    },
+    "intro": [
+      {
+        "text": "The Spine"
+      },
+      {
+        "image": "freshComb"
+      },
+      {
+        "text": "giữ mọi bản ghi phiên. The Honeycomb"
+      },
+      {
+        "image": "comb"
+      },
+      {
+        "text": "lập chỉ mục ai đã làm gì. Van dọn output công cụ cũ mà giữ lại dữ kiện."
+      }
+    ],
+    "layers": {
+      "tabsLabel": "Các lớp",
+      "tabs": [
+        {
+          "id": "spine",
+          "tab": "Spine",
+          "title": "Mọi bản ghi, trên ổ đĩa",
+          "body": "Mỗi cây phiên, gồm phiên gốc và mọi phiên con subagent, delegate-devin, hivemind-delegate, được lưu vào .session-archive/ dưới dạng JSONL. Văn bản dài nằm trong blob đặt tên theo SHA-256, nên không gì bị lưu hai lần. Chạy lại trên phiên không đổi thì không ghi gì.",
+          "plate": [
+            ".session-archive/",
+            "  sessions/ses_4Fh1/ses_4Fh1.jsonl",
+            "  sessions/ses_4Fh1/info.json",
+            "  sessions/ses_4Fh1/subagents/ses_7Kq2/",
+            "  blobs/9a2de9b1….txt",
+            "  index.sqlite"
+          ]
+        },
+        {
+          "id": "honeycomb",
+          "tab": "Honeycomb",
+          "title": "Ai làm gì, truy vấn được",
+          "body": "index.sqlite ghi lại phiên, các lần giao việc kèm harness, tệp đã chạm, biên nhận test và build, cùng bản đồ mã nguồn: khung AST, repo map xếp hạng PageRank, và các tệp hay thay đổi cùng nhau trong git.",
+          "plate": [
+            "delegation   harness       mode",
+            "ses_7Kq2     antigravity   spawn",
+            "ses_9Vb3     devin         continue",
+            "ses_2Lm8     opencode      spawn"
+          ]
+        },
+        {
+          "id": "viewports",
+          "tab": "Viewports",
+          "title": "Dọn nhiễu, giữ dữ kiện",
+          "body": "substrate.valve thay output công cụ cũ bằng breadcrumb trỏ tới blob đã lưu, và giữ một manifest ghi tệp nào FRESH, SLICE hay STALE. Sau compaction, agent đi tiếp từ chỉ mục thay vì đọc lại mọi thứ.",
+          "plate": [
+            "Working-memory manifest",
+            "FRESH   src/retry.ts",
+            "SLICE   src/queue.ts  40–88",
+            "STALE   test/retry.test.ts  đọc lại"
+          ]
+        }
+      ],
+      "primary": "Xem bản demo truy vết",
+      "secondary": "npm"
+    },
+    "trace": {
+      "heading": "Hai lần gọi tới sự thật.",
+      "body": "Khi agent rảnh, Substrate gửi một dòng cho mỗi change-set. Lần gọi đầu trả về gói: các nhánh xếp theo mức quan trọng, tối đa 800 token. Lần gọi thứ hai mở một lá: diff kèm bằng chứng SHA-256, các subagent đã chạm vào, hoặc kết quả test nào giờ đã cũ.",
+      "demoTitle": "Change-set ví dụ",
+      "demoNote": "Dữ liệu mẫu. Trong dự án của bạn, nó đến từ git và sổ công cụ của OpenCode.",
+      "packageLabel": "Lần gọi 1 · gói",
+      "leafLabel": "Lần gọi 2 · lá",
+      "pickBranch": "Chọn một nhánh để mở lá của nó."
+    },
+    "switches": {
+      "label": "Cách nó hoạt động",
+      "items": [
+        {
+          "sentence": "Không bao giờ ghi vào DB của OpenCode.",
+          "consequence": "opencode.db chỉ được mở để đọc. Kho lưu trữ nằm ở .session-archive/ tại gốc dự án, ngoài .opencode/.",
+          "on": true
+        },
+        {
+          "sentence": "Hook mỗi bước chỉ chạy trong bộ nhớ.",
+          "consequence": "Hook context chạy ở mọi bước của model nên không đụng tới ổ đĩa. Nó được thiết kế trong ngân sách 2 ms, có test kiểm tra.",
+          "on": true
+        },
+        {
+          "sentence": "Cho biết tệp nào hay đổi cùng nhau.",
+          "consequence": "Lịch sử git cho agent biết tệp nào thường đổi cùng tệp nó đang sửa, trước khi nó bỏ sót.",
+          "on": false
+        },
+        {
+          "sentence": "Qua compaction vẫn nhớ mình đang ở đâu.",
+          "consequence": "Hook compaction viết một gói nối tiếp từ chỉ mục, để agent biết việc nào đã xong và việc nào còn dở.",
+          "on": false
         }
       ]
     },
-    "keys": {
-      "heading": "Mọi phím nó thêm vào.",
-      "headingLine1": "Mọi phím",
-      "headingLine2": "nó thêm vào.",
+    "commands": {
+      "line1": "Các lệnh",
+      "line2": "nó thêm vào.",
       "tableName": "Lệnh",
-      "cardTitle": "Devin muốn chạy một lệnh",
-      "cardCommand": "bun test",
-      "cardOptions": [
-        "Cho phép lần này",
-        "Luôn cho phép",
-        "Từ chối"
-      ],
-      "caption": "Yêu cầu cấp quyền hiện thành thẻ. Các lựa chọn do agent đưa ra."
+      "image": "plate",
+      "groups": [
+        {
+          "label": "Trong TUI",
+          "rows": [
+            {
+              "key": "/substrate",
+              "what": "Mở giao diện Substrate"
+            },
+            {
+              "key": "/substrate-sync",
+              "what": "Đồng bộ kho lưu trữ và chỉ mục mã"
+            },
+            {
+              "key": "/substrate-provenance",
+              "what": "Đối chiếu tệp đã ghi với ổ đĩa"
+            },
+            {
+              "key": "/substrate-prune",
+              "what": "Dọn working set ngay"
+            }
+          ]
+        },
+        {
+          "label": "",
+          "rows": [
+            {
+              "key": "/substrate-brief",
+              "what": "Soạn brief cho agent con"
+            },
+            {
+              "key": "/substrate-panel",
+              "what": "Bật/tắt bảng kiểm tra phiên"
+            },
+            {
+              "key": "/substrate-repomap",
+              "what": "Mở repo map"
+            },
+            {
+              "key": "/substrate-compaction",
+              "what": "Xem trước gói compaction"
+            }
+          ]
+        },
+        {
+          "label": "Công cụ của agent",
+          "rows": [
+            {
+              "key": "substrate.viewport",
+              "what": "trace, search, repomap, skeleton, slice, coupled, brief, timeline"
+            },
+            {
+              "key": "substrate.valve",
+              "what": "prune, status, reset"
+            },
+            {
+              "key": "archive.persist",
+              "what": "Lưu cây phiên ngay"
+            },
+            {
+              "key": "ctx.context-prune",
+              "what": "Tên cũ của substrate.valve"
+            }
+          ]
+        }
+      ]
     },
     "closing": {
-      "heading": "Tiếp theo: Claude Code.",
-      "headingLine1": "Tiếp theo:",
-      "headingLine2": "Claude Code.",
-      "body": "Sau đó là Cursor. Tiền ủng hộ giúp mình có thời gian làm ra chúng.",
-      "button": "Ủng hộ qua Ko-fi"
-    },
-    "footer": {
-      "note1": "hmoc-steward-acp 0.2.0, plugin cho OpenCode V2.",
-      "note2Before": "Thích Buy Me a Coffee hơn?",
-      "note2Link": "Ở đây",
-      "note2After": ".",
-      "note3Before": "Link giới thiệu các công cụ mình dùng kèm:",
-      "note3Freebuff": "Freebuff",
-      "note3Middle": "và gói",
-      "note3Zai": "Z.ai GLM Coding Plan",
-      "note3After": ". Chúng không thuộc plugin, và mình được thưởng nếu bạn đăng ký.",
-      "backToTop": "Lên đầu trang",
-      "githubLabel": "GitHub",
-      "npmLabel": "npm",
-      "issuesLabel": "Báo lỗi",
-      "credit": "Làm bởi shynlee04",
-      "copyright": "© 2026"
+      "line1": "Đây là bản beta.",
+      "line2": "Cứ phá thử.",
+      "body": "Chủ dự án vẫn đang kiểm thử. Nếu có gì hỏng, hãy mở issue và ghi kèm phiên bản OpenCode: Substrate đọc chính dữ liệu của OpenCode.",
+      "button": "Mở issue",
+      "privacy": "Bản ghi phiên có thể chứa bất cứ thứ gì đã dán vào phiên. Hãy coi .session-archive/ như bí mật và tự quyết có commit nó hay không."
     }
   },
-  "blogSection": {
-    "pageTitle": "Ghi Chép Kỹ Thuật & Kiến Trúc Đường Truyền",
-    "pageSubtitle": "Phân tích song ngữ về cách phá khóa độc quyền Harness trong OpenCode V2, đồng bộ phiên ses_* hai chiều, giữ phiên Freebuff qua keepSlotForResume và động cơ bộ nhớ Hivemind-Substrate.",
-    "readArticleCta": "Đọc bài phân tích",
-    "backToBlogCta": "Quay lại danh sách bài viết",
-    "proNotBroTakeawayLabel": "Đúc kết kiến trúc cốt lõi"
-  },
-  "episodesSection": {
-    "pageTitle": "Video Thực Chiến & Bản Ghi Terminal",
-    "pageSubtitle": "Xem chuỗi video dưới 2 phút và màn dựng dự án Greenfield 3-Harness trong 5 phút kèm lời thoại song ngữ và mạch lệnh OpenCode V2.",
-    "watchEpisodeCta": "Xem video và mạch lệnh",
-    "transcriptHeading": "Lời thoại song ngữ",
-    "tuiReplayHeading": "Mạch lệnh OpenCode V2",
-    "backToEpisodesCta": "Quay lại danh sách video"
-  },
-  "showroomSection": {
-    "pageTitle": "Phòng Thử Nghiệm Giao Diện (Showroom)",
-    "pageSubtitle": "Kiểm tra trực tiếp trạm 4 nút 3D, ngăn kéo X-Ray 3 tầng, bảng tính vắt token khuyến mãi và cấu trúc dữ liệu Payload CMS 3.0 với nút chuyển ngôn ngữ EN/VI.",
-    "harnessControlsTitle": "Bảng điều khiển trực tiếp (ngôn ngữ, chuyển động và nút mạng)",
-    "storyWokTitle": "Trạm Điều Phối 4 Nút 3D & Sơ Đồ Tĩnh",
-    "storyXrayTitle": "Ngăn Kéo Soi Mạch X-Ray 3 Tầng",
-    "storyConversionTitle": "Bảng Tính Vắt Promo & Kênh Nhà Cung Cấp",
-    "payloadCollectionsTitle": "Cấu Trúc Bộ Sưu Tập Payload CMS 3.0"
+  "footer": {
+    "tagline": "Hai plugin cho OpenCode V2, làm bởi shynlee04.",
+    "columns": {
+      "plugins": "Plugin",
+      "install": "Cài đặt",
+      "source": "Mã nguồn",
+      "watch": "Xem",
+      "support": "Ủng hộ"
+    },
+    "links": {
+      "steward": "Steward",
+      "substrate": "Substrate",
+      "stewardNpm": "hmoc-steward-acp",
+      "substrateNpm": "hivemind-substrate",
+      "stewardGithub": "Steward trên GitHub",
+      "substrateGithub": "Substrate trên GitHub",
+      "video": "Video demo",
+      "channel": "Kênh YouTube",
+      "kofi": "Ko-fi",
+      "bmc": "Buy Me a Coffee"
+    },
+    "referralBefore": "Link giới thiệu cho các công cụ mình dùng cùng:",
+    "referralFreebuff": "Freebuff",
+    "referralMiddle": "và",
+    "referralZai": "Z.ai GLM Coding Plan",
+    "referralAfter": ". Chúng không thuộc các plugin, và mình nhận credit nếu bạn đăng ký.",
+    "creditsLabel": "Ảnh",
+    "backToTop": "Lên đầu trang",
+    "copyright": "© 2026 shynlee04"
   }
 }

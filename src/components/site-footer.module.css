@@ -1,0 +1,96 @@
+.footer {
+  background: var(--bg);
+  color: var(--ink);
+  padding: var(--section-pad) var(--gutter) 2rem;
+}
+
+.band {
+  margin-bottom: 3.5rem;
+}
+
+.wordmark {
+  margin-top: 2rem;
+  font-size: var(--step-lead);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.columnLabel {
+  font-size: var(--step-small);
+  font-weight: 600;
+  margin-bottom: 0.8em;
+}
+
+.column li + li {
+  margin-top: 0.45em;
+}
+
+.link {
+  font-size: var(--step-small);
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+  text-decoration-thickness: 1.5px;
+}
+
+.link:hover {
+  text-decoration-thickness: 2.5px;
+}
+
+.referral {
+  font-size: var(--step-small);
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+.credits {
+  margin-top: 1.25em;
+  font-size: var(--step-small);
+  color: var(--muted);
+  max-width: 100ch;
+  line-height: 1.8;
+}
+
+.lastRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+.copyright {
+  font-size: var(--step-small);
+}
+
+.topButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: var(--step-small);
+  font-weight: 600;
+  padding: 0.4em 0.2em;
+}
+
+.topButton:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.topGlyph {
+  width: 0.7em;
+  height: 0.8em;
+  background: var(--ink);
+  clip-path: var(--hex-point);
+}
+
+@media (max-width: 720px) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

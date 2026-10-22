@@ -1,6 +1,7 @@
+import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
-import { FOOTER_URLS, SiteFooter } from "@/components/home/site-footer";
-import { SiteHeader } from "@/components/home/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import {
   getPortalDictionary,
   LocaleSchema,
@@ -12,11 +13,6 @@ export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((locale) => ({ locale }));
 }
 
-function resolveLocale(raw: string): Locale {
-  const parsed = LocaleSchema.safeParse(raw);
-  return parsed.success ? parsed.data : "en";
-}
-
 export default async function LocaleLayout({
   children,
   params,
@@ -25,20 +21,20 @@ export default async function LocaleLayout({
   readonly params: Promise<{ locale: string }>;
 }) {
   const { locale: rawLocale } = await params;
-  const locale = resolveLocale(rawLocale);
+  const parsed = LocaleSchema.safeParse(rawLocale);
+  if (!parsed.success) notFound();
+  const locale: Locale = parsed.data;
   const dict = getPortalDictionary(locale);
-  const alternateLocale: Locale = locale === "en" ? "vi" : "en";
 
   return (
-    <div lang={locale} data-locale={locale} id="top">
+    <div id="top">
       <SiteHeader
         locale={locale}
-        alternateLocale={alternateLocale}
         nav={dict.nav}
         switchLabel={dict.meta.switchLocaleLabel}
       />
       <main>{children}</main>
-      <SiteFooter footer={dict.home.footer} urls={FOOTER_URLS} />
+      <SiteFooter locale={locale} footer={dict.footer} />
     </div>
   );
 }

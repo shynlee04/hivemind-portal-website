@@ -2,7 +2,7 @@
   "name": "hivemind-portal-website",
   "version": "0.1.0",
   "private": true,
-  "description": "Bilingual (EN/VI) Hivemind-* Ecosystem Portal, 3D Cyber-Wok Reactor Stage, 3-Layer X-Ray Explorer, Partner Conversion Hub, Payload 3.0 Content Collections & Component Showroom",
+  "description": "Bilingual (EN/VI) public site for the Hivemind OpenCode V2 plugins: Steward (hmoc-steward-acp) and Substrate (hivemind-substrate)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,7 +14,6 @@
     "next": "16.4.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "three": "0.172.0",
     "zod": "3.24.1"
   },
   "devDependencies": {
@@ -22,7 +21,6 @@
     "@types/node": "22.10.7",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "@types/three": "0.172.0",
     "typescript": "5.7.3"
   }
 }

@@ -1,0 +1,498 @@
+/* Hero */
+.hero {
+  position: relative;
+  overflow: clip;
+  background: var(--bg);
+  min-height: 92svh;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(3rem, 9vh, 6rem);
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+
+.heroText {
+  grid-column: 1 / span 7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.headline {
+  font-size: var(--step-display);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.headline span {
+  display: block;
+}
+
+.support {
+  margin-top: 1.6rem;
+  font-size: var(--step-lead);
+  line-height: 1.4;
+  max-width: 34ch;
+}
+
+.heroActions {
+  margin-top: 2.2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+
+.textLink {
+  font-weight: 500;
+  font-size: var(--step-body);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1.5px;
+}
+
+.textLink:hover {
+  text-decoration-thickness: 3px;
+}
+
+/* Intro statement on white */
+.intro {
+  background: var(--field);
+  padding-block: clamp(6rem, 22vh, 13rem);
+}
+
+.introInner {
+  grid-column: 2 / span 10;
+}
+
+/* Showcase split */
+.showcase {
+  background: var(--field);
+  min-height: 88svh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.plate {
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  padding: 2.5rem;
+  min-height: 20rem;
+}
+
+.plateImg {
+  width: min(82%, 34rem);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.showcaseText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 2.5rem 0;
+  min-width: 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.tab {
+  background: none;
+  border: 0;
+  padding: 0.3em 0;
+  font-size: var(--step-body);
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.tab[data-selected] {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 2px;
+}
+
+.showcaseBody {
+  margin-block: 2rem;
+}
+
+.showcaseTitle {
+  font-size: var(--step-head);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+.showcaseDesc {
+  margin-top: 1.4rem;
+  max-width: 36ch;
+}
+
+.version {
+  margin-top: 1rem;
+  font-size: var(--step-small);
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.actionCells {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.5rem;
+  font-size: var(--step-body);
+  font-weight: 600;
+  transition: filter 0.15s ease;
+}
+
+.cell:hover {
+  filter: brightness(0.92);
+}
+
+.cellInk {
+  background: var(--ink);
+  color: var(--field);
+}
+
+.cellSurface {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* Steps: tiles that grow */
+.steps {
+  background: var(--bg);
+  padding-block: var(--section-pad);
+}
+
+.stepsHeading {
+  grid-column: 1 / span 5;
+  grid-row: 1;
+  align-self: start;
+  font-size: var(--step-head);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  max-width: 12ch;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  align-items: end;
+  gap: 10px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  grid-row: 1;
+}
+
+.tileBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: clip;
+}
+
+.tileBox img {
+  height: 78%;
+  width: auto;
+  aspect-ratio: 0.866;
+  object-fit: cover;
+  flex: none;
+}
+
+.tile1 {
+  grid-column: 1 / span 3;
+}
+
+.tile1 .tileBox {
+  height: 30svh;
+  background: var(--surface);
+}
+
+.tile2 {
+  grid-column: 4 / span 4;
+}
+
+.tile2 .tileBox {
+  height: 44svh;
+  background: var(--field);
+}
+
+.tile3 {
+  grid-column: 8 / span 5;
+}
+
+.tile3 .tileBox {
+  height: 60svh;
+  background: var(--ink);
+}
+
+.tileName {
+  margin-top: 1rem;
+  font-size: var(--step-lead);
+  font-weight: 600;
+}
+
+.tileBody {
+  margin-top: 0.4rem;
+  font-size: var(--step-body);
+  color: var(--ink);
+  max-width: 34ch;
+}
+
+/* slow drift on the middle tile's photo */
+.tile2 .tileBox img {
+  animation: tile-drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes tile-drift {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile2 .tileBox img {
+    animation: none;
+  }
+}
+
+/* Ledger */
+.ledger {
+  background: var(--field);
+  padding-block: var(--section-pad);
+}
+
+.ledgerHeading {
+  grid-column: 1 / -1;
+  font-size: var(--step-head);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  max-width: 14ch;
+  margin-bottom: 6rem;
+}
+
+.ledgerName {
+  grid-column: 5;
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+.ledgerTable {
+  grid-column: 6 / span 7;
+}
+
+.ledgerGroup+.ledgerGroup {
+  margin-top: 44px;
+}
+
+.ledgerRow {
+  display: grid;
+  grid-template-columns: minmax(9ch, 12ch) minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: 0.55rem;
+}
+
+.ledgerRow+.ledgerRow {
+  margin-top: 0.7rem;
+}
+
+.ledgerKind {
+  color: var(--muted);
+  font-size: var(--step-small);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.ledgerWhat {
+  font-size: var(--step-body);
+}
+
+.ledgerValue {
+  font-size: var(--step-body);
+  text-align: right;
+}
+
+.ledgerPhoto {
+  grid-column: 1 / span 4;
+  align-self: end;
+}
+
+.ledgerPhoto img {
+  width: min(22vw, 26rem);
+  height: auto;
+  aspect-ratio: 0.8;
+  object-fit: cover;
+}
+
+/* Install on ink */
+.install {
+  background: var(--ink);
+  color: var(--field);
+  min-height: 90svh;
+  padding-block: var(--section-pad);
+  display: flex;
+  align-items: stretch;
+}
+
+.installShell {
+  width: 100%;
+}
+
+.installLeft {
+  grid-column: 1 / span 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.installHeadline {
+  font-size: var(--step-display);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.installHeadline span {
+  display: block;
+}
+
+.installBody {
+  margin-top: 1.4rem;
+  font-size: var(--step-body);
+  color: color-mix(in srgb, var(--field) 72%, var(--ink));
+  max-width: 40ch;
+}
+
+.installRight {
+  grid-column: 7 / span 5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Phone */
+@media (max-width: 900px) {
+  .hero {
+    min-height: 0;
+  }
+
+  .introInner {
+    grid-column: 1 / -1;
+  }
+
+  .heroText {
+    grid-column: 1 / -1;
+  }
+
+  .showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .plate {
+    padding: 1rem;
+  }
+
+  .showcaseText {
+    padding: 1.25rem var(--gutter) 0;
+  }
+
+  .cell {
+    min-height: 3.75rem;
+  }
+
+  .stepsHeading {
+    grid-column: 1 / -1;
+    margin-bottom: 2rem;
+  }
+
+  .tiles {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.75rem;
+  }
+
+  .tile1 .tileBox {
+    height: 48vw;
+    min-height: 9rem;
+  }
+
+  .tile2 .tileBox {
+    height: 60vw;
+    min-height: 12rem;
+  }
+
+  .tile3 .tileBox {
+    height: 76vw;
+    min-height: 16rem;
+  }
+
+  .ledgerHeading {
+    text-indent: 0;
+    margin-bottom: 2.5rem;
+  }
+
+  .ledgerName {
+    display: none;
+  }
+
+  .ledgerTable {
+    grid-column: 1 / -1;
+  }
+
+  .ledgerRow {
+    grid-template-columns: 1fr auto;
+  }
+
+  .ledgerKind {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+
+  .ledgerPhoto {
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+  }
+
+  .ledgerPhoto img {
+    width: 60%;
+  }
+
+  .installLeft {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+
+  .installRight {
+    grid-column: 1 / -1;
+    margin-top: 2.5rem;
+    justify-content: flex-start;
+  }
+}

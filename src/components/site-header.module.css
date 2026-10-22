@@ -1,0 +1,109 @@
+.header {
+  background: var(--bg);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem var(--gutter);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 600;
+  font-size: var(--step-body);
+  letter-spacing: -0.01em;
+}
+
+.glyph {
+  width: 1.15em;
+  height: 1.25em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.navLink {
+  font-size: var(--step-body);
+  font-weight: 500;
+  padding-block: 0.3em;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 2px;
+}
+
+.navLink[data-active] {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 2px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.install {
+  display: inline-flex;
+  align-items: center;
+  clip-path: var(--hex-flat);
+  background: var(--ink);
+  color: var(--bg);
+  font-size: var(--step-small);
+  font-weight: 600;
+  padding: 0.55em 1.6em;
+  transition: transform 0.18s ease;
+}
+
+.install:hover {
+  transform: translateY(-2px);
+}
+
+.menuButton {
+  display: none;
+  background: none;
+  border: 0;
+  padding: 0.5em 0.2em;
+  font-size: var(--step-small);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.phoneNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.75rem var(--gutter) 1.25rem;
+  background: var(--bg);
+}
+
+.phoneLink {
+  font-size: var(--step-lead);
+  font-weight: 500;
+  padding-block: 0.35em;
+}
+
+@media (max-width: 720px) {
+  .nav {
+    display: none;
+  }
+
+  .install {
+    display: none;
+  }
+
+  .menuButton {
+    display: inline-block;
+  }
+}

@@ -1,0 +1,162 @@
+.bands {
+  display: flex;
+  flex-direction: column;
+}
+
+.band {
+  min-height: 20svh;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 2rem;
+  padding: 2rem var(--gutter);
+  background: var(--bg);
+  transition: background-color 0.35s ease;
+}
+
+.sentence {
+  font-size: clamp(1.875rem, 3.6vw, 3.75rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: var(--muted);
+  transition: color 0.35s ease;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 2.2em;
+  height: 1.1em;
+  padding: 0;
+  font-size: clamp(1.875rem, 3.6vw, 3.75rem);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.track {
+  position: absolute;
+  inset: 0;
+  background: var(--muted);
+  clip-path: polygon(0.55em 0,
+      calc(100% - 0.55em) 0,
+      100% 50%,
+      calc(100% - 0.55em) 100%,
+      0.55em 100%,
+      0 50%);
+  transition: background-color 0.25s ease;
+}
+
+.knob {
+  position: absolute;
+  top: 50%;
+  left: 0.17em;
+  width: 0.62em;
+  height: 0.72em;
+  margin-top: -0.36em;
+  background: var(--field);
+  clip-path: var(--hex-point);
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.toggle[aria-checked="true"] .track {
+  background: var(--ink);
+}
+
+.toggle[aria-checked="true"] .knob {
+  transform: translateX(1.24em);
+}
+
+.band[data-on] .sentence {
+  color: var(--ink);
+}
+
+.band[data-on][data-fill="field"] {
+  background: var(--field);
+}
+
+.band[data-on][data-fill="ink"] {
+  background: var(--ink);
+}
+
+.band[data-on][data-fill="surface"] {
+  background: var(--surface);
+}
+
+.band[data-on][data-fill="ink"] .sentence {
+  color: var(--bg);
+}
+
+.band[data-on][data-fill="ink"] .consequence {
+  color: color-mix(in srgb, var(--field) 80%, var(--ink));
+}
+
+.band[data-on][data-fill="surface"] .consequence {
+  color: var(--ink);
+}
+
+.band[data-on][data-fill="ink"] .toggle .track {
+  background: var(--bg);
+}
+
+.band[data-on][data-fill="ink"] .toggle .knob {
+  background: var(--ink);
+}
+
+.band[data-on][data-fill="ink"] .toggle:focus-visible {
+  outline-color: var(--bg);
+}
+
+.consequence {
+  grid-column: 1 / -1;
+  font-size: var(--step-body);
+  max-width: 64ch;
+  color: var(--muted);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.35s ease,
+    margin-top 0.35s ease,
+    visibility 0.35s;
+}
+
+.band[data-on] .consequence {
+  max-height: 8em;
+  opacity: 1;
+  visibility: visible;
+  margin-top: 0.8rem;
+}
+
+.band[data-on] .sentence {
+  color: var(--ink);
+}
+
+@media (max-width: 720px) {
+  .band {
+    min-height: 132px;
+    column-gap: 1rem;
+    padding-block: 1.4rem;
+  }
+
+  .sentence {
+    font-size: 6.4vw;
+    line-height: 1.15;
+    max-width: 76vw;
+  }
+
+  .toggle {
+    font-size: 6.4vw;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .consequence {
+    font-size: 0.9375rem;
+  }
+}
