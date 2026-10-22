@@ -1,6 +1,6 @@
 import { PRODUCTS } from "@/modules/ecosystem";
 import type { PortalDictionary } from "@/modules/locale-dictionary";
-import { HexImage } from "@/components/hex-image";
+import { HexArt } from "@/components/hex-art";
 import { InstallDialog } from "@/components/install-dialog";
 import styles from "./substrate.module.css";
 
@@ -14,9 +14,9 @@ export function SubstrateClosing({
     <section className={styles.closing}>
       <div className="shell">
         <div className={styles.closingLeft}>
-          <HexImage
-            id="catba"
-            alt={dict.common.images.catba.alt}
+          <HexArt
+            id="build"
+            alt={dict.common.images.build.alt}
             className={styles.closingPhoto}
           />
           <h2 className={styles.closingHeadline} data-reveal>

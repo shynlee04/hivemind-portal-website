@@ -28,7 +28,7 @@
   margin-bottom: 0.8em;
 }
 
-.column li + li {
+.column li+li {
   margin-top: 0.45em;
 }
 
@@ -47,14 +47,6 @@
   font-size: var(--step-small);
   max-width: 60ch;
   color: var(--muted);
-}
-
-.credits {
-  margin-top: 1.25em;
-  font-size: var(--step-small);
-  color: var(--muted);
-  max-width: 100ch;
-  line-height: 1.8;
 }
 
 .lastRow {

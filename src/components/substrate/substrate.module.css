@@ -476,10 +476,10 @@ code.plateLines {
   align-self: end;
 }
 
-.commandsPhoto img {
+.commandsPhoto svg {
   width: min(22vw, 26rem);
   height: auto;
-  aspect-ratio: 0.8;
+  aspect-ratio: 0.866;
   object-fit: cover;
 }
 
@@ -501,8 +501,7 @@ code.plateLines {
 .closingPhoto {
   width: min(15rem, 55%);
   height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
+  aspect-ratio: 0.866;
   margin-bottom: 2rem;
 }
 
@@ -599,7 +598,7 @@ code.plateLines {
     margin-top: 2rem;
   }
 
-  .commandsPhoto img {
+  .commandsPhoto svg {
     width: 60%;
   }
 

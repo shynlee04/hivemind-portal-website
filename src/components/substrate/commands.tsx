@@ -1,5 +1,5 @@
 import type { PortalDictionary } from "@/modules/locale-dictionary";
-import { HexImage } from "@/components/hex-image";
+import { HexArt } from "@/components/hex-art";
 import styles from "./substrate.module.css";
 
 export function SubstrateCommands({
@@ -35,7 +35,7 @@ export function SubstrateCommands({
           ))}
         </div>
         <div className={styles.commandsPhoto} data-reveal>
-          <HexImage
+          <HexArt
             id={commands.image}
             alt={dict.common.images[commands.image].alt}
           />

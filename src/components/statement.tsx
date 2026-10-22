@@ -1,8 +1,8 @@
-import type { ImageId } from "@/modules/locale-dictionary";
-import { HexImage } from "./hex-image";
+import type { ArtId } from "@/modules/locale-dictionary";
+import { HexArt } from "./hex-art";
 import styles from "./statement.module.css";
 
-type Segment = { readonly text: string } | { readonly image: ImageId };
+type Segment = { readonly text: string } | { readonly image: ArtId };
 
 export function StatementWithThumbs({
   segments,
@@ -10,7 +10,7 @@ export function StatementWithThumbs({
   className,
 }: {
   readonly segments: ReadonlyArray<Segment>;
-  readonly alts: Record<ImageId, { readonly alt: string }>;
+  readonly alts: Record<ArtId, { readonly alt: string }>;
   readonly className?: string;
 }) {
   return (
@@ -22,11 +22,10 @@ export function StatementWithThumbs({
             segment.text
           ) : (
             <span className={styles.thumb}>
-              <HexImage
+              <HexArt
                 id={segment.image}
                 alt={alts[segment.image].alt}
                 className={styles.thumbImg}
-                eager
               />
             </span>
           )}

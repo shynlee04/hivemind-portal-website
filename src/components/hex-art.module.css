@@ -1,0 +1,164 @@
+.art {
+  display: block;
+  width: 100%;
+  height: auto;
+  clip-path: var(--hex-point);
+}
+
+.bgInk {
+  fill: var(--ink);
+}
+
+.bgField {
+  fill: var(--field);
+}
+
+.bgSurface {
+  fill: var(--surface);
+}
+
+.cellInk {
+  fill: var(--ink);
+}
+
+.cellField {
+  fill: var(--field);
+}
+
+.cellBg {
+  fill: var(--bg);
+}
+
+.cellMuted {
+  fill: var(--muted);
+}
+
+.cellFaint {
+  fill: var(--muted);
+  fill-opacity: 0.28;
+}
+
+.cellStrokeInk {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+}
+
+.cellStrokeField {
+  fill: none;
+  stroke: var(--field);
+  stroke-width: 1.2;
+  stroke-opacity: 0.45;
+}
+
+.ringMuted {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.1;
+}
+
+.lineInk {
+  stroke: var(--ink);
+  stroke-width: 1.4;
+}
+
+.lineBg {
+  stroke: var(--bg);
+  stroke-width: 1.6;
+}
+
+.lineFaint {
+  stroke: var(--muted);
+  stroke-width: 0.9;
+}
+
+.dash {
+  stroke-dasharray: 3 3;
+}
+
+.pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: art-pulse 2.4s ease-in-out infinite;
+}
+
+.wave {
+  animation: art-wave 3.6s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0) * 0.22s);
+}
+
+.drop {
+  animation: art-drop 3.2s ease-in-out infinite;
+}
+
+.spinSlow {
+  transform-box: view-box;
+  transform-origin: center;
+  animation: art-spin 14s linear infinite;
+}
+
+.spinReverse {
+  transform-box: view-box;
+  transform-origin: center;
+  animation: art-spin-reverse 20s linear infinite;
+}
+
+@keyframes art-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
+
+@keyframes art-wave {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes art-drop {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(32px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(32px);
+    opacity: 0;
+  }
+}
+
+@keyframes art-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes art-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse,
+  .wave,
+  .drop,
+  .spinSlow,
+  .spinReverse {
+    animation: none;
+  }
+}

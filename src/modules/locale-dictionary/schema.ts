@@ -4,15 +4,15 @@ export const SUPPORTED_LOCALES = ["en", "vi"] as const;
 export const LocaleSchema = z.enum(SUPPORTED_LOCALES);
 export type Locale = z.infer<typeof LocaleSchema>;
 
-export const ImageIdSchema = z.enum([
-  "queen",
-  "comb",
-  "freshComb",
-  "catba",
-  "nectar",
-  "plate",
+export const ArtIdSchema = z.enum([
+  "agent",
+  "honeycomb",
+  "yield",
+  "build",
+  "orbit",
+  "diagram",
 ]);
-export type ImageId = z.infer<typeof ImageIdSchema>;
+export type ArtId = z.infer<typeof ArtIdSchema>;
 
 const TuiToneSchema = z.enum([
   "prompt",
@@ -33,7 +33,7 @@ const TuiFragmentSchema = z
 
 const IntroSegmentSchema = z.union([
   z.object({ text: z.string() }).strict(),
-  z.object({ image: ImageIdSchema }).strict(),
+  z.object({ image: ArtIdSchema }).strict(),
 ]);
 
 const HeadlineSchema = z
@@ -120,12 +120,12 @@ export const PortalDictionarySchema = z
         example: z.string(),
         images: z
           .object({
-            queen: z.object({ alt: z.string() }).strict(),
-            comb: z.object({ alt: z.string() }).strict(),
-            freshComb: z.object({ alt: z.string() }).strict(),
-            catba: z.object({ alt: z.string() }).strict(),
-            nectar: z.object({ alt: z.string() }).strict(),
-            plate: z.object({ alt: z.string() }).strict(),
+            agent: z.object({ alt: z.string() }).strict(),
+            honeycomb: z.object({ alt: z.string() }).strict(),
+            yield: z.object({ alt: z.string() }).strict(),
+            build: z.object({ alt: z.string() }).strict(),
+            orbit: z.object({ alt: z.string() }).strict(),
+            diagram: z.object({ alt: z.string() }).strict(),
           })
           .strict(),
       })
@@ -152,7 +152,7 @@ export const PortalDictionarySchema = z
                 .object({
                   id: z.enum(["steward", "substrate"]),
                   tab: z.string(),
-                  image: ImageIdSchema,
+                  image: ArtIdSchema,
                   title: z.string(),
                   body: z.string(),
                   version: z.string(),
@@ -169,7 +169,7 @@ export const PortalDictionarySchema = z
             items: z.array(
               z
                 .object({
-                  image: ImageIdSchema,
+                  image: ArtIdSchema,
                   name: z.string(),
                   body: z.string(),
                 })
@@ -181,7 +181,7 @@ export const PortalDictionarySchema = z
           .object({
             heading: z.string(),
             tableName: z.string(),
-            image: ImageIdSchema,
+            image: ArtIdSchema,
             groups: z.array(
               z
                 .object({
@@ -261,7 +261,7 @@ export const PortalDictionarySchema = z
             line1: z.string(),
             line2: z.string(),
             tableName: z.string(),
-            image: ImageIdSchema,
+            image: ArtIdSchema,
           })
           .strict(),
         closing: z
@@ -318,7 +318,7 @@ export const PortalDictionarySchema = z
             line1: z.string(),
             line2: z.string(),
             tableName: z.string(),
-            image: ImageIdSchema,
+            image: ArtIdSchema,
             groups: z.array(
               z
                 .object({
@@ -373,7 +373,6 @@ export const PortalDictionarySchema = z
         referralMiddle: z.string(),
         referralZai: z.string(),
         referralAfter: z.string(),
-        creditsLabel: z.string(),
         backToTop: z.string(),
         copyright: z.string(),
       })

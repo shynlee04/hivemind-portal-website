@@ -1,5 +1,5 @@
 import type { PortalDictionary } from "@/modules/locale-dictionary";
-import { HexImage } from "@/components/hex-image";
+import { HexArt } from "@/components/hex-art";
 import styles from "./home.module.css";
 
 export function HomeLedger({ dict }: { readonly dict: PortalDictionary }) {
@@ -28,7 +28,7 @@ export function HomeLedger({ dict }: { readonly dict: PortalDictionary }) {
           ))}
         </div>
         <div className={styles.ledgerPhoto} data-reveal style={{ "--rd": 1 } as import("react").CSSProperties}>
-          <HexImage
+          <HexArt
             id={ledger.image}
             alt={dict.common.images[ledger.image].alt}
           />

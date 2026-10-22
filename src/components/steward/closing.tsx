@@ -1,6 +1,6 @@
 import { LINKS } from "@/modules/ecosystem";
 import type { PortalDictionary } from "@/modules/locale-dictionary";
-import { HexImage } from "@/components/hex-image";
+import { HexArt } from "@/components/hex-art";
 import styles from "./steward.module.css";
 
 export function StewardClosing({ dict }: { readonly dict: PortalDictionary }) {
@@ -9,9 +9,9 @@ export function StewardClosing({ dict }: { readonly dict: PortalDictionary }) {
     <section className={styles.closing}>
       <div className="shell">
         <div className={styles.closingLeft}>
-          <HexImage
-            id="queen"
-            alt={dict.common.images.queen.alt}
+          <HexArt
+            id="agent"
+            alt={dict.common.images.agent.alt}
             className={styles.closingPhoto}
           />
           <h2 className={styles.closingHeadline} data-reveal>

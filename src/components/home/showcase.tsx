@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, type KeyboardEvent } from "react";
 import { PRODUCTS } from "@/modules/ecosystem";
 import type { Locale, PortalDictionary } from "@/modules/locale-dictionary";
-import { HexImage } from "@/components/hex-image";
+import { HexArt } from "@/components/hex-art";
 import styles from "./home.module.css";
 
 type TabData = PortalDictionary["home"]["showcase"]["tabs"][number];
@@ -34,7 +34,7 @@ export function HomeShowcase({
   return (
     <section className={styles.showcase}>
       <div className={styles.plate}>
-        <HexImage
+        <HexArt
           id={tab.image}
           alt={images[tab.image].alt}
           className={styles.plateImg}

@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import type { PortalDictionary } from "@/modules/locale-dictionary";
-import { HexImage } from "@/components/hex-image";
+import { HexArt } from "@/components/hex-art";
 import styles from "./home.module.css";
 
 const TILE_CLASSES = [styles.tile1, styles.tile2, styles.tile3] as const;
@@ -22,7 +22,7 @@ export function HomeSteps({ dict }: { readonly dict: PortalDictionary }) {
               style={{ "--rd": index + 1 } as CSSProperties}
             >
               <div className={styles.tileBox}>
-                <HexImage
+                <HexArt
                   id={item.image}
                   alt={dict.common.images[item.image].alt}
                 />

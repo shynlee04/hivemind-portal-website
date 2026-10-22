@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildInstallPlan } from "@/modules/ecosystem";
 import {
+  ArtIdSchema,
   getPortalDictionary,
   PortalDictionarySchema,
   SUPPORTED_LOCALES,
@@ -33,6 +34,37 @@ describe("LocaleDictionaryModule seam", () => {
 
   test("getPortalDictionary rejects unsupported locales", () => {
     expect(() => getPortalDictionary("fr" as unknown as Locale)).toThrow();
+  });
+
+  test("every art id is used by the dictionaries and every dict image is a valid art id", () => {
+    const valid = new Set<string>(ArtIdSchema.options);
+    const used = new Set<string>();
+    for (const locale of SUPPORTED_LOCALES) {
+      const dict = JSON.parse(
+        readFileSync(
+          join(ROOT, "src/modules/locale-dictionary", `${locale}.json`),
+          "utf8",
+        ),
+      ) as unknown;
+      const visit = (node: unknown): void => {
+        if (typeof node !== "object" || node === null) return;
+        if (Array.isArray(node)) {
+          node.forEach(visit);
+          return;
+        }
+        for (const [key, value] of Object.entries(node)) {
+          if (key === "image" && typeof value === "string") used.add(value);
+          visit(value);
+        }
+      };
+      visit(dict);
+    }
+    for (const id of used) {
+      expect(valid.has(id)).toBe(true);
+    }
+    for (const id of ArtIdSchema.options) {
+      expect(used.has(id)).toBe(true);
+    }
   });
 
   test("hero install commands equal the strings built by buildInstallPlan", () => {

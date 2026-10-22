@@ -1,21 +1,21 @@
 import enRaw from "./en.json";
 import viRaw from "./vi.json";
 import {
-  ImageIdSchema,
+  ArtIdSchema,
   LocaleSchema,
   PortalDictionarySchema,
   SUPPORTED_LOCALES,
-  type ImageId,
+  type ArtId,
   type Locale,
   type PortalDictionary,
 } from "./schema";
 
 export {
-  ImageIdSchema,
+  ArtIdSchema,
   LocaleSchema,
   PortalDictionarySchema,
   SUPPORTED_LOCALES,
-  type ImageId,
+  type ArtId,
   type Locale,
   type PortalDictionary,
 };

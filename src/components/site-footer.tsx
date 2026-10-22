@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Locale, PortalDictionary } from "@/modules/locale-dictionary";
-import { LINKS, PHOTO_CREDITS, PRODUCTS } from "@/modules/ecosystem";
+import { LINKS, PRODUCTS } from "@/modules/ecosystem";
 import { HexMark } from "./hex-mark";
 import styles from "./site-footer.module.css";
 
@@ -17,42 +17,42 @@ export function SiteFooter({
     readonly label: string;
     readonly links: ReadonlyArray<{ readonly href: string; readonly text: string }>;
   }> = [
-    {
-      label: footer.columns.plugins,
-      links: [
-        { href: `/${locale}/steward`, text: footer.links.steward },
-        { href: `/${locale}/substrate`, text: footer.links.substrate },
-      ],
-    },
-    {
-      label: footer.columns.install,
-      links: [
-        { href: PRODUCTS.steward.npmUrl, text: footer.links.stewardNpm },
-        { href: PRODUCTS.substrate.npmUrl, text: footer.links.substrateNpm },
-      ],
-    },
-    {
-      label: footer.columns.source,
-      links: [
-        { href: PRODUCTS.steward.repoUrl, text: footer.links.stewardGithub },
-        { href: PRODUCTS.substrate.repoUrl, text: footer.links.substrateGithub },
-      ],
-    },
-    {
-      label: footer.columns.watch,
-      links: [
-        { href: LINKS.video, text: footer.links.video },
-        { href: LINKS.channel, text: footer.links.channel },
-      ],
-    },
-    {
-      label: footer.columns.support,
-      links: [
-        { href: LINKS.kofi, text: footer.links.kofi },
-        { href: LINKS.buyMeACoffee, text: footer.links.bmc },
-      ],
-    },
-  ];
+      {
+        label: footer.columns.plugins,
+        links: [
+          { href: `/${locale}/steward`, text: footer.links.steward },
+          { href: `/${locale}/substrate`, text: footer.links.substrate },
+        ],
+      },
+      {
+        label: footer.columns.install,
+        links: [
+          { href: PRODUCTS.steward.npmUrl, text: footer.links.stewardNpm },
+          { href: PRODUCTS.substrate.npmUrl, text: footer.links.substrateNpm },
+        ],
+      },
+      {
+        label: footer.columns.source,
+        links: [
+          { href: PRODUCTS.steward.repoUrl, text: footer.links.stewardGithub },
+          { href: PRODUCTS.substrate.repoUrl, text: footer.links.substrateGithub },
+        ],
+      },
+      {
+        label: footer.columns.watch,
+        links: [
+          { href: LINKS.video, text: footer.links.video },
+          { href: LINKS.channel, text: footer.links.channel },
+        ],
+      },
+      {
+        label: footer.columns.support,
+        links: [
+          { href: LINKS.kofi, text: footer.links.kofi },
+          { href: LINKS.buyMeACoffee, text: footer.links.bmc },
+        ],
+      },
+    ];
 
   return (
     <footer className={styles.footer}>
@@ -86,23 +86,6 @@ export function SiteFooter({
           {footer.referralZai}
         </a>
         {footer.referralAfter}
-      </p>
-      <p className={styles.credits}>
-        {footer.creditsLabel}:{" "}
-        {PHOTO_CREDITS.map((credit, index) => (
-          <span key={credit.id}>
-            {index > 0 ? " · " : null}
-            <a href={credit.page} className={styles.link}>
-              {credit.title}
-            </a>
-            {" — "}
-            {credit.creator}
-            {" — "}
-            <a href={credit.licenseUrl} className={styles.link}>
-              {credit.license}
-            </a>
-          </span>
-        ))}
       </p>
       <div className={styles.lastRow}>
         <p className={styles.copyright}>{footer.copyright}</p>

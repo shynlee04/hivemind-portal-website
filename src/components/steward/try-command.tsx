@@ -7,7 +7,7 @@ import {
   interpretCommand,
 } from "@/modules/command-console";
 import type { Locale, PortalDictionary } from "@/modules/locale-dictionary";
-import { HexImage } from "@/components/hex-image";
+import { HexArt } from "@/components/hex-art";
 import { TuiFragment } from "@/components/tui-fragment";
 import styles from "./steward.module.css";
 
@@ -35,9 +35,9 @@ export function TryCommand({
             <TuiFragment lines={answer.lines} />
             <p className={styles.answerSummary}>{answer.summary}</p>
           </div>
-          <HexImage
-            id="nectar"
-            alt={dict.common.images.nectar.alt}
+          <HexArt
+            id="orbit"
+            alt={dict.common.images.orbit.alt}
             className={styles.tryPhoto}
           />
         </div>

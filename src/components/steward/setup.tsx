@@ -1,5 +1,5 @@
 import type { PortalDictionary } from "@/modules/locale-dictionary";
-import { HexImage } from "@/components/hex-image";
+import { HexArt } from "@/components/hex-art";
 import styles from "./steward.module.css";
 
 export function StewardSetup({ dict }: { readonly dict: PortalDictionary }) {
@@ -56,9 +56,9 @@ export function StewardSetup({ dict }: { readonly dict: PortalDictionary }) {
             ))}
           </ul>
           <p className={styles.needsNote}>{setup.needsNote}</p>
-          <HexImage
-            id="catba"
-            alt={dict.common.images.catba.alt}
+          <HexArt
+            id="build"
+            alt={dict.common.images.build.alt}
             className={styles.setupPhoto}
           />
         </div>

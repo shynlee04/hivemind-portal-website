@@ -104,8 +104,7 @@
   bottom: -1.5rem;
   width: 7rem;
   height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
+  aspect-ratio: 0.866;
 }
 
 .tryAnswer {
@@ -277,8 +276,7 @@ code.answerTitle {
 .setupPhoto {
   width: min(11rem, 40%);
   height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
+  aspect-ratio: 0.866;
   align-self: flex-end;
 }
 
@@ -434,10 +432,10 @@ code.answerTitle {
   align-self: end;
 }
 
-.keysPhoto img {
+.keysPhoto svg {
   width: min(22vw, 26rem);
   height: auto;
-  aspect-ratio: 0.8;
+  aspect-ratio: 0.866;
   object-fit: cover;
 }
 
@@ -476,8 +474,7 @@ code.answerTitle {
 .closingPhoto {
   width: min(15rem, 55%);
   height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
+  aspect-ratio: 0.866;
   margin-bottom: 2rem;
 }
 
@@ -587,7 +584,7 @@ code.answerTitle {
     margin-top: 2rem;
   }
 
-  .keysPhoto img {
+  .keysPhoto svg {
     width: 60%;
   }
 

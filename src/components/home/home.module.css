@@ -87,8 +87,7 @@
 .plateImg {
   width: min(82%, 34rem);
   height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
+  aspect-ratio: 0.866;
 }
 
 .showcaseText {
@@ -211,11 +210,10 @@
   overflow: clip;
 }
 
-.tileBox img {
+.tileBox svg {
   height: 78%;
   width: auto;
   aspect-ratio: 0.866;
-  object-fit: cover;
   flex: none;
 }
 
@@ -260,7 +258,7 @@
 }
 
 /* slow drift on the middle tile's photo */
-.tile2 .tileBox img {
+.tile2 .tileBox svg {
   animation: tile-drift 20s ease-in-out infinite alternate;
 }
 
@@ -275,7 +273,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tile2 .tileBox img {
+  .tile2 .tileBox svg {
     animation: none;
   }
 }
@@ -344,10 +342,10 @@
   align-self: end;
 }
 
-.ledgerPhoto img {
+.ledgerPhoto svg {
   width: min(22vw, 26rem);
   height: auto;
-  aspect-ratio: 0.8;
+  aspect-ratio: 0.866;
   object-fit: cover;
 }
 
@@ -481,7 +479,7 @@
     margin-top: 2rem;
   }
 
-  .ledgerPhoto img {
+  .ledgerPhoto svg {
     width: 60%;
   }
 

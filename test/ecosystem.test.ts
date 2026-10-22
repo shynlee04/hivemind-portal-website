@@ -1,10 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
 import {
   buildInstallPlan,
   LINKS,
-  PHOTO_CREDITS,
   PRODUCTS,
   type InstallNoteId,
   type InstallScope,
@@ -12,11 +9,8 @@ import {
 } from "@/modules/ecosystem";
 import {
   getPortalDictionary,
-  ImageIdSchema,
   SUPPORTED_LOCALES,
 } from "@/modules/locale-dictionary";
-
-const ROOT = process.cwd();
 const STEWARD_REF = "hmoc-steward-acp";
 const SUBSTRATE_REF = "hivemind-substrate";
 const STEWARD_PROJECT_JSON = `{
@@ -159,48 +153,6 @@ describe("EcosystemModule install plans", () => {
           }
         }
       }
-    }
-  });
-});
-
-describe("EcosystemModule photo credits", () => {
-  test("covers every image id used by the dictionaries", () => {
-    const credited = new Set(PHOTO_CREDITS.map((credit) => credit.id));
-    for (const id of ImageIdSchema.options) {
-      expect(credited.has(id)).toBe(true);
-    }
-
-    for (const locale of SUPPORTED_LOCALES) {
-      const dict = JSON.parse(
-        readFileSync(
-          join(ROOT, "src/modules/locale-dictionary", `${locale}.json`),
-          "utf8",
-        ),
-      );
-      const used = new Set<string>();
-      const visit = (node: unknown) => {
-        if (typeof node !== "object" || node === null) return;
-        if (Array.isArray(node)) {
-          node.forEach(visit);
-          return;
-        }
-        for (const [key, value] of Object.entries(node)) {
-          if (key === "image" && typeof value === "string") used.add(value);
-          visit(value);
-        }
-      };
-      visit(dict);
-      for (const id of used) {
-        expect(credited.has(id as (typeof ImageIdSchema.options)[number])).toBe(
-          true,
-        );
-      }
-    }
-  });
-
-  test("every credited image file exists under public/images", () => {
-    for (const credit of PHOTO_CREDITS) {
-      expect(existsSync(join(ROOT, "public", credit.file))).toBe(true);
     }
   });
 });

@@ -3,7 +3,7 @@ import {
   type PluginCommand,
 } from "@/modules/command-console";
 import type { Locale, PortalDictionary } from "@/modules/locale-dictionary";
-import { HexImage } from "@/components/hex-image";
+import { HexArt } from "@/components/hex-art";
 import styles from "./steward.module.css";
 
 export function StewardKeys({
@@ -50,7 +50,7 @@ export function StewardKeys({
           ))}
         </div>
         <div className={styles.keysPhoto} data-reveal>
-          <HexImage
+          <HexArt
             id={keys.image}
             alt={dict.common.images[keys.image].alt}
           />

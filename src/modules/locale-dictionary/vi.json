@@ -36,23 +36,23 @@
     "github": "GitHub",
     "example": "Ví dụ",
     "images": {
-      "queen": {
-        "alt": "Ong chúa được đánh dấu đỏ, xung quanh là ong thợ"
+      "agent": {
+        "alt": "Hoạ tiết tổ ong: một ô sáng được đánh dấu giữa các ô mờ"
       },
-      "comb": {
-        "alt": "Ong mật đi trên những ô sáp còn trống"
+      "honeycomb": {
+        "alt": "Hoạ tiết tổ ong: một cụm ô được đánh chỉ mục"
       },
-      "freshComb": {
-        "alt": "Miếng sáp ong tươi được giơ lên, mật rỏ xuống chậu"
+      "yield": {
+        "alt": "Hoạ tiết tổ ong: các ô đang đổ đầy mật"
       },
-      "catba": {
-        "alt": "Người nuôi ong ở Cát Bà, Việt Nam, giơ cầu ong bên thùng gỗ"
+      "build": {
+        "alt": "Hoạ tiết tổ ong: một ô rơi đúng vào vị trí"
       },
-      "nectar": {
-        "alt": "Ong mật đang lấy mật trên bông cúc tây"
+      "orbit": {
+        "alt": "Hoạ tiết tổ ong: ô vệ tinh quay quanh lõi"
       },
-      "plate": {
-        "alt": "Hình XI trong sách nuôi ong năm 1853 của Langstroth: thùng ong, mạng che mặt, găng tay và dụng cụ"
+      "diagram": {
+        "alt": "Hoạ tiết tổ ong: ô bản vẽ kỹ thuật với các nét dựng hình"
       }
     }
   },
@@ -160,13 +160,13 @@
         "text": "Steward cho agent bạn"
       },
       {
-        "image": "queen"
+        "image": "agent"
       },
       {
         "text": "thêm đồng nghiệp. Substrate"
       },
       {
-        "image": "comb"
+        "image": "honeycomb"
       },
       {
         "text": "nhớ mọi phiên, phiên con và diff trên ổ đĩa."
@@ -178,7 +178,7 @@
         {
           "id": "steward",
           "tab": "Steward",
-          "image": "queen",
+          "image": "agent",
           "title": "Ba agent, một terminal",
           "body": "Mở một phiên Devin, Antigravity hay Freebuff thật trong terminal OpenCode để ngồi xem nó làm, hoặc để agent của bạn giao việc cho bất kỳ ai trong số đó rồi làm tiếp. Model nào cũng chọn được, lấy từ catalog của từng agent.",
           "version": "hmoc-steward-acp 0.4.0, mới nhất trên npm",
@@ -188,7 +188,7 @@
         {
           "id": "substrate",
           "tab": "Substrate",
-          "image": "comb",
+          "image": "honeycomb",
           "title": "Giữ một bộ nhớ chính xác",
           "body": "Lưu mọi cây phiên vào dự án, lập chỉ mục ai đã làm gì, dọn output công cụ cũ mà không đánh mất dữ kiện, và truy mọi thay đổi về đúng phiên và subagent tạo ra nó.",
           "version": "hivemind-substrate 0.2.0-beta.1, beta trên npm",
@@ -201,17 +201,17 @@
       "heading": "Ba bước là xong.",
       "items": [
         {
-          "image": "catba",
+          "image": "build",
           "name": "Cài đặt",
           "body": "Mỗi plugin một lệnh — cho mọi dự án, hoặc riêng dự án này."
         },
         {
-          "image": "comb",
+          "image": "honeycomb",
           "name": "Khởi động lại OpenCode",
           "body": "Plugin chỉ được nạp lúc khởi động, nên sau khi cài chỉ cần mở lại một lần."
         },
         {
-          "image": "freshComb",
+          "image": "yield",
           "name": "Thiết lập một lần, dùng luôn",
           "body": "/hivemind-setup hỏi muốn dùng harness và model nào, lưu câu trả lời rồi không làm phiền nữa."
         }
@@ -220,7 +220,7 @@
     "ledger": {
       "heading": "Hiện có, và sắp có.",
       "tableName": "Phát hành",
-      "image": "nectar",
+      "image": "orbit",
       "groups": [
         {
           "rows": [
@@ -384,7 +384,7 @@
       "line1": "Mọi lệnh",
       "line2": "và phím tắt nó thêm.",
       "tableName": "Lệnh",
-      "image": "plate"
+      "image": "diagram"
     },
     "closing": {
       "line1": "Claude Code",
@@ -431,13 +431,13 @@
         "text": "The Spine"
       },
       {
-        "image": "freshComb"
+        "image": "yield"
       },
       {
         "text": "giữ mọi transcript. The Honeycomb"
       },
       {
-        "image": "comb"
+        "image": "honeycomb"
       },
       {
         "text": "lập chỉ mục ai làm gì. Valve dọn output cũ, giữ dữ kiện."
@@ -526,7 +526,7 @@
       "line1": "Các lệnh",
       "line2": "nó thêm vào.",
       "tableName": "Lệnh",
-      "image": "plate",
+      "image": "diagram",
       "groups": [
         {
           "label": "Trong TUI",
@@ -627,7 +627,6 @@
     "referralMiddle": "và",
     "referralZai": "Z.ai GLM Coding Plan",
     "referralAfter": ". Chúng không nằm trong plugin — mình nhận credit nếu bạn đăng ký.",
-    "creditsLabel": "Ảnh",
     "backToTop": "Lên đầu trang",
     "copyright": "© 2026 shynlee04"
   }

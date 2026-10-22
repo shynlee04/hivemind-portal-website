@@ -36,23 +36,23 @@
     "github": "GitHub",
     "example": "Example",
     "images": {
-      "queen": {
-        "alt": "A marked queen bee surrounded by worker bees"
+      "agent": {
+        "alt": "Honeycomb art: one bright cell marked among dim worker cells"
       },
-      "comb": {
-        "alt": "A honey bee walking across empty wax honeycomb cells"
+      "honeycomb": {
+        "alt": "Honeycomb art: a patch of indexed cells"
       },
-      "freshComb": {
-        "alt": "A piece of fresh honeycomb held up, honey dripping into a bowl"
+      "yield": {
+        "alt": "Honeycomb art: cells filling with honey"
       },
-      "catba": {
-        "alt": "A beekeeper in Cát Bà, Vietnam, holding up a hive frame beside a wooden hive"
+      "build": {
+        "alt": "Honeycomb art: a cell dropping into place"
       },
-      "nectar": {
-        "alt": "A honey bee collecting nectar from an aster flower"
+      "orbit": {
+        "alt": "Honeycomb art: a satellite cell circling its core"
       },
-      "plate": {
-        "alt": "Plate XI from Langstroth's 1853 hive treatise: a hive box, bee veil, glove and tools"
+      "diagram": {
+        "alt": "Honeycomb art: a blueprint cell with construction marks"
       }
     }
   },
@@ -160,13 +160,13 @@
         "text": "Steward gives your agent"
       },
       {
-        "image": "queen"
+        "image": "agent"
       },
       {
         "text": "colleagues. Substrate"
       },
       {
-        "image": "comb"
+        "image": "honeycomb"
       },
       {
         "text": "remembers every session, child and diff, on your own disk."
@@ -178,7 +178,7 @@
         {
           "id": "steward",
           "tab": "Steward",
-          "image": "queen",
+          "image": "agent",
           "title": "Three agents, one terminal",
           "body": "Open Devin, Antigravity or Freebuff as a real session in the OpenCode terminal and watch it work, or let your agent delegate to any of them and keep going. Pick any model each one offers.",
           "version": "hmoc-steward-acp 0.4.0, latest on npm",
@@ -188,7 +188,7 @@
         {
           "id": "substrate",
           "tab": "Substrate",
-          "image": "comb",
+          "image": "honeycomb",
           "title": "Keep an exact memory",
           "body": "Archive every session tree into your project, index who did what, prune stale tool output without losing the facts, and trace any change back to the session and subagent that made it.",
           "version": "hivemind-substrate 0.2.0-beta.1, beta on npm",
@@ -201,17 +201,17 @@
       "heading": "Three steps, then work.",
       "items": [
         {
-          "image": "catba",
+          "image": "build",
           "name": "Install it",
           "body": "One command per plugin, for every project or just this one."
         },
         {
-          "image": "comb",
+          "image": "honeycomb",
           "name": "Reload OpenCode",
           "body": "Plugins load at startup, so restart once after installing."
         },
         {
-          "image": "freshComb",
+          "image": "yield",
           "name": "Set up once, then forget it",
           "body": "/hivemind-setup asks which harnesses and models to use, saves the answers and stays out of the way."
         }
@@ -220,7 +220,7 @@
     "ledger": {
       "heading": "What ships, and what's next.",
       "tableName": "Releases",
-      "image": "nectar",
+      "image": "orbit",
       "groups": [
         {
           "rows": [
@@ -384,7 +384,7 @@
       "line1": "Every command",
       "line2": "and key it adds.",
       "tableName": "Commands",
-      "image": "plate"
+      "image": "diagram"
     },
     "closing": {
       "line1": "Claude Code",
@@ -431,13 +431,13 @@
         "text": "The Spine"
       },
       {
-        "image": "freshComb"
+        "image": "yield"
       },
       {
         "text": "keeps every transcript. The Honeycomb"
       },
       {
-        "image": "comb"
+        "image": "honeycomb"
       },
       {
         "text": "indexes who did what. The valve clears old tool output and keeps the facts."
@@ -526,7 +526,7 @@
       "line1": "Commands",
       "line2": "it adds.",
       "tableName": "Commands",
-      "image": "plate",
+      "image": "diagram",
       "groups": [
         {
           "label": "In the TUI",
@@ -627,7 +627,6 @@
     "referralMiddle": "and the",
     "referralZai": "Z.ai GLM Coding Plan",
     "referralAfter": ". They aren't part of the plugins, and I get credit if you sign up.",
-    "creditsLabel": "Photographs",
     "backToTop": "Back to top",
     "copyright": "© 2026 shynlee04"
   }
