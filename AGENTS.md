@@ -19,11 +19,11 @@ node ~/.config/devin/skills/design-taste-frontend/scripts/inspect.mjs http://loc
 | Module | Public seam | Owns |
 | :--- | :--- | :--- |
 | `LocaleDictionaryModule` | `src/modules/locale-dictionary/index.ts` | `en`/`vi` copy, Zod schema (`schema.ts`), parity check. All page copy lives here. |
-| `EcosystemModule` | `src/modules/ecosystem/index.ts` | `PRODUCTS` (packages, versions, URLs), `LINKS`, `buildInstallPlan`, `PHOTO_CREDITS`. Bump versions here only. |
+| `EcosystemModule` | `src/modules/ecosystem/index.ts` | `PRODUCTS` (packages, versions, URLs), `LINKS`, `buildInstallPlan`. Bump versions here only. |
 | `CommandConsoleModule` | `src/modules/command-console/index.ts` | Steward "Try a command" answers and the commands/keys table. |
 | `TraceExplorerModule` | `src/modules/trace-explorer/index.ts` | Substrate sample change-set package and leaves. |
 
-UI lives in `src/components/` (shared) and `src/components/{home,steward,substrate}/`; routes in `src/app/[locale]/` are thin shells. Art direction: `.taste-skill/direction.json` (one-motif hexagon); house rules in `.planning/SPEC.md` §4.
+UI lives in `src/components/` (shared) and `src/components/{home,steward,substrate}/`; routes in `src/app/[locale]/` are thin shells. All imagery is generated SVG via `src/components/hex-art.tsx` (`ArtId` scenes; no photographs). Art direction: `.taste-skill/direction.json` (one-motif hexagon); house rules in `.planning/SPEC.md` §4.
 
 ## Non-Negotiable Rules
 - Atomic git commits per logical unit (`docs`, `feat`, `test`, `chore`). Never leave an uncommitted dirty tree.

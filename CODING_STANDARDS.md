@@ -18,4 +18,4 @@
 - Follow the one-motif direction (`.planning/SPEC.md` §4): the hexagon is the only shape; no gradients, rules, shadows at rest, eyebrows or monospace outside code and `data-ui` fragments.
 - Every headline fits two lines at 1440, 768 and 390px in both locales; heading line-height stays ≥ 1.0 with room for Vietnamese diacritics.
 - Every interactive live element works without JavaScript from its server-rendered default and honours `prefers-reduced-motion`.
-- Every photograph is credited in the footer via `PHOTO_CREDITS`.
+- All imagery is generated SVG via `HexArt` (`ArtId` scenes only — no raster photographs); every scene honours `prefers-reduced-motion` and carries localized alt text.

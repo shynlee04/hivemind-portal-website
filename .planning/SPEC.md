@@ -28,11 +28,11 @@ The site claims only what those sources ship or what the owner has scoped into t
 - **SU-02 Trace demo (Substrate live thing):** `TraceExplorerModule` sample change-set: package rows open leaves (diff, actors, evidence). Labelled as sample data.
 - **I18N-01:** one dictionary schema; `en` and `vi` keep 100% key and array-length parity.
 - **CL-01:** a test bans stale claims (fabricated model IDs, Cyber-Wok/Payload vocabulary, `devin_run`, `devin_doctor`, old install versions, Freebuff "tools denied").
-- **CR-01:** every photograph is a credited open-licence picture of the bee/hive world (never presented as the product or its author), listed in the footer.
+- **CR-01:** all imagery is generated inline SVG from `HexArt` (`ArtId` scenes — `agent`, `honeycomb`, `yield`, `build`, `orbit`, `diagram`), never raster stock; each scene carries localized alt text and honours `prefers-reduced-motion`.
 
 ## 4. Art direction
 
-Taste-skill direction `one-motif` (seed 279398933, `.taste-skill/direction.json`): the honeycomb cell (pointy-top hexagon) is the only shape — photo masks, buttons, bullets, the giant hero field and the footer tessellation. Orange `#ff7a1f` ground, ink `#050f16`, white rest fields; Albert Sans. House rules: two-line headlines, no eyebrows, no rules, no gradients, no shadows at rest, monospace only in code and `data-ui` fragments.
+Taste-skill direction `one-motif` (seed 279398933, `.taste-skill/direction.json`): the honeycomb cell (pointy-top hexagon) is the only shape — generated `HexArt` scenes, buttons, bullets, the giant hero field and the footer tessellation. Orange `#ff7a1f` ground, ink `#050f16`, white rest fields; Albert Sans. House rules: two-line headlines, no eyebrows, no rules, no gradients, no shadows at rest, monospace only in code and `data-ui` fragments.
 
 ## 5. Verification gate
 

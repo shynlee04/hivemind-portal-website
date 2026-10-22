@@ -27,4 +27,4 @@ Use these names in code, copy and tests. Product terms come from the plugin repo
 - **Install plan:** ordered `InstallStep`s from `buildInstallPlan(plugins, scope)`.
 - **Fragment:** an HTML rendering of a TUI moment, root marked `data-ui`.
 - **Hex motif:** the pointy-top honeycomb cell used for every mask, button and bullet.
-- **Image id:** `queen | comb | freshComb | catba | nectar | plate`, credited in `PHOTO_CREDITS`.
+- **Art id:** `agent | honeycomb | yield | build | orbit | diagram` — generated SVG scenes rendered by `HexArt`, with per-locale alt text under `common.images`.
